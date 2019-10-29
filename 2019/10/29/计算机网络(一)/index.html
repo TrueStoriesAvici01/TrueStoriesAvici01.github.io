@@ -1,90 +1,61 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="en">
+<html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
 
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="计算机网络," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc. The way  end systems communicate with each">
+  <meta name="description" content="The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc. The way  end systems communicate with each">
 <meta name="keywords" content="计算机网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络(一)：计算机网络于Internet">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;29&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)&#x2F;index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc. The way  end systems communicate with each">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;29&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)&#x2F;FDMandTDM.PNG">
@@ -95,41 +66,21 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;29&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)&#x2F;FDMandTDM.PNG">
 
+<link rel="canonical" href="http://yoursite.com/2019/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://yoursite.com/2019/10/29/计算机网络(一)/"/>
-
-
-
-
-
-  <title>计算机网络(一)：计算机网络于Internet | Hexo</title>
+  <title>计算机网络(一)：计算机网络于Internet | 咸鱼的自我修养</title>
   
 
 
@@ -137,170 +88,139 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">咸鱼的自我修养</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
   <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
+
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
-  
+  </li>
+  </ul>
+
 </nav>
-
-
-
- </div>
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
+  <div class="posts-expand">
+      
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="咸鱼不翻身">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="咸鱼的自我修养">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">计算机网络(一)：计算机网络于Internet</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          计算机网络(一)：计算机网络于Internet
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">
-                2019-10-29
-              </time>
-            
+              <span class="post-meta-item-text">Posted on</span>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-28 22:07:52" itemprop="dateModified" datetime="2019-10-28T22:07:52+08:00">2019-10-28</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h1 id="The-Internet"><a href="#The-Internet" class="headerlink" title="The Internet"></a>The Internet</h1><h2 id="A-nut-and-bolts-description"><a href="#A-nut-and-bolts-description" class="headerlink" title="A nut-and-bolts description"></a>A nut-and-bolts description</h2><p><strong>hosts</strong>(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc.</p>
@@ -326,9 +246,8 @@
 <blockquote>
 <ol>
 <li><strong>routers</strong>: used in the network core.</li>
-<li><strong>link-layer switches</strong>: used in access networks.</li>
+<li><strong>link-layer switches</strong>: used in access networks.<br><strong>route</strong>(<strong>path</strong>): The sequence of communication links and packet switches traversed by a packet from the sending end system to the receiving end system.</li>
 </ol>
-<p><strong>route</strong>(<strong>path</strong>): The sequence of communication links and packet switches traversed by a packet from the sending end system to the receiving end system.</p>
 </blockquote>
 </blockquote>
 <p><strong>ISP</strong>(Internet Service Prociders):</p>
@@ -341,8 +260,6 @@
 </blockquote>
 <h2 id="A-services-Description"><a href="#A-services-Description" class="headerlink" title="A services Description"></a>A services Description</h2><blockquote>
 <p>The Internet is as <em>an infrastructure that provides services to applications</em>.</p>
-</blockquote>
-<blockquote>
 <p><strong>API</strong>(Application Programming Interface):<br>End systems attached to the Internet provide an <strong>API</strong> that specifies how a program running on one end system asks the Internet infrastructure to deliver data to a specific destination program running on another end system.<br><strong>API</strong>:</p>
 <blockquote>
 <p>A set of rules that the sending program must follow so that the Internet can deliver the data to the destination program.</p>
@@ -350,8 +267,6 @@
 </blockquote>
 <h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><blockquote>
 <p><strong>NOTE:</strong> It takes two(or more) communicating entities running the same protocol in order to accomplish a task.</p>
-</blockquote>
-<blockquote>
 <p>All activity in the Internet that involves two or more communicating remote entities in governed by a protocol.</p>
 <blockquote>
 <p>Hardware-implemented protocols in two physically connected computers control the flow of bits on the “wire” between the two network interface cards.<br>Congestion-control protocols in end systems control the rate at which packets are transmitted between sender and receiver.<br>Protocols in routers determine a packet’s path from source to destination.</p>
@@ -362,8 +277,10 @@
 <p><em>A <strong>prtocol</strong> defines the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or a message or other event.</em></p>
 </blockquote>
 <hr>
-<h1 id="The-Network-Edge"><a href="#The-Network-Edge" class="headerlink" title="The Network Edge"></a>The Network Edge</h1><p><strong>End system</strong> are also referred to as <strong>host</strong>.<br>    Hosts are divided into two categories:<br>    1. <strong>clients</strong>: desktop PCs, smartphones…<br>    2. <strong>servers</strong>: powerful machines that stores and distribute Web pages…</p>
-<hr>
+<h1 id="The-Network-Edge"><a href="#The-Network-Edge" class="headerlink" title="The Network Edge"></a>The Network Edge</h1><p><strong>End system</strong> are also referred to as <strong>host</strong>.<br>    Hosts are divided into two categories:</p>
+<pre><code>1. **clients**: desktop PCs, smartphones...
+2. **servers**: powerful machines that stores and distribute Web pages...
+</code></pre><hr>
 <h2 id="Access-Networks"><a href="#Access-Networks" class="headerlink" title="Access Networks"></a>Access Networks</h2><p><strong>Access network</strong>: the network that physically connects an end system to the first router(edge router).</p>
 <blockquote>
 <p>DSL(digital subscriber line)<br>    A residence typically obtains <strong>DSL</strong> Internet access from the same local telephone company(telco) that provides its wired local phone access.</p>
@@ -414,8 +331,12 @@
 <p><strong>Twisted-Pair Copper Wire</strong><br>Twisted pair consists of two insulated copper wires,each about 1 mm thick, arranged in a regular spiral pattern.<br>    (<em>The wires are twisted together to reduce the electrical interference from similar pairs close by</em>)</p>
 <p><strong>Unshielded twisted pair</strong>(UTP) is used for computer networks.</p>
 <p><strong>Coaxial Cable</strong><br>Coaxial cable consists of two copper conductors which are concentric rather than parallel.</p>
-<p><strong>Fiber Optics</strong><br>An optical fiber is a thin, flexible medium that conducts pulses of light, with each pulse representing a bit.<br>    1. A single optical fiber can support tremendous bit rates.<br>    2. Fiber optics  are immune to electromagnetic 3. interference.<br>    4. Very low signal attenuation.<br>    5. Very hard to tap.</p>
-<hr>
+<p><strong>Fiber Optics</strong><br>An optical fiber is a thin, flexible medium that conducts pulses of light, with each pulse representing a bit.</p>
+<pre><code>1. A single optical fiber can support tremendous bit rates.
+2. Fiber optics  are immune to electromagnetic 3. interference.
+4. Very low signal attenuation.
+5. Very hard to tap.
+</code></pre><hr>
 <h1 id="The-Network-Core"><a href="#The-Network-Core" class="headerlink" title="The Network Core"></a>The Network Core</h1><h2 id="Packet-Switching"><a href="#Packet-Switching" class="headerlink" title="Packet Switching"></a>Packet Switching</h2><p>End systems exchange message with each other.<br>To send a message from source to destination:<br>    Long messages are broke into samll chunks of data(<strong>packets</strong>).<br>    <strong>Packets</strong>  travels through <em>communication links</em> and <em>packet switches</em>(<em>routers</em> or <em>link-layer switches</em>).</p>
 <p>The transmit time: L/R seconds. As a packet of L bits and a link with transmission rate R bit/sec.</p>
 <hr>
@@ -450,8 +371,6 @@
 <li><strong>frequency-division multiplexing(FDM)</strong></li>
 <li><strong>time-division multiplexing(TDM)</strong></li>
 </ol>
-</blockquote>
-<blockquote>
 <p>FDM: </p>
 <blockquote>
 <p>the frequency spectrum of a link is divided up among the connections.<br>A frequency band to each connection for the duration of the connection.<br>The width of the band is the <strong>bandwidth</strong>.<br>TDM:<br><strong>Time</strong> is divided into <strong>frames</strong> of fixed duration.<br>Each <strong>frame</strong> is divided into a fixed number of <strong>time slots</strong>.<br>A time slots in each frame for the sole use of a connection.<br>The transmission rate of a circuit is equal to <strong>the frame rate</strong> multiplied by <strong>the number of bits in a slot</strong>.</p>
@@ -544,8 +463,6 @@
 <p><strong>traffic intensity</strong></p>
 <blockquote>
 <p><em>La/R</em><br><em>L</em>: all packets consist of <em>L</em> bits.<br><em>a</em>: the average rate at which packets arrive at the queue (packets/sec).<br><em>R</em>: the transmission rate (bits/sec).</p>
-</blockquote>
-<blockquote>
 <p><strong>WARNING</strong>:<br><em>La/R &gt; 1</em>: the average rate of bits arrive at the queue exceeds the rate of bits transmit from the queue, the queue delay will approach infinty.</p>
 </blockquote>
 <p><strong>Two conditions of traffic intensity</strong></p>
@@ -554,8 +471,6 @@
 <li>When traffic intensity is close to zero, the average queuing delay will be close to zero.</li>
 <li>When the traffic intensity is close to 1, the arrival rate exceeds the transmission capacity, a queue will form during these periods of time.</li>
 </ol>
-</blockquote>
-<blockquote>
 <p><strong>NOTE</strong>: the traffic intensity approaches 1, the average queuing delay increases rapidly. A small percentage increase in the intensity will result in a much larger percentage-wise increase in delay.</p>
 </blockquote>
 <p><img src="queuingdelay.PNG" alt="Queuing Delay"></p>
@@ -608,214 +523,134 @@
 </ol>
 <p><img src="FiveLayerProtocolStack.PNG" alt="Five layers Internet protocol stack"></p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/" rel="next" title="数据结构与抽象(四)：泛型">
-                <i class="fa fa-chevron-left"></i> 数据结构与抽象(四)：泛型
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
           </div>
 
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/" rel="prev" title="数据结构与抽象(二)：设计类">
-                数据结构与抽象(二)：设计类 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
         
-          
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/" rel="next" title="数据结构与抽象(一)：组织数据">
+                  <i class="fa fa-chevron-left"></i> 数据结构与抽象(一)：组织数据
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/" rel="prev" title="数据结构与抽象(三)：包">
+                  数据结构与抽象(三)：包 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  
+  
+
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">John Doe</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">22</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">32</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Internet"><span class="nav-number">1.</span> <span class="nav-text">The Internet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-nut-and-bolts-description"><span class="nav-number">1.1.</span> <span class="nav-text">A nut-and-bolts description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-services-Description"><span class="nav-number">1.2.</span> <span class="nav-text">A services Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">1.3.</span> <span class="nav-text">Protocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Network-Edge"><span class="nav-number">2.</span> <span class="nav-text">The Network Edge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Networks"><span class="nav-number">2.1.</span> <span class="nav-text">Access Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Physical-Media"><span class="nav-number">2.2.</span> <span class="nav-text">Physical Media</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Network-Core"><span class="nav-number">3.</span> <span class="nav-text">The Network Core</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Packet-Switching"><span class="nav-number">3.1.</span> <span class="nav-text">Packet Switching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circuit-Switching"><span class="nav-number">3.2.</span> <span class="nav-text">Circuit Switching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Network-of-Networks"><span class="nav-number">3.3.</span> <span class="nav-text">A Network of Networks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Delay-Loss-and-Throughput-in-Packet-Switched-Networks"><span class="nav-number">4.</span> <span class="nav-text">Delay, Loss, and Throughput in Packet-Switched Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-of-Delay-in-Packet-Switched-Networks"><span class="nav-number">4.1.</span> <span class="nav-text">Overview of Delay in Packet-Switched Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Types-of-Delay"><span class="nav-number">4.2.</span> <span class="nav-text">Types of Delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queuing-Delay-and-Packet-Loss"><span class="nav-number">4.3.</span> <span class="nav-text">Queuing Delay and Packet Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End-to-End-Delay"><span class="nav-number">4.4.</span> <span class="nav-text">End-to-End Delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Throughput-in-Computer-Networks"><span class="nav-number">4.5.</span> <span class="nav-text">Throughput in Computer Networks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Layers-and-Their-Service-Models"><span class="nav-number">5.</span> <span class="nav-text">Protocol Layers and Their Service Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layered-Architecture"><span class="nav-number">5.1.</span> <span class="nav-text">Layered Architecture</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Internet"><span class="nav-number">1.</span> <span class="nav-text">The Internet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-nut-and-bolts-description"><span class="nav-number">1.1.</span> <span class="nav-text">A nut-and-bolts description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-services-Description"><span class="nav-number">1.2.</span> <span class="nav-text">A services Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">1.3.</span> <span class="nav-text">Protocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Network-Edge"><span class="nav-number">2.</span> <span class="nav-text">The Network Edge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Networks"><span class="nav-number">2.1.</span> <span class="nav-text">Access Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Physical-Media"><span class="nav-number">2.2.</span> <span class="nav-text">Physical Media</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Network-Core"><span class="nav-number">3.</span> <span class="nav-text">The Network Core</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Packet-Switching"><span class="nav-number">3.1.</span> <span class="nav-text">Packet Switching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circuit-Switching"><span class="nav-number">3.2.</span> <span class="nav-text">Circuit Switching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Network-of-Networks"><span class="nav-number">3.3.</span> <span class="nav-text">A Network of Networks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Delay-Loss-and-Throughput-in-Packet-Switched-Networks"><span class="nav-number">4.</span> <span class="nav-text">Delay, Loss, and Throughput in Packet-Switched Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-of-Delay-in-Packet-Switched-Networks"><span class="nav-number">4.1.</span> <span class="nav-text">Overview of Delay in Packet-Switched Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Types-of-Delay"><span class="nav-number">4.2.</span> <span class="nav-text">Types of Delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queuing-Delay-and-Packet-Loss"><span class="nav-number">4.3.</span> <span class="nav-text">Queuing Delay and Packet Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End-to-End-Delay"><span class="nav-number">4.4.</span> <span class="nav-text">End-to-End Delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Throughput-in-Computer-Networks"><span class="nav-number">4.5.</span> <span class="nav-text">Throughput in Computer Networks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Layers-and-Their-Service-Models"><span class="nav-number">5.</span> <span class="nav-text">Protocol Layers and Their Service Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layered-Architecture"><span class="nav-number">5.1.</span> <span class="nav-text">Layered Architecture</span></a></li></ol></li></ol></div>
       </div>
-    </main>
+      <!--/noindex-->
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-
-  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
 
 
+      </div>
+    </main>
 
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
 
         
+
+
+
+
+
 
 
 
@@ -826,31 +661,15 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -867,109 +686,9 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
 
   
 

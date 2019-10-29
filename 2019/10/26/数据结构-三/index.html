@@ -1,90 +1,61 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="en">
+<html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
 
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="数据结构,列表," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
+  <meta name="description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
 <meta name="keywords" content="数据结构,列表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构(三)：列表">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;insertSort.gif">
@@ -92,41 +63,21 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;insertSort.gif">
 
+<link rel="canonical" href="http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://yoursite.com/2019/10/26/数据结构-三/"/>
-
-
-
-
-
-  <title>数据结构(三)：列表 | Hexo</title>
+  <title>数据结构(三)：列表 | 咸鱼的自我修养</title>
   
 
 
@@ -134,162 +85,134 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">咸鱼的自我修养</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
   <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
+
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
-  
+  </li>
+  </ul>
+
 </nav>
-
-
-
- </div>
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
+  <div class="posts-expand">
+      
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="咸鱼不翻身">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="咸鱼的自我修养">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">数据结构(三)：列表</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          数据结构(三)：列表
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-26T10:19:28+08:00">
-                2019-10-26
-              </time>
-            
+              <span class="post-meta-item-text">Posted on</span>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="Created: 2019-10-26 10:19:28" itemprop="dateCreated datePublished" datetime="2019-10-26T10:19:28+08:00">2019-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-29 10:05:28" itemprop="dateModified" datetime="2019-10-29T10:05:28+08:00">2019-10-29</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -297,336 +220,208 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p><strong>循秩访问</strong>（call-by-rank）:<br>数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。</p>
 <p><strong>循位置访问/循链接访问</strong>（call-by-position/call-by-link）:<br>逻辑上互为前驱和后继的元素之间维护着某种索引关系。<br>索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。</p>
 <hr>
 <h1 id="从向量到列表"><a href="#从向量到列表" class="headerlink" title="从向量到列表"></a>从向量到列表</h1><p>引入列表的目的，两者差异…</p>
-<a id="more"></a>
-<hr>
-<h2 id="静态与动态"><a href="#静态与动态" class="headerlink" title="静态与动态"></a>静态与动态</h2><p>静态数据结构（向量）：<br>    静态操作：（size(), get()）常数时间内完成。<br>    动态操作：（insert(), remove()）需要线性时间。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="静态与动态"><a href="#静态与动态" class="headerlink" title="静态与动态"></a>静态与动态</h2><p>静态数据结构（向量）：<br>    静态操作：（size(), get()）常数时间内完成。<br>    动态操作：（insert(), remove()）需要线性时间。</p>
 <p>动态数据结构（列表）：<br>    引入或删除新的元素只需要在局部调整相关指针，降低动态操作的成本。<br>    静态操作：（访问元素）O(n)。<br>    动态操作： 常数时间。</p>
 <p><strong>列表</strong><br>列表是具有线性逻辑次序的一组元素构成的集合：<br>L = {a(0), a(1), …, a(n-1)}<br>其中的元素称为<strong>节点</strong>（node）。</p>
 <hr>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h2 id="列表节点"><a href="#列表节点" class="headerlink" title="列表节点"></a>列表节点</h2><p><strong>ADT接口</strong><br>|操作接口|功能|<br>|—|—|<br>|data()|当前节点所存数据对象|<br>|pred()|当前节点前驱节点的位置|<br>|succ()|当前节点后继节点的位置|<br>|insertAsPred(e)|插入前驱节点，存入被引对象e，返回新节点位置|<br>|insertAsSucc(e)|插入后继节点，存入被引对象e，返回新节点位置|</p>
-<p><strong>ListNode模板类</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Rank;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ListNodePosi(T) ListNode<span class="meta-string">&lt;T&gt;* //列表节点位置</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span><span class="comment">//列表节点模板类</span></span><br><span class="line">    T data; ListNodePosi(T) pred; ListNodePosi(T) succ;</span><br><span class="line"></span><br><span class="line">    ListNode() &#123;&#125;<span class="comment">//header 和 trailer的构造</span></span><br><span class="line">    ListNode( T e, ListNodePosi(T) p = <span class="literal">NULL</span>, ListNodePosi(T) s = <span class="literal">NULL</span>) <span class="comment">//默认构造器</span></span><br><span class="line">        : data(e), pred(p), succ(s) &#123;&#125;</span><br><span class="line">    ListNodePosi(T) insertAsPred(T <span class="keyword">const</span>&amp; e);<span class="comment">//前插节点</span></span><br><span class="line">    ListNodePosi(T) insertSucc(T <span class="keyword">const</span>&amp; e);<span class="comment">//后插节点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表ADT支持的操作接口<br>|操作接口|功能|适用对象|<br>|—|—|—|<br>|size()|返回列表当前的规模（节点总数）|列表|<br>|first(), last()|返回首、末节点的位置|列表|<br>|insertAsFirst(e)/insertAsLast(e)|将e当作首、末节点插入|列表|<br>|insertBefore(p, e)/insertAfter(p, e)|将e当作节点p的直接前驱、后继插入|列表|<br>|remove(p)|删除位置p处的节点，返回其数值|列表|<br>|disordered()|判断所有节点是否已按非降序排列||<br>|sort()|调整各节点的位置，使之按非降序排列||<br>|find(e)|查找目标元素e，失败时返回NULL||<br>|search(e)|查找目标元素e，返回不大于e且秩最大的节点|有序列表|<br>|deduplicate()|删除重复节点|列表|<br>|uniquify()|删除重复节点|有序列表|<br>|traverse()|遍历并统一处理所有节点，处理方法由函数对象指定|列表|</p>
-<p><strong>List模板类</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#nclude <span class="meta-string">"listNode.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">List</span>&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> _size; ListNodePosi(T) header; ListNodePoi(T) trailer;<span class="comment">//规模、头哨兵、尾哨兵</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span>:</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;<span class="comment">//初始化</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">clear</span><span class="params">()</span></span>;<span class="comment">//清除所有节点</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">copyNodes</span><span class="params">(ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//复制自位置p起的n项</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(ListNodePosi(T)&amp;, <span class="keyword">int</span>, List&lt;T&gt;&amp;, ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//有序列表归并</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(ListNodePosi(T)&amp;, <span class="keyword">int</span>)</span></span>;<span class="comment">//对p开始n个节点归并和排序</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//选择排序</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//插入排序</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">        List() &#123;init();&#125;</span><br><span class="line">        List(List&lt;T&gt; <span class="keyword">const</span>&amp; L);<span class="comment">//整体复制列表</span></span><br><span class="line">        List(List&lt;T&gt; <span class="keyword">const</span>&amp; L, Rank r, <span class="keyword">int</span> n);<span class="comment">//复制列表自r起的n项</span></span><br><span class="line">        List(ListNodePosi(T) p, <span class="keyword">int</span> n);<span class="comment">//复制列表自p起的n项</span></span><br><span class="line">    <span class="comment">//析构函数</span></span><br><span class="line">        ~List();<span class="comment">//释放所有节点</span></span><br><span class="line">        <span class="function">Rank <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> _size;&#125;<span class="comment">//规模</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> _size &lt;= <span class="number">0</span>;&#125;<span class="comment">//判空</span></span><br><span class="line">        T&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> r) <span class="keyword">const</span>;<span class="comment">//重载，支持循秩访问</span></span><br><span class="line">        ListNodePosi(T) first() <span class="keyword">const</span> &#123;<span class="keyword">return</span> header-&gt;succ;&#125;<span class="comment">//首节点位置</span></span><br><span class="line">        ListNodePosi(T) last() <span class="keyword">const</span> &#123;<span class="keyword">return</span> trailer-&gt;pred;&#125;<span class="comment">//末节点位置</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(ListNodePosi(T) p)</span></span>&#123;<span class="comment">//判断位置p是否合法</span></span><br><span class="line">            <span class="keyword">return</span> p &amp;&amp; (trailer != p) &amp;&amp; (header != p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">disordered</span><span class="params">()</span> <span class="keyword">const</span></span>;<span class="comment">//判断是否排序</span></span><br><span class="line">        ListNodePosi(T) find(T <span class="keyword">const</span>&amp; e) <span class="keyword">const</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> find(e, _size, trailer);</span><br><span class="line">        &#125;<span class="comment">//无序列表查找</span></span><br><span class="line">        ListNodePosi(T) find(T <span class="keyword">const</span>&amp; e, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span>;<span class="comment">//无序区间查找</span></span><br><span class="line">        ListNodePosi(T) search(T <span class="keyword">const</span>&amp; e) <span class="keyword">const</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> search(e, _size, trailer);</span><br><span class="line">        &#125;<span class="comment">//有序列表查找</span></span><br><span class="line">        ListNodePosi(T) search(T <span class="keyword">const</span>&amp; e, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span>;<span class="comment">//有序区间查找</span></span><br><span class="line">        ListNodePosi(T) selectMax(ListNodePosi(T) p, <span class="keyword">int</span> n);<span class="comment">//在p及其后n-1个元素中选择最大者</span></span><br><span class="line">        ListNodePosi(T) selectMax()&#123;<span class="keyword">return</span> selectMax(header-&gt;succ,_size);&#125;<span class="comment">//整体最大者</span></span><br><span class="line">    <span class="comment">//可写访问接口</span></span><br><span class="line">        ListNodePosi(T) insertAsFirst(T <span class="keyword">const</span>&amp; e);<span class="comment">//将e作为首节点插入</span></span><br><span class="line">        ListNodePosi(T) insertAsLast(T <span class="keyword">const</span>&amp; e);<span class="comment">//将e作为末节点插入</span></span><br><span class="line">        ListNodePosi(T) insertBefore(ListNodePosi(T) p, T <span class="keyword">const</span>&amp; e);<span class="comment">//将e作为p的前驱插入</span></span><br><span class="line">        ListNodePosi(T) insertAfter(ListNodePosi(T) p, T <span class="keyword">const</span>&amp;e);<span class="comment">//将e作为p的后继插入</span></span><br><span class="line">        <span class="function">T <span class="title">remove</span><span class="params">(ListNodePosi(T) p)</span></span>;<span class="comment">//删除位置p处的节点</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(List&lt;T&gt;&amp; L)</span></span>&#123;merge(first(), size, L, L.first(), L._size);&#125;<span class="comment">//全列表归并</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(ListNodePosi(T) p, <span class="keyword">int</span> n)</span></span>;<span class="comment">//列表区间排序</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">()</span> </span>&#123;sort(first(), _size);&#125;<span class="comment">//列表整体排序</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">deduplicate</span><span class="params">()</span></span>;<span class="comment">//无序去重</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">uniquify</span><span class="params">()</span></span>;<span class="comment">//有序去重</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span></span>;<span class="comment">//前后倒置</span></span><br><span class="line">    <span class="comment">//遍历</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(<span class="keyword">void</span> (*)(T&amp;))</span></span>;</span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(VST&amp;)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h2 id="列表节点"><a href="#列表节点" class="headerlink" title="列表节点"></a>列表节点</h2><p><strong>ADT接口</strong><br>|操作接口|功能|<br>|—-|—-|<br>|data()|当前节点所存数据对象|<br>|pred()|当前节点前驱节点的位置|<br>|succ()|当前节点后继节点的位置|<br>|insertAsPred(e)|插入前驱节点，存入被引对象e，返回新节点位置|<br>|insertAsSucc(e)|插入后继节点，存入被引对象e，返回新节点位置|</p>
+<p><strong>ListNode模板类</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Rank;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ListNodePosi(T) ListNode<span class="meta-string">&lt;T&gt;* //列表节点位置</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span><span class="comment">//列表节点模板类</span></span><br><span class="line">    T data; ListNodePosi(T) pred; ListNodePosi(T) succ;</span><br><span class="line"></span><br><span class="line">    ListNode() &#123;&#125;<span class="comment">//header 和 trailer的构造</span></span><br><span class="line">    ListNode( T e, ListNodePosi(T) p = <span class="literal">NULL</span>, ListNodePosi(T) s = <span class="literal">NULL</span>) <span class="comment">//默认构造器</span></span><br><span class="line">        : data(e), pred(p), succ(s) &#123;&#125;</span><br><span class="line">    ListNodePosi(T) insertAsPred(T <span class="keyword">const</span>&amp; e);<span class="comment">//前插节点</span></span><br><span class="line">    ListNodePosi(T) insertSucc(T <span class="keyword">const</span>&amp; e);<span class="comment">//后插节点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表ADT支持的操作接口<br>|操作接口|功能|适用对象|<br>|—-|—-|—-|<br>|size()|返回列表当前的规模（节点总数）|列表|<br>|first(), last()|返回首、末节点的位置|列表|<br>|insertAsFirst(e)/insertAsLast(e)|将e当作首、末节点插入|列表|<br>|insertBefore(p, e)/insertAfter(p, e)|将e当作节点p的直接前驱、后继插入|列表|<br>|remove(p)|删除位置p处的节点，返回其数值|列表|<br>|disordered()|判断所有节点是否已按非降序排列||<br>|sort()|调整各节点的位置，使之按非降序排列||<br>|find(e)|查找目标元素e，失败时返回NULL||<br>|search(e)|查找目标元素e，返回不大于e且秩最大的节点|有序列表|<br>|deduplicate()|删除重复节点|列表|<br>|uniquify()|删除重复节点|有序列表|<br>|traverse()|遍历并统一处理所有节点，处理方法由函数对象指定|列表|</p>
+<p><strong>List模板类</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#nclude <span class="meta-string">"listNode.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">List</span>&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> _size; ListNodePosi(T) header; ListNodePoi(T) trailer;<span class="comment">//规模、头哨兵、尾哨兵</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span>:</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;<span class="comment">//初始化</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">clear</span><span class="params">()</span></span>;<span class="comment">//清除所有节点</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">copyNodes</span><span class="params">(ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//复制自位置p起的n项</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(ListNodePosi(T)&amp;, <span class="keyword">int</span>, List&lt;T&gt;&amp;, ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//有序列表归并</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(ListNodePosi(T)&amp;, <span class="keyword">int</span>)</span></span>;<span class="comment">//对p开始n个节点归并和排序</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//选择排序</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(ListNodePosi(T), <span class="keyword">int</span>)</span></span>;<span class="comment">//插入排序</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">        List() &#123;init();&#125;</span><br><span class="line">        List(List&lt;T&gt; <span class="keyword">const</span>&amp; L);<span class="comment">//整体复制列表</span></span><br><span class="line">        List(List&lt;T&gt; <span class="keyword">const</span>&amp; L, Rank r, <span class="keyword">int</span> n);<span class="comment">//复制列表自r起的n项</span></span><br><span class="line">        List(ListNodePosi(T) p, <span class="keyword">int</span> n);<span class="comment">//复制列表自p起的n项</span></span><br><span class="line">    <span class="comment">//析构函数</span></span><br><span class="line">        ~List();<span class="comment">//释放所有节点</span></span><br><span class="line">        <span class="function">Rank <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> _size;&#125;<span class="comment">//规模</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> _size &lt;= <span class="number">0</span>;&#125;<span class="comment">//判空</span></span><br><span class="line">        T&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> r) <span class="keyword">const</span>;<span class="comment">//重载，支持循秩访问</span></span><br><span class="line">        ListNodePosi(T) first() <span class="keyword">const</span> &#123;<span class="keyword">return</span> header-&gt;succ;&#125;<span class="comment">//首节点位置</span></span><br><span class="line">        ListNodePosi(T) last() <span class="keyword">const</span> &#123;<span class="keyword">return</span> trailer-&gt;pred;&#125;<span class="comment">//末节点位置</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(ListNodePosi(T) p)</span></span>&#123;<span class="comment">//判断位置p是否合法</span></span><br><span class="line">            <span class="keyword">return</span> p &amp;&amp; (trailer != p) &amp;&amp; (header != p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">disordered</span><span class="params">()</span> <span class="keyword">const</span></span>;<span class="comment">//判断是否排序</span></span><br><span class="line">        ListNodePosi(T) find(T <span class="keyword">const</span>&amp; e) <span class="keyword">const</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> find(e, _size, trailer);</span><br><span class="line">        &#125;<span class="comment">//无序列表查找</span></span><br><span class="line">        ListNodePosi(T) find(T <span class="keyword">const</span>&amp; e, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span>;<span class="comment">//无序区间查找</span></span><br><span class="line">        ListNodePosi(T) search(T <span class="keyword">const</span>&amp; e) <span class="keyword">const</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> search(e, _size, trailer);</span><br><span class="line">        &#125;<span class="comment">//有序列表查找</span></span><br><span class="line">        ListNodePosi(T) search(T <span class="keyword">const</span>&amp; e, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span>;<span class="comment">//有序区间查找</span></span><br><span class="line">        ListNodePosi(T) selectMax(ListNodePosi(T) p, <span class="keyword">int</span> n);<span class="comment">//在p及其后n-1个元素中选择最大者</span></span><br><span class="line">        ListNodePosi(T) selectMax()&#123;<span class="keyword">return</span> selectMax(header-&gt;succ,_size);&#125;<span class="comment">//整体最大者</span></span><br><span class="line">    <span class="comment">//可写访问接口</span></span><br><span class="line">        ListNodePosi(T) insertAsFirst(T <span class="keyword">const</span>&amp; e);<span class="comment">//将e作为首节点插入</span></span><br><span class="line">        ListNodePosi(T) insertAsLast(T <span class="keyword">const</span>&amp; e);<span class="comment">//将e作为末节点插入</span></span><br><span class="line">        ListNodePosi(T) insertBefore(ListNodePosi(T) p, T <span class="keyword">const</span>&amp; e);<span class="comment">//将e作为p的前驱插入</span></span><br><span class="line">        ListNodePosi(T) insertAfter(ListNodePosi(T) p, T <span class="keyword">const</span>&amp;e);<span class="comment">//将e作为p的后继插入</span></span><br><span class="line">        <span class="function">T <span class="title">remove</span><span class="params">(ListNodePosi(T) p)</span></span>;<span class="comment">//删除位置p处的节点</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(List&lt;T&gt;&amp; L)</span></span>&#123;merge(first(), size, L, L.first(), L._size);&#125;<span class="comment">//全列表归并</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(ListNodePosi(T) p, <span class="keyword">int</span> n)</span></span>;<span class="comment">//列表区间排序</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">()</span> </span>&#123;sort(first(), _size);&#125;<span class="comment">//列表整体排序</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">deduplicate</span><span class="params">()</span></span>;<span class="comment">//无序去重</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">uniquify</span><span class="params">()</span></span>;<span class="comment">//有序去重</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span></span>;<span class="comment">//前后倒置</span></span><br><span class="line">    <span class="comment">//遍历</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(<span class="keyword">void</span> (*)(T&amp;))</span></span>;</span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(VST&amp;)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <h1 id="列表-1"><a href="#列表-1" class="headerlink" title="列表"></a>列表</h1><h2 id="头、尾节点"><a href="#头、尾节点" class="headerlink" title="头、尾节点"></a>头、尾节点</h2><blockquote>
 <p>私有的<strong>头节点</strong>（header）和<strong>尾节点</strong>（trailer）始终存在，对外不可见。<br>对外可见的第一个和最后一个节点分别是<strong>首节点</strong>（first node）和<strong>末节点</strong>（last node）。<br><strong>头节点</strong>是<strong>首节点</strong>的直接前驱。<br><strong>尾节点</strong>是<strong>末节点</strong>的直接后继。<br><strong>哨兵节点</strong>（sentinel node）：封装之后对外不可见的节点。（<em>头、尾节点，等</em>）</p>
 </blockquote>
 <h2 id="默认构造方法"><a href="#默认构造方法" class="headerlink" title="默认构造方法"></a>默认构造方法</h2><p>创建一对头、尾哨兵节点，设置其前驱、后继指针构成一个双向链表。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> List&lt;T&gt;::init()&#123;</span><br><span class="line">    header = <span class="keyword">new</span> ListNode&lt;T&gt;;<span class="comment">//头哨兵节点</span></span><br><span class="line">    trailer = <span class="keyword">new</span> ListNode&lt;T&gt;;<span class="comment">//尾哨兵节点</span></span><br><span class="line">    header-&gt;succ = trailer; header-&gt;pred = <span class="literal">NULL</span>;<span class="comment">//头节点的前驱、后继</span></span><br><span class="line">    trailer-&gt;pred = header; trailer-&gt;succ = <span class="literal">NULL</span>;<span class="comment">//尾节点的前驱、后继</span></span><br><span class="line">    _size = <span class="number">0</span>;<span class="comment">//规模</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="通过秩指定列表节点"><a href="#通过秩指定列表节点" class="headerlink" title="通过秩指定列表节点"></a>通过秩指定列表节点</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">T&amp; List&lt;T&gt;::<span class="keyword">operator</span>[](<span class="keyword">int</span> r) <span class="keyword">const</span> &#123;</span><br><span class="line">    ListNodePosi(T) p = first();<span class="comment">//从首节点出发</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; r--) p = p-&gt;succ;<span class="comment">//循环到第r个位置</span></span><br><span class="line">    <span class="keyword">return</span> p-&gt;data;<span class="comment">//返回目标数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p><strong>实现</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) List&lt;T&gt;::find(T <span class="keyword">const</span>&amp;, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; n--)<span class="comment">//从后向前找n个前驱</span></span><br><span class="line">        <span class="keyword">if</span> (e == (p == (p-&gt;pred)-&gt;date)) <span class="keyword">return</span> p;<span class="comment">//找到则返回对应元素</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;<span class="comment">//没找到则返回NULL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) List&lt;T&gt;::find(T <span class="keyword">const</span>&amp;, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; n--)<span class="comment">//从后向前找n个前驱</span></span><br><span class="line">        <span class="keyword">if</span> (e == (p == (p-&gt;pred)-&gt;date)) <span class="keyword">return</span> p;<span class="comment">//找到则返回对应元素</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;<span class="comment">//没找到则返回NULL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>时间复杂度：O(n)。</p>
 </blockquote>
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p><strong>接口</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertAsFirst(T <span class="keyword">const</span>&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> header-&gt;insertAsSucc(e);<span class="comment">//作为首节点插入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertAsLast(T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> trailer-&gt;insertAsPred(e);<span class="comment">//作为末节点插入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertBefore(ListNodePosi(T) p, T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> p-&gt;insertAsPred(e);<span class="comment">//作为p的前驱插入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertAfter(ListNodePosi(T) p, T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> p-&gt;insertAsSucc(e);<span class="comment">//作为p的后继插入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>前插入</strong><br>将新元素e当作当前节点的前驱插入：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) ListNode&lt;T&gt;::insertAsPred(T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    ListNodePosi(T) x = <span class="keyword">new</span> ListNode(e, pred, <span class="keyword">this</span>);<span class="comment">//创建新节点</span></span><br><span class="line">    pred-&gt;succ = x; pred = x;<span class="comment">//设置正向链接</span></span><br><span class="line">    <span class="keyword">return</span> x;<span class="comment">//返回新节点的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p><strong>接口</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertAsFirst(T <span class="keyword">const</span>&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> header-&gt;insertAsSucc(e);<span class="comment">//作为首节点插入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertAsLast(T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> trailer-&gt;insertAsPred(e);<span class="comment">//作为末节点插入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertBefore(ListNodePosi(T) p, T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> p-&gt;insertAsPred(e);<span class="comment">//作为p的前驱插入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; ListNodePosi(T) List&lt;T&gt;::insertAfter(ListNodePosi(T) p, T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    _size++; <span class="keyword">return</span> p-&gt;insertAsSucc(e);<span class="comment">//作为p的后继插入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>前插入</strong><br>将新元素e当作当前节点的前驱插入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) ListNode&lt;T&gt;::insertAsPred(T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    ListNodePosi(T) x = <span class="keyword">new</span> ListNode(e, pred, <span class="keyword">this</span>);<span class="comment">//创建新节点</span></span><br><span class="line">    pred-&gt;succ = x; pred = x;<span class="comment">//设置正向链接</span></span><br><span class="line">    <span class="keyword">return</span> x;<span class="comment">//返回新节点的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤说明</strong></p>
 <ol>
 <li>当前节点表示为<code>this</code>，其前驱为<code>pred</code>。</li>
 <li>首先创建一个新的节点<strong>new</strong>，设定其前驱为<code>pred</code>，后继为<code>this</code>。</li>
-<li>对于<code>this</code>和<code>pred</code>的顺序关系重置：将<code>this</code>的前驱<code>pred</code>的后继设置为新的节点<strong>new</strong>，<code>this</code>的前驱设定为<strong>new</strong>。（<em>顺序不能颠倒，否则：只实现了<code>this</code>的前驱为*</em>new<strong>，第二步将</strong>new<strong>节点的后继设置为其自身，并且<code>this</code>原本的前驱<code>pred</code>的后继依旧是<code>this</code>，而没有更新成</strong>this***）</li>
+<li>对于<code>this</code>和<code>pred</code>的顺序关系重置：将<code>this</code>的前驱<code>pred</code>的后继设置为新的节点<strong>new</strong>，<code>this</code>的前驱设定为<strong>new</strong>。（<em>顺序不能颠倒，否则：只实现了<code>this</code>的前驱为<strong>new</strong>，第二步将<strong>new</strong>节点的后继设置为其自身，并且<code>this</code>原本的前驱<code>pred</code>的后继依旧是<code>this</code>，而没有更新成<strong>this</strong></em>）</li>
 </ol>
-<p><strong>后插入</strong><br>将新元素e作为当前节点的后继插入至当前列表：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) ListNode&lt;T&gt;::insertAsSucc(T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    ListNodePosi(T) x = <span class="keyword">new</span> ListNode(e, <span class="keyword">this</span>, succ);</span><br><span class="line">    succ-&gt;pred = x; succ = x;<span class="comment">//设置逆向链接</span></span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>后插入</strong><br>将新元素e作为当前节点的后继插入至当前列表：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) ListNode&lt;T&gt;::insertAsSucc(T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">    ListNodePosi(T) x = <span class="keyword">new</span> ListNode(e, <span class="keyword">this</span>, succ);</span><br><span class="line">    succ-&gt;pred = x; succ = x;<span class="comment">//设置逆向链接</span></span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>一点注意</strong></p>
 <blockquote>
 <p>先设置当前节点的后继的前驱为新的节点，再设置当前节点的后继为当前节点。</p>
 </blockquote>
 <p><strong>复杂度</strong>： 时间复杂度为常数时间O(1)。</p>
-<h2 id="基于复制的构造"><a href="#基于复制的构造" class="headerlink" title="基于复制的构造"></a>基于复制的构造</h2><p><strong>实现</strong><br>细节：<code>copyNodes()</code>首先首先调用<code>init()</code>方法，创建头、尾哨兵节点，并做相应的初始化处理，再自p所指向的节点开始，取出n个相邻的节点，并逐个作为末节点插入到列表中并更新节点。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::copyNodes(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    init();<span class="comment">//首先初始化，创建头、尾节点</span></span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        insertAsLast(p -&gt;data);<span class="comment">//将p所指向节点的值作为末节点插入到新列表中</span></span><br><span class="line">        p = p-&gt;succ;<span class="comment">//指向下一个列表</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="基于复制的构造"><a href="#基于复制的构造" class="headerlink" title="基于复制的构造"></a>基于复制的构造</h2><p><strong>实现</strong><br>细节：<code>copyNodes()</code>首先首先调用<code>init()</code>方法，创建头、尾哨兵节点，并做相应的初始化处理，再自p所指向的节点开始，取出n个相邻的节点，并逐个作为末节点插入到列表中并更新节点。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::copyNodes(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    init();<span class="comment">//首先初始化，创建头、尾节点</span></span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        insertAsLast(p -&gt;data);<span class="comment">//将p所指向节点的值作为末节点插入到新列表中</span></span><br><span class="line">        p = p-&gt;succ;<span class="comment">//指向下一个列表</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>复杂度</strong><br>为了某一区间，首先要将找到复制区间的起始节点的位置，然后在调用上面的方法。寻找起始节点的位置的时间复杂度是O(n)，而复制的时间复杂度也是O(n)，故总的时间复杂度为O(n)，正比于被复制节点的最高秩。</p>
-<p><strong>基于复制的列表构造方法</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">List&lt;T&gt;::List(ListNodePosi(T) p, <span class="keyword">int</span> n) &#123;</span><br><span class="line">    copyNodes(p, n);<span class="comment">//复制自位置p起的n项</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">List&lt;T&gt;::List(List&lt;T&gt; <span class="keyword">const</span>&amp;)&#123;</span><br><span class="line">    copyNodes(L.first(), L._size);<span class="comment">//复制列表L</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">List&lt;T&gt;::List(List&lt;T&gt; <span class="keyword">const</span>&amp; L, <span class="keyword">int</span> r, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    copyNodes(L[r], n);<span class="comment">//复制L中自第r项起的n项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p><strong>实现</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T List&lt;T&gt;::remove(ListNodePosi(T) p)&#123;</span><br><span class="line">    T e = p-&gt;data;<span class="comment">//备份待删除节点的数据</span></span><br><span class="line">    p-&gt;pred-&gt;succ = p-&gt;succ;<span class="comment">//设定待删除节点p的前驱的后继为p的后继</span></span><br><span class="line">    p-&gt;succ-&gt;pred = p-&gt;pred;<span class="comment">//设定p的后继的前驱是p的前驱</span></span><br><span class="line">    <span class="keyword">delete</span> p;<span class="comment">//删除节点</span></span><br><span class="line">    _size--;<span class="comment">//列表规模对应更新</span></span><br><span class="line">    <span class="keyword">return</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意事项</strong></p>
+<p><strong>基于复制的列表构造方法</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">List&lt;T&gt;::List(ListNodePosi(T) p, <span class="keyword">int</span> n) &#123;</span><br><span class="line">    copyNodes(p, n);<span class="comment">//复制自位置p起的n项</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">List&lt;T&gt;::List(List&lt;T&gt; <span class="keyword">const</span>&amp;)&#123;</span><br><span class="line">    copyNodes(L.first(), L._size);<span class="comment">//复制列表L</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">List&lt;T&gt;::List(List&lt;T&gt; <span class="keyword">const</span>&amp; L, <span class="keyword">int</span> r, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    copyNodes(L[r], n);<span class="comment">//复制L中自第r项起的n项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T List&lt;T&gt;::remove(ListNodePosi(T) p)&#123;</span><br><span class="line">    T e = p-&gt;data;<span class="comment">//备份待删除节点的数据</span></span><br><span class="line">    p-&gt;pred-&gt;succ = p-&gt;succ;<span class="comment">//设定待删除节点p的前驱的后继为p的后继</span></span><br><span class="line">    p-&gt;succ-&gt;pred = p-&gt;pred;<span class="comment">//设定p的后继的前驱是p的前驱</span></span><br><span class="line">    <span class="keyword">delete</span> p;<span class="comment">//删除节点</span></span><br><span class="line">    _size--;<span class="comment">//列表规模对应更新</span></span><br><span class="line">    <span class="keyword">return</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><strong>注意事项</strong></p>
 <ol>
 <li>必须先设定待删除节点的前驱和后继的所对应的后继和前驱，再删除节点，否则无法找到对应的后继和前驱，从而导致列表断裂，前驱没有后继，后继没有前驱。</li>
 <li>注意更新列表的规模（<em>容易遗忘</em>）。</li>
 </ol>
 <p><strong>复杂度</strong>：常数次基本操作，时间复杂度为O(1)。</p>
 <h2 id="析构"><a href="#析构" class="headerlink" title="析构"></a>析构</h2><p><strong>析构</strong>：将列表删除，其所占用的资源释放。</p>
-<p><strong>列表析构方法</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; List&lt;T&gt;::~List()</span><br><span class="line">&#123;</span><br><span class="line">    clear();<span class="comment">//清空对外可见的节点</span></span><br><span class="line">    <span class="keyword">delete</span> header;<span class="comment">//释放头节点</span></span><br><span class="line">    <span class="keyword">delete</span> trailer;<span class="comment">//释放尾节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>列表清空方法clear()</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">int</span> List&lt;T&gt;::clear()&#123;</span><br><span class="line">    <span class="keyword">int</span> oldSize = _size;<span class="comment">//备份原列表规模</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; _size)</span><br><span class="line">        remove(header-&gt;succ);<span class="comment">//删除头节点的后继</span></span><br><span class="line">    <span class="keyword">return</span> oldSize;<span class="comment">//返回原列表的规模</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="唯一化"><a href="#唯一化" class="headerlink" title="唯一化"></a>唯一化</h2><p><strong>实现</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">int</span> List&lt;T&gt;::deduplicate()&#123;</span><br><span class="line">    <span class="keyword">if</span> (_size &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//平凡列表特殊处理，直接返回无重复</span></span><br><span class="line">    <span class="keyword">int</span> oldSize = _size;<span class="comment">//备份原列表规模</span></span><br><span class="line">    ListNodePosi(T) p = header;<span class="comment">//从头节点开始</span></span><br><span class="line">    Rank r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (trailer != (p = p-&gt;succ))&#123;<span class="comment">//确保p的后继不是尾节点</span></span><br><span class="line">        ListNodePosi(T) q = find(p-&gt;data, r, p);<span class="comment">//对p在p的前驱中查重</span></span><br><span class="line">        q ? remove(q) : r++;<span class="comment">//重复则删除p，否则指向p的后继</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> olsSize - _size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>列表析构方法</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; List&lt;T&gt;::~List()</span><br><span class="line">&#123;</span><br><span class="line">    clear();<span class="comment">//清空对外可见的节点</span></span><br><span class="line">    <span class="keyword">delete</span> header;<span class="comment">//释放头节点</span></span><br><span class="line">    <span class="keyword">delete</span> trailer;<span class="comment">//释放尾节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>列表清空方法clear()</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">int</span> List&lt;T&gt;::clear()&#123;</span><br><span class="line">    <span class="keyword">int</span> oldSize = _size;<span class="comment">//备份原列表规模</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; _size)</span><br><span class="line">        remove(header-&gt;succ);<span class="comment">//删除头节点的后继</span></span><br><span class="line">    <span class="keyword">return</span> oldSize;<span class="comment">//返回原列表的规模</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="唯一化"><a href="#唯一化" class="headerlink" title="唯一化"></a>唯一化</h2><p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">int</span> List&lt;T&gt;::deduplicate()&#123;</span><br><span class="line">    <span class="keyword">if</span> (_size &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//平凡列表特殊处理，直接返回无重复</span></span><br><span class="line">    <span class="keyword">int</span> oldSize = _size;<span class="comment">//备份原列表规模</span></span><br><span class="line">    ListNodePosi(T) p = header;<span class="comment">//从头节点开始</span></span><br><span class="line">    Rank r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (trailer != (p = p-&gt;succ))&#123;<span class="comment">//确保p的后继不是尾节点</span></span><br><span class="line">        ListNodePosi(T) q = find(p-&gt;data, r, p);<span class="comment">//对p在p的前驱中查重</span></span><br><span class="line">        q ? remove(q) : r++;<span class="comment">//重复则删除p，否则指向p的后继</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> olsSize - _size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>复杂度</strong><br>算法总共需要O(n)次迭代，每次迭代正比于当前节点的位置，即总的执行时间为<br>1 + 2 + 3 + … + n = (n + 1)n/2 =O(n^2)。</p>
-<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p><strong>实现</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> List&lt;T&gt;::traverse(<span class="keyword">void</span> (*visit)(T&amp;))&#123;<span class="comment">//利用函数指针机制遍历</span></span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) p = header; p != trailer; p = p-&gt;succ)</span><br><span class="line">        visit(p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::traverse(VST&amp; visit)<span class="comment">//利用函数对象机制的遍历</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) p = header-&gt;succ; p !=trailer; p = p-&gt;succ)</span><br><span class="line">        visit(p-&gt;data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> List&lt;T&gt;::traverse(<span class="keyword">void</span> (*visit)(T&amp;))&#123;<span class="comment">//利用函数指针机制遍历</span></span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) p = header; p != trailer; p = p-&gt;succ)</span><br><span class="line">        visit(p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::traverse(VST&amp; visit)<span class="comment">//利用函数对象机制的遍历</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) p = header-&gt;succ; p !=trailer; p = p-&gt;succ)</span><br><span class="line">        visit(p-&gt;data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <h1 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h1><p><strong>有序列表</strong>（sorted list）：列表中所有节点的逻辑次序与其大小次序完全一致。</p>
 <h2 id="唯一化-1"><a href="#唯一化-1" class="headerlink" title="唯一化"></a>唯一化</h2><p><strong>思想</strong>：位置指针p和q分别指向每一对相邻的节点，若两者相同，则删除q，否则转向下一对相邻节点。反复迭代，直至检查过所有节点。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">int</span> List&lt;T&gt;::uniqueify()&#123;</span><br><span class="line">    <span class="keyword">if</span> (_size &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> oldSize = _size;</span><br><span class="line">    ListNodePosi(T) p;</span><br><span class="line">    ListNodePosi(T) q;</span><br><span class="line">    <span class="keyword">for</span> (p = header, q = p-&gt;succ; trailer != q; p = q, q = q-&gt;succ)</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;data == q-&gt;data)</span><br><span class="line">        &#123;</span><br><span class="line">            remove(q);</span><br><span class="line">            q = p;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> olsSize - _size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>复杂度</strong><br>时间复杂度为O(n)，线性正比于列表的规模。</p>
 <h2 id="查找-1"><a href="#查找-1" class="headerlink" title="查找"></a>查找</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (ListNodePosi p = trailer; (p-&gt;pred != header) &amp;&amp; (p-&gt;data &lt;= e); p = p-&gt;pred)</span><br><span class="line">&#123;</span><br><span class="line">    p-&gt;data == e ? <span class="keyword">return</span> p:;<span class="comment">//自己实现</span></span><br><span class="line">&#125;<span class="comment">//注：要考虑列表中不存在该值的情况</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;<span class="comment">//在前驱中找到不大于e的最后者</span></span><br><span class="line">ListNodePosi(T) List&lt;T&gt;::search(T <span class="keyword">const</span>&amp; e, <span class="keyword">int</span> n, ListNodePosi(T) p) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt;= n--)</span><br><span class="line">        <span class="keyword">if</span> (((p = p-&gt;pred)-&gt;data) &lt;= e) <span class="keyword">break</span>;<span class="comment">//返回不小于e的最后一个</span></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>复杂度</strong><br>平均运行的时间复杂度为O(n)。</p>
 <hr>
 <h1 id="排序器"><a href="#排序器" class="headerlink" title="排序器"></a>排序器</h1><h2 id="统一入口"><a href="#统一入口" class="headerlink" title="统一入口"></a>统一入口</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> List&lt;T&gt;::sort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">switch</span>(rand() %<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: insertionSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>: selectionSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>: mergeSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="插入排序（insertionSort）"><a href="#插入排序（insertionSort）" class="headerlink" title="插入排序（insertionSort）"></a>插入排序（insertionSort）</h2><p><strong>思路</strong>：将整个序列看作并切分为两个部分：<strong>有序的前缀</strong>，<strong>无序的后缀</strong>；经过迭代后，反复<strong>将后缀的首元素移到前缀中合适的位置</strong>。<br><img src="insertSort.gif" alt="插入排序"> </p>
-<p><strong>实现</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(r = <span class="number">0</span>; r &lt; n<span class="number">-1</span>; r++)&#123;<span class="comment">//自己的实现</span></span><br><span class="line">    T t = find(p-&gt;data, r, p-&gt;pred);</span><br><span class="line">    insert(p-&gt;data, t);</span><br><span class="line">    p = p-&gt;succ;<span class="comment">//！及时删除多余的节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(r = <span class="number">0</span>; r &lt; n<span class="number">-1</span>; r++)&#123;<span class="comment">//自己的实现</span></span><br><span class="line">    T t = find(p-&gt;data, r, p-&gt;pred);</span><br><span class="line">    insert(p-&gt;data, t);</span><br><span class="line">    p = p-&gt;succ;<span class="comment">//！及时删除多余的节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::insertionSort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; n; r++)&#123;</span><br><span class="line">        insertAfter(search(p-&gt;data, r, p), p-&gt;data);<span class="comment">//查找到不大于待插入数据的最后一个位置，插入其后</span></span><br><span class="line">        p = p-&gt;succ;remove(p-&gt;pred);<span class="comment">//移至后一节点，删除刚刚插入的节点，顺序不能颠倒，否则导致链表断裂。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>复杂度</strong><br>    算法是由n步迭代构成的，每次迭代包含<code>查找</code>，<code>插入</code>和<code>删除</code>构成。其中<code>插入</code>和<code>删除</code>的时间复杂度为O(1)，而<code>查找</code>所需的时间在O(1)至O(n)之间，故总的平均时间复杂度为O(n^2)。</p>
 <h2 id="选择排序（selectionSort）"><a href="#选择排序（selectionSort）" class="headerlink" title="选择排序（selectionSort）"></a>选择排序（selectionSort）</h2><p><strong>思路</strong>：将序列划分成<em>无序前缀</em>和<em>有序后缀</em>两部分，要求前缀不大于后缀。每次迭代从前缀中选出最大者，并作为最小元素插入至后缀中。</p>
-<p><strong>实现</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自己的实现</span></span><br><span class="line"><span class="comment">//对于给定位置p以及后续的n-1个元素进行排序</span></span><br><span class="line">ListNodePosi head = p;</span><br><span class="line"><span class="keyword">int</span> r = n;</span><br><span class="line">ListNodePosi tail = ((r == <span class="number">1</span>) ? <span class="keyword">return</span> p : p = p-&gt;succ, r--;);</span><br><span class="line"><span class="keyword">while</span>(n &gt; <span class="number">1</span>)&#123;</span><br><span class="line">    ListNodePosi max = searchMax(tail,n);</span><br><span class="line">    insertAfter(tail,max);</span><br><span class="line">    tail = tail-&gt;pred;</span><br><span class="line">    remove(max);</span><br><span class="line">    n--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自己的实现</span></span><br><span class="line"><span class="comment">//对于给定位置p以及后续的n-1个元素进行排序</span></span><br><span class="line">ListNodePosi head = p;</span><br><span class="line"><span class="keyword">int</span> r = n;</span><br><span class="line">ListNodePosi tail = ((r == <span class="number">1</span>) ? <span class="keyword">return</span> p : p = p-&gt;succ, r--;);</span><br><span class="line"><span class="keyword">while</span>(n &gt; <span class="number">1</span>)&#123;</span><br><span class="line">    ListNodePosi max = searchMax(tail,n);</span><br><span class="line">    insertAfter(tail,max);</span><br><span class="line">    tail = tail-&gt;pred;</span><br><span class="line">    remove(max);</span><br><span class="line">    n--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">selectMax(ListNodePosi p, <span class="keyword">int</span> n)&#123;<span class="comment">//自己的实现</span></span><br><span class="line">    ListNodePosi max = p;</span><br><span class="line">    n--;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="keyword">if</span>((p = p-&gt;succ)-&gt;data &gt; max-&gt;data)</span><br><span class="line">            max = p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>实现</strong><br>列表的选择排序</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::selectionSort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    ListNodePosi(T) head = p-&gt;pred; ListNodePosi(T) tail = p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) tail = tail-&gt;succ;<span class="comment">//tail为尾节点</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span> &lt; n)&#123;</span><br><span class="line">        ListNodePosi(T) max = selectMax(head-&gt;succ, n);<span class="comment">//在头节点后的n个节点中找出最大者</span></span><br><span class="line">        insertBefore(tail, remove(max));<span class="comment">//将最大者插入到末节点之前</span></span><br><span class="line">        tail = tail-&gt;pred; n--;<span class="comment">//末节点向前移动</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>列表最大节点的定位</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) List&lt;T&gt;::selectMax(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    ListNodePosi(T) max = p;</span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) cur = p; <span class="number">1</span> &lt; n; n--)</span><br><span class="line">        <span class="keyword">if</span> (!lt((cur = cur-&gt;succ)-&gt;data, max-&gt;data))</span><br><span class="line">            max = cur;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>实现</strong><br>列表的选择排序<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::selectionSort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    ListNodePosi(T) head = p-&gt;pred; ListNodePosi(T) tail = p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) tail = tail-&gt;succ;<span class="comment">//tail为尾节点</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span> &lt; n)&#123;</span><br><span class="line">        ListNodePosi(T) max = selectMax(head-&gt;succ, n);<span class="comment">//在头节点后的n个节点中找出最大者</span></span><br><span class="line">        insertBefore(tail, remove(max));<span class="comment">//将最大者插入到末节点之前</span></span><br><span class="line">        tail = tail-&gt;pred; n--;<span class="comment">//末节点向前移动</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>列表最大节点的定位<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) List&lt;T&gt;::selectMax(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    ListNodePosi(T) max = p;</span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) cur = p; <span class="number">1</span> &lt; n; n--)</span><br><span class="line">        <span class="keyword">if</span> (!lt((cur = cur-&gt;succ)-&gt;data, max-&gt;data))</span><br><span class="line">            max = cur;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>复杂度</strong><br>选择排序由n次迭代构成，每次迭代有<code>查找</code>和<code>插入</code>。<code>插入</code>和<code>删除</code>都是O(1)的复杂度，而每次查找的必须遍历整个无序前缀，总的时间复杂度为O(n^2)。<br>其中最好情况和最坏情况的渐进效率相同。</p>
 <h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2>
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
-          
-            <a href="/tags/%E5%88%97%E8%A1%A8/" rel="tag"># 列表</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/" rel="next" title="剑指Offer(一)：面试流程">
-                <i class="fa fa-chevron-left"></i> 剑指Offer(一)：面试流程
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E5%88%97%E8%A1%A8/" rel="tag"># 列表</a>
           </div>
 
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" rel="prev" title="剑指Offer(二)：面试需要的基础知识">
-                剑指Offer(二)：面试需要的基础知识 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
         
-          
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/" rel="next" title="剑指Offer(一)：面试流程">
+                  <i class="fa fa-chevron-left"></i> 剑指Offer(一)：面试流程
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" rel="prev" title="剑指Offer(二)：面试需要的基础知识">
+                  剑指Offer(二)：面试需要的基础知识 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  
+  
+
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">John Doe</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">22</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">32</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从向量到列表"><span class="nav-number">1.</span> <span class="nav-text">从向量到列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态与动态"><span class="nav-number">1.1.</span> <span class="nav-text">静态与动态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表节点"><span class="nav-number">2.1.</span> <span class="nav-text">列表节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">2.2.</span> <span class="nav-text">列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表-1"><span class="nav-number">3.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#头、尾节点"><span class="nav-number">3.1.</span> <span class="nav-text">头、尾节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认构造方法"><span class="nav-number">3.2.</span> <span class="nav-text">默认构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过秩指定列表节点"><span class="nav-number">3.3.</span> <span class="nav-text">通过秩指定列表节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">3.4.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">3.5.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于复制的构造"><span class="nav-number">3.6.</span> <span class="nav-text">基于复制的构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">3.7.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#析构"><span class="nav-number">3.8.</span> <span class="nav-text">析构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一化"><span class="nav-number">3.9.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">3.10.</span> <span class="nav-text">遍历</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序列表"><span class="nav-number">4.</span> <span class="nav-text">有序列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一化-1"><span class="nav-number">4.1.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找-1"><span class="nav-number">4.2.</span> <span class="nav-text">查找</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序器"><span class="nav-number">5.</span> <span class="nav-text">排序器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#统一入口"><span class="nav-number">5.1.</span> <span class="nav-text">统一入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序（insertionSort）"><span class="nav-number">5.2.</span> <span class="nav-text">插入排序（insertionSort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序（selectionSort）"><span class="nav-number">5.3.</span> <span class="nav-text">选择排序（selectionSort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">5.4.</span> <span class="nav-text">归并排序</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从向量到列表"><span class="nav-number">1.</span> <span class="nav-text">从向量到列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态与动态"><span class="nav-number">1.2.</span> <span class="nav-text">静态与动态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表节点"><span class="nav-number">2.1.</span> <span class="nav-text">列表节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">2.2.</span> <span class="nav-text">列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表-1"><span class="nav-number">3.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#头、尾节点"><span class="nav-number">3.1.</span> <span class="nav-text">头、尾节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认构造方法"><span class="nav-number">3.2.</span> <span class="nav-text">默认构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过秩指定列表节点"><span class="nav-number">3.3.</span> <span class="nav-text">通过秩指定列表节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">3.4.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">3.5.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于复制的构造"><span class="nav-number">3.6.</span> <span class="nav-text">基于复制的构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">3.7.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#析构"><span class="nav-number">3.8.</span> <span class="nav-text">析构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一化"><span class="nav-number">3.9.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">3.10.</span> <span class="nav-text">遍历</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序列表"><span class="nav-number">4.</span> <span class="nav-text">有序列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一化-1"><span class="nav-number">4.1.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找-1"><span class="nav-number">4.2.</span> <span class="nav-text">查找</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序器"><span class="nav-number">5.</span> <span class="nav-text">排序器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#统一入口"><span class="nav-number">5.1.</span> <span class="nav-text">统一入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序（insertionSort）"><span class="nav-number">5.2.</span> <span class="nav-text">插入排序（insertionSort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序（selectionSort）"><span class="nav-number">5.3.</span> <span class="nav-text">选择排序（selectionSort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">5.4.</span> <span class="nav-text">归并排序</span></a></li></ol></li></ol></div>
       </div>
-    </main>
+      <!--/noindex-->
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-
-  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
 
 
+      </div>
+    </main>
 
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
 
         
+
+
+
+
+
 
 
 
@@ -637,31 +432,15 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -678,109 +457,9 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
 
   
 
