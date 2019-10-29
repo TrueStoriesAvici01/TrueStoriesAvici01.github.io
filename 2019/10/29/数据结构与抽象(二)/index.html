@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,封装,继承,多态," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="设计类封装封装：将数据和方法放在一个类中，隐藏类实现的细节，不需要知道类定义的内部细节，只需要知道如何为方法提供相应的参数，让方法执行正确的动作。 抽象(abstract)：关注是什么而不是如何的过程。 封装将类定义分成两个部分:   客户接口(client interface):   类的公有方法的方法头 类中公有命名常量    实现(implementation): 所有数据域和所有方法的定义">
+<meta name="keywords" content="Java,封装,继承,多态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与抽象(二)：设计类">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;29&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="设计类封装封装：将数据和方法放在一个类中，隐藏类实现的细节，不需要知道类定义的内部细节，只需要知道如何为方法提供相应的参数，让方法执行正确的动作。 抽象(abstract)：关注是什么而不是如何的过程。 封装将类定义分成两个部分:   客户接口(client interface):   类的公有方法的方法头 类中公有命名常量    实现(implementation): 所有数据域和所有方法的定义">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-28T14:08:04.742Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/29/数据结构与抽象(二)/"/>
+
+
+
+
+
+  <title>数据结构与抽象(二)：设计类 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与抽象(二)：设计类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">
+                2019-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="设计类"><a href="#设计类" class="headerlink" title="设计类"></a>设计类</h1><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p><strong>封装</strong>：将数据和方法放在一个类中，隐藏类实现的细节，不需要知道类定义的内部细节，只需要知道如何为方法提供相应的参数，让方法执行正确的动作。</p>
+<p><strong>抽象</strong>(abstract)：关注<em>是什么</em>而不是<em>如何</em>的过程。</p>
+<p><strong>封装</strong>将类定义分成两个部分:</p>
+<blockquote>
+<ol>
+<li><strong>客户接口</strong>(client interface): <blockquote>
+<ol>
+<li>类的公有方法的方法头</li>
+<li>类中公有命名常量</li>
+</ol>
+</blockquote>
+</li>
+<li><strong>实现</strong>(implementation): <em>所有数据域和所有方法的定义组成</em><blockquote>
+<ol>
+<li>私有数据域</li>
+<li>私有常量</li>
+<li>所有的方法定义</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="说明方法"><a href="#说明方法" class="headerlink" title="说明方法"></a>说明方法</h2><p><strong>注释</strong>: 使用/<em>* 开头，</em>/结尾，以@开头的<strong>标签(tag)</strong>标识方法。</p>
+<p><strong>前置条件与后置条件</strong>: </p>
+<blockquote>
+<ol>
+<li><strong>前置条件(precodition)</strong>: 方法执行前必须为真，否则不执行。</li>
+<li><strong>后置条件(postcondition)</strong>: 描述方法返回的值。</li>
+</ol>
+</blockquote>
+<p><strong>断言</strong>(assertion):</p>
+<blockquote>
+<p><strong>断言语句</strong>(assert statement): 使用<strong>assert</strong>语句强制执行断言：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> boolean_expression : valued_expression;</span><br><span class="line"><span class="comment">//如果第一个表达式为假，则可选的第二个表达式的值将出现在错误信息中</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Java接口"><a href="#Java接口" class="headerlink" title="Java接口"></a>Java接口</h2><p><strong>Java接口</strong>(Java interface):</p>
+<blockquote>
+<p>声明了一些<strong>公有方法</strong>，定义<strong>公有命名常量</strong>。</p>
+</blockquote>
+<p><strong>实现</strong>(implement):</p>
+<blockquote>
+<p>使用一个类来定义接口中声明的方法，<strong>必须定义接口中说明的每个方法的方法体</strong>，也可定义接口中没有声明的方法。</p>
+</blockquote>
+<p>接口示例:<br>文件名: <strong>interface_name.java</strong>（<em>与接口名相同</em>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">interface_name</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Method1</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 无参数，无返回值方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Method2</span><span class="params">(String s)</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 有参数，无返回值方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1. 不声明类的具体构造方法</span></span><br><span class="line"><span class="comment">     * 2. 不能声明static或final类型方法</span></span><br><span class="line"><span class="comment">     * 3. 默认为public</span></span><br><span class="line"><span class="comment">     * 4. 可声明数据域，但应该是命名常量，即为public、final及static的</span></span><br><span class="line"><span class="comment">     */</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实现接口的注意事项</strong>:</p>
+<ol>
+<li>实现接口的类必须在定义的开头使用<strong>implements</strong>进行说明。</li>
+<li>实现接口的类<strong>必须定义接口中声明的每个方法</strong>。</li>
+<li>不同的类对于相同接口的相同方法可以有不同的实现。</li>
+<li>接口不能定义私有数据域。</li>
+<li>类中可以定义所实现接口中未声明的方法。</li>
+<li>一个<strong>class</strong>中可以同时实现多个接口，同时由另外一个类中派生出来。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Class1</span> <span class="keyword">extends</span> <span class="title">Class2</span> <span class="keyword">implements</span> <span class="title">IF1</span>,<span class="title">IF2</span>,...</span></span><br><span class="line"><span class="class">//<span class="title">Class1</span>类是继承类<span class="title">Class2</span>，同时实现接口<span class="title">IF1</span>和<span class="title">IF2</span>...，其中继承的类放前面，实现的接口放后面，多个接口用,隔开</span></span><br></pre></td></tr></table></figure></li>
+<li>实现多个接口时，各个接口中声明的方法皆须定义，同名方法可只定义一次。(<em>Q: 在实现多个接口的类中，调用同名方法时是使用的哪个接口的方法</em>)<blockquote>
+<p>Question:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接口1：IF1.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IF1</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口2：IF2.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IF2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现接口1和接口2的类Test.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">IF1</span>,<span class="title">IF2</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello Java!"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">            Test t = <span class="keyword">new</span> Test();</span><br><span class="line">            t.test;<span class="comment">//此处的方法test是实现的接口1还是接口2，还是和接口1，2没有关系</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>一个类不能同时继承多个父类（<em>避免实现继承时可能出现的冲突</em>）</li>
+<li>Java 通过实现多个接口的机制，从侧面获得了多重继承的能力而避免了可能的混乱。</li>
+</ol>
+<hr>
+<p><strong>接口作为数据类型</strong></p>
+<p>可以将Java接口作为<strong>声明变量、数据域或方法的参数</strong>。</p>
+<p>将Java接口作为实参传入类class中，可以保证：</p>
+<blockquote>
+<ol>
+<li>方法的参数有特定的方法</li>
+<li>参数只有接口中声明的方法</li>
+</ol>
+</blockquote>
+<p><strong>实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//interface:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InterfaceTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Way1</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Method which a realize be used as parameter:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Method</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MethodTest</span><span class="params">(InterfaceTest itf)</span></span>&#123;</span><br><span class="line">        itf.Way1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Class which realizes the interface:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Realize</span> <span class="keyword">implements</span> <span class="title">InterfaceTest</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> Way1&#123;</span><br><span class="line">        System.out.println(<span class="string">"Test!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//class Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Method m = <span class="keyword">new</span> Method();</span><br><span class="line">        Realize r = <span class="keyword">new</span> Realize();</span><br><span class="line">        m.MethodTest(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注:</strong></p>
+<ol>
+<li>有一个接口<code>InterfaceTest</code>，里面定义方法<code>Way1()</code></li>
+<li>有一个class:<code>Method</code>, <code>Method</code>中定义一个方法<code>MethodTest(InterfaceTest itf)</code>，其形参为<code>InterfaceTest</code>类型的对象。</li>
+<li>为了使用类<code>Method</code>中的方法<code>MethodTest</code>，需要传入<code>InterfaceTest</code>类型的对象，所以在一个新的类中将该类型的对象实现出来：新的类<code>Realize</code>实现接口<code>InterfaceTest</code>，并重写接口方法<code>Way1</code>。</li>
+<li>利用测试类<code>Test</code>检验类<code>Method</code>: 分别<code>new</code>出<code>Method</code>和<code>Realize</code>的对象，调用<code>Method</code>内中的方法<code>MethodTest</code>。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="派生一个接口"><a href="#派生一个接口" class="headerlink" title="派生一个接口"></a>派生一个接口</h2><blockquote>
+<p><strong>可以从一个或多个接口中派生出新的接口</strong><br><em>被派生的接口中可以定义新的方法</em><br><em>实现接口的类中必须实现接口中的所有方法（包括其继承的接口中定义的所有方法）</em><br><em>Java接口允许同时继承多个接口，但是类不能同时继承多个类</em></p>
+</blockquote>
+<blockquote>
+<p><strong>示例</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//interface 1:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IF1</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Method1</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//interface 2:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IF2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Method2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//interface which extends multiple interfaces at same time:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IF</span> <span class="keyword">extends</span> <span class="title">IF1</span>,<span class="title">IF2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Method3</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Class which realize interface IF:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">IF</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> Method1&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> Method2&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> Method3&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="接口内命名常量"><a href="#接口内命名常量" class="headerlink" title="接口内命名常量"></a>接口内命名常量</h2><p>定义在接口中的常量 VS 定义在类中的常量</p>
+<blockquote>
+<ol>
+<li><strong>定义在接口中常量</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义了常量的接口：</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ConstantValue</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> Pi = <span class="number">3.14</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MathTest</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> Pi = <span class="number">3.1415</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> T = <span class="number">1.5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现类中直接使用接口中定义的常量：</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">ConstantValue</span>,<span class="title">MathTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(ContantValue.Pi);</span><br><span class="line">        System.out.println(T);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注:</strong> 可以通过前缀加接口名来限定使用的常量。当class内中继承的多个接口中没有重名的常量可以不加；但是多个接口中存在重名的常量时，必须使用<code>接口名.常量名</code>的方式限定所要使用的常量。</p>
+<blockquote>
+<ol start="2">
+<li><strong>定义在类中的常量</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义在类中的常量</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Constants</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> Pi = <span class="number">3.1415</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用类中的常量</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(Constant.Pi);<span class="comment">//必须加上类名</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/%E5%B0%81%E8%A3%85/" rel="tag"># 封装</a>
+          
+            <a href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag"># 继承</a>
+          
+            <a href="/tags/%E5%A4%9A%E6%80%81/" rel="tag"># 多态</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" rel="next" title="计算机网络(一)：计算机网络于Internet">
+                <i class="fa fa-chevron-left"></i> 计算机网络(一)：计算机网络于Internet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/" rel="prev" title="数据结构与抽象(三)：包">
+                数据结构与抽象(三)：包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计类"><span class="nav-number">1.</span> <span class="nav-text">设计类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">1.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明方法"><span class="nav-number">1.2.</span> <span class="nav-text">说明方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java接口"><span class="nav-number">1.3.</span> <span class="nav-text">Java接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#派生一个接口"><span class="nav-number">1.4.</span> <span class="nav-text">派生一个接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口内命名常量"><span class="nav-number">1.5.</span> <span class="nav-text">接口内命名常量</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

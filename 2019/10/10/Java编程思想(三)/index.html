@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java操作符 操作符接受一个或多个参数，并生成一个新值。有些操作符可能改变操作数自身的值。“=”，“==”，“!=”能够操作所有对象，其他的操作符只能操作“基本类型”。String类支持“+”和“+=”。   优先级先乘除后加减。使用括号明确计算顺序。“+”可能涉及“字符串转换”：当一个String后面有“+”，其后又有非String类型元素，会试图将非String类型的元素转换为String。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想(三)：操作符">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;10&#x2F;Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%89)&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java操作符 操作符接受一个或多个参数，并生成一个新值。有些操作符可能改变操作数自身的值。“=”，“==”，“!=”能够操作所有对象，其他的操作符只能操作“基本类型”。String类支持“+”和“+=”。   优先级先乘除后加减。使用括号明确计算顺序。“+”可能涉及“字符串转换”：当一个String后面有“+”，其后又有非String类型元素，会试图将非String类型的元素转换为String。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-28T14:09:59.462Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/Java编程思想(三)/"/>
+
+
+
+
+
+  <title>Java编程思想(三)：操作符 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%89)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java编程思想(三)：操作符</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T21:13:16+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java操作符"><a href="#Java操作符" class="headerlink" title="Java操作符"></a>Java操作符</h1><blockquote>
+<p>操作符接受一个或多个参数，并生成一个新值。<br>有些操作符可能改变操作数自身的值。<br>“=”，“==”，“!=”能够操作所有对象，其他的操作符只能操作“基本类型”。<br><code>String</code>类支持“+”和“+=”。</p>
+</blockquote>
+<hr>
+<h1 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h1><p>先乘除后加减。<br>使用括号明确计算顺序。<br>“+”可能涉及“字符串转换”：当一个<code>String</code>后面有“+”，其后又有非<code>String</code>类型元素，会试图将非<code>String</code>类型的元素转换为<code>String</code>。</p>
+<a id="more"></a>
+<hr>
+<h1 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h1><p>“=”：用右边的值复制给左边的值。</p>
+<blockquote>
+<p>右值可以是任何常数、变量或者表达式。<br>左值必须为明确的、已命名的变量。</p>
+</blockquote>
+<blockquote>
+<p>基本数据类型的赋值就是将一个地方的内容复制到另一个地方。<code>a = b</code>后，修改<code>a</code>的值不会影响<code>b</code>。</p>
+</blockquote>
+<blockquote>
+<p>赋值的为对象时有所不同，对一个对象进行操作时，操作的是对象的引用，赋值操作则是将“引用”复制一份，两者都是指向相同的对象，<strong>修改其中一个都会对另外一个产生相同的影响</strong>。（<em>别名现象</em>）</p>
+</blockquote>
+<blockquote>
+<p>避免“别名问题”：使用对象中的域进行赋值，而不是使用对象进行赋值。</p>
+</blockquote>
+<h2 id="方法调用中的别名问题"><a href="#方法调用中的别名问题" class="headerlink" title="方法调用中的别名问题"></a>方法调用中的别名问题</h2><blockquote>
+<p>在方法中传入的参数为对象时，方法会作用于该对象，从而改变对象的实际值（<em>传进来的是对象的引用，而非对象的复制</em>）</p>
+</blockquote>
+<p><strong>示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Letter</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PassObject</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Letter y)</span></span>&#123;</span><br><span class="line">        y.c = <span class="string">'z'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Letter x = <span class="keyword">new</span> Letter();</span><br><span class="line">        x.c = <span class="string">'a'</span>;</span><br><span class="line">        System.out.println(x.c);</span><br><span class="line">        f(x);</span><br><span class="line">        System.out.println(x.c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//输出结果：a z</span></span><br><span class="line"><span class="comment">//调用方法f(x)会改变x中的值</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h1><ol>
+<li>包含加（+），减（-），乘（*），除（/）以及取模操作符（%从整数除法中产生余数）。</li>
+<li>支持运算与赋值同时操作。</li>
+</ol>
+<p>一元减号（-）和一元加号（+）：一元减号用于转变数据的符号，一元加号仅将较小类型的操作数提升为<strong>int</strong>。</p>
+<hr>
+<h1 id="自动递增和递减"><a href="#自动递增和递减" class="headerlink" title="自动递增和递减"></a>自动递增和递减</h1><blockquote>
+<ol>
+<li>++：增加一个单位</li>
+<li><strong>- -</strong>：减少一个单位</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol>
+<li><strong>前缀式</strong><br> ++a, - -a：操作符位于变量的前面。先执行运算，再生成值。</li>
+<li><strong>后缀式</strong><br> a++, a- -：操作符位于变量的后面。先生成值，再执行运算。</li>
+</ol>
+</blockquote>
+<hr>
+<h1 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h1><p>关系操作符有：</p>
+<ol>
+<li>小于（&lt;）</li>
+<li>大于（&gt;）</li>
+<li>小于或等于（&lt;=）</li>
+<li>大于或等于（&gt;=）</li>
+<li>等于（==）</li>
+<li>不等于（!=）</li>
+</ol>
+<blockquote>
+<p>产生一个<strong>boolean</strong>值：关系成立则为<strong>true</strong>，否则为<strong>false</strong>。<br>=, !=适合所有基本数据类型，其他不适合<strong>boolean</strong>类型。</p>
+</blockquote>
+<h2 id="测试对象的等价性"><a href="#测试对象的等价性" class="headerlink" title="测试对象的等价性"></a>测试对象的等价性</h2><blockquote>
+<p>若 == 两侧的是对象，则实际上比较的是对象的引用，除非使用赋值=创建两个对象，否则相同class创建的两个对象的引用是不同的。<br>使用“<code>==</code>” 或 “<code>equal</code>” 来对比相同类的两个对象时，其比较的都是引用，而创建的两个引用是不同的，所以为false。只有使用“<code>=</code>”来生成新的对象时，两个对象的引用才是一样的。</p>
+</blockquote>
+<hr>
+<h1 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h1><ol>
+<li>与（&amp;&amp;）</li>
+<li>或（||）</li>
+<li>非（！）<br>生成的是<strong>boolean</strong>值：ture或者false</li>
+</ol>
+<p>“与”，“或”，“非”操作只可应用于布尔值。<br>不可将一个非布尔值当作布尔值在逻辑表达式中使用。</p>
+<hr>
+<h2 id="短路"><a href="#短路" class="headerlink" title="短路"></a>短路</h2><p>使用逻辑操作符时，一旦能够明确无误地确定整个表达式的值（&amp;&amp;时遇到false，||遇到true），就不再计算表达式剩下的部分。</p>
+<hr>
+<h1 id="直接常量"><a href="#直接常量" class="headerlink" title="直接常量"></a>直接常量</h1><p>后缀字符标志着其类型：</p>
+<ol>
+<li>大写（或小写）的<strong>L</strong>代表<code>long</code>。</li>
+<li>大写（或小写）的<strong>F</strong>代表<code>float</code>。</li>
+<li>大写（或小写）的<strong>D</strong>代表<code>double</code>。</li>
+<li>十六进制数以前缀<strong>0x</strong>（或<strong>0X</strong>）表示。</li>
+</ol>
+<h2 id="指数计数法"><a href="#指数计数法" class="headerlink" title="指数计数法"></a>指数计数法</h2><p>使用e（E）表示“10的幂次”。</p>
+<hr>
+<h1 id="按位操作符"><a href="#按位操作符" class="headerlink" title="按位操作符"></a>按位操作符</h1><ol>
+<li>按位“与”（<strong>&amp;</strong>）</li>
+<li>按位“或”（<strong>|</strong>）</li>
+<li>按位“异或”（<strong>^</strong>）</li>
+<li>按位“非”（<strong>~</strong>）（只对一个操作符操作）</li>
+</ol>
+<p>可与<code>=</code>连用：<br>&amp;=<br>|=<br>^=<br><em>没有~=</em></p>
+<hr>
+<h1 id="移位操作符"><a href="#移位操作符" class="headerlink" title="移位操作符"></a>移位操作符</h1><blockquote>
+<p><strong>只可处理整数类型</strong></p>
+</blockquote>
+<ol>
+<li><strong>左移位操作符</strong>（&lt;&lt;）：将操作数向左移动指定的位数（低位补0）</li>
+<li><strong>“有符号”右移位操作符</strong>（&gt;&gt;）：向右移动操作数，符号为正，高位插0；符号为负，高位插1。</li>
+<li><strong>“无符号”右移位操作符</strong>（&gt;&gt;&gt;）：高位只插0。</li>
+</ol>
+<p><strong>char</strong>、<strong>byte</strong>或<strong>short</strong>类型的数值：<br>先转成<strong>int</strong>类型，得到结果为<strong>int</strong>类型，只有低5位有效。<br><strong>long</strong>类型：<br>结果为<strong>long</strong>类型，只有低6位有效。</p>
+<p><strong>移位与等号组合使用</strong><br>先进行移位操作，再将得到的结果赋给左边的变量。</p>
+<blockquote>
+<p><strong>注</strong>:进行“无符号”右移位结合赋值符号时，当对于<strong>byte</strong>或<strong>short</strong>类型的值处理时，会先转换为<strong>int</strong>类型，再进行移位，然后被截断，赋值给原来的类型，可能产生-1的情况。</p>
+</blockquote>
+<hr>
+<h1 id="三元操作符-if-else"><a href="#三元操作符-if-else" class="headerlink" title="三元操作符 if-else"></a>三元操作符 if-else</h1><blockquote>
+<p>表达式为：<code>boolean-exp ? value0 : value1</code><br>若<code>boolean-exp</code>为<strong>true</strong>，就计算<strong>value0</strong>，否则就计算<strong>value1</strong>。</p>
+</blockquote>
+<hr>
+<h1 id="字符串操作符-和"><a href="#字符串操作符-和" class="headerlink" title="字符串操作符 + 和 +="></a>字符串操作符 + 和 +=</h1><p>在Java中的一个特殊用途：</p>
+<blockquote>
+<p><strong>连接不同的字符串</strong>。</p>
+</blockquote>
+<p>如果表达式以一个字符串开头，那么后续所有操作数都必须时字符串型。（<em>编译器会自动将字符序列转化为字符串类型</em>）</p>
+<blockquote>
+<p><strong>使用操作符时常犯的错误</strong></p>
+<ol>
+<li><code>while (x = y){...}</code>，实际上是想测试两个数x与y是否相等<code>while (x == y){...}</code>。</li>
+<li>把按位与（&amp;）、或（|）当成逻辑与（&amp;&amp;）、或（||）使用。</li>
+</ol>
+</blockquote>
+<hr>
+<h1 id="类型转换操作符"><a href="#类型转换操作符" class="headerlink" title="类型转换操作符"></a>类型转换操作符</h1><p>显式地进行类型的转换，或者在不能自动转换的时候进行强制类型转换。</p>
+<p><strong>方法</strong></p>
+<blockquote>
+<p>将需要的数据类型置于圆括号内，放在要进行类型转换的值的左边。</p>
+</blockquote>
+<p><strong>两种类型转换</strong></p>
+<ol>
+<li><em>窄化转换（narrowing conversion）</em>：强制进行显式类型转换。</li>
+<li><em>扩展转换（widening conversion）</em>：不必进行显式类型转换。</li>
+</ol>
+<p><strong>注：</strong></p>
+<blockquote>
+<ol>
+<li>允许任何基本数据类型转化为基本数据类型（布尔类型除外）。</li>
+<li><em>boolean</em>类型不允许进行任何类型转换。</li>
+<li>“类”数据类型不允许进行数据类型转换。</li>
+</ol>
+</blockquote>
+<p><strong>截尾和舍入</strong><br>一般的，将浮点数转换为整型值时，对该数值进行“截尾”：即，<strong>直接舍弃小数部分</strong>。<br>如果需要舍入的结果，需要使用<strong>java.lang.Math</strong>中的<strong>round()</strong>方法。</p>
+<p><strong>提升</strong><br>通常情况下，较小的数据类型与较大的数据类型进行运算时，较小的数据类型会被转换为较大的数据类型。</p>
+<blockquote>
+<p>表达式中出现的最大的数据类型决定了表达式最终结果的数据类型。</p>
+</blockquote>
+<hr>
+<h1 id="Java没有sizeof"><a href="#Java没有sizeof" class="headerlink" title="Java没有sizeof"></a>Java没有sizeof</h1><p>Java中所有的数据类型在所有机器中的大小都相同，而<code>sizeof()</code>是考虑到不同机器的数据类型的位数不同而设计的，所以Java中不存在<code>sizeof()</code>。</p>
+<hr>
+<h1 id="操作符小结"><a href="#操作符小结" class="headerlink" title="操作符小结"></a>操作符小结</h1><blockquote>
+<ol>
+<li>布尔类型值只能进行赋值（false或true），对其进行测试，不能相加或其他操作。</li>
+<li>对于<strong>char</strong>、<strong>byte</strong>、<strong>short</strong>，复合赋值不需要进行类型转换。</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/10/%E4%BF%A1%E6%81%AF%E8%AE%BA(%E4%B8%80)/" rel="next" title="信息论(一)：离散信源及其信息测度">
+                <i class="fa fa-chevron-left"></i> 信息论(一)：离散信源及其信息测度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%BA%8C)/" rel="prev" title="数据结构(二)：向量">
+                数据结构(二)：向量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java操作符"><span class="nav-number">1.</span> <span class="nav-text">Java操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优先级"><span class="nav-number">2.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#赋值"><span class="nav-number">3.</span> <span class="nav-text">赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用中的别名问题"><span class="nav-number">3.1.</span> <span class="nav-text">方法调用中的别名问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算术操作符"><span class="nav-number">4.</span> <span class="nav-text">算术操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动递增和递减"><span class="nav-number">5.</span> <span class="nav-text">自动递增和递减</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关系操作符"><span class="nav-number">6.</span> <span class="nav-text">关系操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试对象的等价性"><span class="nav-number">6.1.</span> <span class="nav-text">测试对象的等价性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑操作符"><span class="nav-number">7.</span> <span class="nav-text">逻辑操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#短路"><span class="nav-number">7.1.</span> <span class="nav-text">短路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直接常量"><span class="nav-number">8.</span> <span class="nav-text">直接常量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指数计数法"><span class="nav-number">8.1.</span> <span class="nav-text">指数计数法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按位操作符"><span class="nav-number">9.</span> <span class="nav-text">按位操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移位操作符"><span class="nav-number">10.</span> <span class="nav-text">移位操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三元操作符-if-else"><span class="nav-number">11.</span> <span class="nav-text">三元操作符 if-else</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作符-和"><span class="nav-number">12.</span> <span class="nav-text">字符串操作符 + 和 +=</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类型转换操作符"><span class="nav-number">13.</span> <span class="nav-text">类型转换操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java没有sizeof"><span class="nav-number">14.</span> <span class="nav-text">Java没有sizeof</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作符小结"><span class="nav-number">15.</span> <span class="nav-text">操作符小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

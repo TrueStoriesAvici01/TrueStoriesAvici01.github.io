@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,控制流程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="true和falseJava不允许将一个数字作为布尔值使用，如果想要在一个布尔测试中使用一个非布尔值，则首先不需要用一个条件表达式将其转换为布尔值。  if-elseelse是可选的。 可使用两个形式： 12if (Boolean-expression)&#x2F;&#x2F;形式1    statement 1234567if (Boolean-expression1)    statement1;else if">
+<meta name="keywords" content="Java,控制流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想(四)：控制执行流程">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;13&#x2F;Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E5%9B%9B)&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="true和falseJava不允许将一个数字作为布尔值使用，如果想要在一个布尔测试中使用一个非布尔值，则首先不需要用一个条件表达式将其转换为布尔值。  if-elseelse是可选的。 可使用两个形式： 12if (Boolean-expression)&#x2F;&#x2F;形式1    statement 1234567if (Boolean-expression1)    statement1;else if">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-28T14:09:05.174Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/13/Java编程思想(四)/"/>
+
+
+
+
+
+  <title>Java编程思想(四)：控制执行流程 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/13/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E5%9B%9B)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java编程思想(四)：控制执行流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-13T17:00:23+08:00">
+                2019-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="true和false"><a href="#true和false" class="headerlink" title="true和false"></a>true和false</h1><p><strong>Java不允许将一个数字作为布尔值使用，如果想要在一个布尔测试中使用一个非布尔值，则首先不需要用一个条件表达式将其转换为布尔值。</strong></p>
+<hr>
+<h1 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h1><p><code>else</code>是可选的。</p>
+<p>可使用两个形式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Boolean-expression)<span class="comment">//形式1</span></span><br><span class="line">    statement</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Boolean-expression1)</span><br><span class="line">    statement1;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (Boolean-expresion2)</span><br><span class="line">    statement2;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    statement;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<hr>
+<h1 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h1><p><code>while</code>、<code>do-while</code>和<code>for</code>用来控制循环，称为<strong>迭代语句</strong>（iteration statement）。</p>
+<p>语句反复执行、直到起控制作用的<strong>布尔表达式</strong>（boolean expression）为“false”时终止。</p>
+<hr>
+<h2 id="do-while"><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">    statements;</span><br><span class="line"><span class="keyword">while</span> (Boolean-expression);</span><br></pre></td></tr></table></figure>
+<p><code>do-while</code>和<code>while</code>的区别：<br>    即便布尔表达式为<code>false</code>，<code>do-while</code>中的语句至少执行一次，而<code>while</code>中的语句可能一次都不执行（<em>布尔表达式为<code>false</code></em>）。</p>
+<hr>
+<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><p><strong>格式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (initialization; Boolean-expression; step)</span><br><span class="line">    statements;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong></p>
+<blockquote>
+<ol>
+<li>初始化（initialization）表达式、布尔表达式（Boolean-expression）或步进（step）运算都可为空。</li>
+<li>每次迭代前会测试布尔表达式：true则执行循环语句，否则跳出循环。</li>
+<li>每次循环结束，都执行一次步进。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h2><p>Java中唯一可以使用逗号操作符的地方就是<strong><code>for</code>循环的控制表达式</strong>。<br>控制表达式的初始化和步进控制部分，都可使用一些列逗号分隔的语句，而且那些语句均会独立执行。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">1</span>, j = i + <span class="number">10</span>; i &lt; <span class="number">5</span>; i++, j = i * <span class="number">2</span>)<span class="comment">//可以为任意数量相同类型的变量。</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Foreach语法"><a href="#Foreach语法" class="headerlink" title="Foreach语法"></a>Foreach语法</h1><p><strong>实现</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">float</span> x : f)<span class="comment">//依次将f中的每一元素赋值给x，再执行对应的语句块</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="return"><a href="#return" class="headerlink" title="return"></a>return</h1><p><strong>两个用途</strong></p>
+<ol>
+<li>指定一个方法返回什么值。</li>
+<li>导致当前的方法退出，并返回指定值。</li>
+</ol>
+<blockquote>
+<p>当指定一个方法为非<code>void</code>时，则需确保有一个返回值。</p>
+</blockquote>
+<hr>
+<h1 id="break-和-continue"><a href="#break-和-continue" class="headerlink" title="break 和 continue"></a>break 和 continue</h1><p><code>break</code>：用来退出循环，不执行循环中的剩下的语句。<br><code>continue</code>：停止执行当前的迭代，退出循环起始处，开始下一次迭代。</p>
+<p><em><code>while(true)</code>和<code>for(;;)</code>都是无穷循环</em>。</p>
+<hr>
+<h1 id="goto"><a href="#goto" class="headerlink" title="goto"></a>goto</h1><p><code>goto</code>只是Java的一个保留字，并不使用。<br>Java中的使用<strong>标签</strong>和<code>break</code>和<code>continue</code>两个关键词结合实现<strong>跳转</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">label1:</span><br><span class="line">    outer-iteration&#123;</span><br><span class="line">        inner-iteration&#123;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">break</span>;<span class="comment">//中断内部迭代，返回外部迭代</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">continue</span>;<span class="comment">//中断迭代，从内部迭代的起始点开始</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">continue</span> label1;<span class="comment">//同时中断内部和外部迭代，直接跳转到label1处，然后继续迭代，从外部迭代开始</span></span><br><span class="line">            ....</span><br><span class="line">            <span class="keyword">break</span> label1;<span class="comment">//中断内外迭代，回到label1处，不重新进入迭代（结束迭代）</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在Java里需要使用标签的唯一理由是：<strong>有循环嵌套存在，而且像从多层嵌套中break或continue</strong>。</p>
+</blockquote>
+<hr>
+<h1 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h1><p><code>switch</code>是一种<em>选择语句</em>。<br><strong>形式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (integral-selector)&#123;</span><br><span class="line">    <span class="keyword">case</span> integral-value1 : statement; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> integral-value2 : statement; <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">default</span>: statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>switch</code>将<strong>integral-selector</strong>与<strong>integral-value</strong>进行比较，若符合，则执行对应的语句；否则执行<strong>default</strong>对应的语句。</p>
+<blockquote>
+<p>若<strong>case</strong>后没有<strong>break</strong>，则继续👇执行，直到遇到<strong>break</strong>为止，因此可以用来设计多个条件实现统一的语句：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(selector)&#123;</span><br><span class="line">    <span class="keyword">case</span> CASE1:</span><br><span class="line">    <span class="keyword">case</span> CASE2:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">case</span> CASEn: statements1; <span class="keyword">break</span>;<span class="comment">//CASE1到CASEn都执行statements1语句。</span></span><br><span class="line">    <span class="keyword">case</span> CASEn+<span class="number">1</span>: statemenets; <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/%E6%8E%A7%E5%88%B6%E6%B5%81%E7%A8%8B/" rel="tag"># 控制流程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%BA%8C)/" rel="next" title="数据结构(二)：向量">
+                <i class="fa fa-chevron-left"></i> 数据结构(二)：向量
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/20/%E4%BD%BF%E7%94%A8Matlab%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/" rel="prev" title="使用Matlab在训练分类模型">
+                使用Matlab在训练分类模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#true和false"><span class="nav-number">1.</span> <span class="nav-text">true和false</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-else"><span class="nav-number">2.</span> <span class="nav-text">if-else</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迭代"><span class="nav-number">3.</span> <span class="nav-text">迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#do-while"><span class="nav-number">3.1.</span> <span class="nav-text">do-while</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for"><span class="nav-number">3.2.</span> <span class="nav-text">for</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逗号操作符"><span class="nav-number">3.3.</span> <span class="nav-text">逗号操作符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Foreach语法"><span class="nav-number">4.</span> <span class="nav-text">Foreach语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#return"><span class="nav-number">5.</span> <span class="nav-text">return</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#break-和-continue"><span class="nav-number">6.</span> <span class="nav-text">break 和 continue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#goto"><span class="nav-number">7.</span> <span class="nav-text">goto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#switch"><span class="nav-number">8.</span> <span class="nav-text">switch</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
