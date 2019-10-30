@@ -59,7 +59,7 @@
 <meta property="og:description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;insertSort.gif">
-<meta property="og:updated_time" content="2019-10-29T05:01:06.067Z">
+<meta property="og:updated_time" content="2019-10-29T12:56:31.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;insertSort.gif">
 
@@ -212,7 +212,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-29 13:01:06" itemprop="dateModified" datetime="2019-10-29T13:01:06+08:00">2019-10-29</time>
+                <time title="Modified: 2019-10-29 20:56:31" itemprop="dateModified" datetime="2019-10-29T20:56:31+08:00">2019-10-29</time>
               </span>
 
           
@@ -403,7 +403,16 @@
 <p><strong>实现</strong><br>列表的选择排序<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::selectionSort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    ListNodePosi(T) head = p-&gt;pred; ListNodePosi(T) tail = p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) tail = tail-&gt;succ;<span class="comment">//tail为尾节点</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span> &lt; n)&#123;</span><br><span class="line">        ListNodePosi(T) max = selectMax(head-&gt;succ, n);<span class="comment">//在头节点后的n个节点中找出最大者</span></span><br><span class="line">        insertBefore(tail, remove(max));<span class="comment">//将最大者插入到末节点之前</span></span><br><span class="line">        tail = tail-&gt;pred; n--;<span class="comment">//末节点向前移动</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>列表最大节点的定位<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ListNodePosi(T) List&lt;T&gt;::selectMax(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    ListNodePosi(T) max = p;</span><br><span class="line">    <span class="keyword">for</span> (ListNodePosi(T) cur = p; <span class="number">1</span> &lt; n; n--)</span><br><span class="line">        <span class="keyword">if</span> (!lt((cur = cur-&gt;succ)-&gt;data, max-&gt;data))</span><br><span class="line">            max = cur;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>复杂度</strong><br>选择排序由n次迭代构成，每次迭代有<code>查找</code>和<code>插入</code>。<code>插入</code>和<code>删除</code>都是O(1)的复杂度，而每次查找的必须遍历整个无序前缀，总的时间复杂度为O(n^2)。<br>其中最好情况和最坏情况的渐进效率相同。</p>
-<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::merge(ListNodePosi(T)&amp; p, List&lt;T&gt;&amp; L, ListNodePosi(T) q, <span class="keyword">int</span> m)&#123;<span class="comment">//当前列表中自p起的n个元素，与列表L中自q起的m个元素归并</span></span><br><span class="line">    ListNodePosi(T) pp = p-&gt;pred;<span class="comment">//存储p的前驱</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span>&lt;m) <span class="comment">//若L不空，则需要进行归并</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="number">0</span> &lt; n) &amp;&amp; (p-&gt;data &lt;= q-&gt;data))<span class="comment">//若p未指向末尾，并且p指向的元素小于等于q指向的元素，则</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (q == (p = p-&gt;succ))<span class="comment">//若q等于p的后继，则将p替换成其直接后继</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            n--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//若p指向末尾或q指向的数较小，将q插入p的前面。</span></span><br><span class="line">        &#123;</span><br><span class="line">            insertBefore(p, L.remove((q = q-&gt;succ)-&gt;pred));</span><br><span class="line">            m--;</span><br><span class="line">        &#125;</span><br><span class="line">    p = pp-&gt;succ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>复杂度</strong><br>时间消耗主要在迭代的次数中，最好情况下，只需要O(m)，最坏情况为O(n)。总的时间复杂度正比于O(n+m)，线性正比于两个列表的长度之和。</p>
+<p><strong>列表的递归排序算法实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::mergeSort(ListNodePosi(T)&amp; p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> m = n&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    ListNodePosi(T) q = p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i  = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">        q = q-&gt;succ;<span class="comment">//q指向中间节点</span></span><br><span class="line">    mergeSort(p, m);<span class="comment">//归并排序前半部分</span></span><br><span class="line">    mergeSort(q, n-m);<span class="comment">//归并排序后边部分</span></span><br><span class="line">    merge(p, m, *<span class="keyword">this</span>, q, n-m);<span class="comment">//归并</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><strong>时间复杂度</strong></p>
+<ol>
+<li>首先花费线性时间确定居中的切分节点</li>
+<li>然后迭代对长度为n/2的两个子列表做归并，其中迭代的次数为<strong>log</strong>n，而每次迭代的时间复杂度为O(n)。</li>
+<li>故总的时间复杂度为O((n1+n2+n3+n4)<strong>log</strong>(n))，其中n1为寻找切分中点的时间，n2为前边部分的时间，n3为后边部分的时间，n4为归并的时间，化简后为O(n<strong>log</strong>n)。</li>
+<li><strong>注</strong>：划分子列表应该保证两者长度接近等长，从而提高效率。</li>
+</ol>
+
     </div>
 
     
@@ -485,12 +494,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
