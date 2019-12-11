@@ -58,10 +58,10 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;insertSort.gif">
-<meta property="og:updated_time" content="2019-10-29T12:56:31.332Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;insertSort.gif">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.023Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89&#x2F;insertSort.gif">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;insertSort.gif">
 
 <link rel="canonical" href="http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">
 
@@ -212,7 +212,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-29 20:56:31" itemprop="dateModified" datetime="2019-10-29T20:56:31+08:00">2019-10-29</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -230,7 +230,7 @@
 <p><strong>循位置访问/循链接访问</strong>（call-by-position/call-by-link）:<br>逻辑上互为前驱和后继的元素之间维护着某种索引关系。<br>索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。</p>
 <hr>
 <h1 id="从向量到列表"><a href="#从向量到列表" class="headerlink" title="从向量到列表"></a>从向量到列表</h1><p>引入列表的目的，两者差异…</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="静态与动态"><a href="#静态与动态" class="headerlink" title="静态与动态"></a>静态与动态</h2><p>静态数据结构（向量）：<br>    静态操作：（size(), get()）常数时间内完成。<br>    动态操作：（insert(), remove()）需要线性时间。</p>
+<h2 id><a href="#" class="headerlink" title></a><a id="more"></a></h2><h2 id="静态与动态"><a href="#静态与动态" class="headerlink" title="静态与动态"></a>静态与动态</h2><p>静态数据结构（向量）：<br>    静态操作：（size(), get()）常数时间内完成。<br>    动态操作：（insert(), remove()）需要线性时间。</p>
 <p>动态数据结构（列表）：<br>    引入或删除新的元素只需要在局部调整相关指针，降低动态操作的成本。<br>    静态操作：（访问元素）O(n)。<br>    动态操作： 常数时间。</p>
 <p><strong>列表</strong><br>列表是具有线性逻辑次序的一组元素构成的集合：<br>L = {a(0), a(1), …, a(n-1)}<br>其中的元素称为<strong>节点</strong>（node）。</p>
 <hr>
@@ -393,7 +393,7 @@
 <p><strong>复杂度</strong><br>平均运行的时间复杂度为O(n)。</p>
 <hr>
 <h1 id="排序器"><a href="#排序器" class="headerlink" title="排序器"></a>排序器</h1><h2 id="统一入口"><a href="#统一入口" class="headerlink" title="统一入口"></a>统一入口</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> List&lt;T&gt;::sort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">switch</span>(rand() %<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: insertionSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>: selectionSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>: mergeSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="插入排序（insertionSort）"><a href="#插入排序（insertionSort）" class="headerlink" title="插入排序（insertionSort）"></a>插入排序（insertionSort）</h2><p><strong>思路</strong>：将整个序列看作并切分为两个部分：<strong>有序的前缀</strong>，<strong>无序的后缀</strong>；经过迭代后，反复<strong>将后缀的首元素移到前缀中合适的位置</strong>。<br><img src="insertSort.gif" alt="插入排序"> </p>
+<h2 id="插入排序（insertionSort）"><a href="#插入排序（insertionSort）" class="headerlink" title="插入排序（insertionSort）"></a>插入排序（insertionSort）</h2><p><strong>思路</strong>：将整个序列看作并切分为两个部分：<strong>有序的前缀</strong>，<strong>无序的后缀</strong>；经过迭代后，反复<strong>将后缀的首元素移到前缀中合适的位置</strong>。<br><img src="/.com//insertSort.gif" alt="插入排序"> </p>
 <p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(r = <span class="number">0</span>; r &lt; n<span class="number">-1</span>; r++)&#123;<span class="comment">//自己的实现</span></span><br><span class="line">    T t = find(p-&gt;data, r, p-&gt;pred);</span><br><span class="line">    insert(p-&gt;data, t);</span><br><span class="line">    p = p-&gt;succ;<span class="comment">//！及时删除多余的节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::insertionSort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; n; r++)&#123;</span><br><span class="line">        insertAfter(search(p-&gt;data, r, p), p-&gt;data);<span class="comment">//查找到不大于待插入数据的最后一个位置，插入其后</span></span><br><span class="line">        p = p-&gt;succ;remove(p-&gt;pred);<span class="comment">//移至后一节点，删除刚刚插入的节点，顺序不能颠倒，否则导致链表断裂。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>复杂度</strong><br>    算法是由n步迭代构成的，每次迭代包含<code>查找</code>，<code>插入</code>和<code>删除</code>构成。其中<code>插入</code>和<code>删除</code>的时间复杂度为O(1)，而<code>查找</code>所需的时间在O(1)至O(n)之间，故总的平均时间复杂度为O(n^2)。</p>
@@ -494,12 +494,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

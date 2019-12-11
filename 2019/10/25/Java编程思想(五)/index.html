@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="用构造器确保初始化Java中通过构造器确保每个对象都得到初始化。初始化采用与类相同的名称。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-29T14:49:44.295Z">
+<meta property="og:updated_time" content="2019-12-10T14:10:04.983Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/10/25/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%94)/">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-29 22:49:44" itemprop="dateModified" datetime="2019-10-29T22:49:44+08:00">2019-10-29</time>
+                <time title="Modified: 2019-12-10 22:10:04" itemprop="dateModified" datetime="2019-12-10T22:10:04+08:00">2019-12-10</time>
               </span>
 
           
@@ -257,6 +257,19 @@
 <p>在构造器中调用构造器</p>
 </blockquote>
 <p><strong>背景</strong><br>一个类中有多个构造器，在一个构造器中调用其他的构造器时，使用<code>this</code>简化代码。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    String s = <span class="string">"string"</span>;</span><br><span class="line"></span><br><span class="line">    Test()&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="string">"test"</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(<span class="string">"无参构造"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Test(String s)&#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Test(String s, <span class="keyword">int</span> i)&#123;</span><br><span class="line">        <span class="keyword">this</span>(s);</span><br><span class="line">        <span class="keyword">this</span>.i = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printI</span><span class="params">(Test t)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"i is : "</span> + t.i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Test t = <span class="keyword">new</span> Test();</span><br><span class="line">        t.printI(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="static的含义"><a href="#static的含义" class="headerlink" title="static的含义"></a>static的含义</h2><ol>
+<li><code>static</code>方法的内部不能调用非<code>static</code>的方法，反之可以。</li>
+<li>用法：在未创建任何对象的前提下，仅仅通过类本身来调用<code>static</code>方法。</li>
+</ol>
+<hr>
+<h1 id="清理：终结处理和垃圾回收"><a href="#清理：终结处理和垃圾回收" class="headerlink" title="清理：终结处理和垃圾回收"></a>清理：终结处理和垃圾回收</h1><p><code>new</code>方法创建的对象 -&gt; 垃圾回收器自动回收<br>非<code>new</code>方法获得的内存空间 -&gt; 利用定义的<code>finalize()</code>方法</p>
+<p><strong><code>finalize()</code>的注意事项</strong></p>
+<ol>
+<li>调用<code>finalize()</code>方法，在下次垃圾回收动作发生时才真正回收内存。</li>
+<li>使用<code>finalize()</code>方法：对象<strong>可能不被垃圾回收</strong>；垃圾回收不等于“析构”。（<em>一般不会主动调用垃圾回收，除非内存用完或程序退出</em>）</li>
+<li>垃圾回收只于内存有关。一般使用<code>finalize()</code>方法的情况是调用了非Java代码而占据的内存（<em>很少发生，可以忽略</em>）。</li>
+<li>可以使用<code>finalize()</code>来对对象<em>终结条件</em>的验证，即通过类中<strong>重载</strong><code>finalize()</code> 方法，然后再主动调用<code>System.gc()</code>方法，从输出结果中确定是否进行了垃圾回收。</li>
+</ol>
 
     </div>
 
@@ -324,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用构造器确保初始化"><span class="nav-number">1.</span> <span class="nav-text">用构造器确保初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法重载"><span class="nav-number">2.</span> <span class="nav-text">方法重载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#区分重载方法"><span class="nav-number">2.1.</span> <span class="nav-text">区分重载方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#涉及基本类型的重载"><span class="nav-number">2.2.</span> <span class="nav-text">涉及基本类型的重载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#默认构造器"><span class="nav-number">3.</span> <span class="nav-text">默认构造器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this关键字"><span class="nav-number">4.</span> <span class="nav-text">this关键字</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用构造器确保初始化"><span class="nav-number">1.</span> <span class="nav-text">用构造器确保初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法重载"><span class="nav-number">2.</span> <span class="nav-text">方法重载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#区分重载方法"><span class="nav-number">2.1.</span> <span class="nav-text">区分重载方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#涉及基本类型的重载"><span class="nav-number">2.2.</span> <span class="nav-text">涉及基本类型的重载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#默认构造器"><span class="nav-number">3.</span> <span class="nav-text">默认构造器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this关键字"><span class="nav-number">4.</span> <span class="nav-text">this关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#static的含义"><span class="nav-number">4.1.</span> <span class="nav-text">static的含义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#清理：终结处理和垃圾回收"><span class="nav-number">5.</span> <span class="nav-text">清理：终结处理和垃圾回收</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -340,12 +353,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

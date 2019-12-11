@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":"hide"},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="一句话简要介绍动态规划(dynamic programming)  对象：    求解最优化问题。表现：    通常要做出一组选择来达到最优解，每次选择会生成与原问题形式相同的子问题。    ？当多余一个选择子集都生成相同的子问题时，动态规划通常很有效。">
+<meta name="keywords" content="递归,动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归与动态规划总结">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;30&#x2F;%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="一句话简要介绍动态规划(dynamic programming)  对象：    求解最优化问题。表现：    通常要做出一组选择来达到最优解，每次选择会生成与原问题形式相同的子问题。    ？当多余一个选择子集都生成相同的子问题时，动态规划通常很有效。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.026Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>递归与动态规划总结 | 咸鱼的自我修养</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">咸鱼的自我修养</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">咸鱼修炼日记</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="咸鱼不翻身">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼的自我修养">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          递归与动态规划总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-30 21:35:38" itemprop="dateCreated datePublished" datetime="2019-11-30T21:35:38+08:00">2019-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>一句话简要介绍动态规划(dynamic programming)</strong></p>
+<blockquote>
+<p>对象：<br>    求解最优化问题。<br>表现：<br>    通常要做出一组选择来达到最优解，每次选择会生成<strong>与原问题形式相同的子问题</strong>。<br>    ？<em>当多余一个选择子集都生成相同的子问题时，动态规划通常很有效。</em></p>
+</blockquote>
+<a id="more"></a>
+<p><strong>与分治方法的联系</strong></p>
+<ol>
+<li><strong>分治方法</strong>将问题划分成相互独立的子问题，递归求解子问题，再将解组合起来，从而求出原问题的解。</li>
+<li><strong>动态规划</strong>方法类似，但是对于子问题有重叠时（不同的子问题有公共的子子问题），动态规划只对子子问题求解一次，并将解保存到表格中（<em>备忘录</em>），从而避免重复计算。</li>
+</ol>
+<p><strong>性质</strong></p>
+<ol>
+<li><em>最优子结构</em>：问题的最优解包含其子问题的最优解。</li>
+<li><em>子问题重叠</em>：递归求解过程中包含少量不同子问题的多次重复计算。</li>
+</ol>
+<p><strong>动态规划</strong>可分为两个部分：</p>
+<ol>
+<li><strong>递归</strong>：递归求解子问题。</li>
+<li><strong>备忘录</strong>：将已计算的值存储在表中。<center>动态规划 = 递归 + 备忘录</center>
+
+
+</li>
+</ol>
+<p><strong>动态规划的应用领域</strong><br>通常用来求解<strong>最优化问题</strong>(optimization problem)。<br>    <em>通常有多个解，希望求得最优解（an optimal solution)</em></p>
+<p><strong>动态规划的基本步骤</strong></p>
+<blockquote>
+<ol>
+<li>刻画一个最优解的结构特征。</li>
+<li>递归地定义最优解的值。</li>
+<li>计算最优解的值，<em>通常使用<strong>自底向上</strong>的方法</em></li>
+<li>利用计算出的信息构造一个最优解。</li>
+</ol>
+</blockquote>
+<p><strong>例子</strong></p>
+<ul>
+<li>字符串算法：最长公共子序列、最长递增子序列、最长公共子串、编辑距离等。</li>
+<li>关于图的有效求解算法：寻找图中最短距离的Bellman-Ford算法、Floyd的所有顶点间的最短路径算法等。</li>
+<li>链矩阵乘法。</li>
+<li>子集和。</li>
+<li>0/1背包问题。</li>
+<li>旅行商问题。</li>
+</ul>
+<h2 id="从一个例子开始"><a href="#从一个例子开始" class="headerlink" title="从一个例子开始"></a>从一个例子开始</h2><blockquote>
+<p>给定一段长为$n$的钢条，以及切割成长度为i（i = 1, 2,…, n）长度时的售价$V_i$，求如何切割可获得最佳收益。</p>
+</blockquote>
+<p><strong>两种划分子问题的思路</strong></p>
+<ol>
+<li>将钢条切割成两段，第一段长$l_1$，第二段长$n - l_1$，则钢条的最佳收益可表示为$P_n = P_{l_1} + P_{n-l_1}, l_1 = 1, 2,…, n$。<blockquote>
+<p>原问题是<strong>求长为$n$的钢条的最佳收益</strong>，子问题<strong>为长为$l_1$和$n-l_1$的最佳收益</strong>，<em>对两个子问题进一步求解，直到到达约束条件</em></p>
+</blockquote>
+</li>
+<li>将钢条切割成长度为$l_1$的一段（不再进行分割）和长度为$n - l_1$的一段（子问题，进一步切割，直到到达约束条件）。则最终收益为$P_n = V_{l_1} + P_{n - l_1}$。</li>
+</ol>
+<p><strong>动态规划的核心</strong><br>记住已经解决过的子问题的解。</p>
+<p><strong>两种形式</strong></p>
+<ol>
+<li>自顶向下的备忘录法</li>
+<li>自底向上</li>
+</ol>
+<p><strong>最优子问题</strong>(optimal substructure)<br>问题的最优解是由相关子问题的最优解组合而成，而这些子问题可以独立求解。</p>
+<p><strong>证明: $T(n)$表示切割长度为n的钢条的函数调用的次数，$T(n)$ = 1 + $\sum_{j = 0}^{n-1}T(j)$，$T(n) = 2^n$。</strong><br><strong>证</strong>：当n = 0时，T(0) = 1，上式成立。<br>设当n时上式成立，则有$T(n) = 1 + 2 ^0 + 2^1 +… + 2^{n-1} = 2^n$。<br>当n+1时，$T(n+1) = 1 + \sum_{j = 0}^nT(j) = 1 + 2^0 + 2^1 + … + 2^{n-1} + 2^{n} = 2^n + 2^n = 2^{n+1}$，得证。</p>
+<p><strong>朴素递归算法效率低下的原因</strong></p>
+<blockquote>
+<p>反复求解相同的子问题</p>
+</blockquote>
+<p><strong>动态规划的原理</strong></p>
+<blockquote>
+<ol>
+<li>对每个子问题只求解一次，并将结果保存下来。对于再次需要子问题的解时，只需查找保存的结果。</li>
+<li>付出额外的内存空间来节省计算时间，时空权衡(<em>time-memory trade-off</em>)。</li>
+<li>若子问题是输入规模的多项式函数，则可以在多项式时间内求解。</li>
+</ol>
+</blockquote>
+<p><strong>动态规划的两种实现</strong></p>
+<ol>
+<li><strong>带备忘录的自顶向下法</strong>(<em>top-down with memoization</em>)<br> 当求解子问题，先检查是否已计算过。若未计算，则进行计算，并将结果保存；若已计算，则直接返回结果。</li>
+<li><strong>自底向上法</strong>(<em>bottom-up method</em>)<br> 确定子问题的规模，使得任何子问题的求解都只依赖更小的子问题。对子问题按规模进行排序，对子问题进行求解时，其依赖的子问题已经求解完毕，并已保存。</li>
+</ol>
+<p>NOTE: 由于没有递归函数调用，自底向上的方法的时间复杂度具有更小的系数。</p>
+<p><strong>备忘录式自顶向下法的设计小贴士</strong></p>
+<ol>
+<li>用一个数组来装子问题求解的结果。</li>
+<li>初始化该数组时要设置一个正常情况下不可能达到的初始值，从而用来区分该子问题是否已被求解。</li>
+<li>函数首先判断子问题是否已经被求解(对数组对应的值进行检查)<br> 若已求解，则直接返回结果。<br> 若未求解，则继续执行。</li>
+<li>检查边界条件，是否达到结束条件。</li>
+<li>若子问题即未求解过，又未达到边界条件，则对子问题进行求解，并将结果保存到数组中。</li>
+</ol>
+<p><strong>子问题图</strong><br><del>子问题图G = (V, E)的规模可以帮助确定动态规划的运行时间，每个子问题只求解一次，运行时间等于每个子问题求解时间之和。子问题的求解时间与子问题图中对应顶点的度成正比，子问题的数目等于子问题图的顶点数</del></p>
+<p><strong>更进一步</strong><br>当不仅要求出最佳的结果，还要保存获得最佳结果的解方案。</p>
+<p>思路：</p>
+<pre><code>创建一个数组，用来保存最佳结果对应的解方案。
+
+联系数据结构相关知识，可以用栈保存结果。即，遍历可能的结果，当出现更好的结果时，先将栈中的解方案弹出，再将新的方案保存。
+注：利用栈时，先向栈中预保存一个初始值，避免第一次“最优值”导致对空栈弹出。
+</code></pre><p><strong>应用动态规划方案</strong></p>
+<ol>
+<li>刻画一个最优解的结构特征</li>
+<li>递归地定义最优解的值</li>
+<li>计算最优解的值，通常采用自底向上的方法</li>
+<li>利用计算出的信息构造一个最优解</li>
+</ol>
+<blockquote>
+<p>刻画最优解的结构特征<br><em>利用最优子结构性质从子问题的最优解构造原问题的最优解</em>，满足<strong>任何最优解都是子问题实例的最优解构成的</strong></p>
+</blockquote>
+<h2 id="递归和动态规划相关题目"><a href="#递归和动态规划相关题目" class="headerlink" title="递归和动态规划相关题目"></a>递归和动态规划相关题目</h2><blockquote>
+<p>给定整数N，返回Fibonacci数列的第N项。</p>
+</blockquote>
+<p><em>类似题目</em></p>
+<ol>
+<li>给定整数N，代表台阶数，一次可以跨1个或2个台阶，返回有多少种走法？</li>
+<li>假设农场中成熟的母牛每年只会生1头小母牛，并且永远不会死。第一年农场有1头成熟的母牛，从第二年开始，母牛开始生小母牛。每只小母牛3年之后成熟又可以生小母牛。给定整数N，求出N年后牛的数量。</li>
+</ol>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p><strong>递推关系式</strong><br>设第n个Finbonacci数为F(n)，则：</p>
+<ol>
+<li>F(1) = F(2) = 1</li>
+<li>F(n) = F(n-1) + F(n-2)</li>
+</ol>
+<p><strong>解法1</strong><br><em>时间复杂度O($2^n$)方法</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> F(n-<span class="number">1</span>) + F(n-<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法2</strong><br><em>时间复杂度O(N)方法</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> prev, prevOfPrev, tempVal;</span><br><span class="line">    prev = prevOfPrev = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        temp = prev;</span><br><span class="line">        prev += prevOfPrev;</span><br><span class="line">        prevOfPrev = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法3</strong><br><em>时间复杂度O(logN)方法</em></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/29/Notes/" rel="next" title="JBIG2">
+                  <i class="fa fa-chevron-left"></i> JBIG2
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/" rel="prev" title="卡特兰数总结">
+                  卡特兰数总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从一个例子开始"><span class="nav-number">1.</span> <span class="nav-text">从一个例子开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归和动态规划相关题目"><span class="nav-number">2.</span> <span class="nav-text">递归和动态规划相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提示"><span class="nav-number">2.1.</span> <span class="nav-text">提示</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

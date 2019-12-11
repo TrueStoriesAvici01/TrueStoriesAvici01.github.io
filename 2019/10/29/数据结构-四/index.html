@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="背景介绍    Java的运行环境就是基于栈结构的虚拟机。    网络浏览器将用户最近访问过的地址组织成一个栈，新访问的页面存放在栈顶，“后退”按钮可以沿着相反方向返回之前访问的页面。    文本编辑器可以将用户的编辑操作记录在一个栈中，“撤销”功能可以返回上一个编辑记录。 调度银行或医院的服务窗口，管理轮耕的田地和轮伐的森林，要使用到队列。 多进程共享CPU时间，多用户共享打印机，需要借助队列结">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-30T03:54:54.188Z">
+<meta property="og:updated_time" content="2019-12-10T14:10:04.984Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 11:54:54" itemprop="dateModified" datetime="2019-10-30T11:54:54+08:00">2019-10-30</time>
+                <time title="Modified: 2019-12-10 22:10:04" itemprop="dateModified" datetime="2019-12-10T22:10:04+08:00">2019-12-10</time>
               </span>
 
           
@@ -287,6 +287,181 @@
 <p><strong>调用栈自底到顶对应于到函数的最新活跃实例的一条调用路径</strong>。</p>
 </blockquote>
 <p><strong>函数、函数实例与帧</strong>：<br>在程序中，一个函数可能有<strong>多个函数实例</strong>，每个<strong>活跃</strong>函数实例对应于帧中的一帧（frame）。<br><strong>递归</strong>就是同一函数的多个实例对应于栈中的多个帧。</p>
+<hr>
+<h1 id="栈的典型应用"><a href="#栈的典型应用" class="headerlink" title="栈的典型应用"></a>栈的典型应用</h1><ol>
+<li>逆序输出</li>
+<li>递归嵌套</li>
+<li>延迟缓冲</li>
+<li>逆波兰表达式</li>
+</ol>
+<h2 id="逆序输出"><a href="#逆序输出" class="headerlink" title="逆序输出"></a>逆序输出</h2><p><strong>特征</strong></p>
+<ol>
+<li>解答以线性序列的形式给出。</li>
+<li>该序列都是依逆序计算输出。</li>
+<li>输入和输出的规模不确定。</li>
+</ol>
+<p><strong>进制转换</strong><br>对于一个n进制数，转化为m进制数。<br>N(n) -&gt; N(m)<br>设N(n) = d_m <em> (n^m) + … + d_1 </em> (n^1) + d_0 <em> (n^0)<br>设N_i(n) = d_m </em> (n^{i-m}) + … + d_i * (n^{0})<br>从而有N(n) = N_0(n); d_i = N_i(n) % n; N_{i+1}(n) = N_{i}(n) / n。</p>
+<p><strong>递归实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">convert</span><span class="params">(Stack&lt;<span class="keyword">char</span>&gt;&amp; S, _int64 n, <span class="keyword">int</span> base)</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span> digit[]</span><br><span class="line">     = &#123;<span class="string">'0'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,<span class="string">'9'</span>,</span><br><span class="line">     <span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>,<span class="string">'E'</span>,<span class="string">'F'</span>&#125;;</span><br><span class="line">     <span class="keyword">if</span> (<span class="number">0</span> &lt; n)&#123;</span><br><span class="line">         convert(S, n / base, base);<span class="comment">//递归求N_i(n)</span></span><br><span class="line">         S.push(digit[n % base]);<span class="comment">//从低位到高位依次入栈</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>迭代实现</strong><br>将空间消耗将至O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">convert</span><span class="params">(Stack&lt;<span class="keyword">char</span>&gt;&amp; S, _int64 n, <span class="keyword">int</span> base)</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span> digit[]</span><br><span class="line">    =&#123;<span class="string">'0'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,<span class="string">'9'</span>,</span><br><span class="line">     <span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>,<span class="string">'E'</span>,<span class="string">'F'</span>&#125;;</span><br><span class="line">     <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">         <span class="keyword">int</span> remainder = (<span class="keyword">int</span>) (n % base);<span class="comment">//求数位</span></span><br><span class="line">         S.push(digit[remainder]);<span class="comment">//数位入栈</span></span><br><span class="line">         n /= base;<span class="comment">//求N_i(n)</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="迭代嵌套"><a href="#迭代嵌套" class="headerlink" title="迭代嵌套"></a>迭代嵌套</h2><p>具有自相似性的问题多可以嵌套地递归描述。</p>
+<p>两个迭代嵌套的问题：</p>
+<ol>
+<li>栈混洗</li>
+<li>括号匹配</li>
+</ol>
+<p><strong>栈混洗</strong></p>
+<p>描述：<br>有三个栈A、B和S，其中A中含有n个元素，自顶向下分别为{a_1, a_2, …, a_n}。B和S为空。若只允许通过弹出A的顶元素并压入B或S的方式（B.push(S.pop(),S.push(S.pop())），当所有元素都转移到栈B时，B的元素构成的序列称为一个<strong>栈混洗</strong>（stack permutation）。</p>
+<p><strong>要点要求</strong>：实施出栈操作的栈不得为空。</p>
+<p><strong>模型抽象</strong>：对于空栈而言，在由<code>push</code>和<code>pop</code>构成的操作序列中，任意一个前缀中<code>push</code>的数量不少于<code>pop</code>。</p>
+<p><strong>括号匹配</strong></p>
+<p>描述：左括号与右括号的数量相同和次序相反。</p>
+<p><strong>递归实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">trim</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> <span class="built_in">exp</span>[], <span class="keyword">int</span>&amp; lo, <span class="keyword">int</span>&amp; hi)</span></span>&#123;<span class="comment">//用来删除没有括号的前后缀</span></span><br><span class="line">    <span class="keyword">while</span> ((lo &lt;= hi) &amp;&amp; (<span class="built_in">exp</span>[lo] != <span class="string">'('</span>) &amp;&amp; (<span class="built_in">exp</span>[lo] != <span class="string">')'</span>))</span><br><span class="line">        lo++;</span><br><span class="line">    <span class="keyword">while</span> ((hi &gt;= lo) &amp;&amp; (<span class="built_in">exp</span>[hi] != <span class="string">'('</span>) &amp;&amp; (<span class="built_in">exp</span>[hi] != <span class="string">')'</span>))</span><br><span class="line">        hi--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> <span class="built_in">exp</span>[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;<span class="comment">//用来检查是否存在左括号少于右括号的情况，若存在，则返回其位置，若不存在，则返回末端位置。</span></span><br><span class="line">    <span class="keyword">int</span> mi = lo;</span><br><span class="line">    <span class="keyword">int</span> crc = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> ((crc &gt; <span class="number">0</span>) &amp;&amp; (++mi &lt; hi))&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exp</span>[mi] == <span class="string">'('</span>)</span><br><span class="line">            crc++;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exp</span>[mi] == <span class="string">')'</span>)</span><br><span class="line">            crc--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mi;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">paren</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> <span class="built_in">exp</span>[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;<span class="comment">//递归检查（不懂？）</span></span><br><span class="line">    trim(<span class="built_in">exp</span>, lo, hi);</span><br><span class="line">    <span class="keyword">if</span> (lo &gt; hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">exp</span>[lo] != <span class="string">'('</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">exp</span>[hi] != <span class="string">')'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> mi = divide(<span class="built_in">exp</span>, lo, hi);</span><br><span class="line">    <span class="keyword">if</span> (mi &gt; hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> paren(<span class="built_in">exp</span>, lo+<span class="number">1</span>, mi<span class="number">-1</span>) &amp;&amp; paren(<span class="built_in">exp</span>, mi+<span class="number">1</span>, hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>算法复杂度</strong><br>最坏情况是当左、右括号匹配，则需要递归的次数为括号对的数量，每个递归的复杂度为O(n),故总的时间复杂度为O(n^2)(<em>设序列全是括号</em>)。</p>
+<p><strong>迭代实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">paren</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> <span class="built_in">exp</span>[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;<span class="comment">//若为左括号，则入栈，若为右括号，则出栈。出栈时为空或与右括号不匹配则false。否则，最后检查栈是否为空，空则为true，否则为false。</span></span><br><span class="line">    Stack&lt;<span class="keyword">char</span>&gt; S;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; <span class="built_in">exp</span>[i]; i++)</span><br><span class="line">        <span class="keyword">switch</span> (<span class="built_in">exp</span>[i])&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'('</span>: <span class="keyword">case</span> <span class="string">'['</span>: <span class="keyword">case</span> <span class="string">'&#123;'</span>: S.push(<span class="built_in">exp</span>[i]); <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">')'</span>: <span class="keyword">if</span> (S.empty() || (S.push() != <span class="string">'('</span>)) <span class="keyword">return</span> <span class="literal">false</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">']'</span>: <span class="keyword">if</span> (S.empty() || (S.push() != <span class="string">']'</span>)) <span class="keyword">return</span> <span class="literal">false</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&#125;'</span>: <span class="keyword">if</span> (S.empty() || (S.push() != <span class="string">'&#123;'</span>)) <span class="keyword">return</span> <span class="literal">false</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> S.empty();<span class="comment">//S.empty():若S为空，则返回true；否则返回false。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="延迟缓冲"><a href="#延迟缓冲" class="headerlink" title="延迟缓冲"></a>延迟缓冲</h2><p>栈具有数据缓冲区的功能，当数据在需要时弹出处理，否则入栈等待。</p>
+<p><strong>实例</strong>：在计算算术表达式时，要按照规定的优先级依次处理，而非一直是“从左到右”。</p>
+<p><strong>不同运算符之间的优先级表</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>当前符号</th>
+<th></th>
+<th>+</th>
+<th>-</th>
+<th>*</th>
+<th>/</th>
+<th>^</th>
+<th>!</th>
+<th>(</th>
+<th>)</th>
+<th>\0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>+</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>-</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>栈</td>
+<td>*</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>顶</td>
+<td>/</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>运</td>
+<td>^</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>算</td>
+<td>!</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td>&gt;</td>
+<td></td>
+<td>&gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>符</td>
+<td>(</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>=</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>\0</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td>&lt;</td>
+<td></td>
+<td>=</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>求值运算</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">char</span>* S, <span class="keyword">char</span>* RPN)</span></span>&#123;</span><br><span class="line">    Stack&lt;<span class="keyword">float</span>&gt; opnd; Stack&lt;<span class="keyword">char</span>&gt; optr;</span><br><span class="line">    optr.push(<span class="string">'\0'</span>);</span><br><span class="line">    <span class="keyword">while</span> (!optr.empty())&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isdigit</span>(*S))&#123;</span><br><span class="line">            readNumber(S, opnd);</span><br><span class="line">            append(RPN, opnd.top());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">switch</span>(orderBetween(optr.top(), *S))&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&lt;'</span>:</span><br><span class="line">                optr.push(*S);</span><br><span class="line">                S++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'='</span>:</span><br><span class="line">                optr.pop();</span><br><span class="line">                S++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&gt;'</span>:&#123;</span><br><span class="line">                <span class="keyword">char</span> op = optr.pop();</span><br><span class="line">                append(RPN, op);</span><br><span class="line">                <span class="keyword">if</span> (<span class="string">'!'</span> == op)&#123;</span><br><span class="line">                    <span class="keyword">float</span> pOpnd = opnd.pop();</span><br><span class="line">                    opnd.push(calcu(op, pOpnd));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">float</span> pOpnd2 = opnd.pop(), pOpnd1 = opnd.pop();</span><br><span class="line">                    opnd.push(calcu(pOpnd1, op, pOpnd2));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">default</span>: <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> opnd.pop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -305,14 +480,17 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/" rel="next" title="数据结构(一)：绪论">
-                  <i class="fa fa-chevron-left"></i> 数据结构(一)：绪论
+                <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" rel="next" title="剑指Offer(二)：面试需要的基础知识">
+                  <i class="fa fa-chevron-left"></i> 剑指Offer(二)：面试需要的基础知识
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%94/" rel="prev" title="数据结构(五)">
+                  数据结构(五) <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -351,7 +529,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ADT接口"><span class="nav-number">1.1.</span> <span class="nav-text">ADT接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack模板类"><span class="nav-number">1.2.</span> <span class="nav-text">Stack模板类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈与递归"><span class="nav-number">2.</span> <span class="nav-text">栈与递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用栈"><span class="nav-number">2.1.</span> <span class="nav-text">函数调用栈</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ADT接口"><span class="nav-number">1.1.</span> <span class="nav-text">ADT接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack模板类"><span class="nav-number">1.2.</span> <span class="nav-text">Stack模板类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈与递归"><span class="nav-number">2.</span> <span class="nav-text">栈与递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用栈"><span class="nav-number">2.1.</span> <span class="nav-text">函数调用栈</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈的典型应用"><span class="nav-number">3.</span> <span class="nav-text">栈的典型应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逆序输出"><span class="nav-number">3.1.</span> <span class="nav-text">逆序输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代嵌套"><span class="nav-number">3.2.</span> <span class="nav-text">迭代嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟缓冲"><span class="nav-number">3.3.</span> <span class="nav-text">延迟缓冲</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -367,12 +545,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

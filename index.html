@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/splay-tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/" class="post-title-link" itemprop="url">数据结构(四)</a>
+            <a href="/2019/12/11/splay-tree/" class="post-title-link" itemprop="url">扩展树</a>
         </h1>
 
         <div class="post-meta">
@@ -200,16 +200,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-29 20:57:25" itemprop="dateCreated datePublished" datetime="2019-10-29T20:57:25+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 18:22:26 / Modified: 22:14:28" itemprop="dateCreated datePublished" datetime="2019-12-11T18:22:26+08:00">2019-12-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 11:54:54" itemprop="dateModified" datetime="2019-10-30T11:54:54+08:00">2019-10-30</time>
-              </span>
 
           
 
@@ -222,18 +216,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>背景介绍</strong><br>    Java的运行环境就是基于栈结构的虚拟机。<br>    网络浏览器将用户最近访问过的地址组织成一个栈，新访问的页面存放在栈顶，“后退”按钮可以沿着相反方向返回之前访问的页面。<br>    文本编辑器可以将用户的编辑操作记录在一个栈中，“撤销”功能可以返回上一个编辑记录。</p>
-<pre><code>调度银行或医院的服务窗口，管理轮耕的田地和轮伐的森林，要使用到队列。
-多进程共享CPU时间，多用户共享打印机，需要借助队列结构实现优化的分配。
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="扩展树"><a href="#扩展树" class="headerlink" title="扩展树"></a>扩展树</h1>
       
     </div>
 
@@ -252,7 +235,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -266,7 +249,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/" class="post-title-link" itemprop="url">数据结构(一)：绪论</a>
+            <a href="/2019/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" class="post-title-link" itemprop="url">计算机网络(一)：计算机网络于Internet</a>
         </h1>
 
         <div class="post-meta">
@@ -276,100 +259,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:19" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:19+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:08:30" itemprop="dateModified" datetime="2019-10-28T22:08:30+08:00">2019-10-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h1><blockquote>
-<p><strong>排序(sorting)</strong>: 将n个整数按大小次序排成一个非降序列的操作。</p>
-</blockquote>
-<hr>
-<h2 id="冒泡算法"><a href="#冒泡算法" class="headerlink" title="冒泡算法"></a>冒泡算法</h2><p><strong>局部有序和全局有序</strong></p>
-<blockquote>
-<p>有序序列中每一对相邻元素都是顺序的。<br>所有相邻元素均顺序的序列，也必然整体有序。</p>
-</blockquote>
-<p><strong>算法步骤</strong>:(<em>通过改进局部有序性实现整体的有序</em>)</p>
-<blockquote>
-<ol>
-<li><strong>一趟扫描交换</strong>：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（<em>长度为n的序列，需要n-1次比较和不超过n-1次交换</em>）</li>
-<li><strong>多次扫描</strong>：进行多次扫描交换，直到序列中不再含有任何逆序的相邻元素。</li>
-</ol>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" class="post-title-link" itemprop="url">计算机网络(一)：计算机网络于Internet</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:07:52" itemprop="dateModified" datetime="2019-10-28T22:07:52+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -401,7 +298,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/#more" rel="contents">
+              <a class="btn" href="/2019/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -425,7 +322,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -439,7 +336,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/" class="post-title-link" itemprop="url">数据结构与抽象(四)：泛型</a>
+            <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/" class="post-title-link" itemprop="url">数据结构与抽象(四)：泛型</a>
         </h1>
 
         <div class="post-meta">
@@ -449,14 +346,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:19" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:19+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 10:04:53" itemprop="dateModified" datetime="2019-10-26T10:04:53+08:00">2019-10-26</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -499,7 +396,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -513,7 +410,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/" class="post-title-link" itemprop="url">数据结构与抽象(二)：设计类</a>
+            <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/" class="post-title-link" itemprop="url">数据结构与抽象(二)：设计类</a>
         </h1>
 
         <div class="post-meta">
@@ -523,14 +420,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:19" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:19+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:08:04" itemprop="dateModified" datetime="2019-10-28T22:08:04+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -560,10 +457,10 @@
 <ol>
 <li>私有数据域</li>
 <li>私有常量</li>
-<li>所有的方法定义
+<li>所有的方法定义</li></ol></blockquote></li></ol></blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/#more" rel="contents">
+              <a class="btn" href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -587,7 +484,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -601,7 +498,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/" class="post-title-link" itemprop="url">数据结构与抽象(三)：包</a>
+            <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/" class="post-title-link" itemprop="url">数据结构与抽象(三)：包</a>
         </h1>
 
         <div class="post-meta">
@@ -611,14 +508,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:08:10" itemprop="dateModified" datetime="2019-10-28T22:08:10+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -638,10 +535,10 @@
 <hr>
 <h2 id="包的概念"><a href="#包的概念" class="headerlink" title="包的概念"></a>包的概念</h2><p><strong>包的特点</strong></p>
 <blockquote>
-<p>没有特定次序的对象的有限集合<br>这些对象可能有相同或相关的数据类型<br>可以有重复项<br>
+<p>没有特定次序的对象的有限集合<br>这些对象可能有相同或相关的数据类型<br>可以有重复项<br></p></blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/#more" rel="contents">
+              <a class="btn" href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -665,7 +562,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -679,7 +576,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/" class="post-title-link" itemprop="url">数据结构与抽象(一)：组织数据</a>
+            <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/" class="post-title-link" itemprop="url">数据结构与抽象(一)：组织数据</a>
         </h1>
 
         <div class="post-meta">
@@ -689,14 +586,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 10:05:41" itemprop="dateModified" datetime="2019-10-26T10:05:41+08:00">2019-10-26</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -745,7 +642,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/Block%20Truncation%20Coding/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -759,7 +656,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/Block%20Truncation%20Coding/" class="post-title-link" itemprop="url">Block Trunction Coding</a>
+            <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/" class="post-title-link" itemprop="url">数据结构(一)：绪论</a>
         </h1>
 
         <div class="post-meta">
@@ -769,14 +666,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:10:36" itemprop="dateModified" datetime="2019-10-28T22:10:36+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -790,14 +687,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><strong>Block Truncation Coding (BTC)</strong>是一种灰度图像(<em>greyscale images</em>)的有损图像压缩。</p>
-<blockquote>
-<p>BTC是将图像分割成块(blocks)，然后使用量化器(quantizer)降低每个块中的灰度级的数量并同时保留相同的均值(mean)和均方差(standard deviation)。</p>
+          <h1 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h1><blockquote>
+<p><strong>排序(sorting)</strong>: 将n个整数按大小次序排成一个非降序列的操作。</p>
 </blockquote>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
+<hr>
+<h2 id="冒泡算法"><a href="#冒泡算法" class="headerlink" title="冒泡算法"></a>冒泡算法</h2><p><strong>局部有序和全局有序</strong></p>
+<blockquote>
+<p>有序序列中每一对相邻元素都是顺序的。<br>所有相邻元素均顺序的序列，也必然整体有序。</p>
+</blockquote>
+<p><strong>算法步骤</strong>:(<em>通过改进局部有序性实现整体的有序</em>)</p>
+<blockquote>
+<ol>
+<li><strong>一趟扫描交换</strong>：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（<em>长度为n的序列，需要n-1次比较和不超过n-1次交换</em>）</li>
+<li><strong>多次扫描</strong>：进行多次扫描交换，直到序列中不再含有任何逆序的相邻元素。</li>
+</ol>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/10/29/Block%20Truncation%20Coding/#more" rel="contents">
+              <a class="btn" href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -821,7 +728,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -835,7 +742,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" class="post-title-link" itemprop="url">Java编程思想(一)：对象导论</a>
+            <a href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/" class="post-title-link" itemprop="url">Java编程思想(二)：一切都是对象</a>
         </h1>
 
         <div class="post-meta">
@@ -845,14 +752,87 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:10:05" itemprop="dateModified" datetime="2019-10-28T22:10:05+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h1><p>在创建一个引用的同时，必须将其与一个新的对象进行关联。可使用关键词<strong>new</strong>实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="keyword">new</span> String();</span><br><span class="line"><span class="comment">//创建一个String类型的对象s</span></span><br></pre></td></tr></table></figure></p>
+<h2 id><a href="#" class="headerlink" title></a></h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="咸鱼不翻身">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼的自我修养">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" class="post-title-link" itemprop="url">Java编程思想(一)：对象导论</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -872,7 +852,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/10/29/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/#more" rel="contents">
+              <a class="btn" href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -896,7 +876,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/Java%E4%B8%AD%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -910,7 +890,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/29/Java%E4%B8%AD%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Java中参数</a>
+            <a href="/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">Java出错汇总</a>
         </h1>
 
         <div class="post-meta">
@@ -920,14 +900,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-29 12:25:29" itemprop="dateCreated datePublished" datetime="2019-10-29T12:25:29+08:00">2019-10-29</time>
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:10:21" itemprop="dateModified" datetime="2019-10-28T22:10:21+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -941,11 +921,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>Java 中形参和实参的分析</strong>：</p>
-<p>首先定义一个测试类Study：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Study</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span>[] j = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeI</span><span class="params">()</span></span>&#123;</span><br><span class="line">        i = <span class="number">1</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeJ</span><span class="params">()</span></span>&#123;</span><br><span class="line">        j[<span class="number">0</span>] =<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeI1</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        i = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <h2 id="Syntax-error-on-token-“-”-expected"><a href="#Syntax-error-on-token-“-”-expected" class="headerlink" title="Syntax error on token “;”, , expected"></a>Syntax error on token “;”, , expected</h2><p><strong>表现</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    String s;</span><br><span class="line">    s = <span class="string">"abc"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>原因：在<strong>class</strong>中直接定义类变量，再接着对其赋值。</p>
+<p>解决：建立类变量的同时进行赋值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    String s = <span class="string">"abc"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id><a href="#" class="headerlink" title></a></h2>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/10/29/Java%E4%B8%AD%E6%96%B9%E6%B3%95/#more" rel="contents">
+              <a class="btn" href="/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1015,12 +999,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

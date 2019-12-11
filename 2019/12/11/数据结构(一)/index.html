@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":"hide"},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="计算 排序(sorting): 将n个整数按大小次序排成一个非降序列的操作。   冒泡算法局部有序和全局有序  有序序列中每一对相邻元素都是顺序的。所有相邻元素均顺序的序列，也必然整体有序。  算法步骤:(通过改进局部有序性实现整体的有序)   一趟扫描交换：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（长度为n的序列，需要n-1次比较和不超过n-1次交换） 多次扫描：进行多次扫描">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构(一)：绪论">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="计算 排序(sorting): 将n个整数按大小次序排成一个非降序列的操作。   冒泡算法局部有序和全局有序  有序序列中每一对相邻元素都是顺序的。所有相邻元素均顺序的序列，也必然整体有序。  算法步骤:(通过改进局部有序性实现整体的有序)   一趟扫描交换：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（长度为n的序列，需要n-1次比较和不超过n-1次交换） 多次扫描：进行多次扫描">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.022Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>数据结构(一)：绪论 | 咸鱼的自我修养</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">咸鱼的自我修养</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">咸鱼修炼日记</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="咸鱼不翻身">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼的自我修养">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构(一)：绪论
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h1><blockquote>
+<p><strong>排序(sorting)</strong>: 将n个整数按大小次序排成一个非降序列的操作。</p>
+</blockquote>
+<hr>
+<h2 id="冒泡算法"><a href="#冒泡算法" class="headerlink" title="冒泡算法"></a>冒泡算法</h2><p><strong>局部有序和全局有序</strong></p>
+<blockquote>
+<p>有序序列中每一对相邻元素都是顺序的。<br>所有相邻元素均顺序的序列，也必然整体有序。</p>
+</blockquote>
+<p><strong>算法步骤</strong>:(<em>通过改进局部有序性实现整体的有序</em>)</p>
+<blockquote>
+<ol>
+<li><strong>一趟扫描交换</strong>：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（<em>长度为n的序列，需要n-1次比较和不超过n-1次交换</em>）</li>
+<li><strong>多次扫描</strong>：进行多次扫描交换，直到序列中不再含有任何逆序的相邻元素。</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubblesort</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> sorted = <span class="literal">false</span>;<span class="comment">//标识符sorted用来指示是否进行一趟扫描</span></span><br><span class="line">    <span class="keyword">while</span> (!sorted)&#123;</span><br><span class="line">        sorted = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i <span class="number">-1</span>] &gt; A[i])&#123;</span><br><span class="line">                swap(A[i - <span class="number">1</span>], A[i]);</span><br><span class="line">                sorted = <span class="literal">false</span>;<span class="comment">//若某一趟存在交换，则不能确定整体次序正确，需要再次扫描</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><blockquote>
+<p><em>基于特定的计算模型，旨在解决某一信息处理问题而设计的一个指令序列</em></p>
+</blockquote>
+<p><strong>算法的要素</strong></p>
+<ol>
+<li><strong>输入与输出</strong>：<blockquote>
+<p>输入（input）：对所求解问题特定实例的描述<br>输出（output）：经过计算和处理之后得到的信息，即针对输入问题实例的答案</p>
+</blockquote>
+</li>
+<li><strong>基本操作、确定性与可行性</strong><blockquote>
+<p>算法应可描述为由若干语义明确的基本操作组成的指令序列，且每一基本操作在对应的计算模型中均可兑现。</p>
+</blockquote>
+</li>
+<li><strong>有穷性与正确性</strong><blockquote>
+<p>有穷性（finiteness）：任意算法都应在执行有限次基本操作之后终止并给出输出。<br>正确性（correctness）：算法所给出的输出应该能够符合由问题本身在事先确定的条件。<br><em>证明算法的有穷性和正确性</em>：<br> 从适当的角度找出算法具有的某种不变性和单调性。<br> 单调性：问题的有效规模随着算法的推进不断递减<br> 不变性：不仅在算法初始状态下自然满足，而且与最终的正确性呼应</p>
+</blockquote>
+</li>
+<li><strong>退化与鲁棒性</strong><blockquote>
+<p><em>退化情况</em>（degeneracy）：算法应该能够处理各种极端的输入实例。<br><em>鲁棒性</em>（robustness）：算法能够尽可能充分地应对<em>退化情况</em>。</p>
+</blockquote>
+</li>
+<li><strong>重用性</strong><blockquote>
+<p>算法的总体框架能否方便地推广至其他场合。</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="算法效率"><a href="#算法效率" class="headerlink" title="算法效率"></a>算法效率</h2><p><strong>可计算性</strong>（computability）<br>大量的应用问题不可能设计出必然终止的算法。</p>
+<p><strong>难解性</strong>（intractability）<br>问题的最低求解时间成本远远超过目前实际系统所能提供的计算能力。</p>
+<p><strong>计算效率</strong></p>
+<ol>
+<li><em>衡量尺度</em>：<strong>时间</strong>和<strong>空间</strong>方面度量算法的计算成本</li>
+<li><em>归纳算法设计中的一般性规律和技巧</em></li>
+</ol>
+<p><strong>数据结构</strong><br>以“数据”为研究对象，建立支持高效算法的数据处理策略。</p>
+<hr>
+<h1 id="复杂度度量"><a href="#复杂度度量" class="headerlink" title="复杂度度量"></a>复杂度度量</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p><strong>时间复杂度</strong>（time complexity）：</p>
+<blockquote>
+<p>算法的执行时间可表示为输入规模的一个函数，特定算法处理规模为n的问题所需的时间记为T(n).<br>在规模为n的所有输入中选择执行时间最长者作为T(n).</p>
+</blockquote>
+<hr>
+<h2 id="渐进复杂度"><a href="#渐进复杂度" class="headerlink" title="渐进复杂度"></a>渐进复杂度</h2><p>渐进分析（asymptotic analysis）：</p>
+<blockquote>
+<p>关注时间复杂度的总体变化趋势和增长速度。</p>
+</blockquote>
+<p><strong>环境差异</strong><br>不同的软硬件对计算算法的时间有影响，应该避免。</p>
+<p><strong>基本操作</strong></p>
+<blockquote>
+<p>指令语句可分解为若干次基本操作<br>将T(n)定义为算法所执行基本操作的总次数：T(n)决定于组成算法的所有语句各自的执行次数，以及其中含有基本操作的数目。</p>
+</blockquote>
+<p><strong>最坏、最好与平均情况</strong></p>
+<blockquote>
+<ol>
+<li><strong>最坏情况</strong>（worst case）：算法在处理任何序列所需的时间不会超过的时间复杂度。</li>
+<li><strong>最好情况</strong>（best case）：算法的最少执行时间</li>
+<li><strong>平均情况</strong>（average case）：按照某种约定的概率分布对所有输入对应的计算时间加权平均。</li>
+</ol>
+</blockquote>
+<p><strong>大O记号</strong>（big-O notation）</p>
+<blockquote>
+<p>若存在正的常数c和函数f(n),使得对任何n &gt;&gt; 2 都有<br>T(n) &lt;= c·f(n)<br>可认为f(n)为T(n)增长速度的一个渐进上界，记为：<br>T(n) = O(f(n))<br><strong>性质</strong></p>
+<ol>
+<li>对于任一常数c &gt; 0, 有 O(f(n)) = O(c·f(n)) <em>函数各项正的常系数可等同于1</em></li>
+<li>对于任意常数a &gt; b &gt; 0, 有O(n^a + n^b) = O(n^a) <em>多项式中的低次项可忽略，只保留最高次项</em></li>
+</ol>
+</blockquote>
+<p><strong>大Ω记号</strong>（big-omega notation）<br><em>对算法的复杂度最好情况做出估计</em></p>
+<blockquote>
+<p>若存在正的常数c和函数g(n)，使得对于任何n &gt;&gt; 2都有<br>T(n) &gt;= c·g(n)<br>则在n足够大之后，g(n)给出T(n)的一个渐进下界：<br>T(n) = Ω(g(n))</p>
+</blockquote>
+<p><strong>大Θ记号</strong>（big-theta notation）<br>从渐进的趋势看，T(n)介于Ω(g(n))与O(f(n))之间，若出现g(n) = f(n), 可用Θ表示。</p>
+<blockquote>
+<p>若存在正的常数c1 &lt; c2 和函数h(n)，使得对于任何n &gt;&gt; 2都有<br>c1·h(n) &lt;= T(n) &lt;= c2·h(n)<br>认为在n足够大后，h(n)给出T(n)的一个确界：<br>T(n) = Θ(h(n))</p>
+</blockquote>
+<hr>
+<h2 id="空间复杂度-space-complexity"><a href="#空间复杂度-space-complexity" class="headerlink" title="空间复杂度(space complexity)"></a>空间复杂度(space complexity)</h2><p>时间复杂度本身就是空间复杂度的一个上界。</p>
+<hr>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="常数O-1"><a href="#常数O-1" class="headerlink" title="常数O(1)"></a>常数O(1)</h2><p><strong>问题与算法</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ordinaryElement(s[], n)</span><br><span class="line"><span class="comment">//任取三个元素</span></span><br><span class="line"><span class="comment">//比较后排序</span></span><br><span class="line"><span class="comment">//输出中间值（常规元素）</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>复杂度</strong></p>
+<ol>
+<li>无论输入的数据多大，仅取其中的三个元素，计较大小后输出，综合的运行时间为：T(n) = O(1)</li>
+<li>称为“常数时间复杂度算法”（constant-time algorithm）或“就地算法”（in-place algorithm）。</li>
+<li>仅含一次或常数次基本操作的算法均属于时间复杂度为O(1)的算法。</li>
+<li><strong>一般不含循环、分支、子程序调用</strong>。</li>
+</ol>
+<hr>
+<h2 id="对数O-logn"><a href="#对数O-logn" class="headerlink" title="对数O(logn)"></a>对数O(logn)</h2><p><strong>问题与算法</strong><br>问题：任意非负整数，统计器二进制展开中1的个数<br>算法：将n进行二进制展开，每次右移一位，检查最低位是否为1，是则个数加一，否则不加，直至移完。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">coutOnes</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ones = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> &lt; n)&#123;</span><br><span class="line">        ones += (<span class="number">1</span> &amp; n); <span class="comment">//末位为1，则与运算为1，否则为0</span></span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;<span class="comment">//右移一位</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ones;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>复杂度</strong></p>
+<ol>
+<li>主要操作来源于<code>while</code>循环。每次循环，n减少为原来的1/2，则需要<strong>log</strong>n次就结束，其他运算为常数次O(1)，则总的时间复杂度取决于<strong>log</strong>n。</li>
+<li>此类算法称为具有“对数时间复杂度”（logarithmic-time algorithm）。</li>
+</ol>
+<blockquote>
+<p><strong>对数多项式复杂度</strong>：运行时间可以表示为T(n) = O(<strong>log</strong>^c n)形式的算法（常数c&gt;0）统称为“对数多项式时间复杂度的算法”（polylogarithmic-time algorithm）。</p>
+</blockquote>
+<hr>
+<h2 id="线性O-n"><a href="#线性O-n" class="headerlink" title="线性O(n)"></a>线性O(n)</h2><p><strong>问题与算法</strong><br>问题：计算给定n个整数的总和。<br>算法：循环计算<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sumI</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        sum +=A[i];</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>复杂度</strong></p>
+<ol>
+<li>求解n个数之和，每次将一个数加到累计和中，单次循环的复杂度为O(1)，总共要循环n个，则总的基本操作的时间复杂度为O(n)。</li>
+<li>运行时间可以表示为T(n) = O(n)形式的算法，统称为“线性时间复杂度算法”（linear-time algorithm）。</li>
+</ol>
+<hr>
+<h2 id="多项式O-polynomial-n"><a href="#多项式O-polynomial-n" class="headerlink" title="多项式O(polynomial(n))"></a>多项式O(polynomial(n))</h2><p>运行时间可以表示为 T(n) = O(f(n))的形式，而且f(x)为多项式，则对应的算法称为“多项式时间复杂度算法”（polynomial-time algorithm）。<br>实际应用中认为是可接受的，若问题存在该范围内的一个算法，则此问题是可有效求解的或易解的（tractable）。</p>
+<hr>
+<h2 id="指数O-2-n"><a href="#指数O-2-n" class="headerlink" title="指数O(2^n)"></a>指数O(2^n)</h2><p><strong>问题与算法</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">_<span class="function">int64 <span class="title">power2BF_I</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    _int64 <span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> &lt; n --)</span><br><span class="line">        <span class="built_in">pow</span> &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">pow</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>复杂度</strong></p>
+<ol>
+<li>若以输入指数n的二进制位数r = <strong>log</strong>n作为输入规模，运行时间为O(2^r)。</li>
+<li>运行时间可以表示为 T(n) = O(a^n)形式的算法(a &gt; 1)，均属于“指数时间复杂度算法”（exponential-time algorithm）。</li>
+</ol>
+<p>通常认为：指数复杂度算法无法真正应用到实际问题，不是有效算法。对于不存在多项式复杂度算法的问题，称为<strong>难解的</strong>（intractable）问题。</p>
+<hr>
+<h2 id="复杂度层次"><a href="#复杂度层次" class="headerlink" title="复杂度层次"></a><strong>复杂度层次</strong></h2><blockquote>
+<p>从低到高: O(1) &lt; O(<strong>log</strong>^<em> n) &lt; O(<strong>loglog</strong> n) &lt; O(<strong>log</strong> n) &lt; O(sqrt(n)) &lt; O(n) &lt; O(n<strong>log</strong>^</em> n) &lt; O(n<strong>loglog</strong> n) &lt; O(n^2) &lt; O(n^3) &lt; O(n^c) &lt; O(2^n)</p>
+</blockquote>
+<hr>
+<h2 id="输入规模"><a href="#输入规模" class="headerlink" title="输入规模"></a>输入规模</h2><p>用以描述输入所需的空间规模。<br>以输入参数n本身的数值作为基准的复杂度称为<strong>伪</strong>复杂度。</p>
+<hr>
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p><strong>递归</strong>：函数和过程进行自我调用。<br>递归调用（recursive call）：某一方法调用自身。<br>是对实际问题中反复出现的结构和形式做高度概括。</p>
+<hr>
+<h2 id="线性递归"><a href="#线性递归" class="headerlink" title="线性递归"></a>线性递归</h2><p><strong>数组求和</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span> &gt; n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> sum(A, n<span class="number">-1</span>) + A[n - <span class="number">1</span>];<span class="comment">//递归调用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>线性递归</strong>（linear recursion）：每一层次上至多只有一个实例，且构成一个线性的次序关系。<br><strong>减而治之</strong>（decrease-and-conquer）：递归每深入一层，待求解问题的规模都缩减一个常数，直至减少到一个小问题。</p>
+</blockquote>
+<hr>
+<h2 id="递归分析"><a href="#递归分析" class="headerlink" title="递归分析"></a>递归分析</h2><p><strong>递归跟踪</strong>（recursion trace）</p>
+<ol>
+<li>算法的每一递归实例都表示为一个方框，注明该实例调用的参数</li>
+<li>若实例M调用实例N，则在M与N对应的方框之间添加一条有向联线</li>
+</ol>
+<blockquote>
+<p><strong>NOTES</strong>:</p>
+<ol>
+<li>递归实例创建、销毁的时间近似于常数。</li>
+<li>只需要统计各递归实例中非递归调用部分所需的时间。</li>
+<li>单词递归的基本操作数和递归的层数。</li>
+</ol>
+</blockquote>
+<p><strong>递归方程</strong>（recurrence equation）<br>通过对递归模式的数学归纳，导出复杂度定界函数的递推方程（组）及其边界条件，对递归方程（组）求解。</p>
+<blockquote>
+<p>寻找相邻两次递归的递推关系，对其进行求解。</p>
+</blockquote>
+<hr>
+<h2 id="递归模式"><a href="#递归模式" class="headerlink" title="递归模式"></a>递归模式</h2><p><strong>多递归基</strong><br>对每一类可能出现的非凡情况，都需设置对应的递归基，保证有穷性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;<span class="comment">//数组倒置</span></span><br><span class="line">    <span class="keyword">if</span> (lo &lt; hi)&#123;</span><br><span class="line">        swap(A[lo], A[hi]);</span><br><span class="line">        reverse(A, lo + <span class="number">1</span>, hi <span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>多向递归</strong><br>递归调用可能有多种选择的分支。</p>
+<p><strong>求解幂函数的算法</strong><br>power2(n) = 1 if n=0<br>            power2(n/2)^2 * 2 if n &gt; 0 and odd<br>            power2(n/2)^2     if n &gt; 0 and even</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">inlin _<span class="function">int64 <span class="title">sqr</span><span class="params">(_int64 a)</span></span>&#123;<span class="keyword">return</span> a * a;&#125;</span><br><span class="line">_<span class="function">int64 <span class="title">power2</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> == n) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> (n &amp; <span class="number">1</span>) ? sqr(power2(n &gt;&gt; <span class="number">1</span>)) &lt;&lt; <span class="number">1</span>; sqr(power2(n &gt;&gt; <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="递归消除"><a href="#递归消除" class="headerlink" title="递归消除"></a>递归消除</h2><p><strong>空间成本</strong><br>递归算法需要更多的空间，影响运行速度。</p>
+<p><strong>尾递归及其消除</strong></p>
+<blockquote>
+<p><strong>尾递归</strong>（tail recursion）：递归调用在递归实例中以最后一步操作的形式出现。只有当该算法任一实例都终止于这一递归调用时，才属于尾递归。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;<span class="comment">//数组倒置</span></span><br><span class="line">    <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">        swap(A[lo++], A[hi--]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="二分递归"><a href="#二分递归" class="headerlink" title="二分递归"></a>二分递归</h2><p><strong>分而治之</strong>（dividi-and-conquer）<br>将问题分解为若干规模更小的子问题，再通过递归机制分别求解。</p>
+<p><strong>多路递归</strong>（multi-way recursion）<br>每一递归实例都可能做多次递归。<br>若是将问题一分为二，则为“二分递归”（binary recursion）</p>
+<p><strong>数组求和</strong><br>思路：以居中的元素为界将数组一分为二，递归地对子数组分别求和，将子数组之和相加。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;<span class="comment">//数组求和</span></span><br><span class="line">    <span class="keyword">if</span> (lo == hi)</span><br><span class="line">        <span class="keyword">return</span> A[lo];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> mi = (lo + hi) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> sum(A, lo, mi) + sum(A, mi + <span class="number">1</span>, hi);<span class="comment">//递归地对两个子数组求和</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Fibonacci数列</strong><br>fibonacci数列第n项fib(n)的递归形式：<br>    fib(n) = n 若 n &lt;= 1<br>             fib(n-1) + fib(n-2)  若 n &gt;= 2</p>
+<p>算法：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_<span class="function">int64 <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//计算fibonacci数列第n项</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">2</span> &gt; n) ?</span><br><span class="line">            (_int64)n</span><br><span class="line">            : fib(n<span class="number">-1</span>) + fib(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Fibonacci数列需要运行O(2^n)的时间复杂度。<br>原因：计算过程中出现的递归实例的重复度高。</p>
+</blockquote>
+<p><strong>优化策略</strong></p>
+<ol>
+<li><strong>制表/记忆</strong>（tabulation/memoization）自顶向下，每遇到一个子问题，首先检查其是否计算过，以期通过直接查阅记录获得解答，避免重复计算。</li>
+<li><strong>动态规划</strong>（dynamic programming）从递归基出发，自底而上递推地得出各子问题的解，直到最终原问题的解。</li>
+</ol>
+<p>（不懂）：<br><strong>Fibonacci数列：线性递归</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">_<span class="function">int64 <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n, _int64&amp; prev)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> == n)</span><br><span class="line">    &#123;</span><br><span class="line">        prev = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        _int64 prevPrev;</span><br><span class="line">        prev = fib(n<span class="number">-1</span>, prevPrev);</span><br><span class="line">        <span class="keyword">return</span> prePrev + prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>时间复杂度为 O(n)。</p>
+</blockquote>
+<p><strong>Fibonacci数列：迭代</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_<span class="function">int64 <span class="title">fibI</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    _int64 f = <span class="number">0</span>, g =<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; n--)&#123;</span><br><span class="line">        g += f;</span><br><span class="line">        f = g - f;</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>时间复杂度为 O(n)，常数规模的空间复杂度。</p>
+</blockquote>
+<hr>
+<h1 id="抽象数据类型"><a href="#抽象数据类型" class="headerlink" title="抽象数据类型"></a>抽象数据类型</h1><p><strong>封装</strong>：将数据项与相关的操作结合为一个整体，将数据结构的外部特性与其内部实现分离，提供一致而标准的对外接口。</p>
+<p><strong>抽象数据类型</strong>（abstract data type，ADT）：通过封装，数据集合与对应的操作所构成。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/" rel="next" title="Java编程思想(二)：一切都是对象">
+                  <i class="fa fa-chevron-left"></i> Java编程思想(二)：一切都是对象
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/" rel="prev" title="数据结构与抽象(一)：组织数据">
+                  数据结构与抽象(一)：组织数据 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算"><span class="nav-number">1.</span> <span class="nav-text">计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡算法"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">1.2.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法效率"><span class="nav-number">1.3.</span> <span class="nav-text">算法效率</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度度量"><span class="nav-number">2.</span> <span class="nav-text">复杂度度量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">2.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐进复杂度"><span class="nav-number">2.2.</span> <span class="nav-text">渐进复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度-space-complexity"><span class="nav-number">2.3.</span> <span class="nav-text">空间复杂度(space complexity)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">3.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常数O-1"><span class="nav-number">3.1.</span> <span class="nav-text">常数O(1)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数O-logn"><span class="nav-number">3.2.</span> <span class="nav-text">对数O(logn)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性O-n"><span class="nav-number">3.3.</span> <span class="nav-text">线性O(n)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多项式O-polynomial-n"><span class="nav-number">3.4.</span> <span class="nav-text">多项式O(polynomial(n))</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数O-2-n"><span class="nav-number">3.5.</span> <span class="nav-text">指数O(2^n)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度层次"><span class="nav-number">3.6.</span> <span class="nav-text">复杂度层次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入规模"><span class="nav-number">3.7.</span> <span class="nav-text">输入规模</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#递归"><span class="nav-number">4.</span> <span class="nav-text">递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性递归"><span class="nav-number">4.1.</span> <span class="nav-text">线性递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归分析"><span class="nav-number">4.2.</span> <span class="nav-text">递归分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归模式"><span class="nav-number">4.3.</span> <span class="nav-text">递归模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归消除"><span class="nav-number">4.4.</span> <span class="nav-text">递归消除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分递归"><span class="nav-number">4.5.</span> <span class="nav-text">二分递归</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象数据类型"><span class="nav-number">5.</span> <span class="nav-text">抽象数据类型</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":"hide"},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="JBIG2 Model-Based Coding 若想获得最佳的压缩结果，使用的数据模型要与实际数据相匹配。 T.4 和 T.6 将每一行看作黑白像素游程的组合。 为了进一步利用不同行之间的关联，二维的游程模型(MR和MMR)提供更佳的文本压缩效果。 JBIG1 使用邻近的像素(模板)来预测单个像素。 自适应的方式提高周期性的半色调图像的压缩表现，使用的游程模型和基于上下文的预测模型具有通用性，但">
+<meta name="keywords" content="JBIG2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JBIG2">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;29&#x2F;Notes&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="JBIG2 Model-Based Coding 若想获得最佳的压缩结果，使用的数据模型要与实际数据相匹配。 T.4 和 T.6 将每一行看作黑白像素游程的组合。 为了进一步利用不同行之间的关联，二维的游程模型(MR和MMR)提供更佳的文本压缩效果。 JBIG1 使用邻近的像素(模板)来预测单个像素。 自适应的方式提高周期性的半色调图像的压缩表现，使用的游程模型和基于上下文的预测模型具有通用性，但">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.026Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/29/Notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JBIG2 | 咸鱼的自我修养</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">咸鱼的自我修养</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">咸鱼修炼日记</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/29/Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="咸鱼不翻身">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼的自我修养">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JBIG2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-29 17:00:00" itemprop="dateCreated datePublished" datetime="2019-11-29T17:00:00+08:00">2019-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JBIG2"><a href="#JBIG2" class="headerlink" title="JBIG2"></a>JBIG2</h1><hr>
+<h2 id="Model-Based-Coding"><a href="#Model-Based-Coding" class="headerlink" title="Model-Based Coding"></a>Model-Based Coding</h2><ol>
+<li>若想获得最佳的压缩结果，使用的数据模型要与实际数据相匹配。</li>
+<li>T.4 和 T.6 将每一行看作黑白像素游程的组合。</li>
+<li>为了进一步利用不同行之间的关联，二维的游程模型(MR和MMR)提供更佳的文本压缩效果。</li>
+<li>JBIG1 使用邻近的像素(模板)来预测单个像素。</li>
+<li>自适应的方式提高周期性的半色调图像的压缩表现，使用的游程模型和基于上下文的预测模型具有通用性，但是通用性影响了某些图像的压缩能力。</li>
+<li>JBIG2 并不对文件做前提性假设, 而是提取最具代表性的比特图(bitmaps): 对不同类型的文字(不同的语言文字)和图像(周期抖动, 误差扩散)更加鲁棒。</li>
+</ol>
+<a id="more"></a>
+<h2 id="Pattern-Matching-for-Text-Image-Data"><a href="#Pattern-Matching-for-Text-Image-Data" class="headerlink" title="Pattern Matching for Text Image Data"></a>Pattern Matching for Text Image Data</h2><ol>
+<li>使用“基于字符的模式匹配”技术：<br> 对重复出现的字符中最具代表性的实例的比特图(bitmaps, symbol, mark, pixel block)进行编码，并存入字典中。</li>
+<li><p>两种编码方式：</p>
+<ol>
+<li><strong>pattern matching and substitution(PM&amp;S)</strong></li>
+<li><strong>Soft pattern matching(SPM)</strong></li>
+</ol>
+<p><strong>要点</strong><br>两者之间的差异在于如何编码比特图。<br>JBIG2允许两个编码器使用相同的编码格式。<br>允许混合使用两者。</p>
+</li>
+</ol>
+<blockquote>
+<p>Pattern Matching and Substitution (匹配替换模式)</p>
+</blockquote>
+<ol>
+<li>相同字符的两个实例不会按照像素进行匹配。</li>
+<li>对于每个字符，编码一个指向字典中最具代表性的比特图的指针和其在文件中的位置（一般是相对于前一个相同字符的相对位置）。</li>
+<li>若该字符未出现过，则直接编码比特图，并加入到字典中。</li>
+<li>比特流不将编码的数值和字典数据放在一起，而是产生一个或多个字典片段，和一个或多个图像数据（指示比特图的数值信息）。</li>
+</ol>
+<p><strong>分割</strong><br>图像会分割成比特图，提取其中的长，宽，面积，位置等信息。</p>
+<p><strong>字典搜索</strong></p>
+<ol>
+<li>预扫描潜在的比特图，跳过特征不符（黑色像素差异较大的，长宽高不符的）。</li>
+<li>计算匹配分数，获得最佳匹配的比特图（Hamming distance）。<br>当最佳匹配的得分超过阈值，认为匹配有效。（阈值与字符的特征有关（尺寸））</li>
+</ol>
+<p><strong>数值型数据编码</strong><br>数值型数据（index，position）可进行huffman编码。</p>
+<p><strong>比特图编码</strong><br>比特图可用MMR或JBIG1进行编码。</p>
+<p><strong>问题</strong><br>由于替换，导致不可避免的替换误差。（可使用Residue Coding 或 soft pattern matching）</p>
+<blockquote>
+<p>Soft Pattern Matching (软匹配)</p>
+</blockquote>
+<ol>
+<li>加入细节信息(refinement data), 可用于重构原始字符。</li>
+<li><p>细节信息包含：<br> 当前期望字符的像素；<br> 使用当前字符和匹配字符的比特图的编码。（有匹配字符，预测精度增加）<br> 使用匹配的字符对当前字符进行无损编码。<br> 匹配的比特图只用于预测模板中，增加无损压缩的精确度。<br> 数值型数据使用算术编码或huffman编码。<br> 比特图使用 <strong>逐像素的基于上下文模型的算术编码</strong>（JBIG1）或<strong>MMR</strong>（T.6）。</p>
+<p> <strong>编码细节</strong></p>
+<ol>
+<li>将待编码的比特图和匹配的比特图的几何中心进行匹配。</li>
+<li>使用算术编码，逐行进行编码（使用不同于JBIG1的模板）<br> 模板由当前比特图的causal region（已编码的像素）和匹配的比特图中邻近的像素。</li>
+</ol>
+</li>
+</ol>
+<h2 id="Halftones"><a href="#Halftones" class="headerlink" title="Halftones"></a>Halftones</h2><p>两种压缩halftone的方式：</p>
+<ol>
+<li>类JBIG1的基于上下文的算术编码 （使用16个像素构成的模板，其中4个为自适应）。</li>
+<li>将halftone图像转换成灰度图像(gray scale image)，再传输灰度图像。<br> 将图像分割成由$m_b$行$n_b$列像素构成的块。<br> 对应的灰度值为块中像素之和。<br> 位平面(bit planes)使用基于上下文的算术编码(JBIG1)进行编码。<br> 灰度值作为半色调位平面字典(halftone bitmap dictionary)的索引。<br> 解码器使用索引恢复原图像。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JBIG2/" rel="tag"># JBIG2</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%94/" rel="next" title="数据结构(五)">
+                  <i class="fa fa-chevron-left"></i> 数据结构(五)
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/" rel="prev" title="递归与动态规划总结">
+                  递归与动态规划总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JBIG2"><span class="nav-number">1.</span> <span class="nav-text">JBIG2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Based-Coding"><span class="nav-number">1.1.</span> <span class="nav-text">Model-Based Coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pattern-Matching-for-Text-Image-Data"><span class="nav-number">1.2.</span> <span class="nav-text">Pattern Matching for Text Image Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Halftones"><span class="nav-number">1.3.</span> <span class="nav-text">Halftones</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

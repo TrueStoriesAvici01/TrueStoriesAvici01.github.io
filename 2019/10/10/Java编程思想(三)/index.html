@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="Java操作符 操作符接受一个或多个参数，并生成一个新值。有些操作符可能改变操作数自身的值。“=”，“==”，“!=”能够操作所有对象，其他的操作符只能操作“基本类型”。String类支持“+”和“+=”。   优先级先乘除后加减。使用括号明确计算顺序。“+”可能涉及“字符串转换”：当一个String后面有“+”，其后又有非String类型元素，会试图将非String类型的元素转换为String。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-28T14:09:59.462Z">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.020Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/10/10/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%89)/">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 22:09:59" itemprop="dateModified" datetime="2019-10-28T22:09:59+08:00">2019-10-28</time>
+                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
               </span>
 
           
@@ -229,7 +229,7 @@
 </blockquote>
 <hr>
 <h1 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h1><p>先乘除后加减。<br>使用括号明确计算顺序。<br>“+”可能涉及“字符串转换”：当一个<code>String</code>后面有“+”，其后又有非<code>String</code>类型元素，会试图将非<code>String</code>类型的元素转换为<code>String</code>。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h1 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h1><p>“=”：用右边的值复制给左边的值。</p>
+<h2 id><a href="#" class="headerlink" title></a><a id="more"></a></h2><h1 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h1><p>“=”：用右边的值复制给左边的值。</p>
 <blockquote>
 <p>右值可以是任何常数、变量或者表达式。<br>左值必须为明确的、已命名的变量。</p>
 <p>基本数据类型的赋值就是将一个地方的内容复制到另一个地方。<code>a = b</code>后，修改<code>a</code>的值不会影响<code>b</code>。</p>
@@ -240,7 +240,7 @@
 <p>在方法中传入的参数为对象时，方法会作用于该对象，从而改变对象的实际值（<em>传进来的是对象的引用，而非对象的复制</em>）</p>
 </blockquote>
 <p><strong>示例</strong></p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Letter</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PassObject</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Letter y)</span></span>&#123;</span><br><span class="line">        y.c = <span class="string">'z'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Letter x = <span class="keyword">new</span> Letter();</span><br><span class="line">        x.c = <span class="string">'a'</span>;</span><br><span class="line">        System.out.println(x.c);</span><br><span class="line">        f(x);</span><br><span class="line">        System.out.println(x.c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//输出结果：a z</span></span><br><span class="line"><span class="comment">//调用方法f(x)会改变x中的值</span></span><br></pre></td></tr></table></figure></h2><h1 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h1><ol>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Letter</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PassObject</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Letter y)</span></span>&#123;</span><br><span class="line">        y.c = <span class="string">'z'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Letter x = <span class="keyword">new</span> Letter();</span><br><span class="line">        x.c = <span class="string">'a'</span>;</span><br><span class="line">        System.out.println(x.c);</span><br><span class="line">        f(x);</span><br><span class="line">        System.out.println(x.c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//输出结果：a z</span></span><br><span class="line"><span class="comment">//调用方法f(x)会改变x中的值</span></span><br></pre></td></tr></table></figure></h2><h1 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h1><ol>
 <li>包含加（+），减（-），乘（*），除（/）以及取模操作符（%从整数除法中产生余数）。</li>
 <li>支持运算与赋值同时操作。</li>
 </ol>
@@ -443,12 +443,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
