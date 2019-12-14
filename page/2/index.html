@@ -1,1342 +1,849 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    
 
-<link rel="stylesheet" href="/css/main.css">
+    
+
+    
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.4.2',
-    exturl: false,
-    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":"hide"},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
-    },
-    sidebarPadding: 40
-  };
-</script>
-
-  <meta name="keywords" content="Java, 算法, 数据结构">
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java, 算法, 数据结构">
+    <meta name="keywords" content="Java, 算法, 数据结构">
 <meta property="og:type" content="website">
 <meta property="og:title" content="咸鱼的自我修养">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;2&#x2F;index.html">
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
-<link rel="canonical" href="http://yoursite.com/page/2/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: true,
-    isPost: false,
-    isPage: false,
-    isArchive: false
-  };
-</script>
-
-  <title>咸鱼的自我修养</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+    <!-- custom head -->
+    
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">咸鱼的自我修养</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">咸鱼修炼日记</p>
-  </div>
-
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Java中参数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>Java 中形参和实参的分析</strong>：</p>
-<p>首先定义一个测试类Study：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Study</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span>[] j = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeI</span><span class="params">()</span></span>&#123;</span><br><span class="line">        i = <span class="number">1</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeJ</span><span class="params">()</span></span>&#123;</span><br><span class="line">        j[<span class="number">0</span>] =<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeI1</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        i = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Git%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/11/Git%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Git理论基础</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git记录的是什么"><a href="#Git记录的是什么" class="headerlink" title="Git记录的是什么"></a>Git记录的是什么</h1><blockquote>
-<ol>
-<li>Git是将每个版本独立保存</li>
-<li>工作区域、暂存区域和Git仓库<blockquote>
-<p>工作区域 (Working Directory)：日常编程时的工作目录<br>暂存区域 (Stage (Index)): 保存改动的目录<br>Git仓库 (Repository(HEAD)): 最终存放所有数据的位置</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<h1 id="Git-的工作流程"><a href="#Git-的工作流程" class="headerlink" title="Git 的工作流程"></a>Git 的工作流程</h1><blockquote>
-<ol>
-<li>在工作目录中添加、修改文件</li>
-<li>将需要进行版本管理的文件存放到暂存区域</li>
-<li>将暂存区域的文件提交到Git仓库</li>
-</ol>
-</blockquote>
-<h2 id="Git-管理的文件有三个状态"><a href="#Git-管理的文件有三个状态" class="headerlink" title="Git 管理的文件有三个状态"></a>Git 管理的文件有三个状态</h2><ul>
-<li>已修改 (modified)</li>
-<li>已暂存 (staged)</li>
-<li>已提交 (committed)</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/11/Git%E5%85%A5%E9%97%A8/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Block%20Truncation%20Coding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/11/Block%20Truncation%20Coding/" class="post-title-link" itemprop="url">Block Trunction Coding</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-11 10:25:18" itemprop="dateCreated datePublished" datetime="2019-12-11T10:25:18+08:00">2019-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><strong>Block Truncation Coding (BTC)</strong>是一种灰度图像(<em>greyscale images</em>)的有损图像压缩。</p>
-<blockquote>
-<p>BTC是将图像分割成块(blocks)，然后使用量化器(quantizer)降低每个块中的灰度级的数量并同时保留相同的均值(mean)和均方差(standard deviation)。</p>
-</blockquote>
-<h2 id><a href="#" class="headerlink" title></a></h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/11/Block%20Truncation%20Coding/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/09/%E4%B8%BB%E8%AF%AD%E5%8A%A8%E8%AF%8D%E4%B8%80%E8%87%B4%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/09/%E4%B8%BB%E8%AF%AD%E5%8A%A8%E8%AF%8D%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-title-link" itemprop="url">主语动词一致性</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-09 15:30:00" itemprop="dateCreated datePublished" datetime="2019-12-09T15:30:00+08:00">2019-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="主语动词一致性"><a href="#主语动词一致性" class="headerlink" title="主语动词一致性"></a>主语动词一致性</h1><h2 id="主语是一个还是两个人-物"><a href="#主语是一个还是两个人-物" class="headerlink" title="主语是一个还是两个人(物)"></a>主语是一个还是两个人(物)</h2><blockquote>
-<ol>
-<li>Your brother John <strong>has</strong> come to see you.</li>
-<li>Your brother and John <strong>have</strong> come to see you.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<ul>
-<li>第一句：单数的主语，要用单数的动词。</li>
-<li>第二句：为两个人，是复数的主语，用复数的动词。</li>
-</ul>
-<blockquote>
-<ol>
-<li>The senator and delegate <strong>wants</strong> to make an announcement.</li>
-<li>The senator and the delegate <strong>want</strong> to make an announcement.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<ul>
-<li>名词短语有三个构成元素：限定词（包括冠词）、形容词和名词。其中任一元素可以省略。<em>the rich</em>就是省略名词<em>people</em>。第一句中<strong>the senator and delegate</strong>只有一个限定词<em>the</em>，名词部分用<em>and</em>连接，表示一个人的两种身份，所以为一个人，用单数。</li>
-<li><strong>the senator</strong>和<strong>the delegate</strong>各有一个限定词，为两个名词短语，代表两个人，动词该用复数。</li>
-</ul>
-<blockquote>
-<ol>
-<li>Every man and every woman <strong>has</strong> to do something for the country.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<p><strong>every man</strong> 和 <strong>every woman</strong>虽各有限定词，但是<em>man</em>和<em>woman</em>为对称的内容，两个<em>every</em>用来强调，表示<em>无论男女</em>，即<em>每个人</em>，选择单数动词。</p>
-<blockquote>
-<ol>
-<li>All work and no play <strong>makes</strong> jack a dull boy.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<p>与上个例子类似，<strong>All work</strong>和<strong>no play</strong>虽是两个名词短语，但是表示的是同一件事情的两个方面，重复加强语气，所以使用单数动词。</p>
-<blockquote>
-<ol>
-<li>A cup and saucer <strong>is</strong> placed on the table.</li>
-<li>A cup and a dish <strong>are</strong> placed on the table.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<ul>
-<li>第一句：<em>cup</em>和<em>saucer</em>是表示一组咖啡杯，为单一名词短语，应为单数。</li>
-<li>第二句：<em>A cup</em>和<em>a dish</em>是两个东西，为两个名词短语，动词该用复数。</li>
-</ul>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<ol>
-<li>A brown and white dog <strong>is</strong> at your doorsteps.</li>
-<li>A brown and a white dog <strong>are</strong> fighting over a bone.</li>
-</ol>
-<p>对于没有限定词的</p>
-<ol>
-<li>Bread and butter <strong>is</strong> not very tasty but very filling.</li>
-<li>Bread and butter <strong>has</strong> both risen in price.<br><strong>提示</strong></li>
-</ol>
-<ul>
-<li>不可数名词使用<em>零冠词</em>，要从意思判断单复数。第一句中<strong>Bread and butter</strong>是一种东西（吐司面包涂奶油），为单数，用单数动词。</li>
-<li>第二句表示两个东西都涨价了，应为复数。</li>
-</ul>
-<ol>
-<li>Oil and water <strong>do</strong> not mix.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong><br>谚语，表示一个事实。</p>
-<h2 id="主语是哪一个"><a href="#主语是哪一个" class="headerlink" title="主语是哪一个"></a>主语是哪一个</h2><p><em>主语中夹有or, but, 比较级as, than等</em></p>
-<blockquote>
-<p>You want ot borrow money? But I, as well as you, <strong>am</strong> broke.</p>
-</blockquote>
-<p><strong>提示</strong></p>
-<p>原句为：<em>I am broke as well as you are.</em>，动词为<em>I</em>的动词，与<em>as well as you</em>无关。</p>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<p>I, no less than you, <strong>am</strong> responsible.</p>
-</blockquote>
-<p><em>对等连接词but</em></p>
-<blockquote>
-<p>Everyone but a few complete idiots <strong>was</strong> able to see that.</p>
-</blockquote>
-<p><strong>提示</strong><br><em>but</em>连接的两个部分通常是一个肯定，一个否定。主语中<strong>否定的部分等于被排除，动词要视肯定的部分而定</strong></p>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<ol>
-<li>The eggs, not the hen, <strong>were</strong> stolen.</li>
-<li>Not only you but also I <strong>was</strong> at fault.</li>
-</ol>
-</blockquote>
-<p><em>对等连接词or</em></p>
-<blockquote>
-<p>Either my father alone or both my parents <strong>are</strong> coming.</p>
-</blockquote>
-<p><strong>提示</strong><br><em>or</em>表示逻辑关系是”二选一“，一般是”选择靠近动词的部分“做主语。</p>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<ol>
-<li>Neither the nor his friends <strong>were</strong> there at that time.</li>
-<li><strong>Does</strong> he or his friends want to go?</li>
-</ol>
-</blockquote>
-<h2 id="主语中有every、each、either、neither等表示”一“的字眼时"><a href="#主语中有every、each、either、neither等表示”一“的字眼时" class="headerlink" title="主语中有every、each、either、neither等表示”一“的字眼时"></a>主语中有every、each、either、neither等表示”一“的字眼时</h2><blockquote>
-<ol>
-<li>Everybody <strong>is</strong> to report here tomorrow.</li>
-<li>Every student <strong>has</strong> several chapters to report on.</li>
-<li>Each <strong>has</strong> to make a five-minute speech.</li>
-<li>You <strong>have</strong> to make a five-minute speech each.(<em>each表示”你们“，为复数</em>)</li>
-<li>Each of you <strong>is</strong> responsible for half of the job.</li>
-</ol>
-</blockquote>
-<h2 id="主语是关系代名词时"><a href="#主语是关系代名词时" class="headerlink" title="主语是关系代名词时"></a>主语是关系代名词时</h2><p>关系代名词代表其先行词，本身没有单复数变化，做主语时要看它代表的先行词是什么。</p>
-<blockquote>
-<p>I don’t trust people who <strong>talk</strong> too much.</p>
-</blockquote>
-<p><strong>提示</strong></p>
-<p><em>talk</em>的单复数是由先行词<em>people</em>决定，第三人称为单数。</p>
-<blockquote>
-<ol>
-<li>He has three options, which <strong>look</strong> equally attractive.</li>
-<li>He has three options, which <strong>is</strong> a good thing.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<ul>
-<li>第一句：先行词为<em>three options</em>，应为复数。</li>
-<li>第二句：<em>which</em>表示前面一整个句子<em>He has three options</em>,即这一件事情，所以为单数。</li>
-</ul>
-<blockquote>
-<p>It <strong>was</strong> the Johnson boys who <strong>were</strong> here last night.</p>
-</blockquote>
-<p><strong>提示</strong><br>前面一个和主语为虚词<em>It</em>，动词依主语而定，为单数。<br>后面一个<em>who</em>从句中主语代表的先行词为<em>the Johnson boys</em>，为复数。</p>
-<h2 id="以单位做主语时"><a href="#以单位做主语时" class="headerlink" title="以单位做主语时"></a>以单位做主语时</h2><blockquote>
-<p>He makes eighty thousand dollars a year, which <strong>is</strong> a lot of money.</p>
-</blockquote>
-<p><strong>提示</strong><br><em>which</em>代表的是<em>eighty thousand dollars</em>，表示的是八万这样多的”一笔钱“，要当单数看。</p>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<p>Ten seconds <strong>is</strong> quite a record for the 100-meter dash.</p>
-</blockquote>
-<h2 id="主语后面有介系词短语时"><a href="#主语后面有介系词短语时" class="headerlink" title="主语后面有介系词短语时"></a>主语后面有介系词短语时</h2><p>一般而言，介系词不影响主语的单复数，判断一致性可不管，但有些情况需要留意。</p>
-<p><em>一般情况</em></p>
-<blockquote>
-<p>Mrs. Lindsey, together with her sons, <strong>is</strong> on a European tour.</p>
-</blockquote>
-<p><strong>提示</strong><br>主语是<em>Mrs.Lindsey</em>，主要意思是太太去旅游，所以用单数。</p>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<ol>
-<li>The use of computers in business <strong>is</strong> now almost inevitable.</li>
-<li>There <strong>is</strong> a list of things to buy in the handbag.</li>
-</ol>
-</blockquote>
-<h2 id="主语为空的字眼时"><a href="#主语为空的字眼时" class="headerlink" title="主语为空的字眼时"></a>主语为空的字眼时</h2><p>若主语为空，只表达”全部/部分“的概念，需要后面的介系词短语判断单复数。</p>
-<blockquote>
-<ol>
-<li>All of these <strong>are</strong> Lishan pears.</li>
-<li>All of the money <strong>has</strong> been spent.</li>
-</ol>
-</blockquote>
-<p><strong>提示</strong></p>
-<ul>
-<li>第一句：后接的<em>of there</em>指的是梨子，为复数。</li>
-<li>第二句：后接的<em>of the money</em>为单数。</li>
-</ul>
-<blockquote>
-<p>All but one of the pears <strong>are</strong> ripe.</p>
-</blockquote>
-<p><strong>提示</strong><br><em>but</em>否定了其后的<em>one</em>，<em>all</em>作主语，为复数。</p>
-<p><strong>类似示例</strong></p>
-<blockquote>
-<ol>
-<li>A lot of the pears <strong>are</strong> damaged.</li>
-<li>A lot of time <strong>has</strong> been wasted.</li>
-<li>Half of the pears still <strong>look</strong> good.</li>
-<li>Half of this pear <strong>is</strong> rotten.</li>
-<li>Some of the cost <strong>is</strong> in transportation.</li>
-<li>None of the pears <strong>is/are</strong> really good to eat.</li>
-</ol>
-</blockquote>
-<p><strong>a number/the number的判断</strong></p>
-<p><em>the number</em>指的是一个数字，所以是单数。<em>a number</em>为”某个数目的…”，指的是若干个可以数得出数目的东西，所以用复数。</p>
-<blockquote>
-<ol>
-<li>The number of people in the demonstration <strong>is</strong> five thousand.</li>
-<li>A number of people <strong>have</strong> brought eggs to throw.</li>
-</ol>
-</blockquote>
-<p><strong>a pair of的判断</strong></p>
-<p>若主语是<em>a pair</em>，就是<em>one pais</em>，应该用单数。</p>
-<blockquote>
-<ol>
-<li>A pair of pants <strong>is</strong> hanging on the wall.</li>
-<li>These pants <strong>are</strong> very fancy.</li>
-</ol>
-</blockquote>
-<h2 id="集合名词"><a href="#集合名词" class="headerlink" title="集合名词"></a>集合名词</h2><p>如：<em>staff</em>、<em>faculty</em>、<em>family</em>、<em>police</em>、<em>committee</em>、<em>crew</em>等，用来表示”一个单位、集团“时，要用单数动词，不加-s而用来表示单位内的”成员“时，要用复数动词。</p>
-<blockquote>
-<ol>
-<li>The committee <strong>is/are</strong> studying the proposal.</li>
-<li>The committee <strong>is</strong> five years old.</li>
-<li>The committee <strong>are</strong> mostly Republican politicians.</li>
-</ol>
-</blockquote>
-<h2 id="一些以s结尾的名词"><a href="#一些以s结尾的名词" class="headerlink" title="一些以s结尾的名词"></a>一些以s结尾的名词</h2><p>名词词尾的s未必是复数，常见学科、疾病等：</p>
-<blockquote>
-<ol>
-<li>Mathematics <strong>is</strong> my forte.</li>
-<li>Mumps primarily <strong>attacks</strong> children.</li>
-<li>Statistics <strong>was</strong> born in the gambling house.</li>
-<li>The statistics <strong>are</strong> not all accurate.<br><em>此时statistics代表一批统计数字，要用复数。</em></li>
-</ol>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">卡特兰数总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-07 09:07:52" itemprop="dateCreated datePublished" datetime="2019-12-07T09:07:52+08:00">2019-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-11 22:19:46" itemprop="dateModified" datetime="2019-12-11T22:19:46+08:00">2019-12-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="关于卡特兰数-Catalan-number-的一些小结"><a href="#关于卡特兰数-Catalan-number-的一些小结" class="headerlink" title="关于卡特兰数(Catalan number)的一些小结"></a>关于卡特兰数(Catalan number)的一些小结</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>1, 1, 2, 5, 14, 42, 132 …</p>
-<h2 id="递推关系"><a href="#递推关系" class="headerlink" title="递推关系"></a>递推关系</h2><p>卡特兰数是满足以下规律的数列：</p>
-<p>设$C_n$为第$n$个卡特兰数</p>
-<ol>
-<li>$C_n = C_0C_{n-1} + C_1C_{n-2} + … + C_{n-1}C_0$<br>  = $\sum_{i = 0}^{n-1}C_iC_{n-i}$<br>  其中$C_0 = 1$。</li>
-<li>$C_n = \binom{2n}{n} - \binom{2n}{n-1} = \binom{2n}{n}/({n+1})$ </li>
-<li>$C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">递归与动态规划总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-30 21:35:38" itemprop="dateCreated datePublished" datetime="2019-11-30T21:35:38+08:00">2019-11-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>一句话简要介绍动态规划(dynamic programming)</strong></p>
-<blockquote>
-<p>对象：<br>    求解最优化问题。<br>表现：<br>    通常要做出一组选择来达到最优解，每次选择会生成<strong>与原问题形式相同的子问题</strong>。<br>    ？<em>当多余一个选择子集都生成相同的子问题时，动态规划通常很有效。</em></p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/29/Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/29/Notes/" class="post-title-link" itemprop="url">JBIG2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-29 17:00:00" itemprop="dateCreated datePublished" datetime="2019-11-29T17:00:00+08:00">2019-11-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="JBIG2"><a href="#JBIG2" class="headerlink" title="JBIG2"></a>JBIG2</h1><hr>
-<h2 id="Model-Based-Coding"><a href="#Model-Based-Coding" class="headerlink" title="Model-Based Coding"></a>Model-Based Coding</h2><ol>
-<li>若想获得最佳的压缩结果，使用的数据模型要与实际数据相匹配。</li>
-<li>T.4 和 T.6 将每一行看作黑白像素游程的组合。</li>
-<li>为了进一步利用不同行之间的关联，二维的游程模型(MR和MMR)提供更佳的文本压缩效果。</li>
-<li>JBIG1 使用邻近的像素(模板)来预测单个像素。</li>
-<li>自适应的方式提高周期性的半色调图像的压缩表现，使用的游程模型和基于上下文的预测模型具有通用性，但是通用性影响了某些图像的压缩能力。</li>
-<li>JBIG2 并不对文件做前提性假设, 而是提取最具代表性的比特图(bitmaps): 对不同类型的文字(不同的语言文字)和图像(周期抖动, 误差扩散)更加鲁棒。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/29/Notes/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%94/" class="post-title-link" itemprop="url">数据结构(五)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-16 10:56:17" itemprop="dateCreated datePublished" datetime="2019-11-16T10:56:17+08:00">2019-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>二叉树节点</strong></p>
-<p>BinNode模板类</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BinNodePosi(T) BinNode<span class="meta-string">&lt;T&gt;* //节点位置</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stature(p) ((p) ? (p)-&gt;height : -1) <span class="comment">// 节点高度</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;RB_RED, RB_BLACK&#125; RBColor; <span class="comment">// 节点颜色</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">struct</span> <span class="title">BinNode</span>&#123;</span> <span class="comment">// 二叉树节点模板类</span></span><br><span class="line">    T data; <span class="comment">// 数值</span></span><br><span class="line">    BinNodePosi(T) parent; BinNodePosi(T) lChild; BinNodePosi(T) rChild; <span class="comment">// 父节点及其左、右孩子</span></span><br><span class="line">    <span class="keyword">int</span> height; <span class="comment">// 高度</span></span><br><span class="line">    <span class="keyword">int</span> npl; <span class="comment">// Null Path Length(左式堆)</span></span><br><span class="line">    RBColor color; <span class="comment">// 颜色（红黑树）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line">    BinNode() : parent(<span class="literal">NULL</span>), lChild(<span class="literal">NULL</span>), rChild(<span class="literal">NULL</span>), height(<span class="number">0</span>), npl(<span class="number">1</span>), color(RB_RED) &#123; &#125;</span><br><span class="line">    BinNode(T e, BinNodePosi(T) p = <span class="literal">NULL</span>, BinNodePosi(T) lc = <span class="literal">NULL</span>, BinNodePosi(T) rc = <span class="literal">NULL</span>, <span class="keyword">int</span> h = <span class="number">0</span>, <span class="keyword">int</span> l = <span class="number">1</span>, RBColor c = RB_RED) : data(e), parent(p), lChild(lc), rChild(rc), height(h), npl(l), color(c) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 操作接口</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>; <span class="comment">// 当前节点后代总数</span></span><br><span class="line">    BinNodePosi(T) insertAsLC(T <span class="keyword">const</span>&amp;) <span class="comment">// 作为当前节点的左孩子插入新节点</span></span><br><span class="line">    BinNodePosi(T) insertAsRC(T <span class="keyword">const</span>&amp;) <span class="comment">// 作为当前节点的右孩子插入新节点</span></span><br><span class="line">    BinNodePosi(T) succ(); <span class="comment">// 取当前节点的直接后继</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travLevel</span><span class="params">(VST&amp;)</span></span>; <span class="comment">// 子树层次遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPre</span><span class="params">(VST&amp;)</span></span>; <span class="comment">// 子树先序遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travIn</span><span class="params">(VST&amp;)</span></span>; <span class="comment">// 子树中序遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPost</span><span class="params">(VST&amp;)</span></span>; <span class="comment">// 子树后序遍历</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较器、判等器</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(BinNode <span class="keyword">const</span>&amp; bin)&gt; &#123;<span class="keyword">return</span> data &lt; bn.data;&#125; <span class="comment">// 小于</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(BinNode <span class="keyword">const</span>&amp; bn) &#123;<span class="keyword">return</span> data == bn.data;&#125; <span class="comment">// 等于</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>以宏的形式对基于BinNode的操作做归纳</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsRoot(x) (!((x).parent))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsLChild(x) (!IsRoot(x) &amp;&amp; (&amp;(x) == (x).parent-&gt;lChild))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsRChild(x) (!IsRoot(x) &amp;&amp; (&amp;(x) == (x).parent-&gt;rChild))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasParent(x) (!IsRoot(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasLChild(x) ((x).lChild)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasRChild(x) ((x).rChild)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasChild(x) (HasChild(x) || HasRChild(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasBothChild(x) (HasLChild(x) &amp;&amp; HasRChild(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsLeaf(x) (!HasChild(x))</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sibling(p) ( \</span></span><br><span class="line">    IsLChild(*(p)) ? \</span><br><span class="line">        (p)-&gt;parent-&gt;rChild : \</span><br><span class="line">        (p)-&gt;parent-&gt;lChild \</span><br><span class="line">) <span class="comment">// 兄弟</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uncle(x) ( \</span></span><br><span class="line">    IsChild(*((x)-&gt;parent)) ? \</span><br><span class="line">        (x)-&gt;parent-&gt;parent-&gt;rChild : \</span><br><span class="line">        (x)-&gt;parent-&gt;parent-&gt;lChild \</span><br><span class="line">) <span class="comment">// 叔叔</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FromParentTo(x) ( \</span></span><br><span class="line">    IsRoot(x) ? _root : ( \</span><br><span class="line">        IsLChild(x) ? (x).parent-&gt;lChild : (x).parent-&gt;rChild \</span><br><span class="line">    ) \</span><br><span class="line">) <span class="comment">// 来自父亲的指针</span></span><br></pre></td></tr></table></figure>
-<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p><strong>BinTree模板类</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"BinNode.h"</span></span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">BinTree</span> &#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> _size; <span class="comment">// 规模</span></span><br><span class="line">    BinNodePosi(T) _root; <span class="comment">// 根节点</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">updateHeight</span><span class="params">(BinNodePosi(T) x)</span></span>; <span class="comment">// 更新节点x的高度</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateHeightAbove</span><span class="params">(BinNodePosi(T) x)</span></span>; <span class="comment">// 更新节点x及其祖先的高度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BinTree() : _size(<span class="number">0</span>), _root(<span class="literal">NULL</span>) &#123; &#125; <span class="comment">// 构造函数</span></span><br><span class="line">    ~BinTree() &#123; <span class="keyword">if</span> (<span class="number">0</span> &lt; _size) remove(_root);&#125; <span class="comment">// 析构函数</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> _size;&#125; <span class="comment">// 规模</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> !_root;&#125; <span class="comment">// 判空</span></span><br><span class="line">    BinNodePosi(T) root() <span class="keyword">const</span> &#123; <span class="keyword">return</span> _root;&#125; <span class="comment">// 树根</span></span><br><span class="line">    BinNodePosi(T) insertAsRoot(T <span class="keyword">const</span>&amp; e); <span class="comment">// 插入根节点</span></span><br><span class="line">    BinNodePosi(T) insertAsLC(BinNodePosi(T) x, T <span class="keyword">const</span>&amp; e); <span class="comment">// e作为x的左孩子插入</span></span><br><span class="line">    BinNodePosi(T) insertAsRC(BinNodePosi(T) x, T <span class="keyword">const</span>&amp; e); <span class="comment">// e作为x的右孩子插入</span></span><br><span class="line">    BinNodePosi(T) attachAsLC(BinNodePosi(T) x, BinTree&lt;T&gt;* &amp;T); <span class="comment">// T作为x左子树接入</span></span><br><span class="line">    BinNodePosi(T) attachAsRC(BinNodePosi(T) x, BinTre&lt;T&gt;* &amp;T); <span class="comment">// T作为x的右子树接入</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">remove</span><span class="params">(BinNodePosi(T) x)</span></span>; <span class="comment">// 删除以位置x处节点为根的子树，返回该子树原先的规模</span></span><br><span class="line">    BinTree&lt;T&gt;* secede(BinNodePosi(T) x); <span class="comment">// 将子树x从当前树中摘除，并将其转换为一颗独立子树</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">travLevel</span><span class="params">(VST&amp; visit)</span> </span>&#123; <span class="keyword">if</span> (_root) _root-&gt;travLevel(visit);&#125; <span class="comment">// 层次遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">travPre</span><span class="params">(VST&amp; visit)</span> </span>&#123;<span class="keyword">if</span> (_root) _root-&gt;travPre(visit);&#125; <span class="comment">// 先序遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">travIn</span><span class="params">(VST&amp; visit)</span> </span>&#123;<span class="keyword">if</span> (_root) _root-&gt;travIn(visit);&#125; <span class="comment">// 中序遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">travPost</span><span class="params">(VST&amp; visit)</span> </span>&#123; <span class="keyword">if</span> (_root) _root-&gt;travPost(visit);&#125; <span class="comment">// 后序遍历</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//比较器、判等器</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; r._root &amp;&amp; lt(_root, t._root);&#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123;<span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root == t._root);&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/" class="post-title-link" itemprop="url">数据结构(四)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-29 20:57:25" itemprop="dateCreated datePublished" datetime="2019-10-29T20:57:25+08:00">2019-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:04" itemprop="dateModified" datetime="2019-12-10T22:10:04+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>背景介绍</strong><br>    Java的运行环境就是基于栈结构的虚拟机。<br>    网络浏览器将用户最近访问过的地址组织成一个栈，新访问的页面存放在栈顶，“后退”按钮可以沿着相反方向返回之前访问的页面。<br>    文本编辑器可以将用户的编辑操作记录在一个栈中，“撤销”功能可以返回上一个编辑记录。</p>
-<pre><code>调度银行或医院的服务窗口，管理轮耕的田地和轮伐的森林，要使用到队列。
-多进程共享CPU时间，多用户共享打印机，需要借助队列结构实现优化的分配。
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" class="post-title-link" itemprop="url">剑指Offer(二)：面试需要的基础知识</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-28 20:22:44" itemprop="dateCreated datePublished" datetime="2019-10-28T20:22:44+08:00">2019-10-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="面试官谈基础知识"><a href="#面试官谈基础知识" class="headerlink" title="面试官谈基础知识"></a>面试官谈基础知识</h1><ul>
-<li>C++: 面向对象的特性、构造函数、析构函数、动态绑定，常用的设计模式、UML图。</li>
-<li>C++: 对内存的使用和管理。</li>
-<li>1.数据结构和算法； 2.编程能力；3.概率等数学；4.问题的分析和推理能力。</li>
-<li>1.编程基础功(字符串处理)；2.并发控制；3.算法、复杂度；4.语言的基本概念。</li>
-<li>1.编程基础；2.计算机系统基础知识；3.算法及设计能力。</li>
-<li>1.对OS的理解：内存管理、文件操作、程序性能、多线程、程序安全；2.对于一门编程语言的掌握程度；3.算法和数据结构。</li>
-</ul>
-<h2 id><a href="#" class="headerlink" title></a></h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-  </div>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
-    src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">29</span>
-          <span class="site-state-item-name">posts</span>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
         </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
       </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">46</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
-  </div>
-
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
         
-
-
-
-
-
-
-
-
-
-
-
-
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-      </div>
-    </footer>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
+</aside>
 
-  
-  <script src="/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script>
-<script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script>
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">咸鱼的自我修养</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
+    <div class="container fade-scale">
+        <h1 class="title">咸鱼的自我修养</h1>
+        <h5 class="subtitle">
+            
+                咸鱼修炼日记
+            
+        </h5>
+    </div>
 
     
 
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-数据结构(一)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.953Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
   
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/">数据结构(一)：绪论</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        计算
+排序(sorting): 将n个整数按大小次序排成一个非降序列的操作。
+
+
+冒泡算法局部有序和全局有序
+
+有序序列中每一对相邻元素都是顺序的。所有相邻元素均顺序的序列，也必然整体有序。
+
+算法步骤:(通过改进局部有序性实现整体的有序)
+
+
+一趟扫描交换：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（长度为n的序列，需要n-1次比较和不超过n-1次交换）
+多次扫描：进行多次扫描交换，直到序列中不再含有任何逆序的相邻元素。
+
+
+    
+
+        <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Java编程思想(二)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.873Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/">Java编程思想(二)：一切都是对象</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        创建对象在创建一个引用的同时，必须将其与一个新的对象进行关联。可使用关键词new实现：12String s = new String();//创建一个String类型的对象s
+
+    
+
+        <a href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Java编程思想(一)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.853Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/">Java编程思想(一)：对象导论</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        对象导论抽象过程面向对象方式
+
+实质：程序通过添加新类型的对象使自身使用于某个特定问题。在阅读描述解决方案的代码的同时，也是在阅读问题的描述。OOP 是根据问题来描述问题，而不是解决方案的计算机来描述问题。
+
+    
+
+        <a href="/2019/12/11/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/" rel="tag">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Java出错汇总"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.841Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/">Java出错汇总</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Syntax error on token “;”, , expected表现1234public class test&#123;    String s;    s = "abc";&#125;
+
+原因：在class中直接定义类变量，再接着对其赋值。
+解决：建立类变量的同时进行赋值。123public class test&#123;    String s = "abc";&#125;
+
+
+    
+
+        <a href="/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%94%99%E8%AF%AF/" rel="tag">错误</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Java中方法"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.837Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/">Java中参数</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Java 中形参和实参的分析：
+首先定义一个测试类Study：1234567891011121314public class Study&#123;    int i;    int[] j = new int[2];    public void changeI()&#123;        i = 1;    &#125;     public void changeJ()&#123;        j[0] =2;    &#125;    public void changeI1(int i)&#123;        i = 3;    &#125;&#125;
+    
+
+        <a href="/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Git入门"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.833Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Git%E5%85%A5%E9%97%A8/">Git理论基础</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Git记录的是什么
+
+Git是将每个版本独立保存
+工作区域、暂存区域和Git仓库
+工作区域 (Working Directory)：日常编程时的工作目录暂存区域 (Stage (Index)): 保存改动的目录Git仓库 (Repository(HEAD)): 最终存放所有数据的位置
+
+
+
+
+Git 的工作流程
+
+在工作目录中添加、修改文件
+将需要进行版本管理的文件存放到暂存区域
+将暂存区域的文件提交到Git仓库
+
+
+Git 管理的文件有三个状态
+已修改 (modified)
+已暂存 (staged)
+已提交 (committed)
+
+    
+
+        <a href="/2019/12/11/Git%E5%85%A5%E9%97%A8/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Block Truncation Coding"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.825Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Block%20Truncation%20Coding/">Block Trunction Coding</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        IntroductionBlock Truncation Coding (BTC)是一种灰度图像(greyscale images)的有损图像压缩。
+
+BTC是将图像分割成块(blocks)，然后使用量化器(quantizer)降低每个块中的灰度级的数量并同时保留相同的均值(mean)和均方差(standard deviation)。
+
+
+    
+
+        <a href="/2019/12/11/Block%20Truncation%20Coding/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/image-compression/" rel="tag">image compression</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-主语动词一致性"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-09 15:30:00" datetime="2019-12-09T07:30:00.000Z"  itemprop="datePublished">2019-12-09</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/09/%E4%B8%BB%E8%AF%AD%E5%8A%A8%E8%AF%8D%E4%B8%80%E8%87%B4%E6%80%A7/">主语动词一致性</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        主语动词一致性主语是一个还是两个人(物)
+
+Your brother John has come to see you.
+Your brother and John have come to see you.
+
+
+提示
+
+第一句：单数的主语，要用单数的动词。
+第二句：为两个人，是复数的主语，用复数的动词。
+
+
+
+The senator and delegate wants to make an announcement.
+The senator and the delegate want to make an announcement.
+
+
+    
+
+        <a href="/2019/12/09/%E4%B8%BB%E8%AF%AD%E5%8A%A8%E8%AF%8D%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E5%A4%8D%E6%95%B0/" rel="tag">单复数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-卡特兰数总结"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-07 09:07:52" datetime="2019-12-07T01:07:52.000Z"  itemprop="datePublished">2019-12-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/">卡特兰数总结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        关于卡特兰数(Catalan number)的一些小结定义1, 1, 2, 5, 14, 42, 132 …
+递推关系卡特兰数是满足以下规律的数列：
+设$C_n$为第$n$个卡特兰数
+
+$C_n = C_0C_{n-1} + C_1C_{n-2} + … + C_{n-1}C_0$  = $\sum_{i = 0}^{n-1}C_iC_{n-i}$  其中$C_0 = 1$。
+$C_n = \binom{2n}{n} - \binom{2n}{n-1} = \binom{2n}{n}/({n+1})$ 
+$C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
+
+    
+
+        <a href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/catalan-number/" rel="tag">catalan number</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/" rel="tag">卡特兰数</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-递归与动态规划总结"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-30 21:35:38" datetime="2019-11-30T13:35:38.000Z"  itemprop="datePublished">2019-11-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/">递归与动态规划总结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一句话简要介绍动态规划(dynamic programming)
+
+对象：    求解最优化问题。表现：    通常要做出一组选择来达到最优解，每次选择会生成与原问题形式相同的子问题。    ？当多余一个选择子集都生成相同的子问题时，动态规划通常很有效。
+
+    
+
+        <a href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    </div>
+</nav>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/page/2/&title=咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/page/2/&title=咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/page/2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=咸鱼的自我修养&url=http://yoursite.com/page/2/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/page/2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/page/2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
 
 </body>
 </html>

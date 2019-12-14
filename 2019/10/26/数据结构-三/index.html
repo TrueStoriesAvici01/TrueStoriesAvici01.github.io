@@ -1,56 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    
 
-<link rel="stylesheet" href="/css/main.css">
+    
+
+    
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.4.2',
-    exturl: false,
-    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":"hide"},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
-    },
-    sidebarPadding: 40
-  };
-</script>
-
-  <meta name="description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>数据结构(三)：列表 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构,列表">
+    <meta name="description" content="循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。 循位置访问&#x2F;循链接访问（call-by-position&#x2F;call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。  从向量到列表引入列表的目的，两者差异…">
 <meta name="keywords" content="数据结构,列表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构(三)：列表">
@@ -62,171 +33,161 @@
 <meta property="og:updated_time" content="2019-12-10T14:10:05.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;insertSort.gif">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
-<link rel="canonical" href="http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
-  };
-</script>
-
-  <title>数据结构(三)：列表 | 咸鱼的自我修养</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+    <!-- custom head -->
+    
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body>
+    <div id="loading" class="active"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">咸鱼的自我修养</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
     </div>
-        <p class="site-subtitle">咸鱼修炼日记</p>
-  </div>
-
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-</div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">数据结构(三)：列表</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">数据结构(三)：列表</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-26T02:19:28.000Z" itemprop="datePublished" class="page-time">
+  2019-10-26
+</time>
 
 
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
+            
+        </h5>
+    </div>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+</header>
 
-          <div class="content">
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#从向量到列表"><span class="post-toc-number">1.</span> <span class="post-toc-text">从向量到列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#null"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"></span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态与动态"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">静态与动态</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接口"><span class="post-toc-number">2.</span> <span class="post-toc-text">接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#列表节点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">列表节点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#列表"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">列表</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#列表-1"><span class="post-toc-number">3.</span> <span class="post-toc-text">列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#头、尾节点"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">头、尾节点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#默认构造方法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">默认构造方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#通过秩指定列表节点"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">通过秩指定列表节点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查找"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">查找</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">插入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基于复制的构造"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">基于复制的构造</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#析构"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">析构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#唯一化"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">唯一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遍历"><span class="post-toc-number">3.10.</span> <span class="post-toc-text">遍历</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序列表"><span class="post-toc-number">4.</span> <span class="post-toc-text">有序列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#唯一化-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">唯一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查找-1"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">查找</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#排序器"><span class="post-toc-number">5.</span> <span class="post-toc-text">排序器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#统一入口"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">统一入口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入排序（insertionSort）"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">插入排序（insertionSort）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#选择排序（selectionSort）"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">选择排序（selectionSort）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#归并排序"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">归并排序</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-数据结构-三"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">数据结构(三)：列表</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-26 10:19:28" datetime="2019-10-26T02:19:28.000Z"  itemprop="datePublished">2019-10-26</time>
+
             
 
-  <div class="posts-expand">
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="咸鱼不翻身">
-      <meta itemprop="description" content="">
-    </span>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咸鱼的自我修养">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          数据结构(三)：列表
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-26 10:19:28" itemprop="dateCreated datePublished" datetime="2019-10-26T10:19:28+08:00">2019-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-10 22:10:05" itemprop="dateModified" datetime="2019-12-10T22:10:05+08:00">2019-12-10</time>
-              </span>
-
-          
 
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p><strong>循秩访问</strong>（call-by-rank）:<br>数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。</p>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>循秩访问</strong>（call-by-rank）:<br>数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。</p>
 <p><strong>循位置访问/循链接访问</strong>（call-by-position/call-by-link）:<br>逻辑上互为前驱和后继的元素之间维护着某种索引关系。<br>索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。</p>
 <hr>
 <h1 id="从向量到列表"><a href="#从向量到列表" class="headerlink" title="从向量到列表"></a>从向量到列表</h1><p>引入列表的目的，两者差异…</p>
@@ -393,7 +354,13 @@
 <p><strong>复杂度</strong><br>平均运行的时间复杂度为O(n)。</p>
 <hr>
 <h1 id="排序器"><a href="#排序器" class="headerlink" title="排序器"></a>排序器</h1><h2 id="统一入口"><a href="#统一入口" class="headerlink" title="统一入口"></a>统一入口</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> List&lt;T&gt;::sort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">switch</span>(rand() %<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: insertionSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>: selectionSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>: mergeSort(p, n); <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="插入排序（insertionSort）"><a href="#插入排序（insertionSort）" class="headerlink" title="插入排序（insertionSort）"></a>插入排序（insertionSort）</h2><p><strong>思路</strong>：将整个序列看作并切分为两个部分：<strong>有序的前缀</strong>，<strong>无序的后缀</strong>；经过迭代后，反复<strong>将后缀的首元素移到前缀中合适的位置</strong>。<br><img src="/.com//insertSort.gif" alt="插入排序"> </p>
+<h2 id="插入排序（insertionSort）"><a href="#插入排序（insertionSort）" class="headerlink" title="插入排序（insertionSort）"></a>插入排序（insertionSort）</h2><p><strong>思路</strong>：将整个序列看作并切分为两个部分：<strong>有序的前缀</strong>，<strong>无序的后缀</strong>；经过迭代后，反复<strong>将后缀的首元素移到前缀中合适的位置</strong>。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//insertSort.gif" alt="插入排序" title>
+                </div>
+                <div class="image-caption">插入排序</div>
+            </figure> </p>
 <p><strong>实现</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(r = <span class="number">0</span>; r &lt; n<span class="number">-1</span>; r++)&#123;<span class="comment">//自己的实现</span></span><br><span class="line">    T t = find(p-&gt;data, r, p-&gt;pred);</span><br><span class="line">    insert(p-&gt;data, t);</span><br><span class="line">    p = p-&gt;succ;<span class="comment">//！及时删除多余的节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> List&lt;T&gt;::insertionSort(ListNodePosi(T) p, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; n; r++)&#123;</span><br><span class="line">        insertAfter(search(p-&gt;data, r, p), p-&gt;data);<span class="comment">//查找到不大于待插入数据的最后一个位置，插入其后</span></span><br><span class="line">        p = p-&gt;succ;remove(p-&gt;pred);<span class="comment">//移至后一节点，删除刚刚插入的节点，顺序不能颠倒，否则导致链表断裂。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>复杂度</strong><br>    算法是由n步迭代构成的，每次迭代包含<code>查找</code>，<code>插入</code>和<code>删除</code>构成。其中<code>插入</code>和<code>删除</code>的时间复杂度为O(1)，而<code>查找</code>所需的时间在O(1)至O(n)之间，故总的平均时间复杂度为O(n^2)。</p>
@@ -413,177 +380,297 @@
 <li><strong>注</strong>：划分子列表应该保证两者长度接近等长，从而提高效率。</li>
 </ol>
 
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-10T14:10:05.023Z" itemprop="dateUpdated">2019-12-10 22:10:05</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
     </div>
-
     
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
-              <a href="/tags/%E5%88%97%E8%A1%A8/" rel="tag"># 列表</a>
-          </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/" rel="next" title="剑指Offer(一)：面试流程">
-                  <i class="fa fa-chevron-left"></i> 剑指Offer(一)：面试流程
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%97%E8%A1%A8/" rel="tag">列表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
 
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" rel="prev" title="剑指Offer(二)：面试需要的基础知识">
-                  剑指Offer(二)：面试需要的基础知识 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-      </footer>
+
+            
+<div class="page-share-wrap">
     
-  </article>
-  
-  
-  
 
-  </div>
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/&title=《数据结构(三)：列表》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/&title=《数据结构(三)：列表》 — 咸鱼的自我修养&source=循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。
+循位置访问/循链接访问（call-by-pos..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构(三)：列表》 — 咸鱼的自我修养&url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
 
 
-          </div>
-          
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
 
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从向量到列表"><span class="nav-number">1.</span> <span class="nav-text">从向量到列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态与动态"><span class="nav-number">1.2.</span> <span class="nav-text">静态与动态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表节点"><span class="nav-number">2.1.</span> <span class="nav-text">列表节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">2.2.</span> <span class="nav-text">列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表-1"><span class="nav-number">3.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#头、尾节点"><span class="nav-number">3.1.</span> <span class="nav-text">头、尾节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认构造方法"><span class="nav-number">3.2.</span> <span class="nav-text">默认构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过秩指定列表节点"><span class="nav-number">3.3.</span> <span class="nav-text">通过秩指定列表节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">3.4.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">3.5.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于复制的构造"><span class="nav-number">3.6.</span> <span class="nav-text">基于复制的构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">3.7.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#析构"><span class="nav-number">3.8.</span> <span class="nav-text">析构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一化"><span class="nav-number">3.9.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">3.10.</span> <span class="nav-text">遍历</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序列表"><span class="nav-number">4.</span> <span class="nav-text">有序列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一化-1"><span class="nav-number">4.1.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找-1"><span class="nav-number">4.2.</span> <span class="nav-text">查找</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序器"><span class="nav-number">5.</span> <span class="nav-text">排序器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#统一入口"><span class="nav-number">5.1.</span> <span class="nav-text">统一入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序（insertionSort）"><span class="nav-number">5.2.</span> <span class="nav-text">插入排序（insertionSort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序（selectionSort）"><span class="nav-number">5.3.</span> <span class="nav-text">选择排序（selectionSort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">5.4.</span> <span class="nav-text">归并排序</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="咸鱼不翻身"
-    src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">咸鱼不翻身</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">29</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">46</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
 
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-  &copy; 
-  <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">咸鱼不翻身</span>
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">剑指Offer(二)：面试需要的基础知识</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">剑指Offer(一)：面试流程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
-  </div>
 
+        <footer class="footer">
+    <div class="top">
         
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/&title=《数据结构(三)：列表》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/&title=《数据结构(三)：列表》 — 咸鱼的自我修养&source=循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。
+循位置访问/循链接访问（call-by-pos..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构(三)：列表》 — 咸鱼的自我修养&url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" alt="微信分享二维码">
+</div>
 
 
 
 
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
-
-        
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script>
-<script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
-
-  
-
-
-
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
 
 </body>
 </html>

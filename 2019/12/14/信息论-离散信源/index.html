@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>信息论(二)-离散信源及其信息测度 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="离散信源,信息论">
+    <meta name="description" content="离散信源及其信息测度信源的数学模型及分类 随机变量描述   一维离散信源  适用场景  消息数是有限或可数的 每次只输出一个消息  特点  输出为单个符号或消息,符号集有限或可数. 可用一维离散型随机变量表示.  数学模型 单符号离散型概率空间 $\begin{bmatrix} X \\ P(X) \end{bmatrix} = \begin{bmatrix} x_1 &amp;amp; x_2 &amp;amp">
+<meta name="keywords" content="离散信源,信息论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论(二)-离散信源及其信息测度">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="离散信源及其信息测度信源的数学模型及分类 随机变量描述   一维离散信源  适用场景  消息数是有限或可数的 每次只输出一个消息  特点  输出为单个符号或消息,符号集有限或可数. 可用一维离散型随机变量表示.  数学模型 单符号离散型概率空间 $\begin{bmatrix} X \\ P(X) \end{bmatrix} = \begin{bmatrix} x_1 &amp;amp; x_2 &amp;amp">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-14T13:23:17.937Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">信息论(二)-离散信源及其信息测度</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">信息论(二)-离散信源及其信息测度</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-14T08:18:19.000Z" itemprop="datePublished" class="page-time">
+  2019-12-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#离散信源及其信息测度"><span class="post-toc-number">1.</span> <span class="post-toc-text">离散信源及其信息测度</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信源的数学模型及分类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">信源的数学模型及分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离散信源的信息熵"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">离散信源的信息熵</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信息熵的基本性质和定理"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">信息熵的基本性质和定理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离散无记忆的扩展信源"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">离散无记忆的扩展信源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离散平稳信源"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">离散平稳信源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔卡夫信源"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">马尔卡夫信源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信源剩余度与自然语言的熵"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">信源剩余度与自然语言的熵</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-信息论-离散信源"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">信息论(二)-离散信源及其信息测度</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-14 16:18:19" datetime="2019-12-14T08:18:19.000Z"  itemprop="datePublished">2019-12-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="离散信源及其信息测度"><a href="#离散信源及其信息测度" class="headerlink" title="离散信源及其信息测度"></a>离散信源及其信息测度</h1><h2 id="信源的数学模型及分类"><a href="#信源的数学模型及分类" class="headerlink" title="信源的数学模型及分类"></a>信源的数学模型及分类</h2><blockquote>
+<p><strong>随机变量描述</strong></p>
+</blockquote>
+<ol>
+<li><strong>一维离散信源</strong></li>
+</ol>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>消息数是<strong>有限</strong>或<strong>可数的</strong></li>
+<li>每次只输出一个消息</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>输出为单个符号或消息,符号集有限或可数.</li>
+<li>可用一维离散型随机变量表示.</li>
+</ul>
+<p><strong>数学模型</strong></p>
+<p><em>单符号离散型概率空间</em></p>
+<p>$\begin{bmatrix} X \\ P(X) \end{bmatrix} = \begin{bmatrix} x_1 &amp; x_2 &amp; … &amp; x_n \\ p(x_1) &amp; p(x_2) &amp; … &amp; p(x_n)\end{bmatrix}$</p>
+<ol>
+<li><strong>一维连续信源</strong></li>
+</ol>
+<p><strong>数学模型</strong></p>
+<p>$\begin{bmatrix} X \\ p(x) \end{bmatrix} = \begin{bmatrix} (a,b) \\ p(x) \end{bmatrix}$</p>
+<p>满足:$\int_a^bp(x)\text{d}x = 1$</p>
+<blockquote>
+<p><strong>随机矢量描述</strong></p>
+</blockquote>
+<p><strong>适用场景</strong></p>
+<p>信源输出是一系列符号序列组成,每个符号是不确定的.</p>
+<p><strong>特点</strong></p>
+<p>消息为按一定概率选取的<strong>符号序列</strong>,时间或空间上离散的一系列随机变量.</p>
+<p><strong>表示</strong></p>
+<p>N维随机矢量$X = (X_1X_2…X_N)$, 其中N为有限整数或可数的无限值.</p>
+<ol>
+<li><strong>离散平稳信源</strong><br>$X = (X_1X_2…X_N)$,每个离散型随机变量$X_i$在<strong>任意不同的时刻分布相同</strong>.(<em>不同时刻概率分布相同</em>)</li>
+<li><strong>连续平稳信源</strong><br>$X = (X_1X_2…X_N)$,每个连续型随机变量$X_i$的<strong>概率密度函数与时间无关</strong>.</li>
+</ol>
+<p><strong>离散无记忆信源</strong></p>
+<p>随机矢量$X = (X_1X_2…X_N)$中,各离散型随机变量$X_i$之间相互独立.</p>
+<p>$P(X) = P(X_1X_2…X_N) = P(X_1)P(X_2)…P(X_N) = \prod_{i = 1}^{N}P(X_i)$</p>
+<p>特点:<br>不同时刻的符号之间相互独立.</p>
+<p><strong>离散无记忆信源X的N次扩展信源</strong></p>
+<p>离散无记忆信源X的N重空间,X本身是随机矢量</p>
+<p>$\begin{bmatrix} X^N \\ P(\alpha_i)\end{bmatrix} = \begin{bmatrix} \alpha_1 &amp; \alpha_2 &amp; … &amp; \alpha_{q^N} \\ P(\alpha_1) &amp; P(\alpha_2) &amp; … &amp; P(\alpha_{q^N}) \end{bmatrix}$</p>
+<p>满足:</p>
+<ul>
+<li><p>$\alpha_i = (a_{i_1}a_{i_2}…a_{i_N})$</p>
+</li>
+<li><p>$P(\alpha_i) = P(a_{i_1}a_{i_2}…a_{i_N} ) = \prod_{k = 1}^{N}P(a_{i_k})$</p>
+</li>
+<li><p>$\sum_{i = 1}^{N}P(\alpha_i) = 1$</p>
+</li>
+</ul>
+<p><strong>离散有记忆信源</strong></p>
+<p>离散随机序列X中,各随机变量$X_i$间是相互依赖的.</p>
+<p><strong>举例</strong></p>
+<ul>
+<li><p><em>m马尔科夫信源</em><br>记忆长度为m+1的信源,每次发出的符号只与前m个符号有关.<br>$P(x_i|…x_{i+2}x_{i+1}x_{i-1}…x_{1}) = P(x_i|…x_{i-1}x_{i-2}…x_{i-m})$</p>
+</li>
+<li><p><em>时齐马尔科夫信源</em><br>m马尔科夫信源的条件概率与时间起点i无关,则符号序列为时齐马尔科夫链,信源为时齐马尔科夫信源.</p>
+</li>
+</ul>
+<h2 id="离散信源的信息熵"><a href="#离散信源的信息熵" class="headerlink" title="离散信源的信息熵"></a>离散信源的信息熵</h2><p><strong>概率知识</strong></p>
+<ul>
+<li>$\sum_{i = 1}^n p(x_i|y_j) = 1$</li>
+<li>$\sum_{j = 1}^m\sum_{i = 1}^n p(x_iy_j) = 1$</li>
+<li>$\sum_{i = 1}^n p(x_iy_j) = p(y_j)$</li>
+<li>$p(x_iy_j) = p(x_i)p(y_j|x_i) = p(y_j)p(x_i|y_j)$</li>
+<li>当x与y相互独立时,$p(y_j|x_i) = p(y_j), p(x_iy_j) = p(x_i)p(y_j)$</li>
+<li>$p(x_i|y_j) = \frac{p(x_iy_j)}{\sum_{i=1}^np(x_iy_j)}$</li>
+</ul>
+<p><strong>信息量</strong></p>
+<p>信息量 = 不确定性的减少量 = 收到消息前的不确定性 - 收到消息后的不确定性</p>
+<p><strong>自信息</strong></p>
+<p>已知事件$x_i$发生,该事件所含的自信息为:</p>
+<p>$I(x_i) = \log \frac{1}{p(x_i)}$</p>
+<p><strong>联合自信息</strong></p>
+<p>信源模型:</p>
+<p>$\begin{bmatrix} XY \\ P(XY) \end{bmatrix} = \begin{bmatrix} x_1y_1 &amp; … &amp; x_1y_m &amp; x_2y_1 &amp; … &amp; x_2y_m &amp;… &amp; x_ny_m \\ p(x_1y_1) &amp; … &amp; p(x_1y_m) &amp; p(x_2y_1) &amp; … &amp; p(x_2y_m) &amp; … &amp; p(x_ny_m)\end{bmatrix}$</p>
+<p>联合自信息:<br>$I(x_iy_j) = \log \frac{1}{p(x_iy_j)}$</p>
+<blockquote>
+<p>若X和Y相互独立时,联合自信息为$I(x_iy_j) = \log \frac{1}{p(x_i)p(y_j)} = \log (1/p(x_i)) + \log (1/p(y_j)) = I(x_i) + I(y_j)$<br>即: 两个随机时间相互独立时,同时发生的消息量等于各自信息之和.</p>
+</blockquote>
+<p><strong>条件自信息量</strong></p>
+<p>在$y_j$条件下,发生$x_ji$的条件概率为$p(x_i|y_j)$,其条件自信息为:<br>$I(x_i|y_j) = \log \frac{1}{p(x_i|y_j)}$</p>
+<blockquote>
+<p>特定条件下($y_j$已知),随机事件$x_i$所带来的信息量</p>
+</blockquote>
+<p><strong>自信息量,条件自信息量和联合自信息量之间的关系</strong></p>
+<p>$I(x_iy_j) = \log \frac{1}{p(x_i)p(y_j|x_i)} = I(x_i) + I(y_j|x_i)=\frac{1}{p(y_j)p(x_i|y_j)} = I(y_j) + I(x_i|y_j)$</p>
+<p><strong>信息熵</strong></p>
+<p><strong>自信息的数学期望</strong>,是平均信息量.</p>
+<p>$H(X) = E[\log \frac{1}{p(x_i)}] = \sum_{i = 1}^n p(x_i) \log \frac{1}{p(x_i)}$</p>
+<p>意义:<br>从<strong>平均</strong>意义上表征信源的总体特性.</p>
+<ul>
+<li>是信源输出每个符号所提供的平均信息量.</li>
+<li>是信源的平均不确定性.</li>
+<li>表征变量X的随机性.</li>
+</ul>
+<p>信息熵大,表示:</p>
+<ul>
+<li>信源输出符号所提供的平均信息量大.</li>
+<li>信源的平均不确定性大.</li>
+<li>随机性较大. </li>
+</ul>
+<p><strong>联合熵</strong></p>
+<p>两个随机变量X,Y:</p>
+<p>$H(XY) = \sum_{x_i \in X}\sum_{y_j \in Y}p(x_iy_j) \log \frac{1}{p(x_iy_j)}$</p>
+<p><strong>意义</strong></p>
+<ul>
+<li>输入X,输出Y,双方通信后,系统存在的不确定性.</li>
+<li>信源XY存在的平均不确定性.</li>
+</ul>
+<p><strong>条件熵</strong></p>
+<p>联合符号集合XY在条件自信息的数学期望.</p>
+<p>已知Y,X的条件熵为:<br>$H(X|Y) = \sum_{j}\sum_i p(x_iy_j)I(x_i|y_j) = \sum_j \sum_i p(x_iy_j) \log \frac{1}{p(x_i|y_j)}$</p>
+<p><strong>含义</strong></p>
+<p>$H(X|Y)$表示接收到Y之后,对于X仍存在的不确定度.<br>是有噪信道传输引起的信息量的损失.</p>
+<h2 id="信息熵的基本性质和定理"><a href="#信息熵的基本性质和定理" class="headerlink" title="信息熵的基本性质和定理"></a>信息熵的基本性质和定理</h2><ol>
+<li><strong>非负性</strong><br>$H(X) \geq 0$</li>
+</ol>
+<p><em>仅限于离散信源</em></p>
+<ol>
+<li><strong>对称性</strong></li>
+</ol>
+<p>信息熵与变量的顺序无关.</p>
+<p>熵与信源的总体统计特性有关,统计特性相同,信源的熵相同.</p>
+<ol>
+<li><strong>扩展性</strong></li>
+</ol>
+<p>对原信源增加一个概率极小的符号,不会改变信源的熵.</p>
+<p>$\lim_{\epsilon \rightarrow0}H_{n+1}[p(x_1),p(x_2)…p(x_n)-\epsilon, \epsilon] = H_n[p(x_1),p(x_2),…,p(x_n)]$</p>
+<p>因为: $\lim_{\epsilon \rightarrow 0}\epsilon\log \epsilon = 0$</p>
+<ol>
+<li><strong>确定性</strong></li>
+</ol>
+<p>只要信源符号表中有一个符号的出现概率为1, 则信源的熵就等于0.</p>
+<ol>
+<li><strong>可加性</strong></li>
+</ol>
+<p>$H(XY) = H(X) + H(Y|X)$</p>
+<ol>
+<li><strong>上凸性</strong></li>
+</ol>
+<p>$H([\alpha X_1 + (1-\alpha X_2)] &gt; \alpha H(X_1) + (1-\alpha)H(X_2)$</p>
+<p>意义:<br>定义域中的极值点处为最大值,可求最大熵.</p>
+<ol>
+<li><strong>极值性</strong>(<em>香农辅助定理</em>)</li>
+</ol>
+<p>对于两个符号数相同的信源X,Y:<br>$H_n[p(x_1),p(x_2)…p(x_n)] = \sum_i p(x_i) \log \frac{1}{p(x_i)} \leq \sum_i p(x_i) \log \frac{1}{p(y_i)}$</p>
+<h2 id="离散无记忆的扩展信源"><a href="#离散无记忆的扩展信源" class="headerlink" title="离散无记忆的扩展信源"></a>离散无记忆的扩展信源</h2><h2 id="离散平稳信源"><a href="#离散平稳信源" class="headerlink" title="离散平稳信源"></a>离散平稳信源</h2><h2 id="马尔卡夫信源"><a href="#马尔卡夫信源" class="headerlink" title="马尔卡夫信源"></a>马尔卡夫信源</h2><h2 id="信源剩余度与自然语言的熵"><a href="#信源剩余度与自然语言的熵" class="headerlink" title="信源剩余度与自然语言的熵"></a>信源剩余度与自然语言的熵</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-14T13:23:17.937Z" itemprop="dateUpdated">2019-12-14 21:23:17</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" rel="tag">离散信源</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/&title=《信息论(二)-离散信源及其信息测度》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/&title=《信息论(二)-离散信源及其信息测度》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(二)-离散信源及其信息测度》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%BB%AA%E8%AE%BA/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">信息论-绪论</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/&title=《信息论(二)-离散信源及其信息测度》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/&title=《信息论(二)-离散信源及其信息测度》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(二)-离散信源及其信息测度》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
