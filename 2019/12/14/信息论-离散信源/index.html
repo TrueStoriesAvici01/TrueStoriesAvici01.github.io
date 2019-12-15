@@ -20,16 +20,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="离散信源,信息论">
+    <meta name="keywords" content="信息论,离散信源">
     <meta name="description" content="离散信源及其信息测度信源的数学模型及分类 随机变量描述   一维离散信源  适用场景  消息数是有限或可数的 每次只输出一个消息  特点  输出为单个符号或消息,符号集有限或可数. 可用一维离散型随机变量表示.  数学模型 单符号离散型概率空间 $\begin{bmatrix} X \\ P(X) \end{bmatrix} = \begin{bmatrix} x_1 &amp;amp; x_2 &amp;amp">
-<meta name="keywords" content="离散信源,信息论">
+<meta name="keywords" content="信息论,离散信源">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息论(二)-离散信源及其信息测度">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90&#x2F;index.html">
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="离散信源及其信息测度信源的数学模型及分类 随机变量描述   一维离散信源  适用场景  消息数是有限或可数的 每次只输出一个消息  特点  输出为单个符号或消息,符号集有限或可数. 可用一维离散型随机变量表示.  数学模型 单符号离散型概率空间 $\begin{bmatrix} X \\ P(X) \end{bmatrix} = \begin{bmatrix} x_1 &amp;amp; x_2 &amp;amp">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-14T13:23:17.937Z">
+<meta property="og:updated_time" content="2019-12-15T09:54:34.596Z">
 <meta name="twitter:card" content="summary">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -336,7 +336,122 @@
 <li><strong>极值性</strong>(<em>香农辅助定理</em>)</li>
 </ol>
 <p>对于两个符号数相同的信源X,Y:<br>$H_n[p(x_1),p(x_2)…p(x_n)] = \sum_i p(x_i) \log \frac{1}{p(x_i)} \leq \sum_i p(x_i) \log \frac{1}{p(y_i)}$</p>
-<h2 id="离散无记忆的扩展信源"><a href="#离散无记忆的扩展信源" class="headerlink" title="离散无记忆的扩展信源"></a>离散无记忆的扩展信源</h2><h2 id="离散平稳信源"><a href="#离散平稳信源" class="headerlink" title="离散平稳信源"></a>离散平稳信源</h2><h2 id="马尔卡夫信源"><a href="#马尔卡夫信源" class="headerlink" title="马尔卡夫信源"></a>马尔卡夫信源</h2><h2 id="信源剩余度与自然语言的熵"><a href="#信源剩余度与自然语言的熵" class="headerlink" title="信源剩余度与自然语言的熵"></a>信源剩余度与自然语言的熵</h2>
+<p><em>证明:条件熵小于信息熵:$H(X|Y) \leq H(X)$, $H(Y|X) \leq H(Y)$</em></p>
+<ol>
+<li><strong>最大离散熵定理</strong></li>
+</ol>
+<p>离散无记忆信源输出n个不同的符号,当且仅当各个符号出现概率相等时,熵最大.</p>
+<p>$H[p(x_1),…,p(x_n)] \leq H(\frac{1}{n},…,\frac{1}{n}) = \log n$</p>
+<h2 id="离散无记忆的扩展信源"><a href="#离散无记忆的扩展信源" class="headerlink" title="离散无记忆的扩展信源"></a>离散无记忆的扩展信源</h2><p><strong>多符号离散平稳信源</strong></p>
+<p>随机矢量X中随机变量的各维联合概率分布不随时间的推移变化,概率分布与时间起点无关.</p>
+<h2 id="离散平稳信源"><a href="#离散平稳信源" class="headerlink" title="离散平稳信源"></a>离散平稳信源</h2><ol>
+<li><strong>离散平稳无记忆信源</strong></li>
+<li><strong>离散平稳有记忆信源</strong></li>
+</ol>
+<blockquote>
+<p><strong>离散平稳无记忆信源</strong></p>
+</blockquote>
+<p><strong>概念</strong></p>
+<ol>
+<li>随机变量序列的长度是有限的</li>
+<li>各符号之间是统计独立的</li>
+<li>各随机变量概率分布相同</li>
+</ol>
+<p><strong>数学模型</strong></p>
+<p>对于离散无记忆信源$X = \{x_1…x_n\}$,其输出消息序列用一组长度为N的序列表示.新信源输出的符号是N长的序列,用N维离散随机矢量表示:<br>$a_i = (x_{i_1},…,x_{i_N})$<br>每个分量$x_{i_k}$都是取自X的随机变量,分量之间统计独立.<br>新信源称为<strong>离散无记忆信源X的N次扩展信源</strong>.</p>
+<p><strong>离散平稳无记忆信源的熵</strong></p>
+<p>N次扩展信源的熵:<br>$H(\mathbf{X}) = H(X^N) =-\sum_{X^N}P(X)\log P(X) = NH(X)$</p>
+<blockquote>
+<p><strong>离散平稳有记忆信源</strong></p>
+</blockquote>
+<ol>
+<li><strong>一维平稳信源</strong></li>
+<li><strong>二维平稳信源</strong></li>
+<li><strong>离散平稳信源</strong></li>
+</ol>
+<p><strong>一维平稳信源</strong></p>
+<p>任意两个不同时刻,信源发出的符号的概率分布完全相同.</p>
+<p><strong>二维平稳信源</strong></p>
+<p>不同时刻,信源发出符号的概率分布相同,且联合概率分布$P(X_iX_{i+1})$与时间无关,则信源任何时刻发出两个符号的概率完全相同.</p>
+<p>数学模型:</p>
+<ul>
+<li>每两个符号看成一组.</li>
+<li>每组中后一个符号与前一个符号有<strong>统计关联</strong>, 这种概率关系与时间无关.</li>
+<li>各组之间是统计独立的.</li>
+</ul>
+<p>信息熵:</p>
+<p>$H(\mathbf{X}) = H(X_1X_2) = H(X_1) + H(X_2|X_1)$<br>    <em>两个有依赖的随机变量$X_1$和$X_2$组成的随机矢量的联合熵等于第一随机变量的熵加上第一个随机变量已知下,第二个随机变量的条件熵.</em><br>    <em>当两个随机变量相互独立时,$H(\mathbf{X})= H(X_1) + H(X_2)$</em></p>
+<p><strong>离散平稳信源</strong></p>
+<p>各维联合概率分布与时间无关,则称为<strong>离散平稳信源</strong>.</p>
+<blockquote>
+<p><strong>离散无记忆信源</strong>的二次扩展信源是二维<strong>离散平稳信源</strong>的特例<br>由$H(X_2|X_1) \leq H(X_2) \rightarrow H(X_2X_1) \leq H(X_1) + H(X_2)$. 即: <strong>二维离散平稳有记忆信源的熵小于等于二维平稳无记忆信源的熵</strong>.</p>
+<p>N维离散平稳有记忆信源的消息熵:<br>$H(\mathbf{X}) = H(X_1) + H(X_2|X_1) + H(X_3|X_1X_2) + … + H(X_N|X_1X_2…X_{N-1})$<br>多符号离散平稳有记忆信源X的熵H(X)是X中起始时刻随机变量$X_1$的熵和各阶条件熵之和,与起始时刻无关.</p>
+<p>离散平稳有记忆信源的极限熵</p>
+<ul>
+<li><strong>非递增性</strong><br>$H(X_N|X_1X_2…X_{N-1}) \leq H(X_{N-1}|X_1…X_{N-2})$</li>
+<li><strong>平均符号熵和条件熵的关系</strong><br>矢量熵$H(\mathbf{X}) = H(X_1X_2…X_N)$(联合熵)<br>平均符号熵: 信源平均每发一个符号所提供的信息量:$H_N(\mathbf{X})=\frac{1}{N}H(\mathbf{X})=\frac{1}{N}H(X_1X_2..X_N)$<br>N给定,平均符号熵$\geq$条件熵:$H_N(\mathbf{X}) \geq H(X_N|X_1X_2…X_{N-1})$</li>
+<li><strong>极限熵</strong><br>当$N\rightarrow \infty$时,平均符号熵去极限为<strong>极限熵</strong>:<br>$H_\infty = \lim_{N\rightarrow \infty}\frac{1}{N}H(X_1X_2…X_N)$<br>含义:代表一般离散平稳有记忆信源平均每发出一个符号所提供的信息量<br>计算:常用条件熵或平均符号熵作为极限熵的近似值.</li>
+</ul>
+</blockquote>
+<h2 id="马尔卡夫信源"><a href="#马尔卡夫信源" class="headerlink" title="马尔卡夫信源"></a>马尔卡夫信源</h2><p><strong>定义</strong></p>
+<ol>
+<li>状态与符号:</li>
+</ol>
+<p>一类信源,输出的符号序列中,各符号之间的依赖关系是有限的,任何时刻信源符号发生的概率只与前面已发生的若干符号(状态)有关.</p>
+<p>信源输出的符号还与信源所处的状态有关: 每个时刻信源发出一个符号后,所处的状态将发生转移.</p>
+<ol>
+<li>时齐马尔科夫链:</li>
+</ol>
+<p>一步转移概率: 状态转移概率$p_l(e_j|e_i) = p(S_l = e_j|S_{l-1})$为马尔科夫链在时刻l的状态一步转移概率.</p>
+<p>若状态转移概率与时刻无关: $p_l(x_k|e_i) = p(x_k|e_i)$,则称为时齐或其次的.</p>
+<ol>
+<li>马尔科夫信源: </li>
+</ol>
+<p>某一时刻信源符号的输出只与此刻信源所处的状态有关,与以前的状态无关；信源所处的状态由以前的输出符号和前一时刻信源的状态唯一确定.</p>
+<ol>
+<li>状态转移图: </li>
+</ol>
+<p>圈代表一个状态,状态之间的有向线代表不同状态之间的转移.</p>
+<ol>
+<li>矩阵表示:</li>
+</ol>
+<p>信源在$e_i$状态下发出符号$x_k$的条件概率$p(x_k|e_i)$用矩阵表示:其中第i行第j列表示在状态$e_i$下发出符号$x_j$的概率.</p>
+<ol>
+<li>结论:</li>
+</ol>
+<ul>
+<li>有记忆信源用符号间的联合概率表示关联性.</li>
+<li>马尔科夫信源用状态之间的转移概率描述关联性.</li>
+<li>转移概率取决于当前输出符号与前面符号之间的关联性.</li>
+</ul>
+<p><strong><em>m</em> 阶马尔科夫信源</strong></p>
+<p>m阶有记忆离散信源的状态: 任何时刻l,符号发出的概率只与前m个符号有关.</p>
+<ol>
+<li><p>数学模型<br>$\begin{bmatrix}X \\ P(X_{m+1}|X_1…X_m)\end{bmatrix} = \begin{bmatrix}x_1,x_2,…,x_n \\  p(x_{k_{m+1}}|x_{k_1}…x_{k_m}) \end{bmatrix}$</p>
+</li>
+<li><p>条件概率(考虑平稳性)<br>$p(x_{k_N}|x_{k_1}…x_{k_{N-1}}) = p(x_{k_N}|x_{k_{N-m}}…x_{k_{N-1}}) = p(x_{k_{m+1}}| x_{k_1}…x_{k_m})$</p>
+</li>
+<li><p>极限熵<br>$H_\infty = \lim_{N\rightarrow \infty} H(X_N|X_1X_2…X_{N-1}) = H(X_{m+1}|X_1…X_m)$<br>$H_\infty = H_{m+1} = \sum_i \sum_j p(e_i)p(e_j|e_i) \log p(e_j|e_i)$<br>其中$p(e_i)$是稳定后的状态极限概率,$p(e_j|e_i)$是一步转移概率.<br><em>$p(e_i)$的求解</em>:<strong>有限齐次马尔科夫链各态历经定理</strong><br>对于有限齐次马尔科夫链,若存在一个正整数$l_0$,使得经过$l_0$步,从任意一个状态$e_i$转移任意一个状态$e_j$的转移概率$p_{l_0}(e_j|e_i) &gt; 0$,则称为各态历经的.其状态极限概率:$\lim_{l\rightarrow \infty} p_l(e_j|e_i) = p(e_j)$<br>注: $H_\infty$只有当状态极限概率$p(e_j)$都存在时存在.$p(e_i) = \sum_i p(e_i)p(e_j|e_i)$</p>
+</li>
+</ol>
+<h2 id="信源剩余度与自然语言的熵"><a href="#信源剩余度与自然语言的熵" class="headerlink" title="信源剩余度与自然语言的熵"></a>信源剩余度与自然语言的熵</h2><p><strong>实际信源的近似</strong></p>
+<ol>
+<li>实际信源近似为平稳信源</li>
+<li>离散平稳信源近似为马尔科夫信源</li>
+</ol>
+<p><strong>信源的冗余度</strong></p>
+<ul>
+<li>$H_\infty$是实际信源熵,难计算,用$H_{m+1}$替代.</li>
+<li><strong>信源熵的相对率$\eta$</strong>: 衡量符号之间的相互依赖程度.为:实际信息熵与同符号数的最大熵的比值$\eta = H_\infty/H_0$.</li>
+<li><strong>信源冗余度$\xi$</strong>:$\xi = 1 - \eta = (H_0 - H_\infty)/H_0$</li>
+<li><strong>信息结构(信息变差)$I_{0\infty}$</strong>: $I_{0\infty} = H_0 - H_\infty$.$I_{0\infty}$越大,冗余度越大,符号间的依赖程度越大.</li>
+</ul>
+<p><strong>通信效率与可靠性的关系</strong></p>
+<ul>
+<li>信源编码: 通过减少冗余度提高通信效率.</li>
+<li>信道编码: 通过增加冗余度来提高通信的抗干扰能力,提高通信的可靠性.</li>
+</ul>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -344,7 +459,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-14T13:23:17.937Z" itemprop="dateUpdated">2019-12-14 21:23:17</time>
+    Last updated: <time datetime="2019-12-15T09:54:34.596Z" itemprop="dateUpdated">2019-12-15 17:54:34</time>
 </span><br>
 
 
@@ -421,7 +536,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/15/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">图的基本操作</h4>
+      </a>
+    </div>
   
 
   

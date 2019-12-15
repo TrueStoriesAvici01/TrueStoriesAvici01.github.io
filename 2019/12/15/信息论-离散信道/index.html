@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>信息论(三)-离散信道及其信道容量 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="信息论,信道,平均互信息,信道容量">
+    <meta name="description" content="离散信道及其信道容量信道的数学模型及分类信道: 输入集合与输出集合间的映射关系.输入和输出是统计依赖关系 数学模型 $\{X\ P(Y|X)\ Y\}$ 分类:  输入输出随机信号的特点:   离散信道 连续信道 半离散&#x2F;半连续信道 波形信道   输入输出随机变量个数   单符号信道 离散无记忆扩展信道(多符号信道)    输入输出个数   单用户信道 多用户信道   信道上有无干扰   有干扰信">
+<meta name="keywords" content="信息论,信道,平均互信息,信道容量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论(三)-离散信道及其信道容量">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;15&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="离散信道及其信道容量信道的数学模型及分类信道: 输入集合与输出集合间的映射关系.输入和输出是统计依赖关系 数学模型 $\{X\ P(Y|X)\ Y\}$ 分类:  输入输出随机信号的特点:   离散信道 连续信道 半离散&#x2F;半连续信道 波形信道   输入输出随机变量个数   单符号信道 离散无记忆扩展信道(多符号信道)    输入输出个数   单用户信道 多用户信道   信道上有无干扰   有干扰信">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-15T13:46:17.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">信息论(三)-离散信道及其信道容量</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">信息论(三)-离散信道及其信道容量</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-15T09:56:24.000Z" itemprop="datePublished" class="page-time">
+  2019-12-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#离散信道及其信道容量"><span class="post-toc-number">1.</span> <span class="post-toc-text">离散信道及其信道容量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信道的数学模型及分类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">信道的数学模型及分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#平均互信息及平均条件互信息"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">平均互信息及平均条件互信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#平均互信息的特性"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">平均互信息的特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信道容量及其一般计算方法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">信道容量及其一般计算方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离散无记忆扩展信道及其信道容量"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">离散无记忆扩展信道及其信道容量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#独立并联信道及其信道容量"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">独立并联信道及其信道容量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#串联信道的互信息和数据处理定理"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">串联信道的互信息和数据处理定理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信源与信道的匹配"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">信源与信道的匹配</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-信息论-离散信道"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">信息论(三)-离散信道及其信道容量</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-15 17:56:24" datetime="2019-12-15T09:56:24.000Z"  itemprop="datePublished">2019-12-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="离散信道及其信道容量"><a href="#离散信道及其信道容量" class="headerlink" title="离散信道及其信道容量"></a>离散信道及其信道容量</h1><h2 id="信道的数学模型及分类"><a href="#信道的数学模型及分类" class="headerlink" title="信道的数学模型及分类"></a>信道的数学模型及分类</h2><p>信道: 输入集合与输出集合间的映射关系.<br><em>输入和输出是统计依赖关系</em></p>
+<p><strong>数学模型</strong></p>
+<p>$\{X\ P(Y|X)\ Y\}$</p>
+<p><strong>分类</strong>:</p>
+<ol>
+<li>输入输出随机信号的特点:</li>
+</ol>
+<ul>
+<li>离散信道</li>
+<li>连续信道</li>
+<li>半离散/半连续信道</li>
+<li>波形信道</li>
+</ul>
+<ol>
+<li>输入输出随机变量个数</li>
+</ol>
+<ul>
+<li>单符号信道</li>
+<li>离散无记忆扩展信道(多符号信道) </li>
+</ul>
+<ol>
+<li>输入输出个数</li>
+</ol>
+<ul>
+<li>单用户信道</li>
+<li>多用户信道</li>
+</ul>
+<ol>
+<li>信道上有无干扰</li>
+</ol>
+<ul>
+<li>有干扰信道</li>
+<li>无干扰信道</li>
+</ul>
+<ol>
+<li>信道有无记忆特性</li>
+</ol>
+<ul>
+<li>无记忆信道</li>
+<li>有记忆信道</li>
+</ul>
+<p><strong>单符号离散信道</strong></p>
+<p>信道模型:</p>
+<blockquote>
+<p><strong>输入</strong>: $X\in \{x_1,x_2,…,x_n\}$<br><strong>输出</strong>: $Y\in\{y_1,y_2,…,y_m\}$<br><strong>信道模型</strong>: $p(y_j|x_i)$<br>其中: $\sum_jP(y_j|x_i) = 1$, $\sum_i P(x_i)P(y_j|x_i) = \sum_iP(x_iy_j) = P(y_j)$</p>
+</blockquote>
+<p>信道统计特性:</p>
+<blockquote>
+<p><strong>统计特性</strong>: 信道转移概率.<br><strong>信道转移概率</strong>: 条件概率$p(y_j|x_i)$<br><strong>信道特性表示</strong>: 信道转移概率矩阵(信道矩阵)(<em>第i行第j列代表输入为$x_i$,输出为$y_j$的转移概率</em>)<br><em>反信道矩阵:条件概率$p(x_i|y_j)$</em></p>
+</blockquote>
+<p><strong>离散信道分类</strong></p>
+<ol>
+<li>无干扰信道</li>
+<li>有干扰无记忆信道</li>
+<li>有干扰有记忆信道</li>
+</ol>
+<p>无干扰信道:<br>输出Y和输入X之间是一一对应的.<br>$y = f(x)$, $p(y|x) =\begin{cases}1 &amp;\  y = f(x)\\ 0 &amp;\  y \neq f(x)\end{cases}$</p>
+<p>有干扰无记忆信道:<br>有干扰: 信道输出符号与输入符号之间无一一对应关系.<br>无记忆: 任意时刻输出符号只与对应时刻的输入符号有关.<br>$P(y|x) = P(y_1y_2…y_N|x_1x_2…x_N) = P(y_1|x_1)P(y_2|x_2)…P(y_N|x_N)$</p>
+<p>有干扰无记忆信道:<br>处理方式:</p>
+<ul>
+<li>将记忆性强的N个符号看作一个矢量符号,各矢量符号之间是无记忆的.</li>
+<li>马尔科夫链.</li>
+</ul>
+<h2 id="平均互信息及平均条件互信息"><a href="#平均互信息及平均条件互信息" class="headerlink" title="平均互信息及平均条件互信息"></a>平均互信息及平均条件互信息</h2><p><strong>平均互信息量</strong></p>
+<p>先验概率: 信源发出$x_i$的概率$p(x_i)$.<br>后验概率: 信宿收到$y_i$后推测发出$x_i$的概率:$p(x_i|y_j)$</p>
+<ol>
+<li><strong>互信息量</strong>: 后验概率与先验概率比值的对数.<br>$I(x_i;y_j) = \log\frac{p(x_i|y_j)}{p(x_i)} = I(x_i) - I(x_i|y_j)$<br><em>互信息量: 已知$y_j$后,消除$x_i$的不确定性的量</em>.<br>性质:<br>对称性:$I(x_i;y_j) = I(y_j;x_i)$<br>X和Y相互独立时: $I(x_i;y_j) = 0$<br>互信息量可正可负可零:<br>正:后验大于先验;<br>负:后验小于先验;<br>零:后验等于先验,两个随机事件相互独立.</li>
+<li><strong>条件互信息量</strong>:<br>$x_i$与$y_jz_k$之间的互信息量:<br>$I(x_i;y_jz_k) = \log \frac{p(x_i|y_jz_k)}{p(x_i)}$<br>条件互信息: 在给定$z_k$条件下,$x_i$与$y_j$之间的互信息量:<br>$I(x_i;y_j|z_k) = \log \frac{p(x_i|y_jz_k)}{p(x_i|z_k)}$<br>则$x_i$和$y_jz_k$的互信息量:<br>$I(x_i;y_jz_k) = I(x_i;z_k) + I(x_i;y_j|z_k)$<br>说明: 联合事件$y_jz_k$发生给$x_i$提供的信息量,等于$z_k$发生后提供关于$x_i$的信息量与给定$z_k$之后再出现$y_j$所提供关于$x_i$的信息量之和.</li>
+<li><strong>平均互信息量</strong></li>
+</ol>
+<h2 id="平均互信息的特性"><a href="#平均互信息的特性" class="headerlink" title="平均互信息的特性"></a>平均互信息的特性</h2><h2 id="信道容量及其一般计算方法"><a href="#信道容量及其一般计算方法" class="headerlink" title="信道容量及其一般计算方法"></a>信道容量及其一般计算方法</h2><h2 id="离散无记忆扩展信道及其信道容量"><a href="#离散无记忆扩展信道及其信道容量" class="headerlink" title="离散无记忆扩展信道及其信道容量"></a>离散无记忆扩展信道及其信道容量</h2><h2 id="独立并联信道及其信道容量"><a href="#独立并联信道及其信道容量" class="headerlink" title="独立并联信道及其信道容量"></a>独立并联信道及其信道容量</h2><h2 id="串联信道的互信息和数据处理定理"><a href="#串联信道的互信息和数据处理定理" class="headerlink" title="串联信道的互信息和数据处理定理"></a>串联信道的互信息和数据处理定理</h2><h2 id="信源与信道的匹配"><a href="#信源与信道的匹配" class="headerlink" title="信源与信道的匹配"></a>信源与信道的匹配</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-15T13:46:17.000Z" itemprop="dateUpdated">2019-12-15 21:46:17</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E9%81%93/" rel="tag">信道</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E9%81%93%E5%AE%B9%E9%87%8F/" rel="tag">信道容量</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B3%E5%9D%87%E4%BA%92%E4%BF%A1%E6%81%AF/" rel="tag">平均互信息</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/&title=《信息论(三)-离散信道及其信道容量》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/&title=《信息论(三)-离散信道及其信道容量》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(三)-离散信道及其信道容量》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/15/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">图的基本操作</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/&title=《信息论(三)-离散信道及其信道容量》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/&title=《信息论(三)-离散信道及其信道容量》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(三)-离散信道及其信道容量》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
