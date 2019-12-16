@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="离散信道及其信道容量信道的数学模型及分类信道: 输入集合与输出集合间的映射关系.输入和输出是统计依赖关系 数学模型 $\{X\ P(Y|X)\ Y\}$ 分类:  输入输出随机信号的特点:   离散信道 连续信道 半离散&#x2F;半连续信道 波形信道   输入输出随机变量个数   单符号信道 离散无记忆扩展信道(多符号信道)    输入输出个数   单用户信道 多用户信道   信道上有无干扰   有干扰信">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-15T13:46:17.000Z">
+<meta property="og:updated_time" content="2019-12-16T11:41:28.277Z">
 <meta name="twitter:card" content="summary">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -253,9 +253,129 @@
 <ol>
 <li><strong>互信息量</strong>: 后验概率与先验概率比值的对数.<br>$I(x_i;y_j) = \log\frac{p(x_i|y_j)}{p(x_i)} = I(x_i) - I(x_i|y_j)$<br><em>互信息量: 已知$y_j$后,消除$x_i$的不确定性的量</em>.<br>性质:<br>对称性:$I(x_i;y_j) = I(y_j;x_i)$<br>X和Y相互独立时: $I(x_i;y_j) = 0$<br>互信息量可正可负可零:<br>正:后验大于先验;<br>负:后验小于先验;<br>零:后验等于先验,两个随机事件相互独立.</li>
 <li><strong>条件互信息量</strong>:<br>$x_i$与$y_jz_k$之间的互信息量:<br>$I(x_i;y_jz_k) = \log \frac{p(x_i|y_jz_k)}{p(x_i)}$<br>条件互信息: 在给定$z_k$条件下,$x_i$与$y_j$之间的互信息量:<br>$I(x_i;y_j|z_k) = \log \frac{p(x_i|y_jz_k)}{p(x_i|z_k)}$<br>则$x_i$和$y_jz_k$的互信息量:<br>$I(x_i;y_jz_k) = I(x_i;z_k) + I(x_i;y_j|z_k)$<br>说明: 联合事件$y_jz_k$发生给$x_i$提供的信息量,等于$z_k$发生后提供关于$x_i$的信息量与给定$z_k$之后再出现$y_j$所提供关于$x_i$的信息量之和.</li>
-<li><strong>平均互信息量</strong></li>
+<li><strong>平均互信息量</strong><br><strong>定义</strong><br>互信息量在联合概率空间中的统计平均值（交互熵）<br>$I(X;Y) = \sum_i\sum_j p(x_iy_j) = \sum_i\sum_j p(x_iy_j) \log \frac{p(x_i|y_j)}{p(x_i)}$<br><strong>物理含义</strong><br>输出端：$I(X;Y) = H(X) - H(X|Y)$<br>其中$H(X)$：X的先验不确定性/无条件熵；$H(X|Y)$：信道疑义度/损失熵，收到Y后对X的后验不确定度。$I(X;Y)$：从Y获得的关于X的平均信息量。<br>输入端：$I(Y;X) = H(Y) - H(Y|X)$<br>其中$H(Y|X)$：噪声熵：发出X后，对Y的平均不确定度；$I(Y;X)$：发出X前后Y的先验不确定度减少量。<br>系统总体：$I(X;Y) = H(X) + H(Y) - H(XY)$<br>$H(XY)$：通信后，系统仍存在的不确定度。</li>
+<li><strong>平均条件互信息</strong><br>$I(X;Y|Z) = H(X|Z) - H(X|YZ)$<br>已知Z条件下，每收到Y后获得的关于X的信息量，等于已知Z下X的平均信息量减去已知YZ同时发生，X的平均信息量。</li>
 </ol>
-<h2 id="平均互信息的特性"><a href="#平均互信息的特性" class="headerlink" title="平均互信息的特性"></a>平均互信息的特性</h2><h2 id="信道容量及其一般计算方法"><a href="#信道容量及其一般计算方法" class="headerlink" title="信道容量及其一般计算方法"></a>信道容量及其一般计算方法</h2><h2 id="离散无记忆扩展信道及其信道容量"><a href="#离散无记忆扩展信道及其信道容量" class="headerlink" title="离散无记忆扩展信道及其信道容量"></a>离散无记忆扩展信道及其信道容量</h2><h2 id="独立并联信道及其信道容量"><a href="#独立并联信道及其信道容量" class="headerlink" title="独立并联信道及其信道容量"></a>独立并联信道及其信道容量</h2><h2 id="串联信道的互信息和数据处理定理"><a href="#串联信道的互信息和数据处理定理" class="headerlink" title="串联信道的互信息和数据处理定理"></a>串联信道的互信息和数据处理定理</h2><h2 id="信源与信道的匹配"><a href="#信源与信道的匹配" class="headerlink" title="信源与信道的匹配"></a>信源与信道的匹配</h2>
+<h2 id="平均互信息的特性"><a href="#平均互信息的特性" class="headerlink" title="平均互信息的特性"></a>平均互信息的特性</h2><blockquote>
+<p><strong>对称性</strong><br>$I(X;Y) = I(Y;X)$</p>
+<p><strong>非负性</strong><br>$I(X;Y) \leq 0$<br><em>平均互信息量表示从一件事件中提取另外一件事件的信息，最坏情况下为两件事件无关，从一件事件中不能得知关于另外一件事件的任何信息。</em></p>
+<p><strong>极值性</strong><br>$I(X;Y) \leq H(X)\\ I(Y;X) \leq H(Y)$</p>
+<p><strong>凸函数性</strong><br>$I(X;Y) = \sum_i\sum_j p(x_i)p(y_j|x_i) \log \frac{p(y_j|x_i)}{p(y_j)} = \sum_i\sum_j p(x_i)p(y_j|x_i) \log \frac{p(y_j|x_i)}{\sum_i p(x_i)p(y_j|x_i)}$<br><strong>平均互信息量$I(X;Y)$是输入信源概率分布$p(x_i)$的上凸函数，平均互信息量$I(X;Y)$是输入转移概率分布$p(y_j|x_i)$的下凸函数</strong><br>固定信道时：输入等概率分布时，接收端获得最大信息量。<br>固定信源时：当$p(y_j|x_i)=1/2$时，接收端获得最小的信息量。</p>
+<p><strong>数据处理定理</strong><br>串联信道：$X\rightarrow P(Y|X)(信道1) \rightarrow Y \rightarrow P(Z|Y)(信道2) \rightarrow Z$<br>数据处理定理：消息经过多级处理，输入消息与输出消息之间的平均互信息量趋于变少。</p>
+</blockquote>
+<h2 id="信道容量及其一般计算方法"><a href="#信道容量及其一般计算方法" class="headerlink" title="信道容量及其一般计算方法"></a>信道容量及其一般计算方法</h2><blockquote>
+<p>功能：以信号形式传输和存储信息。<br>定义：传输消息的媒介或通信。<br>随机性：变换是随机的。<br>描述：条件转移概率表示。<br>意义：信道中平均每个字符传达的信息量（信道的信息传输率）</p>
+</blockquote>
+<p><strong>定义</strong><br>信道的信息传输率：$R = I(X;Y) = H(X) - H(X|Y)$(比特/符号)<br>是信源无条件概率$p(x_i)$和信道转移概率$p(y_j|x_i)$的二元函数：<br>$I(X;Y) = \sum_i \sum_j p(x_i)p(y_j|x_i) \log \frac{p(y_j|x_i)}{\sum_i p(x_i)p(y_j|x_i)}$<br>当信道特性$p(y_j|x_i)$固定时，存在一个$p(x_i)$，使得信道能够传送的信息率最大。</p>
+<p>信道容量C：信道中最大的信息传输率。$C = \max_{p(x_i)}R = \max_{p(x_i)} I(X;Y)$（比特/信道符号）<br>单位时间的信道容量$C_t$：信道平均传输一个符号要t秒，单位时间信道容量为$C_t = 1/t \max_{p(x_i)}I(X;Y)$</p>
+<p><strong>离散无噪信道的信道容量</strong></p>
+<blockquote>
+<p>具有一一对应关系的无噪信道（无噪无损信道）</p>
+<ol>
+<li>已知X或接收Y后对应的Y或X没有不确定性。</li>
+<li>$I(X;Y) = H(X) = H(Y)$</li>
+<li>信源等概率分布时，信道达到信道容量：$C = \max_{p(x_i)}I(X;Y) = \max_{p(x_i)}H(X) = \log n$</li>
+</ol>
+<p>具有扩展性的无损信道（有噪无损信道）</p>
+</blockquote>
+<ol>
+<li>输入X的符号集个数小于输出Y的符号集个数。</li>
+<li>每列只有一个非零元素，已知Y后，X不再有任何不确定度。</li>
+<li>$I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X) = H(X)$</li>
+<li>$H(X|Y) = 0,\ H(Y|X) &gt; 0,\ H(X) &lt; H(Y)$</li>
+</ol>
+<blockquote>
+<p>具有归并性能的无噪信道（无噪有损信道）</p>
+</blockquote>
+<ol>
+<li>输入X的符号集大于输出Y的符号集个数</li>
+<li>每行只有一个非零元素，已知一个x后，对应的y完全确定。</li>
+<li>$I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X) = H(Y)$</li>
+<li>$H(Y|X) = 0,\ H(X|Y) &gt; 0$</li>
+</ol>
+<p><strong>强对称离散信道的信道容量</strong></p>
+<blockquote>
+<p><strong>概念</strong></p>
+</blockquote>
+<p>单符号离散信道X和Y的取值均由n个不同符号组成，每个符号的正确传递概率为：$\overline{p} = 1-p$，其他(n-1)个符号的错误传递概率为：$\frac{p}{n-1}$。</p>
+<p>信道矩阵：<br>$P_{n\times n} = \begin{bmatrix} \overline{p} &amp; \frac{p}{n-1} &amp; … &amp; \frac{p}{n-1}\\<br>\frac{p}{n-1} &amp; \overline{p} &amp; … &amp; \frac{p}{n-1}\\<br>…\\<br>\frac{p}{n-1} &amp; \frac{p}{n-1} &amp; … &amp; \overline{p}\end{bmatrix}$</p>
+<blockquote>
+<p><strong>信道矩阵的特点</strong></p>
+</blockquote>
+<p>$I(X;Y) = H(Y) - H(Y|X)$</p>
+<p>$H(Y|X) = -\sum_i\sum_j p(x_i)p(y_j|x_i) \log p(y_j|x_i) = \sum_i p(x_i)H_{ni}$</p>
+<p>$H_{ni} = -\sum_jp(y_j|x_i) \log p(y_j|x_i)$是固定$X = x_i$时对Y求和，是与X无关的常数。</p>
+<p>$H(Y|X) = H_{ni}$</p>
+<p>$I(X;Y) = H(Y) - H_{ni}$</p>
+<p>$C = \max_{p(x_i)}[H(Y) - H_{ni}]$</p>
+<blockquote>
+<p><strong>信道容量</strong></p>
+</blockquote>
+<p>一种输入分布使得$H(Y)$取得最大值，由输出为n个符号，则其等概率分布时，$H(Y)$最大。</p>
+<p>由$\begin{bmatrix} p(y_1)\\ p(y_2) \\ …\\ p(y_n)\end{bmatrix} = \begin{bmatrix} \overline{p} &amp; \frac{p}{n-1} &amp; … &amp; \frac{p}{n-1}\\<br>\frac{p}{n-1} &amp; \overline{p} &amp; … &amp; \frac{p}{n-1}\\<br>…\\<br>\frac{p}{n-1} &amp; \frac{p}{n-1} &amp; … &amp; \overline{p}\end{bmatrix} \begin{bmatrix} p(x_1) \\ p(x_2) \\ … \\ p(x_n) \end{bmatrix}$</p>
+<p>可知：当输入符号X为等概率分布时，输出Y为等概率分布，此时最大。</p>
+<p>信道容量：<br>$C = \log n - H_{ni} = \log n + \overline{p}\log \overline{p} + p\log \frac{p}{n-1}$</p>
+<blockquote>
+<p><strong>二级制均匀信道</strong></p>
+</blockquote>
+<p>n=2的强对称离散信道是二级制均匀信道。<br>信道容量：$C = 1 + \overline{p}\log \overline{p} + p\log p = 1-H(p)$</p>
+<p><strong>对称离散信道的信道容量</strong></p>
+<blockquote>
+<p><strong>可排列性</strong></p>
+</blockquote>
+<p>行（列）可排列：矩阵的每一行（列）是同一个集合的不同排列。<br>矩阵可排列：矩阵的行和列都是可排列的。</p>
+<blockquote>
+<p><strong>定义</strong></p>
+</blockquote>
+<p>对称离散信道：信道矩阵具有可排列性。</p>
+<blockquote>
+<p><strong>信道容量</strong></p>
+</blockquote>
+<p>$I(X;Y) = H(Y) - H(Y|X) = H(Y) + \sum_i\sum_j p(x_i)p(y_j|x_i) \log p(y_j|x_i) = H(Y) - \sum_ip(x_i) H_{mi}$</p>
+<p>由于每一行是相同元素集的排列，则$H_{mi}$与输入X无关，则$H(Y|X) = H_{mi}$</p>
+<p>信道容量：<br>$C = \max_{p(x_i)} [H(Y) - H_{mi}] = \log m - H(q_1,…,q_m)$</p>
+<p><strong>准对称离散信道的信道容量</strong></p>
+<blockquote>
+<p><strong>定义</strong><br>一个n行m列单符号离散信道矩阵，行可排列，列不可排列，矩阵m列可分成不相交的子集，子集具有可排列性。<br><strong>信道容量</strong><br>$C = \log r - H(q_1,q_2,…,q_m) - \sum_k N_k\log M_k$<br>其中：$N_k = \sum_{y\in Y_k}p(y|x_i),\ M_k = \sum_X p(y_j|x),\ y_j \in Y_k$,$N_k$是第k个子矩阵中行元素之和，$M_k$是第k个子矩阵中列元素之和。</p>
+</blockquote>
+<p><strong>离散信道容量的一般计算方法</strong></p>
+<blockquote>
+<p><strong>离散信道容量的一般计算方法</strong></p>
+<ol>
+<li>由$\sum_j p(y_j|x_i)\beta_j = \sum_j p(y_j|x_i) \log p(y_j|x_i)$,求得$\beta_j$.</li>
+<li>由$C = \log (\sum_i 2^{\beta_j})$,求C.</li>
+<li>由$p(y_j) = 2^{\beta_j-C}$,求$p(y_j)$.</li>
+<li>由$p(y_j) = \sum_i p(x_i)p(y_j|x_i)$,求$p(x_i)$.</li>
+</ol>
+</blockquote>
+<h2 id="离散无记忆扩展信道及其信道容量"><a href="#离散无记忆扩展信道及其信道容量" class="headerlink" title="离散无记忆扩展信道及其信道容量"></a>离散无记忆扩展信道及其信道容量</h2><p><strong>定义</strong><br>多符号离散信源在N个不同的时刻分别通过单符号离散信道,输出端输出随机矢量,形成一个新的信道,称为多符号离散信道.<br>为单符号离散信道的N次扩展信道.</p>
+<p>N次扩展信道的输入符号数由r种扩展为$r^N$,输出符号数由s种扩展到$s^N$种.</p>
+<p>构成N次扩展信道的传递矩阵<br>$P(\mathbf{Y}|\mathbf{X}) = P(Y_1Y_2…Y_N|X_1X_2…X_N)$<br>在输入消息为$\alpha_k$下,输出消息为$\beta_h$的传递概率:$P(\beta_h|\alpha_k) = P(b_{h_1}b_{h_2}…b_{h_N}|a_{k_1}a_{k_2}…a_{k_N})$</p>
+<p><strong>离散无记忆信道的N次扩展信道</strong></p>
+<p>若N次无记忆扩展信道的传递概率满足:<br>$P(\mathbf{Y}|\mathbf{X}) = P(Y_1Y_2…Y_N|X_1X_2…X_N) = \prod_k P(Y_k|X_k)$,则该单符号离散信道称为离散无记忆信道,对应的N次扩展信道称为<strong>离散无记忆信道的N次扩展信道</strong>.</p>
+<p>离散无记忆N次扩展信道的信道容量$C^N = N \times C$</p>
+<p>两个定理:</p>
+<ol>
+<li>若信道的输入随机序列是X,通过信道传输,接收的随机序列是Y.假设<strong>信道是无记忆</strong>的,即信道转移概率满足$P(\mathbf{Y}|\mathbf{X}) = \prod_k P(Y_k|X_k)$,则存在: $I(\mathbf{X};\mathbf{Y}) \leq \sum_i I(X_i;Y_i)$</li>
+<li>若信道的输入随机序列是X,通过信道传输,接收到的随机序列为Y,信道的传输概率为$P(Y|X)$,假设<strong>信道是有记忆</strong>的,则存在$I(\mathbf{X};\mathbf{Y}) \geq \sum_i I(X_i;Y_i)$</li>
+</ol>
+<p>结论:若<strong>信源</strong>和<strong>信道</strong>都是<strong>无记忆</strong>的,则有<br>$I(\mathbf{X};\mathbf{Y}) = \sum_i I(X_i;Y_i)$.<br>对于离散无记忆信道的N次扩展信道而言,若<strong>信源是无记忆的</strong>,则有$I(\mathbf{X};\mathbf{Y}) = NI(X;Y)$.</p>
+<h2 id="独立并联信道及其信道容量"><a href="#独立并联信道及其信道容量" class="headerlink" title="独立并联信道及其信道容量"></a>独立并联信道及其信道容量</h2><p>联合平均互信息不大于各自信道的平均互信息之和. 独立并联信道的信道容量:<br>$C_{1,2…N} = \max_{p(x_1x_2…x_N)}I(X_1…X_N;Y_1…Y_N) \leq \sum_i C_i$<br>$C_i = \max_{p(x_i)}I(X_i;Y_i)$</p>
+<p>结论: 独立并联信道的信道容量不大于各个信道的信道容量之和,只有当输入符号相互独立时,且输入符号的概率分布达到各信道容量的最佳输入分布时,独立并联信道的信道容量才等于各信道容量之和.</p>
+<h2 id="串联信道的互信息和数据处理定理"><a href="#串联信道的互信息和数据处理定理" class="headerlink" title="串联信道的互信息和数据处理定理"></a>串联信道的互信息和数据处理定理</h2><p>若后一个信道的传递概率只与其输入有关,与前一个信道的输入无关:<br>$p(z|yx) = p(z|y)$,<br>则称这两信道的输入输出x,y,z序列构成马尔科夫链.</p>
+<p>这两个串联信道可以等价与一个信道,输入是x,输出是z,转移概率为:<br>$(z|x) = \sum_y P(y|x)P(z|xy)$</p>
+<p>总信道的传递概率:$P(z|x) = \sum_Y P(y|x)P(z|y)$</p>
+<p><strong>串联信道的两个定理</strong></p>
+<ol>
+<li>$I(XY;Z) \geq I(Y;Z)$,当且仅当$P(Z|XY) = P(Z|Y)时等式成立.</li>
+<li>若X,Y,Z组成一个马尔科夫链,则有<br>$I(X;Z) \leq I(X;Y)$<br>$I(X;Z) \leq I(Y;Z)$</li>
+</ol>
+<h2 id="信源与信道的匹配"><a href="#信源与信道的匹配" class="headerlink" title="信源与信道的匹配"></a>信源与信道的匹配</h2><p><strong>定义</strong><br>对于某个信源,若使得信道的信息传输率达到了信道容量,称此信源与信道达到匹配.否则认为有剩余.</p>
+<p><strong>信道剩余度</strong><br>$ = C - I(X;Y)$</p>
+<p><strong>信道相对剩余度</strong><br>$ = \frac{C - I(X;Y)}{C} = 1 - \frac{I(X;Y)}{C}$</p>
+<p><strong>无损信道的相对剩余度</strong><br>$ = 1-\frac{H(X)}{\log r}$</p>
+<p><strong>香农无失真信源编码理论</strong><br>将信源输出的信息变换成适合信道传输的新信源符号来传输.使新信源的符号接近等概率分布,新信源的熵接近最大熵,从而使信道传输的信息量达到最大,信道剩余度接近零.</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -263,7 +383,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-15T13:46:17.000Z" itemprop="dateUpdated">2019-12-15 21:46:17</time>
+    Last updated: <time datetime="2019-12-16T11:41:28.277Z" itemprop="dateUpdated">2019-12-16 19:41:28</time>
 </span><br>
 
 
@@ -340,7 +460,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/16/LaTeX%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">LaTeX常用命令小结</h4>
+      </a>
+    </div>
   
 
   

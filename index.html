@@ -153,6 +153,104 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-信息论-无失真信源编码"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-16 19:42:32" datetime="2019-12-16T11:42:32.000Z"  itemprop="datePublished">2019-12-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">信息论-无失真信源编码</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        无失真信源编码定理编码器实质
+编码:对信源的原始符号按一定规则进行变换.
+目的
+使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性.
+定义
+从信源符号到码符号的一种映射.
+将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:$C = \{W_1,…,W_q\}$...
+    
+
+        <a href="/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%98%E9%95%BF%E7%A0%81/" rel="tag">变长码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AD%89%E9%95%BF%E7%A0%81/" rel="tag">等长码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E5%99%A8/" rel="tag">编码器</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-LaTeX常用命令小结"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-16 15:57:02" datetime="2019-12-16T07:57:02.000Z"  itemprop="datePublished">2019-12-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/16/LaTeX%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/">LaTeX常用命令小结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        LaTeX常用命令小结写在前面本文记录常用的LaTeX命令，常常回顾，加深印象。
+符号类$\overline{p}$:1\overline&#123;p&#125;
+
+    
+
+        <a href="/2019/12/16/LaTeX%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LaTeX/" rel="tag">LaTeX</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-信息论-离散信道"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -256,12 +354,16 @@ $\{X\ P(Y|X)\ Y\}$
 
     
         图的基本操作以下以图的邻接表形式存储
-深度优先搜索
-首先访问一个节点v,然后在v的邻接链表中选择一个节点w,继续进行深度优先搜索.
-当前的访问访问节点v入栈保存.
-若遇到一个节点u,其邻接链表的节点都访问过,则从栈中弹出该节点; 若该节点已经被访问,则忽略该节点; 否则访问该节点并入栈.
+深度优先搜索核心思想
+刨根问底，不撞南墙不回头，撞了南墙少回头，没头可回就结束。
+实现
 
+一个栈用来保存图中的节点。
+对栈的顶端的节点进行判断，若有未访问的邻居，则访问该邻居，并将其入栈。若没有未访问的邻居，则该节点出栈。
+栈为空时则结束。
 
+深度优先搜索伪代码：
+123456789101112131415161718public void DepthF...
     
 
         <a href="/2019/12/15/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="post-more waves-effect waves-button">
@@ -589,116 +691,6 @@ The destination end system reassmbled into the original data.
     <div class="post-footer">
         
 	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-数据结构与抽象(四)"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-12-11 10:25:19" datetime="2019-12-11T02:25:19.013Z"  itemprop="datePublished">2019-12-11</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/">数据结构与抽象(四)：泛型</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Background使用Java没有定义的类类型，可以使用泛型(generic)，定义一个类，其对象的数据类型是由使用者决定。
-泛型数据类型当定义一个实例可能保存不同数据集合的类时，不需要给出对象的具体数据类型，而是使用泛型数据类型替代实际的数据类型。
-实现
-
-在类或接口的定义中写一个占位符，该占位符就是泛型数据类型(generic data type),简称：泛型(generic type...
-    
-
-        <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/" rel="tag">泛型</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-数据结构与抽象(二)"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-12-11 10:25:19" datetime="2019-12-11T02:25:19.001Z"  itemprop="datePublished">2019-12-11</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/">数据结构与抽象(二)：设计类</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        设计类封装封装：将数据和方法放在一个类中，隐藏类实现的细节，不需要知道类定义的内部细节，只需要知道如何为方法提供相应的参数，让方法执行正确的动作。
-抽象(abstract)：关注是什么而不是如何的过程。
-封装将类定义分成两个部分:
-
-
-客户接口(client interface): 
-
-类的公有方法的方法头
-类中公有命名常量
-
-
-
-实现(implementation): 所有数据域和所有方法的定义组成
-
-私有数据域
-私有常量
-所有的方法定义
-    
-
-        <a href="/2019/12/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li></ul>
 
     </div>
     

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>信息论-无失真信源编码 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="信息论,编码器,等长码,变长码">
+    <meta name="description" content="无失真信源编码定理编码器实质 编码:对信源的原始符号按一定规则进行变换. 目的 使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性. 定义 从信源符号到码符号的一种映射. 将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:$C = \{W_1,…,W_q\}$$s_">
+<meta name="keywords" content="信息论,编码器,等长码,变长码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论-无失真信源编码">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;16&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="无失真信源编码定理编码器实质 编码:对信源的原始符号按一定规则进行变换. 目的 使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性. 定义 从信源符号到码符号的一种映射. 将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:$C = \{W_1,…,W_q\}$$s_">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-16T14:31:36.606Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">信息论-无失真信源编码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">信息论-无失真信源编码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-16T11:42:32.000Z" itemprop="datePublished" class="page-time">
+  2019-12-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无失真信源编码定理"><span class="post-toc-number">1.</span> <span class="post-toc-text">无失真信源编码定理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编码器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">编码器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#等长码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">等长码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变长码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">变长码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-信息论-无失真信源编码"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">信息论-无失真信源编码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-16 19:42:32" datetime="2019-12-16T11:42:32.000Z"  itemprop="datePublished">2019-12-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="无失真信源编码定理"><a href="#无失真信源编码定理" class="headerlink" title="无失真信源编码定理"></a>无失真信源编码定理</h1><h2 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h2><p><strong>实质</strong></p>
+<p>编码:对信源的原始符号按一定规则进行变换.</p>
+<p><strong>目的</strong></p>
+<p>使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性.</p>
+<p><strong>定义</strong></p>
+<p>从信源符号到码符号的一种映射.</p>
+<p>将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:<br>$C = \{W_1,…,W_q\}$<br>$s_i \leftrightarrow W_i = (x_{i_1},x_{i_2},…,x_{i_{l_i}})$<br>或者:<br>$\alpha_i = (s_{i_1}s_{i_2}…s_{i_N})\leftrightarrow W_i = (x_{i_1},x_{i_2},…,x_{i_{l_i}})$<br>$W_i$为码字,$l_i$为码长.</p>
+<p><strong>各种码的定义</strong></p>
+<blockquote>
+<p><strong>二元码</strong><br>码符号集为$X = \{0,1\}$,所有码字都是二元序列.</p>
+<p><strong>同价码</strong><br>码符号集$X:\{x_1,x_2,…,x_r\}中每个码符号x所占的传输时间相同.</p>
+<p><strong>等长码</strong><br>一组码中所有码长都相等,则为等长码.</p>
+<p><strong>变长码</strong><br>码中码字长短不一.</p>
+<p><strong>非奇异码</strong><br>一组码中的所有码字都不相同:<br>$s_i \neq s_j \leftrightarrow W_i \neq W_j$</p>
+<p><strong>奇异码</strong><br>一组码中有相同的码字,即:<br>$s_i \neq s_j$,但存在$W_i = W_j$</p>
+<p><strong>码的N次扩展码</strong><br>码C的N次扩展码是所有N个码字组成的码字序列的集合:<br>若码$C = \{W_1,W_2…W_q\}$<br>则N次扩展码为:<br>$B = \{B_i = \{W_{i_1},W_{i_2}…W_{i_N}\}|i_1,…,i_N = 1,…,q\}$<br>即: 从原码字中可重复的选取N个码字进行组合得到的新码字.</p>
+<p><strong>唯一可译码</strong><br>若码的任意一串有限长的码符号序列,只能被唯一的译成所对应的信源符号序列,则称为唯一可译码.<br><em>唯一可译码可分为<strong>非即时码</strong>和<strong>即时码</strong></em>.<br><em>非即时码:接收端收到一个完整的码字后,不能立即译码,而等下一码字开始接收后才判断是否可以译码.</em><br><em>即时码:任意一个码字都不是其他码字的前缀部分.</em></p>
+</blockquote>
+<p><strong>基本概念</strong></p>
+<blockquote>
+<p><strong>码树</strong></p>
+</blockquote>
+<p>若码字序列符号为m进制,可用m个符号的码树来构造码字,每个码树有一个树根A,树根有m个分支,树枝的尽头称为叶节点,中间每个节点生出的树枝的数量等于码符号的数量m,形成m进制码树.</p>
+<blockquote>
+<p><strong>平均码长</strong></p>
+</blockquote>
+<p>编码后,每个信源符号平均所需的码元个数.<br>信源为:$\begin{bmatrix} X\\ P(X)\end{bmatrix} = \begin{bmatrix} x_1 &amp; x_2 &amp; … &amp; x_q \\ P(x_1) &amp; P(x_2) &amp; … &amp; p(x_q) \end{bmatrix}$,若对应的码字长度为$k_i$,则平均码长为$\overline{k} = \sum_i P(x_i)k_i$</p>
+<blockquote>
+<p><strong>码率</strong></p>
+</blockquote>
+<p>编码后信息传输率R,指编码后每个码元载荷的信息量:<br>$R = \frac{H(x)}{\overline{K}}$(比特/码元)<br>$H(x)$: 信源熵;<br>$\overline{k}$: 平均码长.</p>
+<blockquote>
+<p><strong>编码效率</strong></p>
+</blockquote>
+<p>编码后每个码元的实际信息量和能承载的最大信息量的比值.</p>
+<p>假设码元为m进制,即可取m种可能值,则每个码元所能承载的最大信息量为$\log m$比特/码元,编码效率:<br>$\eta = \frac{R}{R_{max}} = \frac{\frac{H(x)}{\overline{K}}}{\log m}$</p>
+<blockquote>
+<p><strong>克劳夫特(Kraft)不等式</strong></p>
+</blockquote>
+<p>唯一可译码存在的充要条件:<br>各码字的长度$k_i$应满足:<br>$\sum_{i=1}^n m^{-k_i} \leq 1$<br>注: m进制的码字,n个信源符号</p>
+<p><strong>注</strong>: 唯一可译码一定满足克劳夫特不等式,满足克拉夫特不等式的码不一定是唯一可译码.</p>
+<h2 id="等长码"><a href="#等长码" class="headerlink" title="等长码"></a>等长码</h2><p><strong>特点</strong></p>
+<p>所有的码的码长都相等.</p>
+<p><strong>无失真信源编码条件</strong>:</p>
+<ul>
+<li>信源符号与码符号序列一一对应.</li>
+<li>信源的任意N次扩展也应该是唯一可译码.</li>
+</ul>
+<h2 id="变长码"><a href="#变长码" class="headerlink" title="变长码"></a>变长码</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-16T14:31:36.606Z" itemprop="dateUpdated">2019-12-16 22:31:36</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%98%E9%95%BF%E7%A0%81/" rel="tag">变长码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AD%89%E9%95%BF%E7%A0%81/" rel="tag">等长码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E5%99%A8/" rel="tag">编码器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/16/LaTeX%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LaTeX常用命令小结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
