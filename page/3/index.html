@@ -153,6 +153,167 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Java出错汇总"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.841Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/">Java出错汇总</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Syntax error on token “;”, , expected表现1234public class test&#123;    String s;    s = "abc";&#125;
+
+原因：在class中直接定义类变量，再接着对其赋值。
+解决：建立类变量的同时进行赋值。123public class test&#123;    String s = "abc";&#125;
+
+
+    
+
+        <a href="/2019/12/11/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%94%99%E8%AF%AF/" rel="tag">错误</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Java中方法"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.837Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/">Java中参数</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Java 中形参和实参的分析：
+首先定义一个测试类Study：1234567891011121314public class Study&#123;    int i;    int[] j = new int[2];    public void changeI()&#123;        i = 1;    &#125;     public void changeJ()&#123;        j[0] =2;    &#125;    public void changeI1(int i)&#123;        i = 3;    &#125;&#125;
+    
+
+        <a href="/2019/12/11/Java%E4%B8%AD%E6%96%B9%E6%B3%95/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Git入门"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-11 10:25:18" datetime="2019-12-11T02:25:18.833Z"  itemprop="datePublished">2019-12-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/11/Git%E5%85%A5%E9%97%A8/">Git理论基础</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Git记录的是什么
+
+Git是将每个版本独立保存
+工作区域、暂存区域和Git仓库
+工作区域 (Working Directory)：日常编程时的工作目录暂存区域 (Stage (Index)): 保存改动的目录Git仓库 (Repository(HEAD)): 最终存放所有数据的位置
+
+
+
+
+Git 的工作流程
+
+在工作目录中添加、修改文件
+将需要进行版本管理的文件存放到暂存区域
+将暂存区域的文件提交到Git仓库
+
+
+Git 管理的文件有三个状态
+已修改 (modified)
+已暂存 (staged)
+已提交 (committed)
+
+    
+
+        <a href="/2019/12/11/Git%E5%85%A5%E9%97%A8/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Block Truncation Coding"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -503,159 +664,6 @@ BinNode模板类
     <div class="post-footer">
         
 	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%9F%E5%88%97/" rel="tag">队列</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-剑指Offer-二"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-28 20:22:44" datetime="2019-10-28T12:22:44.000Z"  itemprop="datePublished">2019-10-28</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/">剑指Offer(二)：面试需要的基础知识</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        面试官谈基础知识
-C++: 面向对象的特性、构造函数、析构函数、动态绑定，常用的设计模式、UML图。
-C++: 对内存的使用和管理。
-1.数据结构和算法； 2.编程能力；3.概率等数学；4.问题的分析和推理能力。
-1.编程基础功(字符串处理)；2.并发控制；3.算法、复杂度；4.语言的基本概念。
-1.编程基础；2.计算机系统基础知识；3.算法及设计能力。
-1.对OS的理解：内存管理、文件操作、程序性能、多线程、程序安全；2.对于一门编程语言的掌握程度；3.算法和数据结构。
-
-
-    
-
-        <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87offer/" rel="tag">剑指offer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-数据结构-三"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 10:19:28" datetime="2019-10-26T02:19:28.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">数据结构(三)：列表</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。
-循位置访问/循链接访问（call-by-position/call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。
-
-从向量到列表引入列表的目的，两者差异…
-
-    
-
-        <a href="/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%97%E8%A1%A8/" rel="tag">列表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-剑指Offer-一"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 07:44:46" datetime="2019-10-25T23:44:46.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/">剑指Offer(一)：面试流程</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        面试官谈面试
-初级程序员：考查算法与数据结构；高级程序员：关注专业技能和项目经验。
-准备：公司近况，项目情况有所了解；准备好合适的问题问面试官。
-面试：不要紧张；了解清楚所解决的问题；做一些整体的设计与规划；不要马上提交，测试用例检查代码；
-
-
-面试的3种形式流程电话面试 -&gt; （共享桌面远程面试） -&gt; 现场面试
-    
-
-        <a href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87offer/" rel="tag">剑指offer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
 
     </div>
     

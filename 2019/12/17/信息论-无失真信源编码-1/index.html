@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>信息论(五)-无失真信源编码 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="信息论,无失真信源编码,香农编码,费诺编码,哈夫曼编码">
+    <meta name="description" content="无失真信源编码香农编码离散无记忆信源：$\begin{bmatrix}x_1 &amp;amp; x_2 &amp;amp; … &amp;amp; x_n \\ p(x_1) &amp;amp; p(x_2) &amp;amp; … &amp;amp; p(x_n) \end{bmatrix}, \sum_i p(x_i) = 1$$l_i = \lceil \log \frac{1}{p(s_i)} \rceil,\ i = 1,2,…,q">
+<meta name="keywords" content="信息论,无失真信源编码,香农编码,费诺编码,哈夫曼编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论(五)-无失真信源编码">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;17&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="无失真信源编码香农编码离散无记忆信源：$\begin{bmatrix}x_1 &amp;amp; x_2 &amp;amp; … &amp;amp; x_n \\ p(x_1) &amp;amp; p(x_2) &amp;amp; … &amp;amp; p(x_n) \end{bmatrix}, \sum_i p(x_i) = 1$$l_i = \lceil \log \frac{1}{p(s_i)} \rceil,\ i = 1,2,…,q">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-17T09:23:51.431Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">信息论(五)-无失真信源编码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">信息论(五)-无失真信源编码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-17T02:41:33.000Z" itemprop="datePublished" class="page-time">
+  2019-12-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无失真信源编码"><span class="post-toc-number">1.</span> <span class="post-toc-text">无失真信源编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#香农编码"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">香农编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#费诺编码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">费诺编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#哈夫曼编码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">哈夫曼编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LZ码"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">LZ码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-信息论-无失真信源编码-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">信息论(五)-无失真信源编码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-17 10:41:33" datetime="2019-12-17T02:41:33.000Z"  itemprop="datePublished">2019-12-17</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="无失真信源编码"><a href="#无失真信源编码" class="headerlink" title="无失真信源编码"></a>无失真信源编码</h1><h2 id="香农编码"><a href="#香农编码" class="headerlink" title="香农编码"></a>香农编码</h2><p>离散无记忆信源：<br>$\begin{bmatrix}x_1 &amp; x_2 &amp; … &amp; x_n \\ p(x_1) &amp; p(x_2) &amp; … &amp; p(x_n) \end{bmatrix}, \sum_i p(x_i) = 1$<br>$l_i = \lceil \log \frac{1}{p(s_i)} \rceil,\ i = 1,2,…,q$<br>$\overline{L} &lt; H_r(S)+1$,<br>r：码元符号数</p>
+<p>注：<br>只有当码源符号概率分布按$(\frac{1}{r})^{a_i}$时，$\overline{L}$才能达到极限值$H_r(S)$.</p>
+<p><strong>编码步骤</strong></p>
+<ol>
+<li>按信源符号的概率从大到小的顺序排序，设$p(x_1) \geq p(x_2) \geq … \geq p(x_n)$.</li>
+<li>设$p(x_0) = 0$,用$p_a(x_j),\ j = i + 1$表示第i个码字的累加概率$p_a(x_j) = \sum_{i = 1}^{j-1}p(x_i)$.</li>
+<li>$-\log_2 p(x_i) \leq k_i &lt;1-\log_2 p(x_i)$.</li>
+<li>把$p_a(x_i)$用二进制数表示，用小数点后的$k_i$位作为$x_i$的码字.</li>
+</ol>
+<h2 id="费诺编码"><a href="#费诺编码" class="headerlink" title="费诺编码"></a>费诺编码</h2><p><strong>编码步骤</strong></p>
+<ol>
+<li>按信源符号的概率从大到小的顺序排序，设$p(x_1) \geq p(x_2) \geq … \geq p(x_n)$.</li>
+<li>对概率按m（码符号数）进行分组，使每组概率尽可能相等.</li>
+<li>给每个分组分配一个码元.</li>
+<li>对每个分组重复2、3步，直到不可分为止.</li>
+</ol>
+<h2 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><p><strong>编码步骤</strong></p>
+<ol>
+<li>将信源符号按概率由大到小顺序排队.</li>
+<li>给两个概率最小的符号各分配一个码位，将其概率相加后合并作为一个新的符号，与剩下的符号一起，再重新排序.</li>
+<li>给缩减信源中概率最小的符号各分配一个码元.</li>
+<li>重复步骤2、3直到概率和为1.</li>
+</ol>
+<p><strong>注</strong></p>
+<ol>
+<li>两个最小符号分配0或1是任意的，只要<strong>每次缩减信源中保持码元分配的一致性</strong>.</li>
+<li>新符号概率与其他符号概率相同，符号次序可以任意排序，但得到的码字不同.</li>
+<li>一般将合并的概率放前，获得较小的码方差.</li>
+<li>进行哈夫曼编码时，为了得到码方差最小的码（各个码字长度接近相等），应使合并的信源符号位于缩减信源序列尽可能高的位置上，以减少再次合并的次数。</li>
+</ol>
+<h2 id="LZ码"><a href="#LZ码" class="headerlink" title="LZ码"></a>LZ码</h2><p>设：<br>信源符号集$S = \{s_1,s_2,…,s_1\}$,输入信源符号序列为$u = u_1u_2…u_L \ (u_i\in S)$</p>
+<p><strong>编码规则</strong></p>
+<ol>
+<li>分段：将符号序列u分成小段。（<em>分段原则：各小段尽可能短，且各不相同，分成的小段称为短语，短语总数为：$M(u)$</em>）</li>
+<li>依次对个短语编号：号码称为该短语的<strong>段号</strong>。</li>
+<li>对每个短语编码：码字 = 除最后一个符号后的短语段号编码 + 最后一符号的编码。单符号的段号码码字为0.<br>(<em>如编为二进制码，则段号需要的长度为：$n = \lceil \log M(u) \rceil$,每个符号编码需要的长度为：$\lceil \log q \rceil$</em>).</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-17T09:23:51.431Z" itemprop="dateUpdated">2019-12-17 17:23:51</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" rel="tag">哈夫曼编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" rel="tag">无失真信源编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%B9%E8%AF%BA%E7%BC%96%E7%A0%81/" rel="tag">费诺编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A6%99%E5%86%9C%E7%BC%96%E7%A0%81/" rel="tag">香农编码</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/&title=《信息论(五)-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/&title=《信息论(五)-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(五)-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">信息论(六)-有噪信道编码</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">信息论(四)-无失真信源编码</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/&title=《信息论(五)-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/&title=《信息论(五)-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(五)-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

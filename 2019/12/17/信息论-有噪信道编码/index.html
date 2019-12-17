@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>信息论(六)-有噪信道编码 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="信息论,有噪信道编码定理">
+    <meta name="description" content="有噪信道编码定理背景 信道总是存在噪声，在有噪信道中进行无措传输可以达到的最大信息传输率。 信道编码对象 信源编码器输出的数字序列（信息序列）。 信源经过等长编码，码符号往往等概率分布，可认为信道编码的信源为等概率出现。 错误概率和编码规则有噪信道的错误概率与：  信道统计特性有关，可由信道的转移矩阵描述。 错误概率与译码准则。  译码准则：离散单符号信道的输入符号集为$A = \{a_i\},\">
+<meta name="keywords" content="信息论,有噪信道编码定理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论(六)-有噪信道编码">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;17&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="有噪信道编码定理背景 信道总是存在噪声，在有噪信道中进行无措传输可以达到的最大信息传输率。 信道编码对象 信源编码器输出的数字序列（信息序列）。 信源经过等长编码，码符号往往等概率分布，可认为信道编码的信源为等概率出现。 错误概率和编码规则有噪信道的错误概率与：  信道统计特性有关，可由信道的转移矩阵描述。 错误概率与译码准则。  译码准则：离散单符号信道的输入符号集为$A = \{a_i\},\">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-17T10:44:40.212Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">信息论(六)-有噪信道编码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">信息论(六)-有噪信道编码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-17T06:14:03.000Z" itemprop="datePublished" class="page-time">
+  2019-12-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有噪信道编码定理"><span class="post-toc-number">1.</span> <span class="post-toc-text">有噪信道编码定理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误概率和编码规则"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">错误概率和编码规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#联合-epsilon-典型序列"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">联合$\epsilon$典型序列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#有噪信道编码定理-1"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">有噪信道编码定理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#联合信源信道编码定理"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">联合信源信道编码定理</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-信息论-有噪信道编码"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">信息论(六)-有噪信道编码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-17 14:14:03" datetime="2019-12-17T06:14:03.000Z"  itemprop="datePublished">2019-12-17</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="有噪信道编码定理"><a href="#有噪信道编码定理" class="headerlink" title="有噪信道编码定理"></a>有噪信道编码定理</h1><p><strong>背景</strong></p>
+<p>信道总是存在噪声，在有噪信道中进行无措传输可以达到的最大信息传输率。</p>
+<p><strong>信道编码对象</strong></p>
+<p>信源编码器输出的数字序列（信息序列）。</p>
+<p>信源经过等长编码，码符号往往等概率分布，可认为信道编码的信源为等概率出现。</p>
+<h2 id="错误概率和编码规则"><a href="#错误概率和编码规则" class="headerlink" title="错误概率和编码规则"></a>错误概率和编码规则</h2><p>有噪信道的错误概率与：</p>
+<ol>
+<li><strong>信道统计特性</strong>有关，可由信道的转移矩阵描述。</li>
+<li>错误概率与<strong>译码准则</strong>。</li>
+</ol>
+<p>译码准则：<br>离散单符号信道的输入符号集为$A = \{a_i\},\ i = 1,2,…,r$,输出符号集$B = \{b_i\},\ j=1,2…,s$.<br>若对每个输出符号$b_j$都有一个确定的数$F(b_j)$使得$b_j$对应于唯一的一个输入符号$a_i$，则这样的函数为<strong>译码规则</strong>。</p>
+<p><strong>平均错误概率</strong><br>收到$b_j$下，译码的条件正确概率为：<br>$P(F(b_j)|b_j) = P(a_i|b_j)$,错误概率为：$P(e|b_j) = 1- P(a_i|b_j)$</p>
+<p>平均错误译码概率为：<br>$P_e = \sum_j p(b_j)P(e|b_j) = \sum_j p(b_j)P(e|b_j) = \sum_j p(b_j)(1-P(a_i|b_j))$<br>表示译码后平均接收一个符号所产生错误的大小。</p>
+<p><strong>最大后验概率准则（最小错误概率准则）</strong></p>
+<p>要使得$P(e|b_j)$最小，则选择$P(F(b_j)|b_j)$为最大，则当$F(b_j) = a^\star$满足：<br>$P(a^\star|b_j) \geq P(a_i|b_j),\ a_i \neq a^\star$。</p>
+<p>上式化简：<br>$P(b_j|a^\star)P(a^\star) \geq P(b_j|a_i)P(a_i)$</p>
+<p>在<strong>信源等概率分布</strong>时，上式为<br>$P(b_j|a^\star) \geq P(b_j|a_i)$.<br>即为<strong>最大似然译码准则</strong>：在收到一个$b_j$后，在信道矩阵的第j列，选择最大的值对应的输入符号作为译码输出。<br>对应的错误概率：<br>$P_E = \sum_{Y,X-a^\star}P(a_ib_j)$</p>
+<p>等价形式：<br>$P_E = \sum_{Y,X-a^\star}P(b_j|a_i)P(a_i)$<br><em>逐列求和，出去选为译码输出元素对应的概率</em></p>
+<p><strong>平均错误概率$P_E$与译码规则有关，应该规则由信道特性决定，则平均错误概率$P_E$与信道疑义度H(X|Y)有关</strong></p>
+<p><strong>费诺不等式</strong><br>$H(X|Y) \leq H(P_E) + P_E\log (r-1)$</p>
+<p>解释：<br>收到Y后关于X的平均不确定性分为两个部分:</p>
+<ol>
+<li>是否产生$P_E$错误的不确定性$H(P_E)$.</li>
+<li>输入符号发送而造成的最大不确定性$P_E\log(r-1)$.</li>
+</ol>
+<p><strong>汉明距离</strong><br>设$\alpha_i = (a_{i_1}…a_{i_n}),\ \beta = (b_{j_1}…b_{j_n})$为两个长度为n的二元序列，则$\alpha_i$和$\beta_i$之间的汉明距离：<br>$D(\alpha_i,\beta_j) = \sum_k \alpha_{i_k} \oplus b_{j_k}$</p>
+<p>在某一码C中，任意两个码字的汉明距离的最小值称为该码C的<strong>最小距离</strong>。<br>$d_{min} = \min \{D(C_i,C_j)\},\ C_i \neq C_j$</p>
+<p><strong>最小距离译码准则</strong>（最大似然译码准则）<br>译码规则：<br>选择$F(b_j) = a^\star$，使之满足：$D(\alpha^\star, \beta_j) \leq D(\alpha_i, \beta_j)\ \alpha_i \neq \alpha^\star$<br>就是将收到一个码字后，将其译为与之最近的输入码字。</p>
+<p>编码选择：<strong>尽量设法使选取的M个码字中任意两个不同码字的距离尽量打</strong>。</p>
+<h2 id="联合-epsilon-典型序列"><a href="#联合-epsilon-典型序列" class="headerlink" title="联合$\epsilon$典型序列"></a>联合$\epsilon$典型序列</h2><p><strong>联合$\epsilon$典型序列</strong><br>n长的序列对(x,y)满足：</p>
+<ol>
+<li>X是$\epsilon$典型序列，即对于任意小的整数$\epsilon$存在n使得：<br>$|1/n\log P(x) - H(X)| &lt; \epsilon$</li>
+<li>X是$\epsilon$典型序列，即对于任意小的整数$\epsilon$存在n使得：<br>$|1/n\log P(y) - H(Y)| &lt; \epsilon$</li>
+<li>对于任意小的正数$\epsilon$，存在n使：<br>$|1/n\log P(xy) - H(XY)| &lt; \epsilon$<br>则成序列对(x,y)为<strong>联合$\epsilon$典型序列</strong>。</li>
+</ol>
+<p>$G_{\epsilon n}(X)$：表示$X^n$中x的典型序列集。<br>$G_{\epsilon n}(Y)$：表示$Y^n$中y的典型序列集。<br>$G_{\epsilon n}(XY)$：表示$X^nY^n$联合空间中xy的典型序列集，即：<br>$G_{\epsilon n}(XY) = \{(x,y) \in X^n \times Y^n: \\ |1/n\log P(x) - H(X)| &lt; \epsilon \\ |1/n\log P(y) - H(Y)| &lt; \epsilon \\ |1/n\log P(xy) - H(XY)| &lt; \epsilon \}$</p>
+<p><strong>联合渐进等分割性</strong><br>对于任意小的正数$\epsilon \geq 0,\ \delta \geq 0$，当n足够大时，则有：</p>
+<ol>
+<li>$P(G_{\epsilon n}(X)) \geq 1-\delta \\ P(G_{\epsilon n}(Y)) \geq 1-\delta \\ P(G_{\epsilon n}(XY)) \geq 1-\delta $</li>
+<li>$2^{-n[H(X)+\epsilon]} &lt; P(x) &lt;2^{-n[H(X)-\epsilon]} \\ 2^{-n[H(Y)+\epsilon]} &lt; P(y) &lt;2^{-n[H(Y)-\epsilon]} \\ 2^{-n[H(XY)+\epsilon]} &lt; P(xy) &lt;2^{-n[H(XY)-\epsilon]}$</li>
+<li>$(1-\delta) 2^{n[H(X)-\epsilon]} \leq ||G_{\epsilon n}(X)|| \leq 2^{n[H(X)+\epsilon]} \\<br>(1-\delta) 2^{n[H(Y)-\epsilon]} \leq ||G_{\epsilon n}(Y)|| \leq 2^{n[H(Y)+\epsilon]} \\<br>(1-\delta) 2^{n[H(XY)-\epsilon]} \leq ||G_{\epsilon n}(XY)|| \leq 2^{n[H(XY)+\epsilon]}$</li>
+</ol>
+<p><strong>说明</strong></p>
+<ol>
+<li>在两个随机变量情况下，信源$X^n,Y^n$和联合信源$X^nY^n$都具有渐进等分割性。</li>
+<li>X，Y是无记忆信源，n长的序列中各符号是无记忆的独立同分布，因此n长的序列x,y也符合大数定律。</li>
+</ol>
+<h2 id="有噪信道编码定理-1"><a href="#有噪信道编码定理-1" class="headerlink" title="有噪信道编码定理"></a>有噪信道编码定理</h2><p><strong>有噪信道编码定理</strong>(香农第二定理)<br>设离散无记忆信道$[X,P(y|x),Y]$,$P(y|x)$为信道传递概率，其信道容量为C。当消息传输率$R&lt; C$时，只要码长n足够长，总可以在输入符号集中$X^n$找到$M(=2^{nR})$个码字组成的一组码$(2^{nR},n)$和对应的译码准则，使信道输出端的平均错误译码概率达到任意小$P_E\rightarrow 0$.</p>
+<p><strong>有噪信道编码逆定理</strong><br>设离散无记忆信道$[X,P(y|x),Y]$,$P(y|x)$，其信道容量为C。当信息传输率$R &gt; C$时，无论码长n多长，总找不到一种编码，使译码错误概率达到任意小。</p>
+<p>对于限带高斯白噪声加性信道，噪声功率为$P_n$，带宽为$W$，信号平均功率受限为$P_s$，则</p>
+<ol>
+<li>当$R\leq C=W\log(1+P_s/P_n)$，总可以找到一种信道编码在信道中以信息传输率（码率）R传输信息，而使平均错误概率任意小。</li>
+<li>当$R&gt;C$，找不到任何信道编码，在信道中以R传输信息而使平均错误概率任意小。</li>
+</ol>
+<p>对于离散无记忆信道(DMC)，当$R&lt; C$时，平均错误概率为<br>$P_E \leq e^{-nE_r(R)}$<br>$E_r(R)$为随机编码指数(可靠性函数或误差指数)<br>$E_r(R) = \max_{0\leq \rho \leq 1}\max_{p(X)}\{E_0[\rho, p(x)]-\rho R\}$</p>
+<h2 id="联合信源信道编码定理"><a href="#联合信源信道编码定理" class="headerlink" title="联合信源信道编码定理"></a>联合信源信道编码定理</h2><p>将通信系统设计成两部分：</p>
+<ol>
+<li>信源编码</li>
+<li>信道编码</li>
+</ol>
+<p>信源编码：用尽可能少的信道符号表达信源，减少冗余。<br>信道编码：适当增加冗余度，使能纠正和克服信道中引起的错误和干扰。</p>
+<p><strong>信源-信道编码定理</strong><br>若$S^n = (S_1S_2..S_n)$是有限序号集的随机序列并满足渐进等分割性(APR),又信源S极限熵$H_\infty&lt; C$则存在信源,信道编码,其$P_E\rightarrow 0$.<br>反之,对于任意平稳随机序列,若极限熵$H_\infty&gt; C$,则错误概率远离0,即不可能在信道中以任意小的错误概率发送随机序列.</p>
+<p><strong>信源通过信道有效可靠传输的充要条件: H &lt; C</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-17T10:44:40.212Z" itemprop="dateUpdated">2019-12-17 18:44:40</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86/" rel="tag">有噪信道编码定理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/&title=《信息论(六)-有噪信道编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/&title=《信息论(六)-有噪信道编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(六)-有噪信道编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">计算机网络和因特网</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">信息论(五)-无失真信源编码</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/&title=《信息论(六)-有噪信道编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/&title=《信息论(六)-有噪信道编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(六)-有噪信道编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

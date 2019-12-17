@@ -14,7 +14,7 @@
     
     
     
-    <title>信息论-无失真信源编码 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <title>信息论(四)-无失真信源编码 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -24,12 +24,12 @@
     <meta name="description" content="无失真信源编码定理编码器实质 编码:对信源的原始符号按一定规则进行变换. 目的 使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性. 定义 从信源符号到码符号的一种映射. 将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:$C = \{W_1,…,W_q\}$$s_">
 <meta name="keywords" content="信息论,编码器,等长码,变长码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="信息论-无失真信源编码">
+<meta property="og:title" content="信息论(四)-无失真信源编码">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;16&#x2F;%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81&#x2F;index.html">
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="无失真信源编码定理编码器实质 编码:对信源的原始符号按一定规则进行变换. 目的 使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性. 定义 从信源符号到码符号的一种映射. 将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:$C = \{W_1,…,W_q\}$$s_">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-16T14:31:36.606Z">
+<meta property="og:updated_time" content="2019-12-17T09:23:51.431Z">
 <meta name="twitter:card" content="summary">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -116,7 +116,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">信息论-无失真信源编码</div>
+        <div class="flex-col header-title ellipsis">信息论(四)-无失真信源编码</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -138,7 +138,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">信息论-无失真信源编码</h1>
+        <h1 class="title">信息论(四)-无失真信源编码</h1>
         <h5 class="subtitle">
             
                 <time datetime="2019-12-16T11:42:32.000Z" itemprop="datePublished" class="page-time">
@@ -161,7 +161,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无失真信源编码定理"><span class="post-toc-number">1.</span> <span class="post-toc-text">无失真信源编码定理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编码器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">编码器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#等长码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">等长码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变长码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">变长码</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无失真信源编码定理"><span class="post-toc-number">1.</span> <span class="post-toc-text">无失真信源编码定理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编码器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">编码器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#等长码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">等长码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#渐进等分割性-AEP-和-epsilon-典型序列"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">渐进等分割性(AEP)和$\epsilon$典型序列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变长码"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">变长码</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -170,7 +170,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">信息论-无失真信源编码</h1>
+        <h1 class="post-card-title">信息论(四)-无失真信源编码</h1>
         <div class="post-meta">
             <time class="post-time" title="2019-12-16 19:42:32" datetime="2019-12-16T11:42:32.000Z"  itemprop="datePublished">2019-12-16</time>
 
@@ -233,7 +233,38 @@
 <li>信源符号与码符号序列一一对应.</li>
 <li>信源的任意N次扩展也应该是唯一可译码.</li>
 </ul>
-<h2 id="变长码"><a href="#变长码" class="headerlink" title="变长码"></a>变长码</h2>
+<p><strong>注</strong>：<br>非等概率信源不能依据信源熵提供的长度对信源进行编码。<br>要依据最大信源熵提供的长度对信源进行编码。</p>
+<p>对信源进行等长编码，需满足：<br>$q \leq m^{K_L}$<br>$K_L$：码长<br>$m$：码符号集中的码元数<br>$q$：信源符号个数。</p>
+<p>对信源的L次扩展信源进行编码，有$q^L$个信源符号序列(长度为L)，必须满足：$q^L \leq m^{K_L}$，即：<br>$\frac{K_K}{L} \geq \frac{\log q}{\log m}$</p>
+<h2 id="渐进等分割性-AEP-和-epsilon-典型序列"><a href="#渐进等分割性-AEP-和-epsilon-典型序列" class="headerlink" title="渐进等分割性(AEP)和$\epsilon$典型序列"></a>渐进等分割性(AEP)和$\epsilon$典型序列</h2><p><strong>大数定理</strong></p>
+<ul>
+<li>独立等分布的随机变量$X_1,X_2,…,X_n$，当n足够大时，$\frac{1}{n}\sum_iX_i$接近其数学期望值$E(X)$.</li>
+<li>$S_1S_2…S_N$统计独立等同分布的随机变量，联合概率为$P(S_1S_2…S_n)$，N足够大时，$(-\log P(S_1S_2…S_N))/N$接近于信源熵H(S),$P(S_1S_2…S_n)$接近于$2^{-NH(S)}$.</li>
+</ul>
+<p><strong>渐进等分割性AEP</strong><br>若随机序列$S_1S_2…S_N$中$S_i$相互统计独立并且服从同一概率分布$P(S)$,又$a_i = (s_{i_1}s_{i_2}…s_{i_N}) \in S_1…S_N$，则$-\frac{1}{N}\log p(a_i) = -\frac{1}{N} \log p(s_{i_1}s_{i_2}…s_{i_N})$以概率收敛于$H(S)$.<br>$\lim_{N\rightarrow \infty}P\{|\frac{I(a_i)}{N}-H(S)|&lt; \epsilon\} = 1$</p>
+<p><strong>$\epsilon$典型序列</strong><br>N长的序列$a_i = (s_{i_1}s_{i_2}…s_{i_N})\in S_1S_2…S_N$,对于任意小的正数$\epsilon$，满足：<br>$|\frac{I(a_i)}{N} - H(S)|&lt;\epsilon$,即$|\frac{-\log P(a_i)}{N} - H(S)|&lt; \epsilon$,则称N长的序列$a_i$为$\epsilon$典型序列，对应的集合为$G_{\epsilon N}$.<br>反之为非$\epsilon$典型序列,对应的集合为$\overline{G_{\epsilon N}}$.</p>
+<p>定理：<br>对于任意小的正整数$\epsilon \geq 0, \delta \geq 0$,当n足够大时，则：</p>
+<ol>
+<li>$P(G_{\epsilon N}) &gt; 1 - \delta,\ P(\overline{G_{\epsilon N}}) \leq \delta$.</li>
+<li>若$\alpha_i = (a_{i1},…,a_{iN}) \in G_{\epsilon N}$，则$2^{-N(H(s) + \epsilon)} &lt; P(a_i) &lt; 2^{-N(H(s)-\epsilon)}$</li>
+<li>设$||G_{\epsilon N}||$表示$G_{\epsilon N}$典型序列集中包含的$\epsilon$典型序列个数，则：<br>$(1-\delta)2^{N(H(s)-\epsilon)} \leq ||G_{\epsilon N}|| \leq 2^{N(H(s) + \epsilon)}$</li>
+</ol>
+<p><strong>等长信源编码定理</strong><br>一个熵为$H(S)$的离散无记忆信源，若对其N次扩展进行等长r元编码，码长为l，对于任意$\epsilon&gt;0$,只要满足：<br>$\frac{l}{N} \geq \frac{H(S)+\epsilon}{\log r}$<br>则可以实现无失真编码，反之，若<br>$\frac{l}{N} \leq \frac{H(S)+\epsilon}{\log r}$<br>则不能实现无失真编码。</p>
+<p>等价形式：</p>
+<ul>
+<li>$l \log r \geq NH(S)$<br>左边：长l的码符号所能载荷的最大信息量。<br>右边：长为N的序列平均携带的信息量。</li>
+<li>$ \frac{l \log r}{N} \geq H(S)$<br>$R = \frac{l \log r}{N}$:编码信息率。</li>
+</ul>
+<p>编码效率：<br>$\eta = \frac{H(S)}{R} = \frac{H(S)}{\frac{l \log r}{N}}$.</p>
+<p>等长码最佳编码效率：<br>$\eta = \frac{H(S)}{H(S) + \epsilon} = 1,\ (\epsilon &gt; 0)$,由$\frac{l}{N} \geq \frac{H(S) + \epsilon}{\log r}$</p>
+<p>由$P_E=P(\overline{G_{\epsilon N}}) \leq \delta(N, \epsilon) \leq \frac{D[I(s_i)]}{N\epsilon^2}$可知，当方差$D[I(s_i)]$和$\epsilon$给定时，只要N足够大，错误率$P_E$就可以小于任意正整数$\delta$.对应的信源序列长度N满足：<br>$N\geq \frac{D[I(s_i)]\eta^2}{H^2(S)(1-\eta)^2\delta}$。</p>
+<h2 id="变长码"><a href="#变长码" class="headerlink" title="变长码"></a>变长码</h2><p><strong>说明</strong><br>编码后码长K是变化的，概率大的符号用短码，概率小的符号用长码。</p>
+<p>信源为：<br>$\begin{bmatrix} S\\ P(S) \end{bmatrix} = \begin{bmatrix} s_1,&amp; s_2, &amp;…&amp;,s_q\\ p(s_1),&amp;p(s_2),&amp;…&amp;,p(s_q)\end{bmatrix}$<br>码字：$W_1,W_2,…,W_q$;码长为：$l_1,l_2,…l_q$。<br>唯一可译码：$p(W_i) = p(s_i)$<br>平均码长：$\overline{L} = \sum_i p(s_i)l_i$<br>信息传输率:平均每个码元携带的信息量：$R = \frac{H(S)}{\overline{L}}$.</p>
+<p><strong>紧致码(最佳码)</strong><br>某一信源和码符号集若有一个唯一可译码，其平均长度$\overline{L}$小于所有其他唯一可译码的平均长度。</p>
+<p>定理：<br>若一个离散无记忆信源S具有熵为H(S),并有r个码元的码符号集$ X=\{x_1,…,x_r\}$,则总可以找到一种无失真编码方法，构成唯一可译码，其平均长度满足：<br>$\frac{H(S)}{\log r} \leq \overline{L} &lt; 1 + \frac{H(S)}{\log r}$<br>当：<br>等式成立的条件$\frac{r^{-l_i}}{p(s_i)} = 1$,即$l_i = -\log_r p(s_i)$时，平均码长能达到下界。（或$p(s_i) = (1/r  )^{l_r}$）.</p>
+<p><strong>无失真变长信源编码定时(香农第一定理)</strong><br>离散无记忆信源S的N次扩展信源$S^N = \{a_1,a_2,…,a_{q^N}\}$,其熵为$H(S^N)$,并有码符号$X = \{x_1,x_2,…,x_r\}$.对信源$S^N$进行编码，总可以找到一种编码方法，构成唯一可译码，使得信源S中每个信源符号所需的平均码长$\overline{L_N}$满足：<br>$NH(S) \leq \overline{L_N} \log r &lt; \log r + NH(S)$<br>或<br>$\frac{H(S)}{\log r} \leq \frac{\overline{L_N}}{N} \leq \frac{1}{N} + \frac{H(S)}{\log r}$<br>或<br>$H_r(S) \leq \frac{\overline{L_N}}{N} &lt; \frac{1}{N} + H_r(S) \ \lim_{N\rightarrow \infty}\frac{\overline{L_N}}{N} = H_r(S)$<br>$\overline{L_N}$:为$S^N$中每个信源符号序列的平均码长。<br>$H_r(S)$:r进制信源S的熵。</p>
+<p><strong>平稳有记忆信源</strong><br>$H(S_1S_2…S_N) \leq \overline{L_N} \log r &lt; \log r + H(S_1…S_N)$<br>$\frac{H(S_1S_2…S_N)}{\log r} \leq \overline{L_N} &lt; 1+ \frac{H(S_1…S_N)}{\log r}$<br>$\frac{H(S_1…S_N)}{N\log r} \leq \frac{\overline{L_N}}{N} &lt; \frac{1}{N} + \frac{H(S_1…S_N)}{N\log r}$<br>$\lim_{N\rightarrow \infty}\frac{\overline{L_N}}{N} &lt; \frac{1}{\log r}\lim_{N\rightarrow \infty}\frac{H(S_1…S_N)}{N} = \frac{H_\infty(S)}{\log r}$</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -241,7 +272,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-16T14:31:36.606Z" itemprop="dateUpdated">2019-12-16 22:31:36</time>
+    Last updated: <time datetime="2019-12-17T09:23:51.431Z" itemprop="dateUpdated">2019-12-17 17:23:51</time>
 </span><br>
 
 
@@ -273,7 +304,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论(四)-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -283,7 +314,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论(四)-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -293,7 +324,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(四)-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -318,7 +349,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">信息论(五)-无失真信源编码</h4>
+      </a>
+    </div>
   
 
   
@@ -397,7 +435,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论(四)-无失真信源编码》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -407,7 +445,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&title=《信息论(四)-无失真信源编码》 — 咸鱼的自我修养&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -417,7 +455,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《信息论(四)-无失真信源编码》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
