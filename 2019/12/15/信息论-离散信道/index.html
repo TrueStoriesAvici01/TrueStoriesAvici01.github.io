@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="离散信道及其信道容量信道的数学模型及分类信道: 输入集合与输出集合间的映射关系.输入和输出是统计依赖关系 数学模型 $\{X\ P(Y|X)\ Y\}$ 分类:  输入输出随机信号的特点:   离散信道 连续信道 半离散&#x2F;半连续信道 波形信道   输入输出随机变量个数   单符号信道 离散无记忆扩展信道(多符号信道)    输入输出个数   单用户信道 多用户信道   信道上有无干扰   有干扰信">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-16T11:41:28.277Z">
+<meta property="og:updated_time" content="2020-01-06T06:09:00.000Z">
 <meta name="twitter:card" content="summary">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -258,7 +258,7 @@
 </ol>
 <h2 id="平均互信息的特性"><a href="#平均互信息的特性" class="headerlink" title="平均互信息的特性"></a>平均互信息的特性</h2><blockquote>
 <p><strong>对称性</strong><br>$I(X;Y) = I(Y;X)$</p>
-<p><strong>非负性</strong><br>$I(X;Y) \leq 0$<br><em>平均互信息量表示从一件事件中提取另外一件事件的信息，最坏情况下为两件事件无关，从一件事件中不能得知关于另外一件事件的任何信息。</em></p>
+<p><strong>非负性</strong><br>$I(X;Y) \geq 0$<br><em>平均互信息量表示从一件事件中提取另外一件事件的信息，最坏情况下为两件事件无关，从一件事件中不能得知关于另外一件事件的任何信息。</em></p>
 <p><strong>极值性</strong><br>$I(X;Y) \leq H(X)\\ I(Y;X) \leq H(Y)$</p>
 <p><strong>凸函数性</strong><br>$I(X;Y) = \sum_i\sum_j p(x_i)p(y_j|x_i) \log \frac{p(y_j|x_i)}{p(y_j)} = \sum_i\sum_j p(x_i)p(y_j|x_i) \log \frac{p(y_j|x_i)}{\sum_i p(x_i)p(y_j|x_i)}$<br><strong>平均互信息量$I(X;Y)$是输入信源概率分布$p(x_i)$的上凸函数，平均互信息量$I(X;Y)$是输入转移概率分布$p(y_j|x_i)$的下凸函数</strong><br>固定信道时：输入等概率分布时，接收端获得最大信息量。<br>固定信源时：当$p(y_j|x_i)=1/2$时，接收端获得最小的信息量。</p>
 <p><strong>数据处理定理</strong><br>串联信道：$X\rightarrow P(Y|X)(信道1) \rightarrow Y \rightarrow P(Z|Y)(信道2) \rightarrow Z$<br>数据处理定理：消息经过多级处理，输入消息与输出消息之间的平均互信息量趋于变少。</p>
@@ -363,11 +363,11 @@
 <h2 id="独立并联信道及其信道容量"><a href="#独立并联信道及其信道容量" class="headerlink" title="独立并联信道及其信道容量"></a>独立并联信道及其信道容量</h2><p>联合平均互信息不大于各自信道的平均互信息之和. 独立并联信道的信道容量:<br>$C_{1,2…N} = \max_{p(x_1x_2…x_N)}I(X_1…X_N;Y_1…Y_N) \leq \sum_i C_i$<br>$C_i = \max_{p(x_i)}I(X_i;Y_i)$</p>
 <p>结论: 独立并联信道的信道容量不大于各个信道的信道容量之和,只有当输入符号相互独立时,且输入符号的概率分布达到各信道容量的最佳输入分布时,独立并联信道的信道容量才等于各信道容量之和.</p>
 <h2 id="串联信道的互信息和数据处理定理"><a href="#串联信道的互信息和数据处理定理" class="headerlink" title="串联信道的互信息和数据处理定理"></a>串联信道的互信息和数据处理定理</h2><p>若后一个信道的传递概率只与其输入有关,与前一个信道的输入无关:<br>$p(z|yx) = p(z|y)$,<br>则称这两信道的输入输出x,y,z序列构成马尔科夫链.</p>
-<p>这两个串联信道可以等价与一个信道,输入是x,输出是z,转移概率为:<br>$(z|x) = \sum_y P(y|x)P(z|xy)$</p>
+<p>这两个串联信道可以等价与一个信道,输入是x,输出是z,转移概率为:<br>$P(z|x) = \sum_y P(y|x)P(z|xy)$</p>
 <p>总信道的传递概率:$P(z|x) = \sum_Y P(y|x)P(z|y)$</p>
 <p><strong>串联信道的两个定理</strong></p>
 <ol>
-<li>$I(XY;Z) \geq I(Y;Z)$,当且仅当$P(Z|XY) = P(Z|Y)时等式成立.</li>
+<li>$I(XY;Z) \geq I(Y;Z)$,当且仅当$P(Z|XY) = P(Z|Y)$时等式成立.</li>
 <li>若X,Y,Z组成一个马尔科夫链,则有<br>$I(X;Z) \leq I(X;Y)$<br>$I(X;Z) \leq I(Y;Z)$</li>
 </ol>
 <h2 id="信源与信道的匹配"><a href="#信源与信道的匹配" class="headerlink" title="信源与信道的匹配"></a>信源与信道的匹配</h2><p><strong>定义</strong><br>对于某个信源,若使得信道的信息传输率达到了信道容量,称此信源与信道达到匹配.否则认为有剩余.</p>
@@ -383,7 +383,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-16T11:41:28.277Z" itemprop="dateUpdated">2019-12-16 19:41:28</time>
+    Last updated: <time datetime="2020-01-06T06:09:00.000Z" itemprop="dateUpdated">2020-01-06 14:09:00</time>
 </span><br>
 
 
@@ -528,7 +528,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

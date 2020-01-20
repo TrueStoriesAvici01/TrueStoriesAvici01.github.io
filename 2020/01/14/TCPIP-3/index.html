@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>TCPIP-3 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="ICP/IP">
+    <meta name="description" content="IP协议IP即网际协议IP位于网络层。作用：实现终端节点之间的通信（点到点，end-to-end）。 网络层与数据链路层的关系数据链路层：直连两个设备之间的通信功能。互连同一种数据链路节点之间的包传递。网络层：非直连的设备之间的通信传输。不同数据链路实现端节点之间的数据包传输。 主机：配备IP地址，不进行路由控制的设备路由器：配备IP地址，又具有路由控制能力的设备节点：主机和路由器总称  IP基础">
+<meta name="keywords" content="ICP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCPIP-3">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;14&#x2F;TCPIP-3&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="IP协议IP即网际协议IP位于网络层。作用：实现终端节点之间的通信（点到点，end-to-end）。 网络层与数据链路层的关系数据链路层：直连两个设备之间的通信功能。互连同一种数据链路节点之间的包传递。网络层：非直连的设备之间的通信传输。不同数据链路实现端节点之间的数据包传输。 主机：配备IP地址，不进行路由控制的设备路由器：配备IP地址，又具有路由控制能力的设备节点：主机和路由器总称  IP基础">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-16T10:11:22.815Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCPIP-3</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCPIP-3</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-14T10:55:29.000Z" itemprop="datePublished" class="page-time">
+  2020-01-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#IP协议"><span class="post-toc-number">1.</span> <span class="post-toc-text">IP协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP即网际协议"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">IP即网际协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络层与数据链路层的关系"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP基础知识"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">IP基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址属于网络层地址"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">IP地址属于网络层地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制-Routing"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">路由控制(Routing)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分片处理-IP-Fragmentation"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">分片处理(IP Fragmentation)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP属于面向无连接型"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">IP属于面向无连接型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP地址基础知识"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">IP地址基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址的定义"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">IP地址的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址是由网络和主机两部分标识组成"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">IP地址是由网络和主机两部分标识组成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址分类"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">IP地址分类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#广播地址"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">广播地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP多播"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">IP多播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">子网掩码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CIDR与VLSM"><span class="post-toc-number">1.3.7.</span> <span class="post-toc-text">CIDR与VLSM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局地址和私有地址"><span class="post-toc-number">1.3.8.</span> <span class="post-toc-text">全局地址和私有地址</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由控制"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">路由控制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址与路由控制"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">IP地址与路由控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制表的聚合-Aggregation"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">路由控制表的聚合(Aggregation)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP分割处理与再构成处理"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">IP分割处理与再构成处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP报文的分片与重组"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">IP报文的分片与重组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径MTU发现"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">路径MTU发现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv6"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">IPv6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址标记方法"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">IP地址标记方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6地址的结构"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">IPv6地址的结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6分段处理"><span class="post-toc-number">1.6.4.</span> <span class="post-toc-text">IPv6分段处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv4首部"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">IPv4首部</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv6首部格式"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">IPv6首部格式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6扩展首部"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">IPv6扩展首部</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP协议相关技术"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">IP协议相关技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DNS"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">DNS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#域名的构成"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">域名的构成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#域名服务器"><span class="post-toc-number">1.9.3.</span> <span class="post-toc-text">域名服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DNS查询"><span class="post-toc-number">1.9.4.</span> <span class="post-toc-text">DNS查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DNS的其他功能"><span class="post-toc-number">1.9.5.</span> <span class="post-toc-text">DNS的其他功能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ARP"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">ARP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作机制"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">工作机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址和MAC地址"><span class="post-toc-number">1.10.2.</span> <span class="post-toc-text">IP地址和MAC地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RARP"><span class="post-toc-number">1.10.3.</span> <span class="post-toc-text">RARP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理ARP"><span class="post-toc-number">1.10.4.</span> <span class="post-toc-text">代理ARP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ICMP"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">ICMP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要ICMP消息"><span class="post-toc-number">1.11.1.</span> <span class="post-toc-text">主要ICMP消息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他ICMP消息"><span class="post-toc-number">1.11.2.</span> <span class="post-toc-text">其他ICMP消息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ICMPv6"><span class="post-toc-number">1.11.3.</span> <span class="post-toc-text">ICMPv6</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DHCP-Dynamic-Host-Configuration-Protocol"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">DHCP(Dynamic Host Configuration Protocol)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目的"><span class="post-toc-number">1.12.1.</span> <span class="post-toc-text">目的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作机制-1"><span class="post-toc-number">1.12.2.</span> <span class="post-toc-text">工作机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DHCP中继代理"><span class="post-toc-number">1.12.3.</span> <span class="post-toc-text">DHCP中继代理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NAT"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">NAT</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作机制-2"><span class="post-toc-number">1.13.1.</span> <span class="post-toc-text">工作机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NAT-PT"><span class="post-toc-number">1.13.2.</span> <span class="post-toc-text">NAT-PT</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.13.3.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决"><span class="post-toc-number">1.13.4.</span> <span class="post-toc-text">解决</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP隧道"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">IP隧道</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他IP相关技术"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">其他IP相关技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP多播相关技术"><span class="post-toc-number">1.15.1.</span> <span class="post-toc-text">IP多播相关技术</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP任播"><span class="post-toc-number">1.15.2.</span> <span class="post-toc-text">IP任播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通信质量控制"><span class="post-toc-number">1.15.3.</span> <span class="post-toc-text">通信质量控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#显示拥塞通知"><span class="post-toc-number">1.15.4.</span> <span class="post-toc-text">显示拥塞通知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mobile-IP"><span class="post-toc-number">1.15.5.</span> <span class="post-toc-text">Mobile IP</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCPIP-3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCPIP-3</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-14 18:55:29" datetime="2020-01-14T10:55:29.000Z"  itemprop="datePublished">2020-01-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h1><h2 id="IP即网际协议"><a href="#IP即网际协议" class="headerlink" title="IP即网际协议"></a>IP即网际协议</h2><p>IP位于网络层。<br>作用：实现终端节点之间的通信（点到点，end-to-end）。</p>
+<h3 id="网络层与数据链路层的关系"><a href="#网络层与数据链路层的关系" class="headerlink" title="网络层与数据链路层的关系"></a>网络层与数据链路层的关系</h3><p>数据链路层：直连两个设备之间的通信功能。互连同一种数据链路节点之间的包传递。<br>网络层：非直连的设备之间的通信传输。不同数据链路实现端节点之间的数据包传输。</p>
+<p><em>主机：配备IP地址，不进行路由控制的设备</em><br><em>路由器：配备IP地址，又具有路由控制能力的设备</em><br><em>节点：主机和路由器总称</em></p>
+<hr>
+<h2 id="IP基础知识"><a href="#IP基础知识" class="headerlink" title="IP基础知识"></a>IP基础知识</h2><p>三大模块：</p>
+<ul>
+<li>IP寻址</li>
+<li>路由</li>
+<li>IP分包与组包</li>
+</ul>
+<h3 id="IP地址属于网络层地址"><a href="#IP地址属于网络层地址" class="headerlink" title="IP地址属于网络层地址"></a>IP地址属于网络层地址</h3><p>IP地址用于连接到网络中的所有主机中识别出进行通信的目标地址，TCP/IP通信中所有主机和路由器必须设置IP地址。<br>网桥和交换集线器等物理层或数据链路层设备不需要设置IP地址。</p>
+<h3 id="路由控制-Routing"><a href="#路由控制-Routing" class="headerlink" title="路由控制(Routing)"></a>路由控制(Routing)</h3><p>将分组数据发送到最终目标地址的功能。</p>
+<p><strong>跳</strong>(hop)：利用数据链路层以下分层功能传输数据帧的一个区间，利用网桥或交换集线器不经过其他路由器而到达相邻主机或网卡之间的一个区间。</p>
+<p>IP路由（多跳路由）：路由器或主机在转发IP数据包只指定下一个路由器或主机。路由器检查到达的数据包，确定下一跳发送的路由器，然后将数据包发送过去。</p>
+<p><strong>路由控制表</strong><br>主机中有一张路由控制表(Routing Table)，记录IP地址下一步发送的路由器。</p>
+<h3 id="分片处理-IP-Fragmentation"><a href="#分片处理-IP-Fragmentation" class="headerlink" title="分片处理(IP Fragmentation)"></a>分片处理(IP Fragmentation)</h3><p>将大的IP包分成多个小的IP包，分片的包到了目的地址后被组合起来。</p>
+<h3 id="IP属于面向无连接型"><a href="#IP属于面向无连接型" class="headerlink" title="IP属于面向无连接型"></a>IP属于面向无连接型</h3><p>不需要建立与对端目标地址之间的连接。<br>原因：</p>
+<ul>
+<li>简化</li>
+<li>提速</li>
+</ul>
+<p>提供<strong>尽力而为</strong>(Best Effort)，不对最后是否收到进行验证。</p>
+<hr>
+<h2 id="IP地址基础知识"><a href="#IP地址基础知识" class="headerlink" title="IP地址基础知识"></a>IP地址基础知识</h2><h3 id="IP地址的定义"><a href="#IP地址的定义" class="headerlink" title="IP地址的定义"></a>IP地址的定义</h3><p>由32位表示，分成4组，每组8位，用“.”隔开，再转化成十进制。<br>按照网卡进行设置。</p>
+<h3 id="IP地址是由网络和主机两部分标识组成"><a href="#IP地址是由网络和主机两部分标识组成" class="headerlink" title="IP地址是由网络和主机两部分标识组成"></a>IP地址是由网络和主机两部分标识组成</h3><p>IP地址组成：</p>
+<ul>
+<li>网络标识</li>
+<li>主机标识</li>
+</ul>
+<p>网络标识：数据链路的不同段使用不同的值，保证每个段地址不重复，相同的段为相同的网络地址。</p>
+<p>主机标识：同一个段不能重复。</p>
+<p>IP包在路由器中由网络标识进行路由。</p>
+<h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><ul>
+<li>A类地址：首位为0，第1位到第8位为网络标识，后24位为主机标识。0.0.0.0 ~ 127.0.0.0。</li>
+<li>B类地址：前两位为10，第1位到第16位为网络标识，后16位为主机标识。128.0.0.1 ~ 191.255.0.0。</li>
+<li>C类地址：前三位为110，第1位到第24位为网络标识，192.168.0.0 ~ 239.255.255.0。</li>
+<li>D类地址：前四位为1110，第1位到第32位为网络标识。224.0.0.0 ~ 239.255.255.255。</li>
+</ul>
+<p>注：主机标识不可为全0或全1，全1位广播地址。</p>
+<h3 id="广播地址"><a href="#广播地址" class="headerlink" title="广播地址"></a>广播地址</h3><p>目的：同一个链路中相互连接的主机之间发送数据包。</p>
+<p>设置：将主机标识部分全部设置为1。</p>
+<p>分类：</p>
+<ul>
+<li>本地广播</li>
+<li>直接广播</li>
+</ul>
+<p>本地广播：在本网络内的广播，IP包会被路由器屏蔽，无法达到本网络之外的网络。</p>
+<p>直接广播：不同网络之间的广播，路由器将数据包转发给所属的所有主机。</p>
+<h3 id="IP多播"><a href="#IP多播" class="headerlink" title="IP多播"></a>IP多播</h3><p>单播效率低，广播给无关的主机带来影响，造成额外流量，而无法穿透路由。</p>
+<p>多播：只给特定组的主机发送，能穿透路由器。</p>
+<p>使用D类地址，前四位为“1110”，剩下的28位为多播的组编号。<br>224.0.0.0到239.255.255.255为多播地址可用范围。224.0.0.0到224.0.0.255不受路由控制。</p>
+<p>利用IP多播实现通信，还需要IGMP协议支持。</p>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><p>问题：直接使用ABCD类地址造成地址的浪费，不足。</p>
+<p>通过子网掩码对子网网络地址进行细分，将原来主机部分用作子网地址。</p>
+<p>一个IP地址有两个标识码：</p>
+<ul>
+<li>IP地址</li>
+<li>标识网络部分的子网掩码</li>
+</ul>
+<p>子网掩码：<br>对应IP地址的网络标识部分全部为1，对应主机标识部分全部为0.</p>
+<h3 id="CIDR与VLSM"><a href="#CIDR与VLSM" class="headerlink" title="CIDR与VLSM"></a>CIDR与VLSM</h3><p>CIDR（无类型域间选路）：<br>采用任意长度分割IP地址的网络标识部分。<br>将多个地址划分成一个大的网络中。<br>域内采用固定长度的子网掩码。</p>
+<p>VLSM（可变长子网掩码）：<br>通过域间路由协议转换为RIP2和OSPF实现。可以随意修改子网掩码长度。</p>
+<h3 id="全局地址和私有地址"><a href="#全局地址和私有地址" class="headerlink" title="全局地址和私有地址"></a>全局地址和私有地址</h3><p>私有网络的IP地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>地址范围</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.0.0.0 ~ 10.255.255.255 (10/8)</td>
+<td>A类</td>
+</tr>
+<tr>
+<td>172.16.0.0 ~ 172.31.255.255 (172.16/12)</td>
+<td>B类</td>
+</tr>
+<tr>
+<td>192.168.0.0 ~ 192.168.255.255 (192.168/16)</td>
+<td>C类</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>全局IP：除私有IP外的IP地址。</p>
+<p>使用NAT使得私有IP和全局IP互换，实现私有地址和全局地址主句互联。</p>
+<p>全局IP地址：整个互联网唯一。<br>私有地址：同一个域内唯一。  </p>
+<p>全局IP有ICANN进行管理。</p>
+<p>一般用户会在每次连接时IP地址可能发生变化。全局IP需要申请。<br>一般通过少数设置全局IP地址的代理服务器结合NAT进行通信。</p>
+<hr>
+<h2 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h2><p>路由控制表(Rouing Table)：由IP地址确定数据包发送的对端目标地址。</p>
+<p>分类：</p>
+<ul>
+<li>静态路由控制：管理员手动设置</li>
+<li>动态路由控制：与其他路由器相互交换信息时自动刷新</li>
+</ul>
+<h3 id="IP地址与路由控制"><a href="#IP地址与路由控制" class="headerlink" title="IP地址与路由控制"></a>IP地址与路由控制</h3><p>路由控制表记录网络地址与下一步发送至路由器的地址。<br>由IP包首部的目的地址，从路由控制表找出具有相同网络地址的记录，从而将数据包转发给对应的路由器。<br>按照最长匹配原则确定目的路由器。</p>
+<p><strong>默认路由器</strong>：0.0.0.0/0或default。<br><strong>主机路由</strong>：IP地址/32 为主机路由(Host Route)，整个IP地址所有的位都要参与路由。<br><strong>环回地址</strong>：同一台计算机上程序之间进行网络通信使用的默认地址，数据包不会发送至网络。127.0.0.1。</p>
+<h3 id="路由控制表的聚合-Aggregation"><a href="#路由控制表的聚合-Aggregation" class="headerlink" title="路由控制表的聚合(Aggregation)"></a>路由控制表的聚合(Aggregation)</h3><p>对多个网络进行分层配置，聚合多个路由信息而减少路由表。</p>
+<hr>
+<h2 id="IP分割处理与再构成处理"><a href="#IP分割处理与再构成处理" class="headerlink" title="IP分割处理与再构成处理"></a>IP分割处理与再构成处理</h2><p>每种数据链路的最大传输单元(MTU)不同，因为不同类型的数据链路的使用目的不同。</p>
+<h3 id="IP报文的分片与重组"><a href="#IP报文的分片与重组" class="headerlink" title="IP报文的分片与重组"></a>IP报文的分片与重组</h3><p>主机对于IP分片(IP Fragmentation)进行相应的处理，当发送的数据包大小超过网络的MTU时需要进行分片。</p>
+<p>分片后的IP数据包在目标主机进行重组。</p>
+<h3 id="路径MTU发现"><a href="#路径MTU发现" class="headerlink" title="路径MTU发现"></a>路径MTU发现</h3><p>路径MTU发现(Path MTU Discovery):<br>路径MTU：发送端主机到接收端之间不需要分片时最大MTU的大小，即<strong>路径中存在的所有数据链路中最小的MTU</strong>。<br>路径MTU发现：主机按照路径MTU的大小将数据报分片再发送，避免路由器进行分片处理。</p>
+<p>工作原理：</p>
+<ul>
+<li>发送端发送IP数据包是将首部的分片禁止标志位设为1。路由器遇到需要分片时，直接丢弃包，并通过ICMP不可达信息将数据链路上MTU值发送给主机。</li>
+<li>主机将有ICMP获得的MUT值进行分片，再重新发送。</li>
+<li>反复上述过程，直到数据包发送给目标主机而没有再收到ICMP，则认为最后一次MTU为合适的MTU值。</li>
+<li>MTU值有时效性，超过一定时间后重新请求MTU。</li>
+</ul>
+<hr>
+<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p><strong>必要性</strong><br>解决IPv4地址耗尽的问题。<br>长度为8个16字节，共128字节。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>IP地址的扩大与路由控制表的聚合</li>
+<li>性能提升（<em>首部长度采用固定40字节，不采用首部校验码，不进行分片处理</em>）</li>
+<li>支持即插即用（<em>没有DHCP也自动分配IP地址</em>）</li>
+<li>采用认证与加密功能</li>
+<li>多播、Mobile IP成为扩展功能</li>
+</ul>
+<h3 id="IP地址标记方法"><a href="#IP地址标记方法" class="headerlink" title="IP地址标记方法"></a>IP地址标记方法</h3><p>每16比特分为一组，每组用“:”分隔，连续的0可使用“::”隔开，只允许出现一次“::”。</p>
+<h3 id="IPv6地址的结构"><a href="#IPv6地址的结构" class="headerlink" title="IPv6地址的结构"></a>IPv6地址的结构</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>网络类型</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>与互联网通信</td>
+<td>全局的单播地址，无需分配IP地址</td>
+</tr>
+<tr>
+<td>限制型网络，不与互联网直连的私有网络</td>
+<td>唯一的本地地址</td>
+</tr>
+<tr>
+<td>不适用路由器，同一个以太网网段</td>
+<td>链路本地单播地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>IPv6地址</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>二进制地址</th>
+<th>十六进制地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未定义</td>
+<td>000…000</td>
+<td>::/128</td>
+</tr>
+<tr>
+<td>环回地址</td>
+<td>000…001</td>
+<td>::1/128</td>
+</tr>
+<tr>
+<td>唯一本地地址</td>
+<td>1111 110</td>
+<td>FC00::/7</td>
+</tr>
+<tr>
+<td>链路本地单播地址</td>
+<td>1111 1110 10</td>
+<td>FE80::/10</td>
+</tr>
+<tr>
+<td>多播地址</td>
+<td>1111 1111</td>
+<td>FF00::/8</td>
+</tr>
+<tr>
+<td>全局单播地址</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>全局单播地址</strong><br>互联网通信的唯一地址。</p>
+<p>格式：</p>
+<ul>
+<li>64比特的<strong>网络标识</strong></li>
+<li>64比特的<strong>主机标识</strong>（接口标识码）</li>
+</ul>
+<p>网络标识：</p>
+<ul>
+<li>48比特的全局路由前缀（广域网络）</li>
+<li>16比特的子网ID（站点内部）</li>
+</ul>
+<p><strong>链路本地单播地址</strong><br>同一个数据链路内唯一的地址，不经由路由器，在同一个链路中通信。</p>
+<p>格式：</p>
+<ul>
+<li>10比特：1111111010</li>
+<li>54比特：0</li>
+<li>64比特：接口ID（MAC地址）</li>
+</ul>
+<p><strong>唯一本地地址</strong><br>不进行互联网通信使用的地址。</p>
+<p>格式：</p>
+<ul>
+<li>7比特：1111110</li>
+<li>1比特L：通常为1</li>
+<li>40比特：全局ID（随机）</li>
+<li>16比特：子网ID（该域子网地址）</li>
+<li>64比特：接口ID</li>
+</ul>
+<h3 id="IPv6分段处理"><a href="#IPv6分段处理" class="headerlink" title="IPv6分段处理"></a>IPv6分段处理</h3><p>只在发送端主机进行，路由器不分片，减少路由器的负荷。<br>路径MTU发现是必需的。<br>最小的MTU为1280字节。</p>
+<hr>
+<h2 id="IPv4首部"><a href="#IPv4首部" class="headerlink" title="IPv4首部"></a>IPv4首部</h2><blockquote>
+<p><strong>版本</strong><br>4比特。<br>标识IP首部的版本号。</p>
+<p><strong>首部长度</strong>(IHL: Internet Header Length)<br>4字节。<br>表示IP首部的长度，单位为4字节（32比特）。在没有可选项的IP包，首部长度设置为5，首部长度为20字节。</p>
+<p><strong>区分服务</strong>(TOS: Type Of Service)<br>8比特。<br>用来表明服务质量，一般不用。</p>
+<p><strong>DSCP段与ECN段</strong><br>DSCP(Differential Services Codepoint,查分服务代码点)是TOS的一部分，统称为DiffServ。<br>6比特，3~5位为0，0~2位称为类别选择代码点，实现质量控级别。<br>ECN(Explicit Congestion Notification,显式拥塞通知)：报告网络拥塞情况：2比特组成：ECT和CE组成<br>ECT(ECN-Capable Transport)：通知TCP层是否处理ECN。<br>CE(Congenstion Experienced)：当转发ECN为1的包时，若网络拥堵，则将CE位设置为1。</p>
+<p><strong>总长度</strong>(Total Length)<br>IP首部与数据部分的总字节数。<br>16比特。<br>IP包的最大长度为2^16 = 65535字节。</p>
+<p><strong>标识</strong>(ID: Identification)<br>16比特。<br>用来分组重组，同一IP包的不同分片的ID递增。</p>
+<p><strong>标志</strong>(Flags)<br>3比特。</p>
+<ul>
+<li>第一位：0</li>
+<li>第二位：是否进行分片（0：分片；1：不可分片）</li>
+<li>第三位：分片下是否为最后一个包（0：是；1：否）</li>
+</ul>
+<p><strong>片偏移</strong>（FO: Fragment Offset）<br>13比特。<br>标识分片中每一个分段相对于原始数据的位置。<br>最多8192个相对位置。<br>单位为8字节，最大表示原始数据8*8192 = 65536字节的位置。</p>
+<p><strong>生存时间</strong>(TTL: Time To Live)<br>8比特。<br>可以中转路由器的个数，每经过一个路由器减一，至0则丢弃该包。</p>
+<p><strong>协议</strong>(Protocol)<br>8比特。<br>表示IP首部的下一首部属于的协议。</p>
+<p><strong>首部校验和</strong>(Header Checksum)<br>16比特。<br>只校验数据包首部，确保IP数据包准确。<br>先将校验位设为0，计算获得为首部校验和。</p>
+<p><strong>源地址</strong>(Source Address)<br>32比特。<br>发送端IP地址。</p>
+<p><strong>目标地址</strong>(Destination Address)<br>32比特。<br>接收端IP地址。</p>
+<p><strong>可选项</strong>(Options)<br>长度可变，可用于安全级别，源路径，路径记录，时间戳…</p>
+<p><strong>填充</strong>(Padding)<br>填充0，使得满足为32的整数倍。</p>
+<p><strong>数据</strong>(Data)<br>存入数据。</p>
+</blockquote>
+<hr>
+<h2 id="IPv6首部格式"><a href="#IPv6首部格式" class="headerlink" title="IPv6首部格式"></a>IPv6首部格式</h2><blockquote>
+<p><strong>版本</strong>(Version)<br>4比特。<br>IPv6该字段为6。</p>
+<p><strong>通信量类</strong>(Traffic Class)<br>类似TOS，暂无用。</p>
+<p><strong>流标号</strong>(Flow Label)<br>20比特。<br>用于服务质量(QoS: Quality Of Service)控制，不使用全设为0。</p>
+<p><strong>有效载荷长度</strong>(Payload Length)<br>包的数据部分的长度。</p>
+<p><strong>下一个首部</strong>(Next Header)<br>8比特。<br>表示IP的上一层协议(TCP或UDP)。<br>有IPv6扩展首部的情况下，为第一个扩展首部的协议类型。</p>
+<p><strong>跳数限制</strong>(Hop Limit)<br>8比特。<br>可通过的路由器的个数。</p>
+<p><strong>源地址</strong>(Source Address)<br>128比特。<br>发送端IP地址。</p>
+<p><strong>目标地址</strong>(Destination Address)<br>128比特。<br>接收端IP地址。</p>
+</blockquote>
+<h3 id="IPv6扩展首部"><a href="#IPv6扩展首部" class="headerlink" title="IPv6扩展首部"></a>IPv6扩展首部</h3><p>IPv6首部长度固定。<br>扩展首部长度不固定。<br>扩展首部位于IPv6首部与TCP/UDP首部中间。<br>对IPv6数据包进行分片，可以设置扩展域为44。</p>
+<p>包括：</p>
+<ul>
+<li>扩展首部协议</li>
+<li>下一个扩展首部字段</li>
+</ul>
+<hr>
+<h2 id="IP协议相关技术"><a href="#IP协议相关技术" class="headerlink" title="IP协议相关技术"></a>IP协议相关技术</h2><h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p><strong>背景</strong><br>IP地址不好记，使用<strong>主机识别码</strong>代替IP地址。<br><strong>主机识别码</strong>和IP地址映射关系存放在hosts中。</p>
+<p>DNS：管理主机名和IP地址之间对应关系的系统。</p>
+<h3 id="域名的构成"><a href="#域名的构成" class="headerlink" title="域名的构成"></a>域名的构成</h3><p>采用分层构成。<br>域名的分层结构像一棵倒挂的树，顶点是根(Root)，下一层为第1层域名，代表国家的域名（顶级域名），下一层表示特定领域的域名（国别顶级域名）。</p>
+<h3 id="域名服务器"><a href="#域名服务器" class="headerlink" title="域名服务器"></a>域名服务器</h3><p>管理域名的主机和相应的软件，每一层都有对应的域名服务器。<br>根部的DNS为根域名服务器，管理域名服务器的IP地址。</p>
+<ul>
+<li>每个域的分层都有各自的域名服务器</li>
+<li>各层域名服务器直到该层和下层的域名服务器的IP地址。</li>
+<li>所有域名服务器知道根域名服务器的IP地址。</li>
+</ul>
+<h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><ul>
+<li>解析器为获取IP地址，项域名服务器进行查询处理。</li>
+<li>接收查询请求的域名服务器首先查找自己的数据库，若有，则直接返回对应的IP地址，否则向根域名服务器查询。</li>
+<li>根域名服务器查询对应的域名服务器的IP地址，返回该IP地址。</li>
+<li>域名服务器向对应的域名服务器查询网页的IP地址。</li>
+<li>域名服务器将IP地址返回给主机。</li>
+<li>主机获取IP地址，按此进行访问。</li>
+</ul>
+<h3 id="DNS的其他功能"><a href="#DNS的其他功能" class="headerlink" title="DNS的其他功能"></a>DNS的其他功能</h3><ul>
+<li>通过IP地址检索主机名(PTR)</li>
+<li>上下层域名服务器IP地址的映射(NS)</li>
+<li>邮件地址和邮件接收服务器的主机名(MX)</li>
+</ul>
+<hr>
+<h2 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h2><p>ARP(Address Resolution Protocol)：<br>以目标IP地址为线索，定位下一个应该接收数据分包的网络设备对应的MAC地址。<br>适用于IPv4，IPv6适用ICMPv6。</p>
+<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p>从一个IP地址发送ARP请求包了解对应IP地址的MAC地址，目标地址将自己的MAC地址填入MAC响应包返回。通过ARP可获得IP地址对应的MAC地址。</p>
+<p>一般将MAC地址缓存到ARP缓存表一段时间，每次进行ARP，会更新缓存内容。</p>
+<h3 id="IP地址和MAC地址"><a href="#IP地址和MAC地址" class="headerlink" title="IP地址和MAC地址"></a>IP地址和MAC地址</h3><p>由于路由器隔断两个网络，只有MAC无法进行通信。<br>IP地址达到目的主机时没有发生过变化，而数据链路的目的地址会随着链路的不同而发生变化。<br>只使用MAC地址，由于其没有层次性，要存储所有设备的MAC地址。</p>
+<h3 id="RARP"><a href="#RARP" class="headerlink" title="RARP"></a>RARP</h3><p>RARP(Reverse Address Resolution Protocol)<br>从MAC地址定位IP地址，适用于无法通过DHCP动态获取IP地址的设备。<br>需要RARP服务器：每次设备启动时，会发送请求消息，请求IP地址，服务器收到请求消息，会发送响应消息。主机接收到。</p>
+<h3 id="代理ARP"><a href="#代理ARP" class="headerlink" title="代理ARP"></a>代理ARP</h3><p>Proxy ARP(代理 ARP)的路由器可以将ARP请求转发给邻近的网段。<br>两个网段的节点之间可以像同一个网段中一样进行通信。</p>
+<hr>
+<h2 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h2><p><strong>主要功能</strong></p>
+<ul>
+<li>确认IP包是否送达目标地址</li>
+<li>通知在发送过程中IP包被废弃的具体原因</li>
+<li>改善网络设置</li>
+</ul>
+<p><strong>分类</strong></p>
+<ul>
+<li>通知出错原因的错误消息</li>
+<li>用于诊断的查询消息</li>
+</ul>
+<h3 id="主要ICMP消息"><a href="#主要ICMP消息" class="headerlink" title="主要ICMP消息"></a>主要ICMP消息</h3><p><strong>ICMP目标不可达消息</strong>(类型3)<br>IP路由器无法将IP数据包发送给目标地址，从而返回一个目标不可达(Destination Unreachable Message)的ICMP消息。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>错误号</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Host Unreachable（没有主机消息，主机没连接网络）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Fragmentaion Needed and Don’t Fragment was Set（MTU探索）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>ICMP重定向消息</strong>(类型5)<br>路由器发现更佳的路由路径，会向发送端发送ICMP重定向(ICMP Redirect Message)，从而主机采用重定向的地址。</p>
+<p><strong>ICMP超时消息</strong>(类型11)<br>TTL减到0时IP包会被抛弃，并发送一个ICMP超时消息(ICMP Time Exceeded Message)，通知发送端报文被抛弃。</p>
+<p>目的：<br>防止发生循环状况，控制包达到的范围。</p>
+<p><em>UNIX下使用指令 <code>traceroute</code></em></p>
+<p><strong>ICMP回送消息</strong>(类型0、8)</p>
+<p>判断发送的数据包是否成功到达对端的消息。<br>发送端发送回送请求消息(ICMP Echo Request Message)，接收端响应回送应答消息(ICMP Echo Replay Message)。</p>
+<h3 id="其他ICMP消息"><a href="#其他ICMP消息" class="headerlink" title="其他ICMP消息"></a>其他ICMP消息</h3><p><strong>ICMP原点抑制消息</strong>(ICMP Source Quench Message)<br>缓解网络拥堵情况，接收主机了解拥堵，放缓IP包发送。</p>
+<p><strong>ICMP路由器探索消息</strong><br>用于发现与自己相连网络中的路由器。<br>主机发送ICMP路由器请求(Router Solicitation)，路由器返回ICMP路由器公告消息(Router Advertisement)</p>
+<p><strong>ICMP地址掩码消息</strong><br>用于主机或路由器了解子网掩码。</p>
+<h3 id="ICMPv6"><a href="#ICMPv6" class="headerlink" title="ICMPv6"></a>ICMPv6</h3><p>分类：</p>
+<ul>
+<li>错误消息(1 ~ 127)</li>
+<li>信息消息(128 ~ 255)</li>
+</ul>
+<p>在IPv6中：<br>ICMP邻居探索消息(Neighbor Discovery)：从IP地址定位MAC地址的协议。<br>融合了ARP，ICMP重定向，ICMP路由器选择消息和自动设置IP地址等功能。</p>
+<p><strong>邻居探索</strong><br>作用：</p>
+<ul>
+<li>查询IPv6地址与MAC地址的对应关系</li>
+<li>宣告消息获得MAC地址</li>
+<li>IPv6的多播地址</li>
+<li>即插即用功能，没有DHCP获取IP地址</li>
+</ul>
+<hr>
+<h2 id="DHCP-Dynamic-Host-Configuration-Protocol"><a href="#DHCP-Dynamic-Host-Configuration-Protocol" class="headerlink" title="DHCP(Dynamic Host Configuration Protocol)"></a>DHCP(Dynamic Host Configuration Protocol)</h2><h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>实现自动设置IP地址，同一管理IP地址分配。<br>设备只要物理上连接网络，就可以自动获取TCP/IP通信必须的设置。</p>
+<h3 id="工作机制-1"><a href="#工作机制-1" class="headerlink" title="工作机制"></a>工作机制</h3><p>先设置DHCP服务器，设置待分配的IP地址，子网掩码，路由控制信息和DNS服务器信息。<br>DHCP获取IP：</p>
+<ul>
+<li>DHCP发现包：客户端要求设置IP地址和子网掩码；服务器通知可以使用的网络设置。</li>
+<li>DHCP请求包：服务器通知想要使用的设置。服务器通知允许的设置。</li>
+</ul>
+<p>不需要IP地址时，发送DHCP解除包。<br>DHCP有时间限制，可以发送请求包延长时限。</p>
+<h3 id="DHCP中继代理"><a href="#DHCP中继代理" class="headerlink" title="DHCP中继代理"></a>DHCP中继代理</h3><p>对于大量设备的网段，可以设置DHCP中继代理：<br>每个网段设置一个DHCP中继代理，其可以设置DHCP服务器的IP地址，在DHCP服务器上为每个网段注册IP地址的分配地址范围。</p>
+<p>流程：</p>
+<ul>
+<li>客户端向中继代理发送DHCP请求包</li>
+<li>中继代理收到广播包后以单播方式发送给DHCP服务器。</li>
+<li>DHCP服务器向中继代理返回应答</li>
+<li>中继代理将包转发给客户端。</li>
+</ul>
+<hr>
+<h2 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h2><p>NAT(Network Address Translator):<br>在本地网络使用私有地址，在连接互联网时使用全局IP地址。<br>还有转换TCP、UDP端口号的NAPT(Network Address Translator)。</p>
+<h3 id="工作机制-2"><a href="#工作机制-2" class="headerlink" title="工作机制"></a>工作机制</h3><p>发送端使用私有地址发送数据包，NAT路由器将源地址替换成全局IP地址后再转发数据包。<br>接收数据包时，NAT将目标地址先转换成私有IP地址再进行转发。</p>
+<p>NAPT路由器内部有一张自动生成的用来转换地址的表，数据包按照表中的映射进行处理。</p>
+<p>在TCP下，建立TCP连接首次握手时的SYN包发出，就生成该表。关闭连接时发出的FIN包的确认应答从表中删除。</p>
+<h3 id="NAT-PT"><a href="#NAT-PT" class="headerlink" title="NAT-PT"></a>NAT-PT</h3><p>将IPv6的首部转换为IPv4的首部，从而IPv6地址的设备和IPv4地址的设备可以通信。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li>无法从外部向内部建立连接</li>
+<li>转换表建立需要开销</li>
+<li>NAT异常所有TCP需要重置</li>
+</ul>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>改用IPv6</li>
+<li>NAT穿越：先发送虚拟的网络包给NAT外侧，NAT会生成转换表。</li>
+</ul>
+<hr>
+<h2 id="IP隧道"><a href="#IP隧道" class="headerlink" title="IP隧道"></a>IP隧道</h2><p>IP隧道：<br>在网络层的首部后面继续追加网络层首部的通信方式。</p>
+<p>(一般情况下，IP首部后面是TCP或UDP的首部)</p>
+<p>应用：</p>
+<ul>
+<li>在不支持IPv4或IPv6的网络中使用IP隧道转发数据包。</li>
+<li>利用IP隧道转发多播消息。多数路由器没有多播包的路由控制消息，可以使用IP隧道，是路由器用单播的形式发包，包到达对应的路由器再转换为多播IP包，从而实现跨路由器多播。</li>
+</ul>
+<hr>
+<h2 id="其他IP相关技术"><a href="#其他IP相关技术" class="headerlink" title="其他IP相关技术"></a>其他IP相关技术</h2><h3 id="IP多播相关技术"><a href="#IP多播相关技术" class="headerlink" title="IP多播相关技术"></a>IP多播相关技术</h3><p>通过IPv4中IGMP，IPv6中ICMPv6的MLD实现。</p>
+<p>作用：</p>
+<ul>
+<li>向路由器表明想要接受多播消息（并通知想要接受多播的地址）</li>
+<li>向交换集线器通知想要接收多播的地址</li>
+</ul>
+<p>流程：</p>
+<ul>
+<li>主机通过IGMP/MLD通知接收多播</li>
+<li>交换机通过IGMP/MLD探听获取接收多播消息</li>
+<li>路由器通过多播协议转发多播包</li>
+<li>路由器将多播包转发给子网</li>
+<li>交换机将包只转发给有接收端的端口</li>
+</ul>
+<h3 id="IP任播"><a href="#IP任播" class="headerlink" title="IP任播"></a>IP任播</h3><p>为提供同一种服务的服务器配置同一个IP地址，并与最近的服务器进行通信的一种方法。</p>
+<p>应用：<br>DNS根域名服务器，全球不止有13处。</p>
+<p>限制：<br>无法保证多个包发送给同一个主机，不适用于TCP通信。</p>
+<h3 id="通信质量控制"><a href="#通信质量控制" class="headerlink" title="通信质量控制"></a>通信质量控制</h3><p><em>收敛：通信线路上的拥塞，路由器和集线器的队列溢出，出现丢包。</em></p>
+<p><strong>机制</strong>：<br>使用RSVP技术。</p>
+<ul>
+<li>IntServ：在发送端传送控制包，收发端之间的路由器进行质量控制的设置。</li>
+<li>DiffServ：域内的路由器对所有IP包首部进行DSCP替换，设置优先级。路由器有DSCP字段的优先级进行优先处理。</li>
+</ul>
+<h3 id="显示拥塞通知"><a href="#显示拥塞通知" class="headerlink" title="显示拥塞通知"></a>显示拥塞通知</h3><p>在IP层的一种显示拥塞通知机制：ECN。</p>
+<p>机制：</p>
+<ul>
+<li>发送包的IP首部中记录路由器是否遇到拥塞</li>
+<li>在返回包的TCP首部中通知是否发生过拥塞</li>
+<li>拥塞检查在<strong>网络层</strong></li>
+<li>拥塞通知在<strong>传输层</strong></li>
+</ul>
+<p>流程：</p>
+<ul>
+<li>IP头中的ECT标志设为1发送</li>
+<li>发送拥塞，设置IP头的CE标志为1</li>
+<li>收到包的CE为1，则TCP在发送应答时，在TCP头中ECE标志设为1后再发送</li>
+<li>TCP发现收到的应答回执ECE为1，降低拥塞窗口（包的发送速度），设置CWR为1</li>
+</ul>
+<h3 id="Mobile-IP"><a href="#Mobile-IP" class="headerlink" title="Mobile IP"></a>Mobile IP</h3><p>在主机说连接的子网IP发生变化时，主机IP地址保持不变。</p>
+<p>流程：</p>
+<ul>
+<li>发送端向归属代理发送数据包</li>
+<li>归属代理利用IP隧道转发给移动主机的外部代理</li>
+<li>外部代理将IP头删除还原原始数据</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>必须有外部代理</li>
+<li>存在三角路由问题</li>
+<li>源地址和本域IP地址不同，容易被抛弃</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-16T10:11:22.815Z" itemprop="dateUpdated">2020-01-16 18:11:22</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICP-IP/" rel="tag">ICP/IP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/14/TCPIP-3/&title=《TCPIP-3》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/14/TCPIP-3/&title=《TCPIP-3》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/14/TCPIP-3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-3》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/14/TCPIP-3/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/14/TCPIP-3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/15/TCPIP-4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCPIP-4</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/14/TCPIP-2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">TCPIP-2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/14/TCPIP-3/&title=《TCPIP-3》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/14/TCPIP-3/&title=《TCPIP-3》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/14/TCPIP-3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-3》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/14/TCPIP-3/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/14/TCPIP-3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/14/TCPIP-3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>TCPIP-2 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="TCP/IP">
+    <meta name="description" content="TCP&#x2F;IP基础知识    OSI模型 TCP&#x2F;IP模型     应用层    表示层    会话层 TELENT,SSH,HTTP,SMTP,POP,SSL&#x2F;TLS,FTP,MIME,HTML,SNMP,MIB,SIP,RTP…   传输层 TCP,UDP,UDP-Lite,SCTP,DCCP   网络层 ARP,IPv4,IPv6,ICMP,IPsec   数据链路层    物理层 以太网,无">
+<meta name="keywords" content="TCP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCPIP-2">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;14&#x2F;TCPIP-2&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="TCP&#x2F;IP基础知识    OSI模型 TCP&#x2F;IP模型     应用层    表示层    会话层 TELENT,SSH,HTTP,SMTP,POP,SSL&#x2F;TLS,FTP,MIME,HTML,SNMP,MIB,SIP,RTP…   传输层 TCP,UDP,UDP-Lite,SCTP,DCCP   网络层 ARP,IPv4,IPv6,ICMP,IPsec   数据链路层    物理层 以太网,无">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-16T10:11:22.815Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCPIP-2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCPIP-2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-14T00:44:42.000Z" itemprop="datePublished" class="page-time">
+  2020-01-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP-IP基础知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">TCP/IP基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据链路的作用"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">数据链路的作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据链路相关技术"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">数据链路相关技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MAC地址"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">MAC地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#共享介质型网络"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">共享介质型网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非共享介质网络"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">非共享介质网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#根据MAC地址转发"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">根据MAC地址转发</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环路检测技术"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">环路检测技术</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VLAN"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">VLAN</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#以太网-Ethernet"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">以太网(Ethernet)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#以太网帧格式"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">以太网帧格式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无线通信"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">无线通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#802-11"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">802.11</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PPP"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">PPP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#帧格式"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">帧格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#PPPoE"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">PPPoE</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他数据链路"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">其他数据链路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ATM-Asynchronous-Transfer-Mode"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">ATM(Asynchronous Transfer Mode)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#POS"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">POS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FDDI"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">FDDI</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Token-Ring"><span class="post-toc-number">1.6.4.</span> <span class="post-toc-text">Token Ring</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#公共网络"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">公共网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模拟电话网络"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">模拟电话网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ADSL"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">ADSL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FTTH"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">FTTH</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#专线"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">专线</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VPN"><span class="post-toc-number">1.7.5.</span> <span class="post-toc-text">VPN</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#公共无线LAN"><span class="post-toc-number">1.7.6.</span> <span class="post-toc-text">公共无线LAN</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他公共无线通信服务"><span class="post-toc-number">1.7.7.</span> <span class="post-toc-text">其他公共无线通信服务</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCPIP-2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCPIP-2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-14 08:44:42" datetime="2020-01-14T00:44:42.000Z"  itemprop="datePublished">2020-01-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="TCP-IP基础知识"><a href="#TCP-IP基础知识" class="headerlink" title="TCP/IP基础知识"></a>TCP/IP基础知识</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">OSI模型</th>
+<th style="text-align:left">TCP/IP模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用层</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">表示层</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">会话层</td>
+<td style="text-align:left">TELENT,SSH,HTTP,SMTP,POP,SSL/TLS,FTP,MIME,HTML,SNMP,MIB,SIP,RTP…</td>
+</tr>
+<tr>
+<td style="text-align:left">传输层</td>
+<td style="text-align:left">TCP,UDP,UDP-Lite,SCTP,DCCP</td>
+</tr>
+<tr>
+<td style="text-align:left">网络层</td>
+<td style="text-align:left">ARP,IPv4,IPv6,ICMP,IPsec</td>
+</tr>
+<tr>
+<td style="text-align:left">数据链路层</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">物理层</td>
+<td style="text-align:left">以太网,无线LAN,PPP…（双绞线，无线，光纤）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="数据链路的作用"><a href="#数据链路的作用" class="headerlink" title="数据链路的作用"></a>数据链路的作用</h2><p>定义了通过通信媒介互连的设备之间传输的规范。<br>通信媒介：双绞线，同轴电缆，光纤，电波或红外线等，还可通过交换机，网桥，中继器等中转数据。</p>
+<p>相关技术：</p>
+<ul>
+<li>MAC寻址</li>
+<li>介质共享</li>
+<li>非公有网络</li>
+<li>分组交换</li>
+<li>环路检测</li>
+<li>VLAN(Virtual Local Area Network,虚拟局域网)</li>
+<li>以太网</li>
+<li>WLAN(Wireless Local Area Network,无线局域网)</li>
+<li>PPP(Point to Point Protocol,点对点协议)</li>
+</ul>
+<p><strong>数据链路的段</strong><br>通过中继器连接的两条网线：</p>
+<ul>
+<li>从网络层看：是同一个网络，为一个段。</li>
+<li>从物理层看：是两个网络，为不同的段。</li>
+</ul>
+<p><strong>网络拓扑</strong>(Topology)<br>网络的连接和构成的形态。<br>分为：</p>
+<ul>
+<li>总线型</li>
+<li>环型</li>
+<li>星型</li>
+<li>网状型</li>
+</ul>
+<hr>
+<h2 id="数据链路相关技术"><a href="#数据链路相关技术" class="headerlink" title="数据链路相关技术"></a>数据链路相关技术</h2><h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><p>用来识别数据链路中互连的节点。<br>长48比特，烧录到ROM中，每个网卡的MAC地址是唯一的。</p>
+<p>地址格式：<br>第1位：单播(0)/多播(1)<br>第2位：全局地址(0)/本地地址(1)<br>第3-24位：厂商识别码<br>第25-48位：厂商内识别码</p>
+<h3 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h3><p>多个设备共享一个通信介质。<br>早期以太网和FDDI。<br>使用半双工通信。</p>
+<p>介质访问控制方式：</p>
+<ul>
+<li>争用方式</li>
+<li>令牌传递方式</li>
+</ul>
+<p><strong>争用方式</strong>(Contention)<br>载波监听多路访问(CSMA)。<br>采用先到先得的方式占用信道发送数据。</p>
+<p>CSMA/CD(Carrier Sense Multiple Access/Collision Detection)载波监听多路访问/冲突检测</p>
+<ul>
+<li>如果载波信道上没有数据，在任何站都可发送数据。</li>
+<li>检查是否发送冲突。若发生冲突，则放弃发送数据，释放载波信道。</li>
+<li>随机延时一段时间，重新争用介质，重新发送帧。</li>
+</ul>
+<p><strong>令牌传递方式</strong></p>
+<ul>
+<li>只有获得令牌的站才有权发送数据</li>
+<li>若不是接收端，则转发给下一个站</li>
+<li>若是接收端，则设置“已接收数据”，并再发送给下一个站</li>
+<li>数据帧回到源地址后被抛弃，令牌沿着环传递给下一个站</li>
+</ul>
+<h3 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h3><p>不共享介质，每个站直连交换机，由交换机负责转发数据帧。<br>采用全双工通信方式。<br>可构造虚拟局域网(VLAN)，进行流量控制。<br>交换机故障则连接的每个站都无法联网。</p>
+<p><strong>半双工与全双工通信</strong></p>
+<ul>
+<li>半双工：同一时间只发送或接收。</li>
+<li>全双工：同一时间可以同时进行发送和接收数据。</li>
+</ul>
+<h3 id="根据MAC地址转发"><a href="#根据MAC地址转发" class="headerlink" title="根据MAC地址转发"></a>根据MAC地址转发</h3><p>交换机根据MAC和对应的接口发送数据，映射关系存放在<strong>转发表</strong>(Forwarding Table)中。<br>转发表是由交换机自学形成的，是交换机将接收到数据帧中的MAC地址和接收的端口进行绑定。</p>
+<p>转发方式：</p>
+<ul>
+<li>存储转发：检查以太网数据帧末尾的FCS位后再转发，避免错误帧。</li>
+<li>直通转发：不需要将整个帧全部接收下来再进行转发。</li>
+</ul>
+<h3 id="环路检测技术"><a href="#环路检测技术" class="headerlink" title="环路检测技术"></a>环路检测技术</h3><p>网桥将数据转发值相连的链路，导致数据帧在网络被循环转发</p>
+<p>解决方案：</p>
+<ul>
+<li>生成树</li>
+<li>源路由</li>
+</ul>
+<p><strong>生成树</strong><br>以一个网桥作为树的根，对其端口设置权重，根据权重优先选择某些端口。</p>
+<p><strong>源路由法</strong><br>判断发送数据的源地址网桥，将帧写入RIF中，网桥根据RIF发送帧到目标地址。</p>
+<h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><p>不改变物理网络拓扑结构的情况下，修改网络的结构。<br>需要具有路由功能的交换机实现通信。<br>对于不同的网段使用VID标签进行唯一标识。</p>
+<hr>
+<h2 id="以太网-Ethernet"><a href="#以太网-Ethernet" class="headerlink" title="以太网(Ethernet)"></a>以太网(Ethernet)</h2><p><strong>连接形式</strong><br>终端与交换机之间独占电缆，不同的交换机之间通过光纤连接。</p>
+<p><strong>分类</strong><br>10BASE：10Mbps<br>100BASE：100Mbps<br>10GBASE：10Gbps</p>
+<h3 id="以太网帧格式"><a href="#以太网帧格式" class="headerlink" title="以太网帧格式"></a>以太网帧格式</h3><p>组成：</p>
+<ul>
+<li>前导码(Preamble)</li>
+<li>帧本体</li>
+</ul>
+<p>前导码：<br>8个8位0、1交替组成，末尾两位为“11”，称为SFD(Start Frame Delimiter)。</p>
+<p>帧本体：<br><strong>首部</strong>：共14字节：6字节目标MAC地址，6字节源MAC地址和2字节上层协议类型。<br><strong>数据</strong>：46~1500字节。<br><strong>尾部</strong>：4字节FCS(Frame Check Sequence，帧检测序列)</p>
+<p>类型：以太网上层网络协议类型。<br>FCS：检查帧是否损坏，将错误帧丢弃。</p>
+<p><strong>IEEE802.3 Ethernet以太网帧格式</strong><br>没有类型，有</p>
+<ul>
+<li>帧长度（2字节）</li>
+<li>LLC（3字节）</li>
+<li>SNAP（5字节）</li>
+</ul>
+<p><strong>数据链路层分层</strong></p>
+<ul>
+<li>介质访问控制层：由特有的首部信息进行控制</li>
+<li>逻辑链路控制层：由两种不同数据链路共有的枕头信息进行控制</li>
+</ul>
+<hr>
+<h2 id="无线通信"><a href="#无线通信" class="headerlink" title="无线通信"></a>无线通信</h2><p>种类：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>距离</th>
+<th>相关技术</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无线PAN</td>
+<td>10m</td>
+<td>蓝牙</td>
+</tr>
+<tr>
+<td>无线LAN</td>
+<td>100m</td>
+<td>Wi-Fi</td>
+</tr>
+<tr>
+<td>无线MAN</td>
+<td>1000-10000m</td>
+<td>WiMAX</td>
+</tr>
+<tr>
+<td>无线RAN</td>
+<td>200000~</td>
+<td></td>
+</tr>
+<tr>
+<td>无线WAN</td>
+<td>~</td>
+<td>3G,LTE,4G</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="802-11"><a href="#802-11" class="headerlink" title="802.11"></a>802.11</h3><p>无线LAN协议中物理层与数据链路层的一部分(MAC层)</p>
+<p>物理层：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>802.11</th>
+<th>802.11a</th>
+<th>802.11b</th>
+<th>802.11g</th>
+<th>802.11n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最大速率</td>
+<td>2Mbps</td>
+<td>54Mbps</td>
+<td>11Mbps</td>
+<td>54Mbps</td>
+<td>150Mbps</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>2.4GHz</td>
+<td>5GHz</td>
+<td>2.4GHz</td>
+<td>2.4GHz</td>
+<td>2.4/5GHz</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>数据链路层：<br>|LLE层|802.2逻辑链路控制|<br>|—-|—-|<br>|MAC层|802.11 MAC CSMA/CA|</p>
+<p>网络层：IP等</p>
+<p>传输层：TCP/UDP等</p>
+<hr>
+<h2 id="PPP"><a href="#PPP" class="headerlink" title="PPP"></a>PPP</h2><p>Point-to-Point，点对点，是1对1连接计算机的协议。<br>位于数据链路层。</p>
+<p>传输数据前需要进行PPP连接。</p>
+<p>主要包含两个协议：</p>
+<ul>
+<li>LCP协议(Link Control Protocol)</li>
+<li>NCP协议(Network Control Protocol)，若上层为IP，则为IPCP(IP Control Protocol)（负责IP地址设置）</li>
+</ul>
+<p>LCP：<br>负责建立、断开连接，设置最大接收单元(MRU)，设置验证协议(RAP或CHAP)以及是否进行通信质量监控。</p>
+<p>身份验证：<br>RAP(Password Authentication Protocol)：两次握手传输密码明文。<br>CHAP(Challenge Handshake Authentication Procotol)：使用一次一密OTP，定期更换密码。</p>
+<h3 id="帧格式"><a href="#帧格式" class="headerlink" title="帧格式"></a>帧格式</h3><ul>
+<li>标志码，1字节，011111110</li>
+<li>地址，1字节</li>
+<li>控制，1字节</li>
+<li>类型，2字节</li>
+<li>数据，0-1500字节</li>
+<li>FCS，4字节</li>
+</ul>
+<h3 id="PPPoE"><a href="#PPPoE" class="headerlink" title="PPPoE"></a>PPPoE</h3><p>在以太网上利用PPPoE(PPP over Ethernet)提供PPP功能。</p>
+<p>帧格式：</p>
+<ul>
+<li>以太网，14字节</li>
+<li>PPPoE首部，6字节</li>
+<li>PPP协议，2字节</li>
+<li>数据，38-1492字节</li>
+<li>FCS</li>
+</ul>
+<p>PPPoE首部：</p>
+<ul>
+<li>版本，4比特</li>
+<li>类型，4比特</li>
+<li>编码，2字节</li>
+<li>会话ID，2字节</li>
+<li>长度，2字节</li>
+</ul>
+<hr>
+<h2 id="其他数据链路"><a href="#其他数据链路" class="headerlink" title="其他数据链路"></a>其他数据链路</h2><h3 id="ATM-Asynchronous-Transfer-Mode"><a href="#ATM-Asynchronous-Transfer-Mode" class="headerlink" title="ATM(Asynchronous Transfer Mode)"></a>ATM(Asynchronous Transfer Mode)</h3><p>使用信元(5字节首部和48字节数据)作为单位进行传输数据。</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>面向连接的数据链路</li>
+<li>通信前需要设置通信线路</li>
+<li>允许同时与多个对端建立通信连接</li>
+<li>可以在任何时候发送任何数据</li>
+</ul>
+<p><strong>异步与同步</strong><br>同步：时间分成不同的时隙，不同的设备独占一个时隙，效率低。<br>异步：按照数据到达的顺序传输，需要5字节包首部识别(VPI，VCI)。</p>
+<p>一个信元只能发送48字节数据，需要使用AAL，每个IP包附上各层的协议首部后，分成最多192个信元发送，若一个信元丢失，则需要重发整个信元。</p>
+<h3 id="POS"><a href="#POS" class="headerlink" title="POS"></a>POS</h3><p>一种在SDH上进行包通信的协议，SDH是光纤上传输数字信号的物理层规范。</p>
+<h3 id="FDDI"><a href="#FDDI" class="headerlink" title="FDDI"></a>FDDI</h3><p>分布式光纤数据结构，使用令牌环访问方式。每个站通过光纤形成环状，使用双环(DAS)避免某处断开导致通信中断。</p>
+<h3 id="Token-Ring"><a href="#Token-Ring" class="headerlink" title="Token Ring"></a>Token Ring</h3><p>令牌环网来自令牌环LAN技术。</p>
+<hr>
+<h2 id="公共网络"><a href="#公共网络" class="headerlink" title="公共网络"></a>公共网络</h2><h3 id="模拟电话网络"><a href="#模拟电话网络" class="headerlink" title="模拟电话网络"></a>模拟电话网络</h3><p>利用固定电话线路进行通信，传输速率在56kbps。</p>
+<h3 id="ADSL"><a href="#ADSL" class="headerlink" title="ADSL"></a>ADSL</h3><p>对模拟电话线路进行扩展，在话机与电信局交换机之间附加分离器。</p>
+<h3 id="FTTH"><a href="#FTTH" class="headerlink" title="FTTH"></a>FTTH</h3><p>Fiber To The Home，高速光纤直连用户家里。通过ONU将计算机与之关联。</p>
+<h3 id="专线"><a href="#专线" class="headerlink" title="专线"></a>专线</h3><p>提供一对一的连线。</p>
+<h3 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h3><p>虚拟专用网络</p>
+<ul>
+<li>IP-VPN：在IP网络使用MPLS构建VPN，即在IP包上附加标签进行传输控制。还可使用IPsec技术，对IP包进行检验和加密。</li>
+<li>广域以太网：数据链路层的以太网利用VLAN实现VPN技术。</li>
+</ul>
+<h3 id="公共无线LAN"><a href="#公共无线LAN" class="headerlink" title="公共无线LAN"></a>公共无线LAN</h3><p>架设热点(HotSpot)，使用无线LAN网络卡可以连接上网。</p>
+<h3 id="其他公共无线通信服务"><a href="#其他公共无线通信服务" class="headerlink" title="其他公共无线通信服务"></a>其他公共无线通信服务</h3><ul>
+<li>X.25：允许一个端点连接多个站点。</li>
+<li>帧中继：允许1对N的通信。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-16T10:11:22.815Z" itemprop="dateUpdated">2020-01-16 18:11:22</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/14/TCPIP-2/&title=《TCPIP-2》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/14/TCPIP-2/&title=《TCPIP-2》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/14/TCPIP-2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-2》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/14/TCPIP-2/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/14/TCPIP-2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/14/TCPIP-3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCPIP-3</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/13/TCPIP-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">TCPIP-1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/14/TCPIP-2/&title=《TCPIP-2》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/14/TCPIP-2/&title=《TCPIP-2》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/14/TCPIP-2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-2》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/14/TCPIP-2/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/14/TCPIP-2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/14/TCPIP-2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

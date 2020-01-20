@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>DataStructure-tree2 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构,二叉树,红黑树">
+    <meta name="description" content="高效二叉查找树最优二叉查找树定义  二叉树中有n个元素，分别表示为$a_1,a_2,…,a_n$，满足$a_1 &amp;lt; a_2 &amp;lt; … &amp;lt; a_n$。 查找$a_i$的概率为$p_i$。 查找在$a_i$和$a_{i+1}$处失败的概率为$q_i$。 $T_{ij}$为关键字$a_{i+1}, …, a_j$构成的最优二叉查找树，$T_{ii}$：空树。 $c_{ij}$：$T_{i">
+<meta name="keywords" content="数据结构,二叉树,红黑树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DataStructure-tree2">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;07&#x2F;DataStructure-tree2&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="高效二叉查找树最优二叉查找树定义  二叉树中有n个元素，分别表示为$a_1,a_2,…,a_n$，满足$a_1 &amp;lt; a_2 &amp;lt; … &amp;lt; a_n$。 查找$a_i$的概率为$p_i$。 查找在$a_i$和$a_{i+1}$处失败的概率为$q_i$。 $T_{ij}$为关键字$a_{i+1}, …, a_j$构成的最优二叉查找树，$T_{ii}$：空树。 $c_{ij}$：$T_{i">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-11T07:25:08.972Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">DataStructure-tree2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">DataStructure-tree2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-07T14:15:07.000Z" itemprop="datePublished" class="page-time">
+  2020-01-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#高效二叉查找树"><span class="post-toc-number">1.</span> <span class="post-toc-text">高效二叉查找树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最优二叉查找树"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">最优二叉查找树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AVL树"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">AVL树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复杂度"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">复杂度</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#红黑树"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">红黑树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么使用红黑树"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">为什么使用红黑树</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义-1"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性质"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">性质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表示"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">表示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作-1"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#伸展树-Splay-tree"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">伸展树(Splay tree)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作-2"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">操作</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-DataStructure-tree2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">DataStructure-tree2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-07 22:15:07" datetime="2020-01-07T14:15:07.000Z"  itemprop="datePublished">2020-01-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="高效二叉查找树"><a href="#高效二叉查找树" class="headerlink" title="高效二叉查找树"></a>高效二叉查找树</h1><h2 id="最优二叉查找树"><a href="#最优二叉查找树" class="headerlink" title="最优二叉查找树"></a>最优二叉查找树</h2><p><strong>定义</strong></p>
+<ul>
+<li>二叉树中有n个元素，分别表示为$a_1,a_2,…,a_n$，满足$a_1 &lt; a_2 &lt; … &lt; a_n$。</li>
+<li>查找$a_i$的概率为$p_i$。</li>
+<li>查找在$a_i$和$a_{i+1}$处失败的概率为$q_i$。</li>
+<li>$T_{ij}$为关键字$a_{i+1}, …, a_j$构成的最优二叉查找树，$T_{ii}$：空树。</li>
+<li>$c_{ij}$：$T_{ij}$的代价，$c_{ii} = 0$。</li>
+<li>$r_{ij}$：$T_{ij}$的树根。</li>
+<li>$w_{ij}$：$T_{ij}$的权值，$w_{ij} = q_i + \sum_{k=i+1}^j(q_k + p_k)$。</li>
+</ul>
+<p><strong>目标函数</strong><br>设$T_{ij}$的根为$k,\ i &lt; k \leq j$，则有：<br>$c_{ij} = p_k + c_{i,k-1} + c_{k, j} + w_{i, k-1} + w_{k,j} = w_{ij} + c_{i,k-1} + c_{kj}$<br>$w_{i,j} = w_{i,j-1} + w_{j,j} + p_j$</p>
+<p><strong>求解</strong><br>先求解$w_{i,j}$，再计算对应的$c_{ij}$，从而确定$T_{ij}$对应的根。<br>$i,j$的确定顺序是：先计算$j = i$，再计算$j = i+1$，再计算$j = i + 2$ …</p>
+<hr>
+<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>高度平衡</strong>：空树是平衡树，或：T不是空树，有左子树$T_L$和右子树$T_R$，则$T$<strong>高度平衡</strong>当且仅当：1. $T_L$和$T_R$高度平衡；2. $|h_L - h_R| \leq 1$，$h_L$、$h_R$分别是$T_L$，$T_R$的高度。</p>
+<p><strong>平衡因子</strong>：二叉树结点$T$的平衡因子$bf(T)$定义为$h_L-h_R$，$h_L$，$h_R$分别是左，右子树$T_L$，$T_R$的高度。AVL树中每个结点$T$的$bf(T) = -1,0,1$。</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>插入导致的不平衡，需要四种旋转：LL，RR，LR，RL。<br>设新结点为N，其最近的祖先平衡因子为$\pm 2$的结点为A。</p>
+<ul>
+<li>LL：新结点N插入到A的左子树的左子树</li>
+<li>LR：新结点N插入到A的左子树的右子树</li>
+<li>RL：新结点N插入到A的右子树的左子树</li>
+<li>RR：新结点N插入到A的右子树的右子树</li>
+</ul>
+<p><em>LL和RR，LR和RL是对称的，可以从其中两个推出另外一个</em></p>
+<p><strong>是否需要调整</strong><br>向AVL树插入一个结点，首先需要确定是否需要进行调整操作，若需要，则再判断何种旋转。</p>
+<p>判断依据：<br>从插入新结点的父结点开始，沿着向根结点的路径中各个祖先结点，分别检查插入新结点的影响：</p>
+<ul>
+<li>对于其父结点，若没有孩子结点，调整插入结点后父结点的平衡因子并依次向上调整祖先结点的平衡因子；若有孩子，则调整父结点的平衡因子，此时AVL树已平衡。</li>
+<li>对于需要调整祖先结点的平衡因子的情况：若插入结点位于祖先结点的左子树，则平衡因子+1；否则，平衡因子-1。</li>
+<li>当调整的祖先结点为根结点或调整后平衡因子为0，+2，-2时，停止向上调整。</li>
+<li>对于停止调整的结点，若其平衡因子为+2 或 -2时，需要以此为参考进行旋转。</li>
+</ul>
+<p><strong>LL旋转</strong><br>设：结点A和结点B需要进行LL旋转，其中B是A的左子结点。Br是结点B的右子树。</p>
+<p>步骤：</p>
+<ul>
+<li>Br成为A的左子树</li>
+<li>A成为B的右子结点</li>
+<li>指向A的指针改成指向B</li>
+</ul>
+<p>旋转前后子树的高度不变，所以不需要向上再进行调整。</p>
+<p>适用：<br>插入的结点位于需要调整结点的左子树，并且插入结点是其父的左子结点</p>
+<p><strong>LR旋转</strong><br>设：需要对结点A，B和C进行调整。其中：<br>B是A的左子结点，C是B的右子结点，Cl是C的左子树，Cr是C的右子树，新插入的结点在C的子树中。</p>
+<p>步骤：</p>
+<ul>
+<li>B的右子结点指向Cl</li>
+<li>A的左子结点指向C</li>
+<li>C的左子结点指向B</li>
+<li>A的左子结点指向子树Cr</li>
+<li>指向A指针指向B</li>
+<li>B的右子结点指向A</li>
+</ul>
+<p>适用：<br>插入结点位于需要调整结点的左子树，并且插入结点是其父的右子树。</p>
+<p><strong>插入</strong></p>
+<ul>
+<li>首先：依据二叉查找树的性质插入结点。</li>
+<li>判断是否需要旋转。</li>
+<li>若需要旋转，则判断旋转种类，在按照对应的步骤进行旋转。</li>
+</ul>
+<p><strong>删除</strong></p>
+<ul>
+<li>若删除的结点是叶子结点，则直接删除。</li>
+<li>若删除的非叶子结点，则用其后继结点替代，等价于删除后继结点（<em>若有右子树，则为右子树的最左端结点；若没有，则为祖先结点中距离其最近的并且有右子树，该右子树的最左端端点；若都没有右子树，则使用其左子结点替代</em>）</li>
+<li>然后从被删除结点的父结点开始，向上调整各祖先结点的平衡因子，判断是否需要旋转，若需要，则按照对应的旋转的方式进行调整。</li>
+</ul>
+<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查找</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>O(log n)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><h3 id="为什么使用红黑树"><a href="#为什么使用红黑树" class="headerlink" title="为什么使用红黑树"></a>为什么使用红黑树</h3><ol>
+<li>插入一个结点引起的不平衡，AVL和RB-Tree都是最多使用两次旋转操作，为O(1)。而删除结点引起的不平衡，最坏情况下，AVL需要维护从被删结点到根结点的路径上所有结点的平衡，为O(log n)。而RB-Tree最多需要三次选择，为O(1)。</li>
+<li>AVL结构更加平衡，插入、删除容易引起不平衡，在<strong>大量需要插入，删除操作</strong>的情况下，需要的旋转的操作更加频繁，而RB-Tree效率更高。</li>
+<li>RB-Tree的统计性能更好。</li>
+</ol>
+<h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>是二叉树，其中每个结点有颜色属性：红色或黑色。<br>并满足以下性质：</p>
+<ul>
+<li>根结点与外部结点都是黑结点</li>
+<li>所有从根到外部结点的路径上都不存在连续两个红结点</li>
+<li>所有从根到外部结点的路径上黑色结点的个数都相同</li>
+</ul>
+<p><em>外部结点：一个结点的左右子结点为空，则用一个结点替代。</em></p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>从根到外部结点的路径长度(length)是该路径上的结点个数，则对于任意两个从根到外部结点的的长度$l_1$和$l_2$，总满足：$l_1 \leq 2l_2$。</li>
+</ul>
+<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><p>红黑树中每个结点含有的属性有：</p>
+<ul>
+<li>颜色(color)</li>
+<li>键值(key)</li>
+<li>左子结点(left)</li>
+<li>右子结点(right)</li>
+<li>父结点(parent)</li>
+</ul>
+<h3 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h3><blockquote>
+<p><strong>查找</strong></p>
+</blockquote>
+<p>与AVL树的查找相同，逐个结点进行比较，若大于当前结点，则从其右子结点开始查找;否则从其左子结点开始查找。</p>
+<blockquote>
+<p><strong>插入</strong></p>
+</blockquote>
+<p>注：调整时以参考结点作为调整操作的默认点，插入时一般以新插入的结点为参考结点。</p>
+<p>步骤：</p>
+<ul>
+<li>若插入时树的<strong>根结点为空</strong>，或其<strong>父结点为黑色</strong>，则直接插入。</li>
+<li>若插入结点（参考结点）的<strong>父结点为红色</strong>，则：<ul>
+<li>若<strong>父结点的兄弟结点（叔结点）为红色</strong>，则：设父结点和叔结点为黑色，祖父结点为红色。然后视祖父结点为参考结点，继续向上进行调整。</li>
+<li>若其<strong>父结点的兄弟结点为黑色</strong>，则：<ul>
+<li>若<strong>参考结点为其父结点的左子结点</strong>,<strong>父结点是祖父结点的左子结点</strong>，则：对掉祖父结点和父结点的颜色;右旋祖父结点。</li>
+<li>若<strong>参考结点为其父结点的右子结点</strong>，<strong>父结点是祖父结点的右子结点</strong>,则：对掉祖父结点和父结点的颜色;左旋祖父结点。</li>
+<li>若<strong>参考结点为其父结点的右子结点</strong>,<strong>父结点是祖父结点的左子结点</strong>,则：左旋父结点（<em>此时参考结点成为原来的父结点的父结点，原来的父结点成为参考的左子结点，参考结点的新的父结点为原来的祖父结点</em>);对掉参考结点与新的父结点（原祖父结点）的颜色;右旋参考结点的新父结点。</li>
+<li>若<strong>参考结点为其父结点的左子结点</strong>，<strong>父结点是祖父结点的右子结点</strong>,则：右旋父结点;对掉参考结点与新父结点的颜色;左旋参考结点的新父结点。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>删除</strong></p>
+</blockquote>
+<p>注：调整时以参考结点作为调整操作的默认点，删除时以<strong>实际</strong>删除的结点作为参考结点。<br>实际删除的结点为D，其后继结点（右子结点）为N，D的父结点为P，D的兄弟结点为S，S的两个孩子结点为Sl和Sr。</p>
+<p>步骤：</p>
+<ul>
+<li>若<strong>D为红色</strong>，则：直接删除D。</li>
+<li>若<strong>D为黑色</strong>,<strong>N为红色</strong>,则：用N替换D，并将N设为黑色。</li>
+<li>若<strong>D为黑色</strong>,<strong>N为黑色</strong>（外部结点）,则：（<em>以下用N代替D作为初始参考点</em>)<ul>
+<li>若<strong>S为红色</strong>,则：旋转结点P，S;对掉P，S的颜色;从参考点继续进行调整。</li>
+<li>若<strong>S为黑色</strong>,则：<ul>
+<li>若<strong>P为黑色</strong>，则：将S的颜色改为红色;将P作为参考点，向上进行调整。</li>
+<li>若<strong>P为红色</strong>，则：<ul>
+<li>若<strong>Sl和Sr为黑色</strong>,则：对掉P和S的颜色。</li>
+<li>若<strong>Sl为红色</strong>,<strong>Sr为黑色</strong>,则：旋转Sl和S;对掉Sl和S的颜色;从参考点开始继续调整。</li>
+<li>若<strong>Sl为任意颜色</strong>,<strong>Sr为红色</strong>,则：旋转P，S;对掉P，S的颜色;设Sr的颜色为黑色。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>根结点的颜色设为黑色。</li>
+</ul>
+<hr>
+<h2 id="伸展树-Splay-tree"><a href="#伸展树-Splay-tree" class="headerlink" title="伸展树(Splay tree)"></a>伸展树(Splay tree)</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>单次访问的复杂度可能为O(N)</li>
+<li>连续访问的平摊复杂度为O(log N)</li>
+<li>Splay树基于的假设是：单次的O(N)是可接受的，但是其发生的频率较低，在一系列的操作下，单次操作的平摊的复杂度是O(log N)。</li>
+<li>Splay树的基本想法是：当一个结点被访问后，会被调整到根结点处。</li>
+<li>应用Splay树的一个实际情况：当一个结点被访问后，其很可能在短时间内被再次访问。</li>
+<li>Splay树的一个优势是：不需要保存高度或平衡因子等信息，节省空间，使用方便。</li>
+</ul>
+<h3 id="操作-2"><a href="#操作-2" class="headerlink" title="操作"></a>操作</h3><blockquote>
+<p><strong>伸展</strong>(Splaying)</p>
+</blockquote>
+<p>分为四种情况，其中两两对称。<br>设待调整的结点为X，其父结点为P，祖父结点为G。</p>
+<ol>
+<li>X为P的左孩子，P为G为左孩子。</li>
+<li>X为P的右孩子，P为G的右孩子。</li>
+<li>X为P的左孩子，P为G的右孩子。</li>
+<li>X为P的右孩子，P为G的左孩子。</li>
+</ol>
+<p><em>1 和 2 对称，3 和 4 对称。</em></p>
+<p>仅考虑非对称情况，有两种splaying操作：</p>
+<ul>
+<li>Zig-zig</li>
+<li>Zig-zag</li>
+</ul>
+<p><strong>Zig-zig</strong><br>适用于情况1，2.</p>
+<p>操作：</p>
+<ul>
+<li>对G进行单旋，使P成为G的父结点。</li>
+<li>对P进行单旋，使X成为P的父结点。</li>
+</ul>
+<p><strong>Zig-zag</strong><br>适用于情况3，4.</p>
+<p>操作：</p>
+<ul>
+<li>对P单旋，使X成为P的父结点。</li>
+<li>对G进行单旋，使X成为G的父结点。</li>
+</ul>
+<p><strong>特点</strong><br>将访问的结点调整成根结点，并且大多数结点的深度减少了约一半。</p>
+<blockquote>
+<p><strong>访问结点</strong></p>
+</blockquote>
+<p>操作：</p>
+<ul>
+<li>首先查找到结点所在的位置。</li>
+<li>若结点为<strong>根结点</strong>，则直接访问，无需splaying。</li>
+<li>若结点<strong>只有父结点</strong>,则：对父结点进行单旋，使父结点成为其孩子。</li>
+<li>若结点<strong>有父结点和祖父结点</strong>，则：判断祖父，父以及该结点属于的情况，然后进行对应的splaying。重复对结点进行splaying，直到结点成为根结点。</li>
+</ul>
+<blockquote>
+<p><strong>插入</strong></p>
+</blockquote>
+<p>操作：</p>
+<ul>
+<li>首先查找插入位置的父结点，将父结点splaying到根结点。</li>
+<li>若插入的结点大于根结点，则：插入的结点的左孩子是根结点，右孩子是根结点的右子树，插入的结点成为根结点。</li>
+<li>若插入的结点小于根结点，则：插入的结点的右孩子是根结点，左孩子是根结点的左子树，插入的结点成为根结点。</li>
+<li>若插入的结点与根结点相等，则无需插入。</li>
+</ul>
+<blockquote>
+<p><strong>删除</strong></p>
+</blockquote>
+<p>操作：</p>
+<ul>
+<li>首先查找要删除的结点，若不存在，则将其前序结点splaying到根结点。</li>
+<li>若存在，则使用后序结点进行替换，再对该结点splaying至根结点。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-11T07:25:08.972Z" itemprop="dateUpdated">2020-01-11 15:25:08</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/07/DataStructure-tree2/&title=《DataStructure-tree2》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/07/DataStructure-tree2/&title=《DataStructure-tree2》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/07/DataStructure-tree2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DataStructure-tree2》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/07/DataStructure-tree2/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/07/DataStructure-tree2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/08/Block%20Truncation%20Coding/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Block Trunction Coding</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/04/DateStructure-Tree/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">DateStructure-Tree</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/07/DataStructure-tree2/&title=《DataStructure-tree2》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/07/DataStructure-tree2/&title=《DataStructure-tree2》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/07/DataStructure-tree2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DataStructure-tree2》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/07/DataStructure-tree2/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/07/DataStructure-tree2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/07/DataStructure-tree2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

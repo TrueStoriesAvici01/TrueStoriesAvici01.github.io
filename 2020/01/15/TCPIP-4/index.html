@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>TCPIP-4 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="TCP/IP">
+    <meta name="description" content="TCP与UDP传输层的作用IP首部使用一个协议字段标识网络层的上一层说采用的传输层协议，从而确定IP传输的数据是TCP内容还是UDP内容。 传输层中使用端口来识别上一层（应用层）中对应的程序。 服务端程序称为守护进程，如：  HTTP：httpd SHH：shhd  UNIX中启动inetd（互联网守护进程），然后又超级守护进程创建(fork)新的进程并转换(exec)为对应的守护进程。 TCP和">
+<meta name="keywords" content="TCP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCPIP-4">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;15&#x2F;TCPIP-4&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="TCP与UDP传输层的作用IP首部使用一个协议字段标识网络层的上一层说采用的传输层协议，从而确定IP传输的数据是TCP内容还是UDP内容。 传输层中使用端口来识别上一层（应用层）中对应的程序。 服务端程序称为守护进程，如：  HTTP：httpd SHH：shhd  UNIX中启动inetd（互联网守护进程），然后又超级守护进程创建(fork)新的进程并转换(exec)为对应的守护进程。 TCP和">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-16T10:11:22.815Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCPIP-4</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCPIP-4</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-15T11:12:42.000Z" itemprop="datePublished" class="page-time">
+  2020-01-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP与UDP"><span class="post-toc-number">1.</span> <span class="post-toc-text">TCP与UDP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#传输层的作用"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">传输层的作用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TCP和UDP"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">TCP和UDP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#端口号"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">端口号</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#识别"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">识别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#确定"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">确定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#端口号与协议"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">端口号与协议</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UDP"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">UDP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">特点</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">TCP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点，目的"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">特点，目的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过序列号与确认应答提高可靠性"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">通过序列号与确认应答提高可靠性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重发超时"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">重发超时</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连接控制"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">连接控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#利用窗口控制提高速度"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">利用窗口控制提高速度</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重发控制"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">重发控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流控制"><span class="post-toc-number">1.4.7.</span> <span class="post-toc-text">流控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拥塞控制"><span class="post-toc-number">1.4.8.</span> <span class="post-toc-text">拥塞控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提高网络利用率"><span class="post-toc-number">1.4.9.</span> <span class="post-toc-text">提高网络利用率</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他传输层协议"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">其他传输层协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UDP-Lite"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">UDP-Lite</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SCTP"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">SCTP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DCCP"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">DCCP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UDP首部格式"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">UDP首部格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP首部格式"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">TCP首部格式</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCPIP-4"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCPIP-4</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-15 19:12:42" datetime="2020-01-15T11:12:42.000Z"  itemprop="datePublished">2020-01-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="TCP与UDP"><a href="#TCP与UDP" class="headerlink" title="TCP与UDP"></a>TCP与UDP</h1><h2 id="传输层的作用"><a href="#传输层的作用" class="headerlink" title="传输层的作用"></a>传输层的作用</h2><p>IP首部使用一个协议字段标识网络层的上一层说采用的传输层协议，从而确定IP传输的数据是TCP内容还是UDP内容。</p>
+<p>传输层中使用<strong>端口</strong>来识别上一层（应用层）中对应的程序。</p>
+<p>服务端程序称为守护进程，如：</p>
+<ul>
+<li>HTTP：httpd</li>
+<li>SHH：shhd</li>
+</ul>
+<p>UNIX中启动inetd（互联网守护进程），然后又超级守护进程创建(fork)新的进程并转换(exec)为对应的守护进程。</p>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p><strong>TCP</strong><br>面向连接的，可靠的协议。实行<strong>顺序控制</strong>，<strong>重发控制</strong>，<strong>流量控制</strong>，<strong>拥塞控制</strong>。</p>
+<p><strong>UDP</strong><br>不可靠的数据包协议，可以确保发送消息的大小，不保证消息一定会达到。<br>适用：<br>高速传输和实时性要求高的通信或广播通信。（IP电话，多播和广播通信，RIP，DHCP等基于广播的协议）</p>
+<p><em>套接字：系统提供的类库（API），程序利用套接字，设置对应的IP地址，端口号，实现数据的发送和接收</em></p>
+<hr>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>地址</th>
+<th>用处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据链路</td>
+<td>MAC地址</td>
+<td>识别同一链路不同的计算机</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP地址</td>
+<td>识别TCP/IP网络中互连的主机和路由器</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>端口</td>
+<td>识别同一台计算机中不同的程序</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="识别"><a href="#识别" class="headerlink" title="识别"></a>识别</h3><p>TCP/IP 和 UDP/IP使用5个信息确定不同的通信</p>
+<ul>
+<li>源IP地址</li>
+<li>目标IP地址</li>
+<li>协议号</li>
+<li>源端口号</li>
+<li>目标端口号</li>
+</ul>
+<h3 id="确定"><a href="#确定" class="headerlink" title="确定"></a>确定</h3><ul>
+<li>标准既定的端口号（静态方法）：广为使用的应用协议使用的端口是固定的（知名端口号Well-Know Port Number）。</li>
+<li>时序分配法（动态方法）：客户端交由相同分配，可在上一个分配的端口号加一。</li>
+</ul>
+<h3 id="端口号与协议"><a href="#端口号与协议" class="headerlink" title="端口号与协议"></a>端口号与协议</h3><p>不同的传输协议可以使用相同的端口号。<br>数据包到达IP层，有IP首部的协议号分配给对应的协议模块（TCP或UDP）。不同的协议独立处理，同一端口号互不影响。</p>
+<hr>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><p>UDP(User Datagram Protocol)</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>提供面向无连接的通信</li>
+<li>按照接收的原样转发</li>
+<li>不进行流量控制</li>
+<li>对丢包不负责重发</li>
+<li>包到达顺序错乱不进行处理</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>包总量少的通信（DNS，SNMP）</li>
+<li>视频，音频等多媒体通信</li>
+<li>限定于LAN的应用通信</li>
+<li>广播通信（广播，多播）</li>
+</ul>
+<hr>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p><strong>连接</strong><br>两个程序为了相互传递消息而建立的专有的，虚拟的通信线路（虚拟电路）。</p>
+<h3 id="特点，目的"><a href="#特点，目的" class="headerlink" title="特点，目的"></a>特点，目的</h3><p>目的：实现可靠性传输<br>特点：<br>通过使用一系列技术实现可靠传输</p>
+<ul>
+<li>校验和</li>
+<li>序列号</li>
+<li>确认应答</li>
+<li>重发控制</li>
+<li>连接管理</li>
+<li>窗口控制</li>
+</ul>
+<h3 id="通过序列号与确认应答提高可靠性"><a href="#通过序列号与确认应答提高可靠性" class="headerlink" title="通过序列号与确认应答提高可靠性"></a>通过序列号与确认应答提高可靠性</h3><p>确认应答(ACK)：发送端的数据到达主机，接收端主机返回一个已收到消息的通知。</p>
+<p>若有确认应答，则数据成功到达；否则超过一定时间则认为数据丢失，进行重传。</p>
+<p>没有确认应答可能是确认应答丢失，而非数据丢失。</p>
+<p>确认应答，重传控制，重复控制等利用序列号实现，序列号是给发送的数据编号，接收端由序列号和数据长度，计算确认应答并返回。</p>
+<h3 id="重发超时"><a href="#重发超时" class="headerlink" title="重发超时"></a>重发超时</h3><p>重发超时：<br>重发数据前，等待确认应答到来的特定的时间间隔。</p>
+<p>受到数据包路径的网络环境影响。</p>
+<p>每次发包都计算往返时间及偏差（<em>不同 的路径可能有较大的浮动</em>），将往返时间与偏差之和稍大值作为重发超时。</p>
+<p>一般以0.5s为单位，重发后仍没有确认应答，则加倍，直到一定重发次数，则关闭连接。</p>
+<h3 id="连接控制"><a href="#连接控制" class="headerlink" title="连接控制"></a>连接控制</h3><p>建立连接：</p>
+<ul>
+<li>（甲）SYN：请求建立连接</li>
+<li>（乙）ACK（针对SYN的确认应答），SYN（请求建立连接）</li>
+<li>（甲）ACK：针对SYN的确认应答</li>
+</ul>
+<p>断开连接：</p>
+<ul>
+<li>（甲）FIN：请求断开连接</li>
+<li>（乙）ACK：针对FIN的确认应答</li>
+<li>（乙）FIN：请求断开连接</li>
+<li>（甲）ACK：针对FIN的确认应答</li>
+</ul>
+<p><strong>最大消息长度</strong>(MSS: Maximum Segment Size)：发送数据包的单位，以MSS的大小将数据进行分割发送。</p>
+<p>确定：<br>建立连接的请求时，在TCP首部中写入MSS选项，两者从中选择较小者。</p>
+<h3 id="利用窗口控制提高速度"><a href="#利用窗口控制提高速度" class="headerlink" title="利用窗口控制提高速度"></a>利用窗口控制提高速度</h3><p>确认应答不再是以每个分段，而是以多个分段为单位。<br>发送端不需要等待一个段的确认应答，可以继续发送。</p>
+<p><strong>窗口大小</strong><br>无需等待确认应答而可以继续发送数据的最大值。</p>
+<p>发送出去而未收到确认应答的数据块被放入缓冲区中，等到收到确认应答后从缓冲中删除。</p>
+<h3 id="重发控制"><a href="#重发控制" class="headerlink" title="重发控制"></a>重发控制</h3><ul>
+<li><strong>若确认应答未能返回</strong>：只要后续的数据包的确认应答能够正常的被接收端接收到，则认为前面的数据包已经被接收到。</li>
+<li><strong>若报文丢失</strong>：接收端会在接收后续的数据包的同时，一直返回缺失的数据包序号。当发送端连续3次收到同样的确认应答，则认为该数据包丢失，则重新发送对应的数据包。（<em>高速重发控制</em>）</li>
+</ul>
+<h3 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h3><p>发送端根据接收端的实际接收能力控制发送的数据量。</p>
+<p>实现：<br>接收端向发送端主机通知自己可以接收数据的大小。<br>TCP首部有专门用于通知窗口大小的字段。</p>
+<p><strong>窗口探测</strong><br>若接收端的缓存区已满，则通信暂停。若窗口更新的通知丢失，则无法继续通信，发送端可使用<strong>窗口探测</strong>的数据段获取最新的窗口大小信息。</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p><strong>与流量控制的区别</strong><br>作用于网络，防止过多的数据注入网络中。</p>
+<p>方法：</p>
+<ul>
+<li>慢开始，拥塞避免</li>
+<li>快重传，快恢复</li>
+</ul>
+<p><strong>慢开始</strong><br>一次往返时间RTT，而且没有经过一个传输轮次，则拥塞窗口cwnd加倍。</p>
+<p>为防止cwnd增大过大，设置慢开始门限ssthresh状态变量：</p>
+<ul>
+<li>cwnd &lt; ssthresh：使用慢开始算法</li>
+<li>cwnd &gt; ssthresh：使用拥塞避免算法</li>
+<li>cwnd = ssthresh：慢开始与拥塞避免随意</li>
+</ul>
+<p><strong>拥塞避免算法</strong><br>每经过一个RTT后把发送端的拥塞窗口cwnd加一，按线性增长。</p>
+<p><strong>网络拥塞</strong><br>若出现网络拥塞（超时或未收到确认），则：</p>
+<ul>
+<li>将ssthresh设置为当前拥塞窗口cwnd。</li>
+<li>拥塞窗口cwnd设置为1。</li>
+<li>开始执行慢开始算法。</li>
+</ul>
+<p><strong>整体流程</strong></p>
+<ol>
+<li>设置拥塞窗口cwnd初始化为1，慢开始门限初始值ssthresh。</li>
+<li>执行慢开始算法，cwnd依据RTT按指数增长。</li>
+</ol>
+<ul>
+<li>当cwnd = ssthresh时，执行拥塞避免算法，cwnd按照线性增长（<em>加法增大</em>）。</li>
+<li>发生超时（拥塞），设置ssthresh为当前cwnd的一半（<em>乘法减小</em>），cwnd设置为1，重新开始慢开始算法。</li>
+</ul>
+<p><strong>快重传算法</strong><br>发送方连续三次收到重复的确认，则立即重传缺失的报文段。</p>
+<p><strong>快恢复算法</strong><br>在拥塞发生时，ssthresh减为cwnd的一半，<strong>不执行慢开始算法，而是将cwnd设为ssthresh相同值，然后执行拥塞避免算法，使cwnd缓慢增大</strong>。</p>
+<h3 id="提高网络利用率"><a href="#提高网络利用率" class="headerlink" title="提高网络利用率"></a>提高网络利用率</h3><ul>
+<li>Nagle算法：满足下列情况才发送数据：<ul>
+<li>已发送的数据已收到确认应答</li>
+<li>可以发送最大段长度的数据</li>
+</ul>
+</li>
+<li>延迟确认应答：收到数据不立即返回确认应答，而是延迟一段时间：无需为每个数据段进行确认应答，一般两个数据段返回一个确认应答。</li>
+<li>捎带应答（PiggyBack Acknowledgement）：TCP的确认和回执数据通过一个包发送，将收到的数据处理后生成返回数据后再进行发送请求。</li>
+</ul>
+<hr>
+<h2 id="其他传输层协议"><a href="#其他传输层协议" class="headerlink" title="其他传输层协议"></a>其他传输层协议</h2><h3 id="UDP-Lite"><a href="#UDP-Lite" class="headerlink" title="UDP-Lite"></a>UDP-Lite</h3><p>轻量级用户数据包协议（Lightweight User Datagram Protocol）：<br>计算校验和的范围可以由应用自行决定。<br>只针对不允许发送错误的部分进行校验和，其他部分可以发送错误。</p>
+<h3 id="SCTP"><a href="#SCTP" class="headerlink" title="SCTP"></a>SCTP</h3><p>流控制传输协议（Stream Control Transmission Protocol）：<br>特点：</p>
+<ul>
+<li>以消息为单位收发</li>
+<li>支持多重宿主（多NIC主机的NIC发生变化可以继续通信）</li>
+<li>支持多数据流通信</li>
+<li>可以定义消息的生存期限</li>
+</ul>
+<h3 id="DCCP"><a href="#DCCP" class="headerlink" title="DCCP"></a>DCCP</h3><p>数据报拥塞控制协议（Datagram Congestion Control Protocol）<br>特点：</p>
+<ul>
+<li>不提供发送数据的可靠性传输</li>
+<li>面向连接，具备建立连接与断开连接的处理</li>
+<li>能够根据网络拥堵情况进行拥塞控制（类似TCP拥塞控制，TCP友好升级控制）</li>
+<li>接收端收到返回确认应答，被用于重发的判断。</li>
+</ul>
+<hr>
+<h2 id="UDP首部格式"><a href="#UDP首部格式" class="headerlink" title="UDP首部格式"></a>UDP首部格式</h2><p>组成：</p>
+<ul>
+<li>源端口号(Source Port)</li>
+<li>目标端口号(Destination Port)</li>
+<li>包长度(Length)</li>
+<li>校验和(Checksum)</li>
+</ul>
+<p><strong>源端口号</strong><br>16位。可以不设置，则不需要返回确认。</p>
+<p><strong>目标端口号</strong><br>16位。接收端端口。</p>
+<p><strong>包长度</strong><br>UDP首部和数据总长度。<br>单位为字节（8位）</p>
+<p><strong>校验和</strong></p>
+<ul>
+<li>最后一位增加“0”使得全长为16的整数倍。</li>
+<li>将校验和设置为“0”。</li>
+<li>以16比特为单位进行1的补码和作为校验和。</li>
+<li>校验和中填入0则认为不进行校验。</li>
+</ul>
+<hr>
+<h2 id="TCP首部格式"><a href="#TCP首部格式" class="headerlink" title="TCP首部格式"></a>TCP首部格式</h2><p>组成：</p>
+<ul>
+<li><strong>源端口号</strong>(Source Port)</li>
+<li><strong>目标端口号</strong>(Destination Port)</li>
+<li><strong>序列号</strong>(Sequence Number)</li>
+<li><strong>确认应答号</strong>(Acknowledgement Number)</li>
+<li><strong>数据偏移</strong>(Data Offset)</li>
+<li><strong>保留</strong>(Reserved)</li>
+<li><strong>控制位</strong>(Control Flag)</li>
+<li><strong>窗口大小</strong>(Window Size)</li>
+<li><strong>校验和</strong>(Checksum)</li>
+<li><strong>紧急指针</strong>(Urgent Pointer)</li>
+<li><strong>选项</strong>(Opitons)</li>
+<li><strong>填充</strong>(Padding)</li>
+</ul>
+<blockquote>
+<p><strong>源端口号</strong><br>16位。<br>发送端端口号。</p>
+<p><strong>目标端口号</strong><br>16位。<br>接收端端口号。</p>
+<p><strong>序列号</strong><br>32位。<br>建立连接是随机生成，有SYN包传给接收端。<br>每发送一次数据，则序列号增加一。</p>
+<p><strong>确认应答号</strong><br>32位。<br>下一次应该收到的数据的序列号，收到确认应答认为该序列前数据被正常接收。</p>
+<p><strong>数据偏移</strong><br>单位为4字节。<br>指示TCP首部的长度。</p>
+<p><strong>保留</strong><br>4位。<br>用于扩展时使用。</p>
+<p><strong>控制位</strong><br>8位。由CWR，ECE，URG，ACK，PSH，RST，SYN，FIN。</p>
+<ul>
+<li>CWR(Congestion Window Reduced)：为1表示已将拥塞窗口缩小。</li>
+<li>ECE(ECN-Echo)：通知有网络拥塞。收到的数据包IP首部ECN为1时则将TCP首部中的ECE设置为1。</li>
+<li>URG(Urgent Flag)：包内有需要紧急处理的数据。</li>
+<li>ACK(Acknowledgement Flag)：为1时确认应答的字段有效。</li>
+<li>PSH(Push Flag)：为1时需要将接受的数据立即传给上层应用协议。</li>
+<li>RST(Reset Flag)：为1表示TCP连接中出现异常必须强制断开连接。</li>
+<li>SYN(Synchronize Flag)：为1表示希望建立连接。</li>
+<li>FIN(Fin Flag)：为1表示不再有数据发送，断开连接。</li>
+</ul>
+<p><strong>窗口大小</strong><br>通知相同TCP首部的确认应答号所指位置开始能够接收的数据大小。<br>为0表示可以发送窗口探测。</p>
+<p><strong>校验和</strong><br>使用TCP伪首部计算校验和：将TCP校验和字段设置为0，然后以16位为单位进行1的补码和计算。</p>
+<p><strong>紧急指针</strong><br>16位。<br>URG为1时有效。<br>指示从数据部分的首部到紧急指针所指示的位置为止的数据为紧急数据。<br>一般在暂时中断通信，或中断通信的情况下使用。（Web浏览器中点击停止按钮或TELENT中Ctrl+C）</p>
+<p><strong>选项</strong><br>用于提高TCP的传输性能。</p>
+</blockquote>
+<p><strong>窗口大小与吞吐量</strong><br>最大吞吐量：Tmax<br>窗口大小：W<br>往返时间：RTT</p>
+<p>Tmax = W/RTT</p>
+<p><em>一般通过建立多个TCP连接来提高吞吐量</em></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-16T10:11:22.815Z" itemprop="dateUpdated">2020-01-16 18:11:22</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/15/TCPIP-4/&title=《TCPIP-4》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/15/TCPIP-4/&title=《TCPIP-4》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/15/TCPIP-4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-4》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/15/TCPIP-4/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/15/TCPIP-4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/16/TCPIP-5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCPIP-5</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/14/TCPIP-3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">TCPIP-3</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/15/TCPIP-4/&title=《TCPIP-4》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/15/TCPIP-4/&title=《TCPIP-4》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/15/TCPIP-4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-4》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/15/TCPIP-4/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/15/TCPIP-4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/15/TCPIP-4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

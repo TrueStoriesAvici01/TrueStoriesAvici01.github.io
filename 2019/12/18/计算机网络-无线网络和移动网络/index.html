@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>计算机网络-无线网络和移动网络 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="计算机网络,无线网络,移动网络,WiFi">
+    <meta name="description" content="无线网络和移动网络概述无线网络要素  无线主机 无线链路  无线网络要点  基站(base station): 负责向与之关联的无线主机收发数据. 如: 蜂窝网络中的蜂窝塔(cell tower)和802.11无线LAN中的接入点(access point). 基础设施模式(infrastructure mode): 与基站关联的主机运行的模式. 自组织网络(ad hoc network): 无线">
+<meta name="keywords" content="计算机网络,无线网络,移动网络,WiFi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-无线网络和移动网络">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;18&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="无线网络和移动网络概述无线网络要素  无线主机 无线链路  无线网络要点  基站(base station): 负责向与之关联的无线主机收发数据. 如: 蜂窝网络中的蜂窝塔(cell tower)和802.11无线LAN中的接入点(access point). 基础设施模式(infrastructure mode): 与基站关联的主机运行的模式. 自组织网络(ad hoc network): 无线">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49586142&#x2F;71076999-93c83e00-21c1-11ea-8856-6545d6f8dcfc.png">
+<meta property="og:updated_time" content="2019-12-19T02:49:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;49586142&#x2F;71076999-93c83e00-21c1-11ea-8856-6545d6f8dcfc.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">计算机网络-无线网络和移动网络</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">计算机网络-无线网络和移动网络</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-18T05:44:40.000Z" itemprop="datePublished" class="page-time">
+  2019-12-18
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无线网络和移动网络"><span class="post-toc-number">1.</span> <span class="post-toc-text">无线网络和移动网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无线链路和网络特征"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">无线链路和网络特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WiFi-802-11无线LAN"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">WiFi: 802.11无线LAN</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#802-11体系结构"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">802.11体系结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#802-11-MAC协议"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">802.11 MAC协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IEEE-802-11-帧"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">IEEE 802.11 帧</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相同的IP子网中的移动性"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">相同的IP子网中的移动性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#802-11-中的高级特色"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">802.11 中的高级特色</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#蓝牙和ZigBee"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">蓝牙和ZigBee</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蜂窝因特网接入"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">蜂窝因特网接入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2G蜂窝网络体系结构"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">2G蜂窝网络体系结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3G蜂窝数据网"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">3G蜂窝数据网</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4G-LTE"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">4G LTE</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#移动管理"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">移动管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#寻址"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">寻址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由选择到移动结点"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">路由选择到移动结点</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#移动IP"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">移动IP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理发现"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">代理发现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#向归属代理注册"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">向归属代理注册</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蜂窝网中的移动性管理"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">蜂窝网中的移动性管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#移动用户呼叫的路由选择"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">移动用户呼叫的路由选择</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GSM中的切换"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">GSM中的切换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无线和移动性对高层协议的影响"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">无线和移动性对高层协议的影响</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-计算机网络-无线网络和移动网络"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">计算机网络-无线网络和移动网络</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-18 13:44:40" datetime="2019-12-18T05:44:40.000Z"  itemprop="datePublished">2019-12-18</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="无线网络和移动网络"><a href="#无线网络和移动网络" class="headerlink" title="无线网络和移动网络"></a>无线网络和移动网络</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>无线网络要素</strong></p>
+<ol>
+<li>无线主机</li>
+<li>无线链路</li>
+</ol>
+<p><strong>无线网络要点</strong></p>
+<ul>
+<li><strong>基站</strong>(base station): 负责向与之关联的无线主机收发数据. 如: 蜂窝网络中的<strong>蜂窝塔</strong>(cell tower)和802.11无线LAN中的<strong>接入点</strong>(access point).</li>
+<li><strong>基础设施模式</strong>(infrastructure mode): 与基站关联的主机运行的模式.</li>
+<li><strong>自组织网络</strong>(ad hoc network): 无线主机没有与基础设施相连接.</li>
+<li><strong>切换</strong>(hand off): 从一个基站到另一个基站,移动主机改变其接入点.</li>
+</ul>
+<p><strong>无线网络分类</strong>:</p>
+<ol>
+<li><strong>单挑,基于基础设施</strong>: 无线主机与基站相连,主机与基站只有一个无线跳. 如: 3G蜂窝网络和802.11.</li>
+<li><strong>单跳,无基础设施</strong>: 不与基站相连. 如: 蓝牙网络,自组织模式的802.11.</li>
+<li><strong>多跳,基于基础设施</strong>: 无线节点通过其他节点中继来与基站通信. 如: 无线传感器网络和<strong>无线网状网络</strong>(wireless mesh network).</li>
+<li><strong>多跳,无基础设施</strong>: 没有基站,节点通过其他节点中继来到达目的地. 如: <strong>移动自组织网络</strong>(mobile ad hoc network, MANET), <strong>车载自组织网络</strong>(vehicular ad hoc network).</li>
+</ol>
+<h2 id="无线链路和网络特征"><a href="#无线链路和网络特征" class="headerlink" title="无线链路和网络特征"></a>无线链路和网络特征</h2><p><strong>无线链路的特点</strong></p>
+<ol>
+<li><strong>递减的信号强度</strong>: 电磁波穿透物体是强度会减弱,会随着距离增加而减弱(<strong>路径损耗</strong>(path loss))</li>
+<li><strong>来自其他源的干扰</strong>: 同一频段发送的信号的电磁波会相互干扰.</li>
+<li><strong>多径传播</strong>: 电磁波由于发生发生经过不同路径到达目的地会产生<strong>多径传播</strong>(multipath propagation).</li>
+<li><strong>掩藏终端问题</strong>(hidden terminal problem): 两个站点同时向同一站点发送信息,由于物理阻挡,导致两个站点无法听到对方的传输.</li>
+<li><strong>衰减</strong>(fading): 两者的距离太远导致信号衰减无法相互检测对方的传输.</li>
+</ol>
+<p><strong>CDMA</strong></p>
+<p>流程:<br>发送的每个比特都要通过乘以M个比特长的CDMA编码,输出为编码后的序列.<br>接收方对每个M长的序列进行解码,从而得到对应的一个比特.</p>
+<p>数学表示:<br>发送方: $Z_{i,m} = d_i \times c_m$.<br>接收方: $d_i = \frac{1}{M} \sum_{m=1}^{M}Z_{i,m}\times c_m$.<br>$c_m$: CDMA编码的第m个比特.<br>$d_i$: 要发送的未编码的第i个比特.<br>$c_m(m=1,…,M)$:收发双方事先知道.</p>
+<blockquote>
+<p>多用户传输:<br>对于每个用户选择恰当的CDMA编码,可以从聚合的信号中恢复出给定的发送方发送的数据.<br>数学表示:<br>N个发送方传输的比特总和:<br>$Z^\star_{i,m} = \sum_{i=1}^NZ^s_{i,m}$<br>获取第k个用户的第i个数据比特:<br>$d_i^k = \frac{1}{M}\sum_{m=1}^M Z^\star_{i,m}\times c_m^k$</p>
+</blockquote>
+<h2 id="WiFi-802-11无线LAN"><a href="#WiFi-802-11无线LAN" class="headerlink" title="WiFi: 802.11无线LAN"></a>WiFi: 802.11无线LAN</h2><p><strong>标准</strong></p>
+<ul>
+<li>802.11b</li>
+<li>802.11a</li>
+<li>802.11g</li>
+</ul>
+<p><strong>关系</strong></p>
+<ul>
+<li>使用相同的CSMA/CA</li>
+<li>链路层帧使用相同的帧结构</li>
+<li>都可降低传输速率而达到更远的距离</li>
+<li>都允许”基础设施模式”和”自组织模式”</li>
+<li>b,g的工作频率较低,传输速率低,传播距离远;a的工作频率高,传输速率快,传播距离近.</li>
+<li>802.11n: 使用多输入多输出MIMO,传输速率快.</li>
+</ul>
+<h3 id="802-11体系结构"><a href="#802-11体系结构" class="headerlink" title="802.11体系结构"></a>802.11体系结构</h3><p><strong>基本服务集</strong>(Basic Service Set,BSS): 一个BSS包含多个无线站点和一个<strong>接入点</strong>(Access Point,AP)(中央基站(base station),其接入网络).</p>
+<p><strong>基础设施无线LAN</strong>(infrastructure wireless LAN): 配备AP的无线LAN.</p>
+<p><strong>自组织网络</strong>: 多个站点构成的无中心控制(AP),与外部网络不连通的局域网络.</p>
+<p><strong>信道与关联</strong></p>
+<p><strong>服务集标识符</strong>(Service Set Identifier,SSID): 即AP名(如:WiFi名)</p>
+<p><strong>WiFi丛林</strong>(WiFi jungle): 多个AP覆盖的位置.</p>
+<p><strong>关联</strong>(associate): 无线站点从WiFi丛林中选择一个AP,并与之创建一个虚拟线路.</p>
+<p><strong>关联方式</strong></p>
+<ul>
+<li><strong>被动扫描</strong>(passive scanning): AP发送<strong>信标帧</strong>(beacon frame,<em>包含AP的SSID和MAC地址</em>),无线站点通过扫描不同信道获得信标帧,选择一个AP关联.</li>
+<li><strong>主动扫描</strong>(active scanning): 无线站点广播<strong>探测请求帧</strong>,AP发送<strong>探测响应帧</strong>进行响应.无线主机选择一个AP,并向其发送一个<strong>关联请求帧</strong>,AP发送<strong>关联响应帧</strong>进行回应.</li>
+</ul>
+<p>关联后:<br>无线站点通过AP向子网发送<strong>DHCP发现报文</strong>,获取子网的一个<strong>IP地址</strong>,无线站点加入子网中.</p>
+<blockquote>
+<p>关联过程中的身份鉴别:</p>
+<ul>
+<li>站点的MAC地址</li>
+<li>用户名和密码: 需要鉴别服务器(协议: RADIUS或DIAMETER)</li>
+</ul>
+</blockquote>
+<h3 id="802-11-MAC协议"><a href="#802-11-MAC协议" class="headerlink" title="802.11 MAC协议"></a>802.11 MAC协议</h3><p><strong>802.11的多路访问协议</strong></p>
+<ol>
+<li>使用碰撞避免.</li>
+<li>使用链路层确认/重传(ARQ).</li>
+</ol>
+<p><strong>链路层确认</strong>(link-layer acknowledgment)<br>目的: 检测数据帧是否无损到达目的地.<br>方法: 目的地收到CRC校验的帧后等待<strong>短帧间间隔</strong>(Short Inter-Frame Spacing,SIFS)后发送一个确认帧.若发送站点在规定时间内未收到确认帧,则认为发送失败,进行重传.多次重传无确认,则放弃发送该帧.</p>
+<p><strong>带碰撞避免的CSMA,CSMA/CA</strong>(CSMA with collision avoidance)<br>CSMA: “载波侦听多路访问”,站点在传输前侦听信道,信道忙则抑制传输.<br>CA: “碰撞避免”,802.11中站点一旦发送一个帧,则完全发送完该帧.</p>
+<p><strong>CSMA/CA流程</strong></p>
+<ol>
+<li>若监听信道空闲,则在一个<strong>分布式帧间间隔</strong>(distributed Inter-Frame Space,DIFS)的时间后发送该帧.</li>
+<li>否则: 选择一个<strong>随机回退值</strong>并在信道空闲时递减该值.信道忙则值保持不变.</li>
+<li>计数值为0时发送数据帧并等待确认.</li>
+<li>收到确认,则帧被正确接收.否则,重新进入第二步的回退阶段,在更大的范围内选取随机值.</li>
+</ol>
+<blockquote>
+<p>第二步中随机回退值在信道空闲仍然抑制传输:<br>理由: 避免多个站点同时等待正忙的信道时导致的信道一空闲就同时发送而导致碰撞.<br>问题: 两个站点相互隐藏或随机值接近.</p>
+</blockquote>
+<p><strong>隐藏终端导致的碰撞</strong></p>
+<p>使用短<strong>请求发送</strong>(Request to Send,RTS)控制帧和一个短<strong>允许发送</strong>(Clear to Send,CTS)控制帧来预约信道.</p>
+<p>流程:</p>
+<ol>
+<li>发送方发送DATA帧前,先向AP发送一个RTS帧(<em>指示传输DATA帧和确认(ACK)帧需要的总时间</em>).</li>
+<li>AP收到RTS帧,广播一个CTS帧作为响应.(<em>发送方获得发送许可,其他站点被指示不可发送</em>)</li>
+</ol>
+<h3 id="IEEE-802-11-帧"><a href="#IEEE-802-11-帧" class="headerlink" title="IEEE 802.11 帧"></a>IEEE 802.11 帧</h3><p>图示:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-images.githubusercontent.com/49586142/71076999-93c83e00-21c1-11ea-8856-6545d6f8dcfc.png" alt="802 11Frame" title>
+                </div>
+                <div class="image-caption">802 11Frame</div>
+            </figure></p>
+<p><strong>有效载荷与CRC字段</strong><br>有效载荷: 放置一个IP数据包和一个ARP分组.<br>CRC: 检测帧中的比特错误.</p>
+<p><strong>地址字段</strong></p>
+<ul>
+<li>地址1: <strong>接收</strong>该帧的无线站点的MAC地址.</li>
+<li>地址2: <strong>传输</strong>该帧的站点的MAC地址.</li>
+<li>地址3: BSS中AP连接的<strong>路由器接口的MAC地址</strong>.</li>
+<li>地址4: 自组织模式中相互转发时使用.</li>
+</ul>
+<p><strong>序号,持续期和帧控制字段</strong><br>序号: 区分新传输的帧和以前帧的重传.<br>持续期: 包含传输数据帧的时间和传输确认的时间.<br>帧控制字段: 类型和子类型用于区分关联,RTS,CTS,ACK和数据帧.To和From定义不同地址字段的含义.WEP指示是否加密.</p>
+<h3 id="相同的IP子网中的移动性"><a href="#相同的IP子网中的移动性" class="headerlink" title="相同的IP子网中的移动性"></a>相同的IP子网中的移动性</h3><p>移动站点在同一子网的不同BSS中移动,移动站点会解除与原AP的关联,然后与新BSS中的AP关联.<br>新AP在关联形成后,会以站点的源地址向交换机发送一以太网广播帧.交换机收到帧后,更新转发表.</p>
+<h3 id="802-11-中的高级特色"><a href="#802-11-中的高级特色" class="headerlink" title="802.11 中的高级特色"></a>802.11 中的高级特色</h3><p><strong>802.11 速率适应</strong><br>当连续两个帧没有收到确认,传输速率降低到前一个较低的速率.<br>当10个帧连续得到确认,或用于跟踪上次降速的定时器超时,传输速率提高到上一个较高的速率.</p>
+<p><strong>功率管理</strong><br>结点将其功率管理比特设为1,指示其即将睡眠,并设置定时器使得在AP发送信标帧前唤醒.<br>接入点将先缓存睡眠结点的帧,等其唤醒后.<br>结点唤醒后查询是否有缓存帧,没有则继续睡眠,否则接收帧.</p>
+<h3 id="蓝牙和ZigBee"><a href="#蓝牙和ZigBee" class="headerlink" title="蓝牙和ZigBee"></a>蓝牙和ZigBee</h3><blockquote>
+<p><strong>蓝牙</strong></p>
+</blockquote>
+<p>IEEE 802.15.1 用于小范围,低功耗和低成本运行.被称为<strong>无线个人区域网络</strong>(Wireless Personal Area Network,WPAN).</p>
+<p>每个时隙选择一个信道传输,并在下一个时隙以随机方式变更信道(<strong>调频扩展频谱</strong>Frequency-Hopping Spread Spectrum,FHSS).</p>
+<p>传输过程:<br>设备组织成一个8个活动设备的<strong>皮可网</strong>(piconet),其中一个设备为主设备,其余为<strong>从设备</strong>,其在奇数时隙发送消息,从设备只有在主设备与其通信后才能发送,只能发送给主设备.其余的设备为<strong>存放设备</strong>(parked),只有主结点将其转换为活动之后才能进行通信.</p>
+<blockquote>
+<p><strong>ZigBee</strong></p>
+</blockquote>
+<p>结点: 多个”简化功能设备”在单个”全功能设备”控制下作为从设备运行. 多个全功能设备能够配置网状(mesh)网络,之间发送帧.</p>
+<h2 id="蜂窝因特网接入"><a href="#蜂窝因特网接入" class="headerlink" title="蜂窝因特网接入"></a>蜂窝因特网接入</h2><p><strong>全球移动通信系统</strong>(GSM)</p>
+<ol>
+<li>第一代(1G): 模拟FDMA系统,用于语音通信.</li>
+<li>第二代(2G): 语音通信,扩展对数据的支持(2.5G).</li>
+<li>第三代(3G): 支持语音和数据.</li>
+</ol>
+<h3 id="2G蜂窝网络体系结构"><a href="#2G蜂窝网络体系结构" class="headerlink" title="2G蜂窝网络体系结构"></a>2G蜂窝网络体系结构</h3><p><strong>小区</strong>(cell): 一个蜂窝网覆盖的区域<br><strong>收发基站</strong>(Base Transceiver Station,BTS): 向小区内的移动站点收发信号.(适用组合的FDM/TDM: 信道被分成多个子带,时间被划分成多个时隙)<br><strong>基站控制器</strong>(Base Station Controller,BSC): 服务多个基站. 功能: 为用户发配BTS信道,执行<strong>寻呼</strong>(paging,找到另一个移动用户),执行移动用户切换.<br><strong>GSM基站系统</strong>(Base Station System,BSS): 基站控制器和其控制的收发基站.<br><strong>移动交换中心</strong>(Mobile Switching Center,MSC): 用户鉴别和账户管理,呼叫建立和切换.</p>
+<h3 id="3G蜂窝数据网"><a href="#3G蜂窝数据网" class="headerlink" title="3G蜂窝数据网"></a>3G蜂窝数据网</h3><p>结构:<br>保留核心GSM蜂窝语音网,增加并行的附加蜂窝数据功能.</p>
+<p>新结点:</p>
+<ul>
+<li><strong>服务通用分组无线服务支持节点</strong>(Serving Generalized packet radio service Support Node,SGSN): 在移动节点和GGSN之间转发数据报,与MSC交互,提供用户认证和切换,维护活跃节点的位置.</li>
+<li><strong>网关GPRS支持节点</strong>(Gateway GPRS Support Node,GGSN): 网关作用,将多个SGSN连接更大的因特网.</li>
+<li><strong>无线电网络控制器</strong>(Radio Network Controller,RNC): 通过MSC与电路交换蜂窝语音网连接,通过SGSN与分组交换因特网连接.</li>
+</ul>
+<p>差异:<br>在TDMA时隙中使用<strong>直接序列宽带CDMA</strong>(Direct Sequence Wideband CDMA,DS-WCDMA).</p>
+<h3 id="4G-LTE"><a href="#4G-LTE" class="headerlink" title="4G LTE"></a>4G LTE</h3><p>LTE: Long-Term Evolution.</p>
+<p><strong>创新</strong></p>
+<ol>
+<li><strong>演化的分组核</strong>(Evolved Packet Core,EPC): 语音和数据在IP数据报中承载.</li>
+<li><strong>LTE无线电接入网</strong>(LTE Radio Access Network): 下行信道采用<strong>正交频分复用</strong>(Orthogonal Frequency Division Multiplexing,OFDM): 频分复用和时分复用结合.</li>
+</ol>
+<h2 id="移动管理"><a href="#移动管理" class="headerlink" title="移动管理"></a>移动管理</h2><p><strong>概念</strong></p>
+<ol>
+<li><strong>归属网络</strong>(home network): 移动结点的永久居所.</li>
+<li><strong>归属代理</strong>(home agent): 归属网络中代表移动结点执行移动管理功能的实体.</li>
+<li><strong>外部网络</strong>(foreign network)/<strong>被访网络</strong>(visited network): 移动结点当前所在的网络.</li>
+<li><strong>外部代理</strong>(foreign agent): 外部网络中帮助移动结点进行移动管理的实体.</li>
+</ol>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>方法:</p>
+<ol>
+<li>通过交换域内与域间路由选择信息实现,通告其他网络有一条正确的路径可将数据报导向该移动结点的固定地址.</li>
+<li>外部代理为移动结点创建一个<strong>交换地址</strong>(Care-Of Address,COA).移动结点与两个地址:<strong>永久地址</strong>(parmanent address)和COA(<strong>外部地址</strong>). 外部代理告诉归属代理移动结点具有的COA.COA用于将数据报通过外部地址重路由到移动结点.</li>
+</ol>
+<h3 id="路由选择到移动结点"><a href="#路由选择到移动结点" class="headerlink" title="路由选择到移动结点"></a>路由选择到移动结点</h3><blockquote>
+<p><strong>间接路由选择</strong>(indirect routing)</p>
+<ul>
+<li><em>移动节点到外部代理的协议</em>: 移动节点到外部网络,向外部代理注册.</li>
+<li><em>外部代理到归属代理的注册协议</em>: 外部代理向归属代理注册移动结点的COA.</li>
+<li><em>归属代理数据报封装协议</em>: 将原始数据报封装在目的地址为COA的数据报中,转发数据报.</li>
+<li><em>外部代理拆封数据报</em>: 将数据报拆封出原始数据报,转发给移动结点.</li>
+</ul>
+</blockquote>
+<p>缺陷: <strong>三角路由选择问题</strong>(triangle routing problem): 通信者和移动节点存在更有效的路径时,数据报仍然先发给归属代理,再转发到外部网络.</p>
+<blockquote>
+<p><strong>直接路由选择</strong>(direct routing)</p>
+<ul>
+<li>通信者所在的网络中有一个<strong>通信者代理</strong>(correspondent agent),其通过向归属代理查询获得移动节点COA.</li>
+<li>通信者通过通信者代理将数据报直接发送到移动结点COA.</li>
+</ul>
+</blockquote>
+<p> 缺陷: 当移动结点在多个外部网络移动时COA变化后通信者代理的更新.<br> 解决: 移动结点到达的第一个外部网络的外部代理为<strong>锚外部代理</strong>(anchor foreign agent). 移动结点的新外部代理将新COA发送给锚外部代理,锚外部代理将数据报重新封装转发给新的外部代理.</p>
+<h2 id="移动IP"><a href="#移动IP" class="headerlink" title="移动IP"></a>移动IP</h2><p> 移动IP: 支持移动性的因特网体系结构与协议.</p>
+<p> 组成:</p>
+<ol>
+<li><strong>代理发现</strong>: 归属代理/外部代理通告移动结点的协议,移动结点请求归属代理/外部代理的协议.</li>
+<li><strong>向归属代理注册</strong>: 向归属代理注册或注销COA所用的协议.</li>
+<li><p><strong>数据报的间接路由选择</strong>: 数据报由归属代理转发至移动节点的方法.</p>
+<h3 id="代理发现"><a href="#代理发现" class="headerlink" title="代理发现"></a>代理发现</h3><p><strong>代理发现</strong>(agent discovery): 移动结点中的网络层知道其已进入一个新的外部网络.</p>
+<p>方法:</p>
+</li>
+<li>代理通告</li>
+<li><p>代理请求</p>
+<blockquote>
+<p><strong>代理通告</strong></p>
+</blockquote>
+<p>外部代理或归属代理周期性的广播一个ICMP报文,包括路由器的IP地址和移动性代理通告扩展.</p>
+</li>
+</ol>
+<ul>
+<li>归属代理比特(H)</li>
+<li>外部代理比特(F)</li>
+<li>注册要求比特(R)</li>
+<li>M,R封装比特</li>
+<li><p>转交地址(COA)字段</p>
+<blockquote>
+<p><strong>代理请求</strong>(agent solicitation)</p>
+</blockquote>
+<p>移动结点广播一个代理请求报文,代理节点单播一个代理通告.</p>
+<h3 id="向归属代理注册"><a href="#向归属代理注册" class="headerlink" title="向归属代理注册"></a>向归属代理注册</h3><p>步骤:</p>
+</li>
+</ul>
+<ol>
+<li>收到外部代理通告后,移动结点向外部代理发送一个移动IP注册报文.</li>
+<li>外部代理收到注册报文并记录移动结点的永久IP地址.</li>
+<li>归属代理收到注册请求并检查真实性和正确性.</li>
+<li><p>外部代理接收注册响应,然后将其转发给移动结点.</p>
+<h2 id="蜂窝网中的移动性管理"><a href="#蜂窝网中的移动性管理" class="headerlink" title="蜂窝网中的移动性管理"></a>蜂窝网中的移动性管理</h2></li>
+</ol>
+<p><strong>定义</strong></p>
+<ul>
+<li><strong>归属公共地域移动网络</strong>(home Public Land Mobile Network, homePLMN)/<strong>归属网络</strong>(home network): 移动用户的归属网络.</li>
+<li><strong>被访网络</strong>(visited network): 移动用户当前所在网络.</li>
+<li><strong>归属位置注册器</strong>(Home Location Register,HLR): 维护用户的个人信息, 通信者与归属网络的<strong>网关移动服务交换中心</strong>(Gateway Mobile services Switching Center,GMSC/<strong>归属MCS</strong>)联系.</li>
+<li><strong>访问者位置注册</strong>(Visitor Location Register,VLR): 维护当前服务网络中的移动用户.</li>
+</ul>
+<h3 id="移动用户呼叫的路由选择"><a href="#移动用户呼叫的路由选择" class="headerlink" title="移动用户呼叫的路由选择"></a>移动用户呼叫的路由选择</h3><ol>
+<li>通信者拨打移动用户的电话号码.</li>
+<li>归属MSC收到该呼叫并查询HLR来确定移动用户的位置.(<em>HLR返回<strong>移动站点漫游号码</strong>(Mobile Station Roaming Number,MSRN)/<em>*漫游号码</em></em>).</li>
+<li>给定一个漫游号码,归属MSC通过网络到达被访网络的MSC建立呼叫.</li>
+</ol>
+<h3 id="GSM中的切换"><a href="#GSM中的切换" class="headerlink" title="GSM中的切换"></a><strong>GSM中的切换</strong></h3><p><strong>切换</strong>(handoff): 移动结点从一个基站到另一个基站.</p>
+<p>原因:</p>
+<ol>
+<li>消耗减弱,可能中断呼叫.</li>
+<li>蜂窝过载.</li>
+</ol>
+<p>步骤:</p>
+<ol>
+<li>旧基站通告MSC即将进行一个切换.</li>
+<li>MSC发起建立到新BS的路径,发配资源.</li>
+<li>新BS发配并激活信道.</li>
+<li>新BS发出信令到被访MSC和旧BS,通知可以切换.</li>
+<li>移动用户被告知应当切换.</li>
+<li>移动用户与新BS交换报文,激活新的信道.</li>
+<li>移动用户向新BS发送切换完成报文,报文被转发到被访MSC.</li>
+<li>旧BS的资源被释放.</li>
+</ol>
+<p><strong>多MSC间切换</strong><br>移动用户初始访问的MSC为<strong>锚MSC</strong>(anchor MSC).<br>呼叫从归属MSC路由选择到锚MSC,然后到当前被访MSC.</p>
+<h2 id="无线和移动性对高层协议的影响"><a href="#无线和移动性对高层协议的影响" class="headerlink" title="无线和移动性对高层协议的影响"></a><strong>无线和移动性对高层协议的影响</strong></h2><p><strong>链路层</strong>和<strong>网络层</strong>有重要区别.<br><strong>运输层</strong>和<strong>应用层</strong>影响较小.</p>
+<p>TCP的拥塞控制反应在无线情况下存在缺陷,解决方案:</p>
+<ul>
+<li><strong>本地恢复</strong>: 在比特出错出现的当时和本地将其恢复.</li>
+<li><strong>TCP发送方知晓无线链路</strong>: 发送方和接收方知道无线链路的存在,将有线网络中发生的拥塞性丢包和无线网络中的差错/丢包区分.</li>
+<li><strong>分离连接方法</strong>: 将端到端的连接分成两个运输层连接:一个移动主机到无线接入点,一个无线接入点到其他通信端点.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-19T02:49:47.000Z" itemprop="dateUpdated">2019-12-19 10:49:47</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WiFi/" rel="tag">WiFi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/" rel="tag">无线网络</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" rel="tag">移动网络</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/&title=《计算机网络-无线网络和移动网络》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/&title=《计算机网络-无线网络和移动网络》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机网络-无线网络和移动网络》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/19/%E5%A4%9A%E5%AA%92%E4%BD%93%E7%BD%91%E7%BB%9C/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">计算机网络-多媒体网络</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">计算机网络和因特网</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/&title=《计算机网络-无线网络和移动网络》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/&title=《计算机网络-无线网络和移动网络》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机网络-无线网络和移动网络》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

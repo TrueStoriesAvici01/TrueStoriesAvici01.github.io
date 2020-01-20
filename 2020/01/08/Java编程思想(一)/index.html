@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Java编程思想(一)：对象导论 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java,面向对象,OOP">
+    <meta name="description" content="对象导论抽象过程面向对象方式  实质：程序通过添加新类型的对象使自身使用于某个特定问题。在阅读描述解决方案的代码的同时，也是在阅读问题的描述。OOP 是根据问题来描述问题，而不是解决方案的计算机来描述问题。">
+<meta name="keywords" content="Java,面向对象,OOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想(一)：对象导论">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;08&#x2F;Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="对象导论抽象过程面向对象方式  实质：程序通过添加新类型的对象使自身使用于某个特定问题。在阅读描述解决方案的代码的同时，也是在阅读问题的描述。OOP 是根据问题来描述问题，而不是解决方案的计算机来描述问题。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java编程思想(一)：对象导论</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java编程思想(一)：对象导论</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-07T23:53:24.342Z" itemprop="datePublished" class="page-time">
+  2020-01-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对象导论"><span class="post-toc-number">1.</span> <span class="post-toc-text">对象导论</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#抽象过程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">抽象过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#每个对象都有一个接口"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">每个对象都有一个接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#每个对象都提供服务"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">每个对象都提供服务</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#被隐藏的具体实现"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">被隐藏的具体实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#复用具体实现"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">复用具体实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多态"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">多态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单根继承结构"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">单根继承结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#容器"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">容器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象的创建和生命期"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">对象的创建和生命期</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常处理"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">异常处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#并发编程"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">并发编程</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java编程思想(一)"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java编程思想(一)：对象导论</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.342Z"  itemprop="datePublished">2020-01-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="对象导论"><a href="#对象导论" class="headerlink" title="对象导论"></a>对象导论</h1><h2 id="抽象过程"><a href="#抽象过程" class="headerlink" title="抽象过程"></a>抽象过程</h2><p><strong>面向对象方式</strong></p>
+<blockquote>
+<p><strong>实质</strong>：程序通过添加新类型的对象使自身使用于某个特定问题。<br>在阅读描述解决方案的代码的同时，也是在阅读问题的描述。<br>OOP 是根据问题来描述问题，而不是解决方案的计算机来描述问题。</p>
+</blockquote>
+<a id="more"></a>
+<p><strong>面向对象的五个基本特性</strong></p>
+<blockquote>
+<ol>
+<li><strong>万物皆对象</strong>：将对象视为变量，它可以<em>存储数据</em>，同时在<em>自身上执行操作</em>。</li>
+<li><strong>程序是对象的集合，彼此通过消息来相互通信</strong>：发消息是对某个特定对象的方法的调用请求。</li>
+<li><strong>每个对象可由其他对象构成</strong>：通过创建包含现有对象的包的方式来创建新类型的对象。</li>
+<li><strong>每个对象都拥有其类型</strong>：每个<em>对象</em>都是某个<em>类(class)</em>的一个<em>实例(instance)</em>。<em>不同类的重要区别是发送消息的类型</em>。</li>
+<li><strong>每个特定类型的所有对象可以接受相同的消息</strong>：消息是区别不同的类型的重要标志。</li>
+</ol>
+</blockquote>
+<p>对象具有<strong>状态</strong>，<strong>行为</strong>和<strong>标识</strong>：</p>
+<blockquote>
+<ol>
+<li><strong>状态</strong>：拥有内部数据，给出对象的状态。</li>
+<li><strong>方法</strong>：产生方法。</li>
+<li><strong>表示</strong>：每个对象具有可以唯一的和其他对象区分开。(<em>在内存中有唯一的地址</em>)</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="每个对象都有一个接口"><a href="#每个对象都有一个接口" class="headerlink" title="每个对象都有一个接口"></a>每个对象都有一个接口</h2><p>对程序进行抽象，发现所有的程序都在重复进行两个行为：</p>
+<blockquote>
+<ol>
+<li><strong>创建某一类型的变量（对象，实例）</strong>：这个过程称为<em>实例化</em>。</li>
+<li><strong>操作这些变量（发消息，请求）</strong></li>
+</ol>
+</blockquote>
+<p><strong>那么如何判断一个变量是否为有效变量</strong>：即能够实现上面的第二个行为。我们在创建对象的时候通过<em>接口(interface)</em>定义了对于某个对象所能进行的<strong>请求</strong>，而构成对象的各种特性和行为决定了<em>接口</em>。</p>
+<p><strong>对象与类的关系</strong>：</p>
+<ol>
+<li>对象和类是所属关系，特定的对象属于某类，而某类又可以包含多个相同类型对象。</li>
+<li>对象和类是具体和抽象的关系，类是对于具有相同特征（<em>数据元素</em>）和相同行为（<em>功能</em>）的对象的抽象，对象是某个类的具体实现。类中定义了最具代表性的方面，而对象在满足这些类所定义的方面的同时又有自己的特点，用来区别同类的不同对象。<br> <em>一个典型的实例是：人类中定义了最具代表性的方面，如：眼睛，鼻子，行动，等…而到某个具体对象，在继承类中的共同方面的同时又有自己的具有辨识的方面，如：同样有眼睛，有的人眼睛大，有的人眼睛小…等</em></li>
+</ol>
+<hr>
+<h2 id="每个对象都提供服务"><a href="#每个对象都提供服务" class="headerlink" title="每个对象都提供服务"></a>每个对象都提供服务</h2><p>将对象看成“服务提供者”，这样不同的对象提供不同的“服务”，而整个程序就是一个“服务的集合”。程序向用户提供服务，而程序通过调用一系列对象将其所提供的“服务”进行整合而实现。</p>
+<p>基于<em>对象为“服务提供者”</em>这一观点，对象的设计中存在难点如下：</p>
+<blockquote>
+<p>通过将问题看成对象，将对象提供的“服务”进行分解，由不同的对象提供的“服务”协作完成</p>
+<ol>
+<li>分解太细，需要的对象变多，费时费力，单个对象提供的功能单一，内聚性差</li>
+<li>分解太粗，单个对象要提供的功能复杂、冗余，无法处理灵活多变的问题</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="被隐藏的具体实现"><a href="#被隐藏的具体实现" class="headerlink" title="被隐藏的具体实现"></a>被隐藏的具体实现</h2><p>程序员可以分为两种：</p>
+<blockquote>
+<ol>
+<li><em>类创建者</em>：创建新数据类型的程序员</li>
+<li><em>客户端程序员</em>：使用数据类型的类消费者</li>
+</ol>
+</blockquote>
+<p>通过<strong>访问控制</strong>来区别两类程序员：</p>
+<blockquote>
+<ol>
+<li>帮助<em>类使用者</em>快速了解哪些可以忽略，哪些值得重视</li>
+<li>降低两类程序员的紧耦合关系，这样大家可以通过统一规范的接口来相互协调，各司其职，互不影响。</li>
+</ol>
+</blockquote>
+<p>类中有四类访问控制表示<em>(访问指定词access specifier)</em></p>
+<blockquote>
+<ol>
+<li><strong>public</strong>: 任何人可用</li>
+<li><strong>default</strong>:<em>(不指定时默认)</em> 同一个包的不同类可用</li>
+<li><strong>protected</strong>: 本类和继承的类可用</li>
+<li><strong>private</strong>: 仅本类可用</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="复用具体实现"><a href="#复用具体实现" class="headerlink" title="复用具体实现"></a>复用具体实现</h2><p>创建<strong>成员变量</strong>: 将一个类的一个对象置于某个新的类中。</p>
+<p><strong>组合(composition)</strong>: 新的类是由任意数量、类型的其他对象以任意方式实现所需功能组成。</p>
+<hr>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>为什么要<strong>继承</strong>:</p>
+<blockquote>
+<p>通过继承，减少不同类之间的相似功能，消除冗余。</p>
+</blockquote>
+<p><strong>继承</strong>过程的关系：</p>
+<blockquote>
+<p>源类(<em>基类，超类，父类</em>): 被继承者，包含其所有导出类所<strong>共享的特性和行为</strong>。<br>导出类(<em>继承类，子类</em>): 继承者，表示核心概念可以被实现的<strong>各种不同的方式</strong>。</p>
+</blockquote>
+<p><strong>继承</strong>中<strong>基类</strong>和<strong>导出类</strong>的两种关系:</p>
+<blockquote>
+<ol>
+<li>在导出类中添加新方法。(关键词<strong>extends</strong>)</li>
+<li>改变现有基类的方法(<em>覆盖(overriding)</em>)。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>通常把一个对象不当成其所属的特定类型看待，而是将其当成其基类的对象来看待。</p>
+<blockquote>
+<p>解决<strong>不同对象的相同方法的不同实现</strong>问题:<br>通过<em>后期绑定</em>：向对象发消息时，知道运行时具体的代码段才确定，编译器只保证被调用方法的存在以及对调用参数和返回值进行类型检查。</p>
+</blockquote>
+<hr>
+<h2 id="单根继承结构"><a href="#单根继承结构" class="headerlink" title="单根继承结构"></a>单根继承结构</h2><blockquote>
+<p>所有对象最终都继承自单一的基类(<strong>Object</strong>)</p>
+</blockquote>
+<p><strong>优势</strong></p>
+<blockquote>
+<ol>
+<li>在每个对象中执行某些基本操作</li>
+<li>所有对象可以在堆上创建</li>
+<li>简化参数传递</li>
+<li>垃圾回收器实现简单</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p><strong>背景</strong></p>
+<blockquote>
+<p>在不知道解决特定问题时需要的对象个数，或者其存活时间，也就不知道如何以及用多大的空间存储这些对象。<br><strong>容器</strong>: 可以在任何需要的时候扩充自己以容纳置于其中的所有东西。</p>
+</blockquote>
+<p>Q: 单个类型的容器可以满足所有需求，为什么还要设计不同类型？<br>A: </p>
+<blockquote>
+<ol>
+<li>不同容器提供不同类型的接口和外部行为</li>
+<li>不同的容器对于某些操作具有不同的效率</li>
+</ol>
+</blockquote>
+<p><strong>参数化类型</strong></p>
+<p><em>Object类型的容器可以存储任何东西，但是在其中置入对象引用时，需要将其向上转型为Object类型，从而丢失其原有类型。在取回时，获得的是一个Object对象的引用，需要进行类型转换。</em></p>
+<p><strong>参数化类型</strong>: 一种编译器可以自动定制作用于特定类型上的类，从而编译器可以定制只接纳和取出特定类型的对象。</p>
+<p><strong>范式</strong>: Java中的参数化类型。<em>一对尖括号</em>，中间包含类型消息。</p>
+<hr>
+<h2 id="对象的创建和生命期"><a href="#对象的创建和生命期" class="headerlink" title="对象的创建和生命期"></a>对象的创建和生命期</h2><p>Java 在<strong>堆(heap)</strong>的内存池中动态地创建对象，直到运行时才知道需要对象的个数，生命期以及具体类型。在需要一个对象时直接在堆中创建，存储空间是在运行时被动态管理。</p>
+<hr>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>在Java中，<strong>异常</strong>是一种对象，它从出错点被“抛出”，并被专门设计用来处理特定类型错误的相应的异常处理器“捕获”。<br>    <em>异常处理就像与程序正常执行路径并行的，在出错时执行另一个路径，它是一条完全分离的执行路径，不会干扰正常执行的代码。</em></p>
+<h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2><p>对于大量的问题，可以把问题切分成多个可独立运行的部分，提高程序的响应能力。<br>在程序中，这些独立运行的部分称为线程，多线程同时运行称为“<strong>并发</strong>”。</p>
+<blockquote>
+<p>并发的一个<strong>隐患</strong><br>    共享资源可能出现问题：可能约束某些资源不能同时被访问。</p>
+<pre><code>一个简单的解决方案：在某个线程使用时将该资源锁定，完成任务后，释放资源锁。
+</code></pre><hr>
+<p>The END</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-10T14:10:05.000Z" itemprop="dateUpdated">2019-12-10 22:10:05</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/" rel="tag">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/&title=《Java编程思想(一)：对象导论》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/&title=《Java编程思想(一)：对象导论》 — 咸鱼的自我修养&source=对象导论抽象过程面向对象方式
+
+实质：程序通过添加新类型的对象使自身使用于某个特定问题。在阅读描述解决方案的代码的同时，也是在阅读问题的描述。OOP 是根..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java编程思想(一)：对象导论》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java编程思想(二)：一切都是对象</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/08/Java%E5%87%BA%E9%94%99%E6%B1%87%E6%80%BB/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java出错汇总</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/&title=《Java编程思想(一)：对象导论》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/&title=《Java编程思想(一)：对象导论》 — 咸鱼的自我修养&source=对象导论抽象过程面向对象方式
+
+实质：程序通过添加新类型的对象使自身使用于某个特定问题。在阅读描述解决方案的代码的同时，也是在阅读问题的描述。OOP 是根..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java编程思想(一)：对象导论》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%B8%80)/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

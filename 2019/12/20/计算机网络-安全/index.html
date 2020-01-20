@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>计算机网络-安全 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="计算机网络,安全">
+    <meta name="description" content="计算机网络中的安全网络安全安全通信(secure communication):  机密性(confidentiality): 仅有通信双方能够理解报文的内容. 报文完整性(message integrity): 通信内容在传输过程中未被修改. 端点鉴别(end-point authentication): 通信双方能够证实对方的身份. 运行安全性(operational security): 抵">
+<meta name="keywords" content="计算机网络,安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-安全">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;20&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="计算机网络中的安全网络安全安全通信(secure communication):  机密性(confidentiality): 仅有通信双方能够理解报文的内容. 报文完整性(message integrity): 通信内容在传输过程中未被修改. 端点鉴别(end-point authentication): 通信双方能够证实对方的身份. 运行安全性(operational security): 抵">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-20T12:58:05.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">计算机网络-安全</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">计算机网络-安全</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-20T00:18:01.000Z" itemprop="datePublished" class="page-time">
+  2019-12-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#计算机网络中的安全"><span class="post-toc-number">1.</span> <span class="post-toc-text">计算机网络中的安全</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络安全"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">网络安全</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#密码学原则"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">密码学原则</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对称密钥密码体制"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">对称密钥密码体制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#公开密钥加密"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">公开密钥加密</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#报文完整性和数字签名"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">报文完整性和数字签名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#密码散列函数"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">密码散列函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#报文鉴别码"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">报文鉴别码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数字签名-digital-signature"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">数字签名(digital signature)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#端点鉴别"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">端点鉴别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安全电子邮件"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">安全电子邮件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使TCP连接安全-SSL"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">使TCP连接安全:SSL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络层安全性-IPsec和虚拟"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">网络层安全性: IPsec和虚拟</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPsec和虚拟专用网"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">IPsec和虚拟专用网</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AH协议和ESP协议"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">AH协议和ESP协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全关联"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">安全关联</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPsec数据报"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">IPsec数据报</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IKE-IPsec中的密钥管理"><span class="post-toc-number">1.7.5.</span> <span class="post-toc-text">IKE: IPsec中的密钥管理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无线LAN安全"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">无线LAN安全</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IEEE-802-11i"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">IEEE 802.11i</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行安全性-防火墙和入侵检测系统"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">运行安全性:防火墙和入侵检测系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#防火墙"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">防火墙</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#入侵检测系统"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">入侵检测系统</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-计算机网络-安全"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">计算机网络-安全</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-20 08:18:01" datetime="2019-12-20T00:18:01.000Z"  itemprop="datePublished">2019-12-20</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="计算机网络中的安全"><a href="#计算机网络中的安全" class="headerlink" title="计算机网络中的安全"></a>计算机网络中的安全</h1><h2 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h2><p><strong>安全通信</strong>(secure communication):</p>
+<ol>
+<li><strong>机密性</strong>(confidentiality): 仅有通信双方能够理解报文的内容.</li>
+<li><strong>报文完整性</strong>(message integrity): 通信内容在传输过程中未被修改.</li>
+<li><strong>端点鉴别</strong>(end-point authentication): 通信双方能够证实对方的身份.</li>
+<li><strong>运行安全性</strong>(operational security): 抵御来自公共因特网的威胁.</li>
+</ol>
+<p>潜在的威胁:</p>
+<ol>
+<li><strong>窃听</strong>: 监听,记录信道上传输的控制报文和数据报文.</li>
+<li><strong>修改</strong>,<strong>插入</strong>和<strong>删除</strong>报文或其内容.</li>
+</ol>
+<h2 id="密码学原则"><a href="#密码学原则" class="headerlink" title="密码学原则"></a>密码学原则</h2><p><strong>对称密钥系统</strong>(symmetric key system): 通信双方的密钥是相同的.<br><strong>公开密钥系统</strong>(public key system): 使用一对密钥,其中一个公开,另外一个只有一人知道.</p>
+<h3 id="对称密钥密码体制"><a href="#对称密钥密码体制" class="headerlink" title="对称密钥密码体制"></a>对称密钥密码体制</h3><p><strong>凯撒密码</strong>(Caesar cipher): 每个字母由其后的第k个字母进行替换.</p>
+<p><strong>单码替换密码</strong>(monoalphabetic cipher): 使用非规则的模式进行替换.</p>
+<p><strong>多码替换规则</strong>(polyalphabetic encryption): 使用多个单码替换密码.一个单码替换密码用于加密某明文报文中一个特定位置的一个字母.</p>
+<p>入侵分类:</p>
+<ol>
+<li><strong>唯密文攻击</strong>(ciphertext-only attack): 入侵者只知道密文.</li>
+<li><strong>:已知明文攻击</strong>(konwn-plaintext attack): 入侵者知道(明文,密文)的一些匹配.</li>
+<li><strong>选择明文攻击</strong>(chosen-plaintext attack): 入侵者能够选择某一明文报文并得到该明文报文对应的密文.</li>
+</ol>
+<p>分类:</p>
+<ol>
+<li><strong>流密码</strong>(stream ciphers)</li>
+<li><strong>块密码</strong>(block ciphers)</li>
+</ol>
+<p><strong>块密码</strong>:<br>将报文分成若干个k比特的块,对每个块单独进行一一映射加密.</p>
+<p><strong>密码块链接</strong>(Cipher Block Chaining,CBC):</p>
+<p>目的:<br>防止相同的块加密生成相同的密文.</p>
+<p>做法:</p>
+<ol>
+<li>加密之前,生成一个<strong>初始向量</strong>(Initialization Vector,IV).</li>
+<li>第一个块,使用明文与初始向量异或后加密.</li>
+<li>后续的块,使用前一个加密后的块和明文以后后加密.</li>
+</ol>
+<h3 id="公开密钥加密"><a href="#公开密钥加密" class="headerlink" title="公开密钥加密"></a>公开密钥加密</h3><p>被通信者有两个密钥: <strong>公钥</strong>(公开的)和<strong>私钥</strong>(私有的). 通信者通过被通信者的公钥加密明文,被通信者用私钥解密密文得到明文.</p>
+<p><strong>RSA</strong><br>公钥,私钥的生成:</p>
+<ol>
+<li>选择大素数p和q.</li>
+<li>计算 n=pq 和 z=(p-1)(q-1).</li>
+<li>选择小于n的数e,使得e和z互素.</li>
+<li>选择d,使得 ed mod z =1.</li>
+<li>公钥对为(n,e);私钥对为(n,d).</li>
+</ol>
+<p>加密:<br>待加密的明文为m:<br>密文c=(m^e) mod n.</p>
+<p>解密:<br>解密得: m = (c^d) mod n.</p>
+<p><strong>会话密钥</strong>(session key)</p>
+<p>用来传输大量数据的密钥.</p>
+<p>方法:</p>
+<ol>
+<li>选择会话密码(对称密钥).</li>
+<li>通过RSA加密会话密钥.</li>
+<li>利用会话密钥加密数据.</li>
+</ol>
+<h2 id="报文完整性和数字签名"><a href="#报文完整性和数字签名" class="headerlink" title="报文完整性和数字签名"></a>报文完整性和数字签名</h2><p><strong>报文完整性</strong>(message integrity): 报文鉴别.</p>
+<h3 id="密码散列函数"><a href="#密码散列函数" class="headerlink" title="密码散列函数"></a>密码散列函数</h3><p><strong>密码散列函数</strong>(cryprographic hash function): 计算上不可能实现两个不同的报文x和y使得H(x) = H(y).</p>
+<p>分类:</p>
+<ul>
+<li>MD5</li>
+<li>SHA-1</li>
+<li>…</li>
+</ul>
+<h3 id="报文鉴别码"><a href="#报文鉴别码" class="headerlink" title="报文鉴别码"></a>报文鉴别码</h3><p>维拉保证报文完整性,需要使用<strong>鉴别密钥</strong>(authentcation key).</p>
+<p>报文完整性步骤:</p>
+<ol>
+<li>将报文m和鉴别密钥s级联后计算散列H(m+s),称为<strong>报文鉴别码</strong>(Message Authentication Code,MAC).</li>
+<li>明文和MAC发送给对方.</li>
+<li>对方计算H(m+s),若与发送的报文界别码相同,则正常.</li>
+</ol>
+<h3 id="数字签名-digital-signature"><a href="#数字签名-digital-signature" class="headerlink" title="数字签名(digital signature)"></a>数字签名(digital signature)</h3><p>作用:<br>类似现实生活中的签名,指明某个文件的所有者或某人认可一个文件的内容.</p>
+<p>要求:</p>
+<ul>
+<li>可证实性</li>
+<li>不可伪造性</li>
+</ul>
+<p>应用:</p>
+<blockquote>
+<p><strong>身份认证</strong></p>
+</blockquote>
+<p>步骤:<br><strong>签名</strong>:</p>
+<ol>
+<li>签名者对报文m计算其”指纹”H(m)(哈希值).</li>
+<li>使用签名者的私钥对H(m)进行加密K(H(m)).</li>
+<li>发送报文m和加密后的密文K(H(m)).</li>
+</ol>
+<p><strong>验证</strong>:</p>
+<ol>
+<li>用公钥对明文解密,获得散列值H(m).</li>
+<li>对报文计算其散列值H’(m).</li>
+<li>两者相同则身份验证成功.</li>
+</ol>
+<blockquote>
+<p><strong>公钥认证</strong>(public key certification)</p>
+</blockquote>
+<p>目的: 证实公钥是对应于某一实体,防止冒名顶替.</p>
+<p><strong>认证中心</strong>(Certification Authority,CA): 识别和发行证书合法化.<br>功能:</p>
+<ul>
+<li>证实一个实体的真实身份.</li>
+<li>生成身份和公钥绑定的<strong>证书</strong>(certificate).</li>
+</ul>
+<h2 id="端点鉴别"><a href="#端点鉴别" class="headerlink" title="端点鉴别"></a>端点鉴别</h2><p><strong>回放攻击</strong>(playback attack): 攻击者记录下带有口令的加密报文,再向目标回放该报文,则可实现伪装.</p>
+<p>解决方案:</p>
+<ol>
+<li>被认证者发送认证报文.</li>
+<li>认证者回应一个<strong>不重数</strong>(nonce,在协议生存期中不会再次使用的数).</li>
+<li>被认证者使用共享的密钥加密不重数,并发送.</li>
+<li>认证者解密,不重数正确则确认身份.</li>
+</ol>
+<h2 id="安全电子邮件"><a href="#安全电子邮件" class="headerlink" title="安全电子邮件"></a>安全电子邮件</h2><p><strong>PGP</strong>(Pretty Good Privacy)<br>一种电子邮件加密方案.</p>
+<p>使用MD5或SHA计算报文摘要;<br>使用CAST,三重DES或IDEA进行对称密钥加密.<br>使用RSA进行公开密钥加密.<br>允许为所信任的用户鉴别更多密钥提供担保.<br>通过哦保持密钥签署方相互签署对方的密钥.</p>
+<h2 id="使TCP连接安全-SSL"><a href="#使TCP连接安全-SSL" class="headerlink" title="使TCP连接安全:SSL"></a>使TCP连接安全:SSL</h2><p><strong>安全套接字层</strong>(Secure Socket Layer,SSL): 安全性服务加强TCP.<br><strong>运输层安全性</strong>(Transport Layer Security,TLS): SSL版本3的修改版本.</p>
+<p>步骤:<br>SSL握手</p>
+<ol>
+<li>客户发送其支持的密码算法列表,连同一个客户的不重数.</li>
+<li>从列表中,服务器选择一个对称算法,一种公钥算法和一种MAC算法.将选择和证书以及服务器不重数返回给客户.</li>
+<li>客户验证证书,提取公钥,生成<strong>前主密钥</strong>(Pre-Master Secret,PMS),使用服务器公钥加密PMS,并发送给服务器.</li>
+<li>使用相同的密钥导出函数,客户和服务器从PMS和不重数计算<strong>主密钥</strong>(Master Secret,MS),之后的报文用MAC加密和鉴别.</li>
+<li>客户发送所有握手报文的一个MAC.</li>
+<li>服务器发送所有握手报文的一个MAC.</li>
+</ol>
+<p>连接关闭:<br>在类型字段中指出该记录是否是用于终止该SSL会话(接收方可用MAC对其进行鉴别,防止<strong>截断攻击</strong>(truncation attack))</p>
+<h2 id="网络层安全性-IPsec和虚拟"><a href="#网络层安全性-IPsec和虚拟" class="headerlink" title="网络层安全性: IPsec和虚拟"></a>网络层安全性: IPsec和虚拟</h2><p><strong>IP安全</strong>(IP Security,IPsec): 为<strong>网络层</strong>提供安全性.</p>
+<p>应用:<br>使用IPsec创建<strong>虚拟专用网</strong>(virtual private network,VPN).<br>提供<strong>机密性</strong>,<strong>源鉴别</strong>,<strong>数据完整性</strong>,<strong>重放攻击防护</strong>.</p>
+<h3 id="IPsec和虚拟专用网"><a href="#IPsec和虚拟专用网" class="headerlink" title="IPsec和虚拟专用网"></a>IPsec和虚拟专用网</h3><p>IP数据报在网关路由器中被转换为IPsec数据报,并被转发进因特网.<br>IPsec数据报具有传统IPv4首部,能被互联网路由器处理.<br>IPsec数据报载荷包括一个IPsec首部,用于被IPsec处理.<br>IPsec数据报载荷是被加密的.</p>
+<h3 id="AH协议和ESP协议"><a href="#AH协议和ESP协议" class="headerlink" title="AH协议和ESP协议"></a>AH协议和ESP协议</h3><p>IPsec协议簇中的两个主要协议:</p>
+<ol>
+<li><strong>鉴别首部</strong>(Authentication Header,AH): 提供源鉴别和数据完整性服务.</li>
+<li><strong>封装安全性载荷</strong>(Encapsulation Security Payload,ESP): 提供源鉴别,数据完整性和机密性.</li>
+</ol>
+<h3 id="安全关联"><a href="#安全关联" class="headerlink" title="安全关联"></a>安全关联</h3><p><strong>安全关联</strong>(Security Association,SA): 源和目的实体创建一个网络层的逻辑连接.</p>
+<p><strong>安全关联数据库</strong>(Security Assocaition Database,SAD): 存储所有SA的状态信息.</p>
+<h3 id="IPsec数据报"><a href="#IPsec数据报" class="headerlink" title="IPsec数据报"></a>IPsec数据报</h3><p>分组形式:</p>
+<ol>
+<li><strong>隧道模式</strong>(tunnel mode)</li>
+<li><strong>运输模式</strong>(transport mode)</li>
+</ol>
+<p>IPv4数据报-&gt;IPsec数据报:</p>
+<ol>
+<li>尾部附上”ESP尾部”字段</li>
+<li>使用SA规定的密钥加密.</li>
+<li>在前面附上”ESP首部”的字段.</li>
+<li>使用SA规定的密钥生成鉴别MAC</li>
+<li>MAC附加在后面形成载荷.</li>
+<li>生成一个IPv4首部字段.附加在载荷之前.</li>
+</ol>
+<p>接收:</p>
+<ol>
+<li>由协议字段,确定使用IPsec ESP处理.</li>
+<li>使用SPI确定数据报所属的SA.</li>
+<li>计算MAC并验证是否与ESP MAC字段相同.(防篡改)</li>
+<li>检查序号(防重放)</li>
+<li>使用SA关联密钥解密.</li>
+<li>删除填充,提取原始IP报文.</li>
+</ol>
+<h3 id="IKE-IPsec中的密钥管理"><a href="#IKE-IPsec中的密钥管理" class="headerlink" title="IKE: IPsec中的密钥管理"></a>IKE: IPsec中的密钥管理</h3><p><strong>因特网密钥交换</strong>(Internet Key Exchange,IKE): 自动生成SA.</p>
+<ol>
+<li>在路由器之间创建agiel双向的IKE SA,创建加密和鉴别密钥,以及主密钥.</li>
+<li>协商加密和鉴别算法.</li>
+<li>两侧生成每个方向的一个SA.</li>
+</ol>
+<h2 id="无线LAN安全"><a href="#无线LAN安全" class="headerlink" title="无线LAN安全"></a>无线LAN安全</h2><p><strong>有线等效保密</strong>(Wired Equivalent Privacy,WEP).</p>
+<p>鉴别步骤:</p>
+<ol>
+<li>主机通过接入点请求鉴别.</li>
+<li>接入点以一个128字节的不重数响应该鉴别请求.</li>
+<li>主机用与接入点共享的密钥加密不重数.</li>
+<li>接入点解密主机加密的不重数.</li>
+</ol>
+<h3 id="IEEE-802-11i"><a href="#IEEE-802-11i" class="headerlink" title="IEEE 802.11i"></a>IEEE 802.11i</h3><p>阶段:</p>
+<ol>
+<li>发现: AP通告鉴别和加密形式,客户请求.</li>
+<li>相互鉴别和主密钥(MK)生成: 鉴别发生在客户和鉴别服务器之间,接入点起中继作用.</li>
+<li>成对主密钥(Pairewise Master Key,PMK): 使用MK生成PMK.</li>
+<li>临时密钥(Temporal Key,TK): 使用PMK,生成用于通信的密钥.</li>
+</ol>
+<h2 id="运行安全性-防火墙和入侵检测系统"><a href="#运行安全性-防火墙和入侵检测系统" class="headerlink" title="运行安全性:防火墙和入侵检测系统"></a>运行安全性:防火墙和入侵检测系统</h2><h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><p><strong>防火墙</strong>(firewall): 将内部网络与因特网隔离,允许某些分组通过而阻止另外一些分组.</p>
+<p>目标: </p>
+<ol>
+<li>从外部到内部和从内部到外部的所有流量都经过防火墙.</li>
+<li>仅被授权的流量允许通过.</li>
+<li>防火墙自身免于渗透.</li>
+</ol>
+<p>分类:</p>
+<ol>
+<li>传统分组过滤器(traditional packet filter)</li>
+<li>状态过滤器(stateful filter)</li>
+<li>应用程序网关(application gateway)</li>
+</ol>
+<blockquote>
+<p><strong>传统的分组过滤器</strong></p>
+</blockquote>
+<p><strong>分组过滤</strong>(packet filtering):<br>位置:<br>在内部网络与ISP之间的网关路由器,进入或离开内部网都要经过该路由器.<br>因素:</p>
+<ul>
+<li>IP源/目的地址</li>
+<li>IP数据报中的协议类型字段.</li>
+<li>TCP或UDP的源和目的端口.</li>
+<li>TCP标志比特: SYN,ACK.</li>
+<li>ICMP报文类型.</li>
+<li>数据报离开或进入网络的不同规则.</li>
+<li>不同路由器接口的不同规则.</li>
+</ul>
+<blockquote>
+<p><strong>状态分组过滤器</strong></p>
+</blockquote>
+<p>跟踪TCP连接,从而作出过滤决定.<br>通过访问控制列表和连接表确定分组是否是正在进行的TCP连接的一部分.</p>
+<blockquote>
+<p><strong>应用程序网关</strong></p>
+</blockquote>
+<p><strong>应用程序网关</strong>(application gateway): 一个应用程序特定的服务器,所有应用程序数据必须通过它.</p>
+<p>流程:</p>
+<ol>
+<li>用户输入要连接的外部主机的主机名.</li>
+<li>网关与外部主机建立会话.</li>
+<li>应用程序网关中继用户和外部主机的数据.</li>
+</ol>
+<p>缺陷:</p>
+<ol>
+<li>不同的应用程序使用不同的应用程序网关.</li>
+<li>所有数据由网关转发,负担重.</li>
+</ol>
+<h3 id="入侵检测系统"><a href="#入侵检测系统" class="headerlink" title="入侵检测系统"></a>入侵检测系统</h3><p><strong>深度分组检查</strong>(deep packet inspection): 查看分组携带的实际应用数据.</p>
+<p><strong>入侵检测系统</strong>(Intrusion Detection System,IDS): 观察到潜在恶意流量并产生告警.</p>
+<p><strong>入侵防止系统</strong>(Intrusion Prevention System,IPS): 滤除可疑流量的设备.</p>
+<p>结构:</p>
+<ul>
+<li>高度安全区域: 由分组过滤器和应用程序网关保护,由IDS监视.</li>
+<li>非军事区(DeMilitarized Zone,DMZ): 仅有分组过滤器保护.</li>
+</ul>
+<p>IDS系统分类:</p>
+<ol>
+<li>基于特征的系统(signature-based system)</li>
+<li>基于异常的系统(anomaly-based system)</li>
+</ol>
+<p>基于特征的系统: 维护一个攻击特征数据库,每个特征是一个规则集.<br>缺陷: 对新攻击缺乏判断力;可能产生虚假警告;可能处理过载而难以检查.</p>
+<p>基于异常的系统: 观察正常流量,生成概况文件.然后寻找不寻常分组流.不依赖现有攻击的以前知识.</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-20T12:58:05.000Z" itemprop="dateUpdated">2019-12-20 20:58:05</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/&title=《计算机网络-安全》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/&title=《计算机网络-安全》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机网络-安全》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">计算机网络-网络管理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/19/%E5%A4%9A%E5%AA%92%E4%BD%93%E7%BD%91%E7%BB%9C/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">计算机网络-多媒体网络</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/&title=《计算机网络-安全》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/&title=《计算机网络-安全》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机网络-安全》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%89%E5%85%A8/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

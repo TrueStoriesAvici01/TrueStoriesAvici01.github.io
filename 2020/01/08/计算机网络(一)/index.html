@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>计算机网络(一)：计算机网络于Internet | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="计算机网络">
+    <meta name="description" content="The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc. The way  end systems communicate with each">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络(一)：计算机网络于Internet">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;08&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc. The way  end systems communicate with each">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;FDMandTDM.PNG">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;nodalDelay.PNG">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;queuingdelay.PNG">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;FiveLayerProtocolStack.PNG">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;FDMandTDM.PNG">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">计算机网络(一)：计算机网络于Internet</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">计算机网络(一)：计算机网络于Internet</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-07T23:53:24.962Z" itemprop="datePublished" class="page-time">
+  2020-01-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#The-Internet"><span class="post-toc-number">1.</span> <span class="post-toc-text">The Internet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-nut-and-bolts-description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">A nut-and-bolts description</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-services-Description"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">A services Description</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Protocol"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Protocol</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#The-Network-Edge"><span class="post-toc-number">2.</span> <span class="post-toc-text">The Network Edge</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Access-Networks"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Access Networks</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Physical-Media"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Physical Media</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#The-Network-Core"><span class="post-toc-number">3.</span> <span class="post-toc-text">The Network Core</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Packet-Switching"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Packet Switching</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Circuit-Switching"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Circuit Switching</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-Network-of-Networks"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">A Network of Networks</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Delay-Loss-and-Throughput-in-Packet-Switched-Networks"><span class="post-toc-number">4.</span> <span class="post-toc-text">Delay, Loss, and Throughput in Packet-Switched Networks</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Overview-of-Delay-in-Packet-Switched-Networks"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Overview of Delay in Packet-Switched Networks</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Types-of-Delay"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Types of Delay</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Queuing-Delay-and-Packet-Loss"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">Queuing Delay and Packet Loss</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#End-to-End-Delay"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">End-to-End Delay</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Throughput-in-Computer-Networks"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">Throughput in Computer Networks</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Protocol-Layers-and-Their-Service-Models"><span class="post-toc-number">5.</span> <span class="post-toc-text">Protocol Layers and Their Service Models</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Layered-Architecture"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">Layered Architecture</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-计算机网络(一)"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">计算机网络(一)：计算机网络于Internet</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.962Z"  itemprop="datePublished">2020-01-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="The-Internet"><a href="#The-Internet" class="headerlink" title="The Internet"></a>The Internet</h1><h2 id="A-nut-and-bolts-description"><a href="#A-nut-and-bolts-description" class="headerlink" title="A nut-and-bolts description"></a>A nut-and-bolts description</h2><p><strong>hosts</strong>(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc.</p>
+<p>The way  end systems communicate with each other:</p>
+<blockquote>
+<ol>
+<li>End systems are connected together by a network of <strong>communication links</strong>(<em>coaxial cable, copper wire, optical fiber…</em>) and <strong>packet switches</strong>.</li>
+<li><strong>Transmission rate</strong>: The rate of different links can transmit data, measured in bits/second.</li>
+<li>Steps: <blockquote>
+<ol>
+<li>The sending end system segments the data and adds header bytes to each segment.</li>
+<li>The resulting packages (<em>packets</em>) are sent through the network to the destination end system.</li>
+<li>The destination end system reassmbled into the original data.</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<p><strong>Packet switch</strong>:</p>
+<blockquote>
+<p><strong>Goal</strong>: take a packet arriving on one of its incoming communication links and forwards that packet on one of  its outgoing communication links.<br><strong>Type</strong>:<br><em>both forword packets toward their ultimate destinations</em>.</p>
+<blockquote>
+<ol>
+<li><strong>routers</strong>: used in the network core.</li>
+<li><strong>link-layer switches</strong>: used in access networks.<br><strong>route</strong>(<strong>path</strong>): The sequence of communication links and packet switches traversed by a packet from the sending end system to the receiving end system.</li>
+</ol>
+</blockquote>
+</blockquote>
+<p><strong>ISP</strong>(Internet Service Prociders):</p>
+<blockquote>
+<p>End systems access the Internet through <strong>ISP</strong>s, the <strong>ISP</strong>s that provide access to end systems must also be interconnected.<br>The lower-tier <strong>ISP</strong>s are interconnected through national and international upper-tier <strong>ISP</strong>s.</p>
+</blockquote>
+<p><strong>TCP/IP</strong>:</p>
+<blockquote>
+<p><strong>Transmission Control Protocol</strong>(TCP):<br><strong>Internet Protocol</strong>(IP): specifies the format of the packets that are sent and received among routers and end systems.</p>
+</blockquote>
+<h2 id="A-services-Description"><a href="#A-services-Description" class="headerlink" title="A services Description"></a>A services Description</h2><blockquote>
+<p>The Internet is as <em>an infrastructure that provides services to applications</em>.</p>
+<p><strong>API</strong>(Application Programming Interface):<br>End systems attached to the Internet provide an <strong>API</strong> that specifies how a program running on one end system asks the Internet infrastructure to deliver data to a specific destination program running on another end system.<br><strong>API</strong>:</p>
+<blockquote>
+<p>A set of rules that the sending program must follow so that the Internet can deliver the data to the destination program.</p>
+</blockquote>
+</blockquote>
+<h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><blockquote>
+<p><strong>NOTE:</strong> It takes two(or more) communicating entities running the same protocol in order to accomplish a task.</p>
+<p>All activity in the Internet that involves two or more communicating remote entities in governed by a protocol.</p>
+<blockquote>
+<p>Hardware-implemented protocols in two physically connected computers control the flow of bits on the “wire” between the two network interface cards.<br>Congestion-control protocols in end systems control the rate at which packets are transmitted between sender and receiver.<br>Protocols in routers determine a packet’s path from source to destination.</p>
+</blockquote>
+</blockquote>
+<p><strong>Definition</strong>:</p>
+<blockquote>
+<p><em>A <strong>prtocol</strong> defines the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or a message or other event.</em></p>
+</blockquote>
+<hr>
+<h1 id="The-Network-Edge"><a href="#The-Network-Edge" class="headerlink" title="The Network Edge"></a>The Network Edge</h1><p><strong>End system</strong> are also referred to as <strong>host</strong>.<br>    Hosts are divided into two categories:</p>
+<pre><code>1. **clients**: desktop PCs, smartphones...
+2. **servers**: powerful machines that stores and distribute Web pages...
+</code></pre><hr>
+<h2 id="Access-Networks"><a href="#Access-Networks" class="headerlink" title="Access Networks"></a>Access Networks</h2><p><strong>Access network</strong>: the network that physically connects an end system to the first router(edge router).</p>
+<blockquote>
+<p>DSL(digital subscriber line)<br>    A residence typically obtains <strong>DSL</strong> Internet access from the same local telephone company(telco) that provides its wired local phone access.</p>
+</blockquote>
+<p>The residential telephone line carries both data and traditional telephone signals simultaneously, which are encoded at different frequencies:(frequency-division multiplexing)</p>
+<ul>
+<li>High-speed downstream channel: 50kHz to 1MHz band</li>
+<li>medium-speed upstream channel: 4kHz to 50kHz band</li>
+<li>two-way telephone channel: 0 to 4kHz band</li>
+</ul>
+<blockquote>
+<p><strong>cable Internet access</strong><br>    Make use of the cable television company’s existing cable television infrastructure.</p>
+</blockquote>
+<p>At the cable head end, the cable modem termination system(CMTS) turning the analog signal sent from the cable modems back into digital format.</p>
+<blockquote>
+<p><strong>FTTH</strong>(fiber to the home)<br>    An optical fiber path from the CO directly to the home.</p>
+</blockquote>
+<p><strong>Two optical-distribution network</strong></p>
+<blockquote>
+<ol>
+<li>active optical networks(<strong>AONs</strong>)</li>
+<li>passive optical networks(<strong>PONs</strong>)</li>
+</ol>
+</blockquote>
+<p><strong>PONs</strong>:<br>    Each home has an optical network terminator(ONT), which is connected by optical fiber to a optical fibers, which connects to an optical linw terminator(OLT). In the home, users connect a home router to the ONT and access the Internet via home router.</p>
+<p><strong>Ethernet and WiFi</strong><br>A local area network(LAN) is used to connect an end system to the edge router.</p>
+<blockquote>
+<ol>
+<li><strong>Ethernet</strong>: Ethernet uesers use twisted-pair copper wire to connect to an Ethernet switch. The Ethernet switch is in turn connected into the larger Internet.</li>
+<li><strong>WiFi</strong>: wireless users transmit/receive packets to/from an access point that is connected into the enterprise’s network.</li>
+</ol>
+</blockquote>
+<p><strong>3G and LTE</strong></p>
+<blockquote>
+<ol>
+<li>Third-generation(3G) wireless provides packet-switched wide-area wireless Internet access at speeds in excess of 1 Mbps.</li>
+<li>Fourth-generation(4G) of wide-area wireless networks(LTE: Long-Term Evolution) can achieve rates in excess of 10 Mbps.</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="Physical-Media"><a href="#Physical-Media" class="headerlink" title="Physical Media"></a>Physical Media</h2><p>Physicak media fall into two categories:</p>
+<blockquote>
+<ol>
+<li><strong>guided media</strong>: the waves are guided along a solid medium. fiber-optic cable, twisted-pair copper wire, coaxial cable.</li>
+<li><strong>unguided media</strong>: the waves propagate in the atmosphere and in outer space. wireless LAN, digital satellite channel.</li>
+</ol>
+</blockquote>
+<p><strong>Twisted-Pair Copper Wire</strong><br>Twisted pair consists of two insulated copper wires,each about 1 mm thick, arranged in a regular spiral pattern.<br>    (<em>The wires are twisted together to reduce the electrical interference from similar pairs close by</em>)</p>
+<p><strong>Unshielded twisted pair</strong>(UTP) is used for computer networks.</p>
+<p><strong>Coaxial Cable</strong><br>Coaxial cable consists of two copper conductors which are concentric rather than parallel.</p>
+<p><strong>Fiber Optics</strong><br>An optical fiber is a thin, flexible medium that conducts pulses of light, with each pulse representing a bit.</p>
+<pre><code>1. A single optical fiber can support tremendous bit rates.
+2. Fiber optics  are immune to electromagnetic 3. interference.
+4. Very low signal attenuation.
+5. Very hard to tap.
+</code></pre><hr>
+<h1 id="The-Network-Core"><a href="#The-Network-Core" class="headerlink" title="The Network Core"></a>The Network Core</h1><h2 id="Packet-Switching"><a href="#Packet-Switching" class="headerlink" title="Packet Switching"></a>Packet Switching</h2><p>End systems exchange message with each other.<br>To send a message from source to destination:<br>    Long messages are broke into samll chunks of data(<strong>packets</strong>).<br>    <strong>Packets</strong>  travels through <em>communication links</em> and <em>packet switches</em>(<em>routers</em> or <em>link-layer switches</em>).</p>
+<p>The transmit time: L/R seconds. As a packet of L bits and a link with transmission rate R bit/sec.</p>
+<hr>
+<p><strong>Store-and-Forward Transmission</strong></p>
+<blockquote>
+<p>The packet switch must receive the entire packet before it can begin to transmit the first bit of the packet onto the outbound link.<br>    Routers need to <em>receive</em>, <em>store</em>, and <em>process</em> the entire packet before forwarding.</p>
+</blockquote>
+<p><strong>The time of transmitting N L-bits packets that elapses from source to destination through a router</strong></p>
+<blockquote>
+<p>time = ((N+1)L)/R<br><em>R is the transmit rate over the link</em></p>
+</blockquote>
+<p><strong>The time of transmitting a L-bits packet that elapses from source to destination through N routers(N+1 links)</strong></p>
+<blockquote>
+<p>time = ((N+1)L)/R</p>
+</blockquote>
+<hr>
+<p><strong>Queuing Delays and Packet Loss</strong><br>The packet switch has an <strong>output buffer</strong>(output queue).<br>    <strong>output queue</strong>: stores packets that the router is about to send into that link.</p>
+<p><strong>Queuing delays</strong>: An arriving packet needs to be transmitted onto a link but the link busy with the transmission of another packet, the arriving packet must wait in the output buffer.</p>
+<p><strong>Packet loss</strong>: An arriving packet find that the buffer is full, then either the arriving packet or one of the already-queued packets will be dropped.</p>
+<hr>
+<p><strong>Forwarding Tables and Routing Protocols</strong></p>
+<blockquote>
+<p>Every end system has an address <strong>IP</strong> address.<br>The source includes the destination’s IP address in the packet’s header.<br>The router examines a portion of the packet’s destination address and forwards the packet to an adjacent router.<br>Each router has a <strong>forwarding table</strong> that maps destination addresses to the router’s outbound links.<br>The Internet has a number of special <strong>routing protocols</strong> that are used to automatically set the forwarding tables.<br><strong>Routing protocol</strong> determines the shortest path from each router to each destination.</p>
+</blockquote>
+<hr>
+<h2 id="Circuit-Switching"><a href="#Circuit-Switching" class="headerlink" title="Circuit Switching"></a>Circuit Switching</h2><p>The resources needed along a path(buffers, link transmission rate) to provide for communication session between the end systems are <em>reserved</em> for the duration of the communication link.</p>
+<p>When the network establishes the circuit, it also reserves a constant transmission rate in the network’s links for the duration of the connection.</p>
+<p>As a given transmission rate has been reserved, the sender can transfer the data to the receiver at the <em>guaranteed</em> constant rate.</p>
+<p><strong>Multiplexing in Circuit-Switched Networks</strong></p>
+<blockquote>
+<ol>
+<li><strong>frequency-division multiplexing(FDM)</strong></li>
+<li><strong>time-division multiplexing(TDM)</strong></li>
+</ol>
+<p>FDM: </p>
+<blockquote>
+<p>the frequency spectrum of a link is divided up among the connections.<br>A frequency band to each connection for the duration of the connection.<br>The width of the band is the <strong>bandwidth</strong>.<br>TDM:<br><strong>Time</strong> is divided into <strong>frames</strong> of fixed duration.<br>Each <strong>frame</strong> is divided into a fixed number of <strong>time slots</strong>.<br>A time slots in each frame for the sole use of a connection.<br>The transmission rate of a circuit is equal to <strong>the frame rate</strong> multiplied by <strong>the number of bits in a slot</strong>.</p>
+</blockquote>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//FDMandTDM.PNG" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p><strong>Silent periods</strong>: Circuit switching has silent periods when one in connections stops transmitting, the network resources cannot be used by other ongoing connections.</p>
+<p><strong>The time transmitting a packet through circuit-switched network</strong>:</p>
+<blockquote>
+<p>The total time = The time of establish an end-to-end circuit + The time of transmitting a packet through link</p>
+</blockquote>
+<p><strong>The performance of two forms of sharing a link</strong></p>
+<blockquote>
+<ol>
+<li>Circuit switching: pre-allocates use of the transmission link regardless of demand, with allocated but unneeded link time going unused.</li>
+<li>Packet switching allocates link use on demand. Link transmission capacity will be shared among those users who need to transmit packets.</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="A-Network-of-Networks"><a href="#A-Network-of-Networks" class="headerlink" title="A Network of Networks"></a>A Network of Networks</h2><p><strong>Goal</strong></p>
+<blockquote>
+<p>To interconnect the access ISPs so that all end systems can send packets to each other.</p>
+</blockquote>
+<ol>
+<li><p><strong>Naive Approach</strong></p>
+<blockquote>
+<p>Each <strong>access ISPs</strong> directly connect with every other access ISP.</p>
+</blockquote>
+</li>
+<li><p><strong>Network Structure 1</strong></p>
+<blockquote>
+<p>Interconnects all of the <strong>access ISPs</strong> with a <strong>single global transit ISP</strong> (<em>global transit ISP is a network of routers and communication links that  spans the global</em>)</p>
+</blockquote>
+</li>
+<li><p><strong>Network Structure 2</strong></p>
+<blockquote>
+<p>Consists of <strong>access ISPs</strong> and multiple <strong>global transit ISPs</strong>.(<em>access ISPs choose among the competing global transit providers</em>)</p>
+</blockquote>
+</li>
+<li><p><strong>Network Structure 3</strong></p>
+<blockquote>
+<p><strong>access ISPs</strong> connect to a(multiple) <strong>regional ISP</strong>(s), each regional ISP connects to <strong>tier-1 ISPs</strong>(global transit ISPs)</p>
+</blockquote>
+</li>
+<li><p><strong>Network Structure 4</strong></p>
+<blockquote>
+<p>Consisted of <strong>access ISPs</strong>, <strong>regional ISPs</strong> and <strong>tier-1 ISPs</strong>.<br><strong>PoPs</strong> exist in all levels (except access ISPs), are a group of routers in the provider’s network where customer ISPs can connect into the provider ISP.<br><strong>Multi-home</strong>: ISPs choose to connect to more than one provider ISPs.<br><strong>Peer</strong>: A pair of nearly ISPs at the same level can directly connect their network together so that the traffic will not through higher level ISPs.<br><strong>IXP</strong>(Internet Exchange Point): A meeting point where multiple ISPs can peer together.</p>
+</blockquote>
+</li>
+<li><p><strong>Network Structure 5</strong></p>
+<blockquote>
+<p>Additional <strong>content provider networks</strong>: “bypass” the upper tiers of the Internet by peering with lower-tier ISPs, either by directly connecting with them or by connecting with them at IXPs.</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h1 id="Delay-Loss-and-Throughput-in-Packet-Switched-Networks"><a href="#Delay-Loss-and-Throughput-in-Packet-Switched-Networks" class="headerlink" title="Delay, Loss, and Throughput in Packet-Switched Networks"></a>Delay, Loss, and Throughput in Packet-Switched Networks</h1><h2 id="Overview-of-Delay-in-Packet-Switched-Networks"><a href="#Overview-of-Delay-in-Packet-Switched-Networks" class="headerlink" title="Overview of Delay in Packet-Switched Networks"></a>Overview of Delay in Packet-Switched Networks</h2><p><strong>total nodal delay</strong> = <strong>nodal processing delay</strong> + <strong>queuing delay</strong> + <strong>transmission delay</strong> + <strong>propagation dalay</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//nodalDelay.PNG" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<hr>
+<h2 id="Types-of-Delay"><a href="#Types-of-Delay" class="headerlink" title="Types of Delay"></a>Types of Delay</h2><p>When a packet arrives at router, the router examines the packet’s headers to determine the appropriate outbound link. A packet can be transmitted on a link only if there is no other packet currently being transmitted on the link, otherwise preceding it in the queue.</p>
+<p><strong>Processing Delay</strong></p>
+<blockquote>
+<p>The time required to examine the packet’s header and determine where to direct the packet.</p>
+</blockquote>
+<p><strong>Queuing Delay</strong>(microseconds to milliseconds)</p>
+<blockquote>
+<p>At the queue, the packet waits to be transmitted onto the link.(<em>Depend on the number of earlier-arriving packets that are queued and waiting for transmission onto the link</em>)</p>
+</blockquote>
+<p><strong>Transmission Delay</strong>(microseconds to milliseconds)</p>
+<blockquote>
+<p>The length of the packet is <em>L</em> bits, and the transmission rate of the link is <em>R</em> bits/sec.<br><strong>Transmission Delay</strong> is the amout of time to push all of the packet’s bits: <em>L/R</em>.</p>
+</blockquote>
+<p><strong>Propagation Delay</strong>(milliseconds)</p>
+<blockquote>
+<p>The time required to propagate from the begining of the link to the destination of the link.<br><strong>Propagation Delay</strong> = <em>d/s</em>. <em>d</em>: the distance between two routers; <em>s</em>: the propagation speed of the link.</p>
+</blockquote>
+<p><strong>Comparing Transmission and Propagation Delay</strong></p>
+<blockquote>
+<p><strong>Transmission delay</strong>: the amount of time required for the router to push out the packet.</p>
+<blockquote>
+<p>A function of the packet’s length and the transmissin rate of the link.<br><strong>Propagation Delay</strong>: the time it takes a bit to propagate from one router to the next.<br>A function of the distance between the two routers.</p>
+</blockquote>
+</blockquote>
+<p><strong>The total nodal delay</strong> d_nodal is equal to:<br>d_nodal = d_proc + d_queue + d_trans + d_prop</p>
+<blockquote>
+<p>d_proc: processing delay<br>d_queue: queuing delay<br>d_trans: transmission delay<br>d_prop: propagation delay</p>
+</blockquote>
+<hr>
+<h2 id="Queuing-Delay-and-Packet-Loss"><a href="#Queuing-Delay-and-Packet-Loss" class="headerlink" title="Queuing Delay and Packet Loss"></a>Queuing Delay and Packet Loss</h2><p>depends on the rate ate which traffic arrives at  the queue, the transmission rate of the link, and the nature of the arriving traffic(periodically or in bursts)</p>
+<p><strong>traffic intensity</strong></p>
+<blockquote>
+<p><em>La/R</em><br><em>L</em>: all packets consist of <em>L</em> bits.<br><em>a</em>: the average rate at which packets arrive at the queue (packets/sec).<br><em>R</em>: the transmission rate (bits/sec).</p>
+<p><strong>WARNING</strong>:<br><em>La/R &gt; 1</em>: the average rate of bits arrive at the queue exceeds the rate of bits transmit from the queue, the queue delay will approach infinty.</p>
+</blockquote>
+<p><strong>Two conditions of traffic intensity</strong></p>
+<blockquote>
+<ol>
+<li>When traffic intensity is close to zero, the average queuing delay will be close to zero.</li>
+<li>When the traffic intensity is close to 1, the arrival rate exceeds the transmission capacity, a queue will form during these periods of time.</li>
+</ol>
+<p><strong>NOTE</strong>: the traffic intensity approaches 1, the average queuing delay increases rapidly. A small percentage increase in the intensity will result in a much larger percentage-wise increase in delay.</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//queuingdelay.PNG" alt="Queuing Delay" title>
+                </div>
+                <div class="image-caption">Queuing Delay</div>
+            </figure>
+<p><strong>Packet Loss</strong><br>As the queuing capacity of a router in finite, a router will <strong>drop</strong> the packet when no place to store such a packet. So the packet will be <strong>lost</strong>.</p>
+<hr>
+<h2 id="End-to-End-Delay"><a href="#End-to-End-Delay" class="headerlink" title="End-to-End Delay"></a>End-to-End Delay</h2><p><strong>The total delay from source to destination</strong><br>There are <em>N - 1</em> routers between the source host and the destination host.</p>
+<blockquote>
+<p>The end-to-end delay d_e2e = N(d_proc + d_trans + d_prop)<br>d_proc: the processing delay at each router<br>d_trans: d_trans = L/R; R: the transmission rate; L: the packet size.<br>s_prop: the propagation on each link.</p>
+</blockquote>
+<p><strong>End System, Application, and Other Delays</strong></p>
+<blockquote>
+<ol>
+<li>May purposedfully delays its transmission as part of its protocol.</li>
+<li>Media packetization delay.</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="Throughput-in-Computer-Networks"><a href="#Throughput-in-Computer-Networks" class="headerlink" title="Throughput in Computer Networks"></a>Throughput in Computer Networks</h2><p><strong>Instantaneous throughput</strong>:<br>At any instant of time is the rate(in bit/sec) at which Host B is receiving the file.</p>
+<blockquote>
+<p><strong>The average throughput</strong> = <em>F/T</em> bits/sec<br><em>F</em> bits in the file<br><em>T</em> seconds to transfer from the sources to the destination.</p>
+</blockquote>
+<p><strong>A example on two end system</strong></p>
+<blockquote>
+<p>Two end systems, a server and a client, connected by two communication links and a router.<br>Suppose R_s denote the rate of the link between the server and the router; R_c denote the rate of the link between the router and the client.<br>For two-links network, the <strong>throughput</strong> is <strong>min{R_c, R_s}</strong>, that is the transmission rate of the <strong>bottleneck link</strong>.<br>When a network with N-links, the transmission rates of the N links being R_1,R_2,…,R_N, the <strong>throughput</strong> is <strong>min{R_1, R_2,…, R_N}</strong>.(<em>Suppose the core of the communication network have very high transmission rates</em>)</p>
+</blockquote>
+<p><strong>Summary about throughput</strong></p>
+<blockquote>
+<p>Throughput depends on the transmission rates of the links over which the data flows.<br>The throughput depends not only on the <strong>transmission rates of the links along the path</strong>, but also on <strong>the intervening traffic</strong>.</p>
+</blockquote>
+<hr>
+<h1 id="Protocol-Layers-and-Their-Service-Models"><a href="#Protocol-Layers-and-Their-Service-Models" class="headerlink" title="Protocol Layers and Their Service Models"></a>Protocol Layers and Their Service Models</h1><h2 id="Layered-Architecture"><a href="#Layered-Architecture" class="headerlink" title="Layered Architecture"></a>Layered Architecture</h2><p>Each layer, combined with the layers below it, implements some functionality, some <em>service</em>.</p>
+<p>As long as the layer provides the same service to the layer above it, and uses the same services from the layer below it, the remainder of the system remains unchanged when a layer’s implementation is changed.</p>
+<p><strong>Protocol Layering</strong><br>The prorocols are implemented in <strong>layers</strong>.<br>Each protocol belongs to one of the layers.</p>
+<p>A protocol layer can be implemented in:</p>
+<ol>
+<li><strong>software</strong> (<em>HTTP and SMTP of application-layer protocols are implemented in software</em>)</li>
+<li><strong>hardware</strong></li>
+<li><strong>a combination of the two</strong></li>
+</ol>
+<blockquote>
+<p><strong>Application-layer</strong> protocols and <strong>transport-layer</strong> protocols are implemented in software in the end system.<br><strong>Physical layer</strong> and <strong>data link layer</strong> are responsible for handling communication over a specific link.<br><strong>Network layer</strong> is often a mixed implementation of hardware and software.</p>
+</blockquote>
+<p><strong>The protocol stack</strong>: The protocols of the various layers.</p>
+<ol>
+<li><strong>the physical layers</strong></li>
+<li><strong>the link layers</strong></li>
+<li><strong>the network layers</strong></li>
+<li><strong>the transport layers</strong></li>
+<li><strong>the application layers</strong></li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//FiveLayerProtocolStack.PNG" alt="Five layers Internet protocol stack" title>
+                </div>
+                <div class="image-caption">Five layers Internet protocol stack</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-10T14:10:05.000Z" itemprop="dateUpdated">2019-12-10 22:10:05</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/&title=《计算机网络(一)：计算机网络于Internet》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/&title=《计算机网络(一)：计算机网络于Internet》 — 咸鱼的自我修养&source=The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机网络(一)：计算机网络于Internet》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/13/TCPIP-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCPIP-1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据结构与抽象(四)：泛型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/&title=《计算机网络(一)：计算机网络于Internet》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/&title=《计算机网络(一)：计算机网络于Internet》 — 咸鱼的自我修养&source=The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机网络(一)：计算机网络于Internet》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Git理论基础 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="Git记录的是什么  Git是将每个版本独立保存 工作区域、暂存区域和Git仓库 工作区域 (Working Directory)：日常编程时的工作目录暂存区域 (Stage (Index)): 保存改动的目录Git仓库 (Repository(HEAD)): 最终存放所有数据的位置     Git 的工作流程  在工作目录中添加、修改文件 将需要进行版本管理的文件存放到暂存区域 将暂存区域的文件">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git理论基础">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;08&#x2F;Git%E5%85%A5%E9%97%A8&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="Git记录的是什么  Git是将每个版本独立保存 工作区域、暂存区域和Git仓库 工作区域 (Working Directory)：日常编程时的工作目录暂存区域 (Stage (Index)): 保存改动的目录Git仓库 (Repository(HEAD)): 最终存放所有数据的位置     Git 的工作流程  在工作目录中添加、修改文件 将需要进行版本管理的文件存放到暂存区域 将暂存区域的文件">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-10T14:10:05.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Git理论基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Git理论基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-07T23:53:24.274Z" itemprop="datePublished" class="page-time">
+  2020-01-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git记录的是什么"><span class="post-toc-number">1.</span> <span class="post-toc-text">Git记录的是什么</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-的工作流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">Git 的工作流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Git-管理的文件有三个状态"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Git 管理的文件有三个状态</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-的第一次实战"><span class="post-toc-number">3.</span> <span class="post-toc-text">Git 的第一次实战</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-命令"><span class="post-toc-number">4.</span> <span class="post-toc-text">Git 命令</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-回到过去"><span class="post-toc-number">5.</span> <span class="post-toc-text">Git 回到过去</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-命令-1"><span class="post-toc-number">6.</span> <span class="post-toc-text">Git 命令</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分支"><span class="post-toc-number">7.</span> <span class="post-toc-text">分支</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建分支"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">创建分支</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#合并分支"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">合并分支</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除分支"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">删除分支</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Git入门"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Git理论基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.274Z"  itemprop="datePublished">2020-01-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Git记录的是什么"><a href="#Git记录的是什么" class="headerlink" title="Git记录的是什么"></a>Git记录的是什么</h1><blockquote>
+<ol>
+<li>Git是将每个版本独立保存</li>
+<li>工作区域、暂存区域和Git仓库<blockquote>
+<p>工作区域 (Working Directory)：日常编程时的工作目录<br>暂存区域 (Stage (Index)): 保存改动的目录<br>Git仓库 (Repository(HEAD)): 最终存放所有数据的位置</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h1 id="Git-的工作流程"><a href="#Git-的工作流程" class="headerlink" title="Git 的工作流程"></a>Git 的工作流程</h1><blockquote>
+<ol>
+<li>在工作目录中添加、修改文件</li>
+<li>将需要进行版本管理的文件存放到暂存区域</li>
+<li>将暂存区域的文件提交到Git仓库</li>
+</ol>
+</blockquote>
+<h2 id="Git-管理的文件有三个状态"><a href="#Git-管理的文件有三个状态" class="headerlink" title="Git 管理的文件有三个状态"></a>Git 管理的文件有三个状态</h2><ul>
+<li>已修改 (modified)</li>
+<li>已暂存 (staged)</li>
+<li>已提交 (committed)</li>
+</ul>
+<a id="more"></a>
+<h1 id="Git-的第一次实战"><a href="#Git-的第一次实战" class="headerlink" title="Git 的第一次实战"></a>Git 的第一次实战</h1><blockquote>
+<ol>
+<li>创建初始文件夹，作为本地仓库(即工作目录)</li>
+<li>在cmd 中cd 到该文件夹，运行 <code>git init</code></li>
+<li><code>git add 带提交的文件</code> 将需要提交的文件提交到暂存区域</li>
+<li><code>git commit -m &quot;提交说明&quot;</code></li>
+</ol>
+</blockquote>
+<h1 id="Git-命令"><a href="#Git-命令" class="headerlink" title="Git 命令"></a>Git 命令</h1><blockquote>
+<ol>
+<li><code>git status</code>: 用来查看各个文件的状态。<blockquote>
+<ol>
+<li><em>Untracked files</em>: 为未添加到暂存区或提交的文件</li>
+<li><em>Changes not staged for commit</em>: 工作目录的文件与暂存目录的文件不匹配(存在修改但为提交至暂存区域)</li>
+<li><em>Changes to be committed</em>: 暂存区域存在未提交的文件</li>
+</ol>
+</blockquote>
+</li>
+<li><code>git reset 要撤销的文件</code>: 用来撤销被加入暂存区域的文件</li>
+<li><code>git checkout -- &lt;从暂存区恢复的文件&gt;</code>: 用暂存区域的指定的文件覆盖工作区域</li>
+<li><code>git log</code>: 查看历史提交</li>
+</ol>
+</blockquote>
+<h1 id="Git-回到过去"><a href="#Git-回到过去" class="headerlink" title="Git 回到过去"></a>Git 回到过去</h1><blockquote>
+<p>Working Directory - add -&gt; Stage(Index)<br>Stage(Index) - commit -&gt; Repository(HEAD)<br>Repository(HEAD) - reset -&gt; Stage(Index)<br>Stage(Index) - checkout -&gt; Working Directory</p>
+</blockquote>
+<h1 id="Git-命令-1"><a href="#Git-命令-1" class="headerlink" title="Git 命令"></a>Git 命令</h1><blockquote>
+<ol>
+<li><code>git reset [--mixed] HEAD~</code>: 回滚到上一个快照，~的个数代表回滚的代数<em>~2等于~~</em>。<br>移动HEAD的指向，将其指向上一个快照<br>将HEAD移动后指向的快照回滚到暂存区域<blockquote>
+<ol>
+<li><code>git rest --soft HEAD~</code>:<br>移动HEAD的指向，将其指向上一个快照</li>
+<li><code>git reset --hard HEAD~</code>:<br>移动HEAD的指向，将其指向上一个快照<br>将HEAD移动后指向的快照回滚到暂存区域<br>将暂存区域的文件还原到工作目录</li>
+</ol>
+</blockquote>
+</li>
+<li><code>git reset &lt;快照ID&gt;</code>: 回滚到指定快照，也可前滚(通过版本ID确定)</li>
+<li><code>git reset &lt;版本快照&gt; &lt;文件名/路径&gt;</code>: 回滚指定快照的个别文件</li>
+<li><code>git diff</code>: 比较 <strong>工作区</strong> 和 <strong>暂存区</strong> 文件的差异</li>
+<li><code>git diff &lt;快照ID1&gt; &lt;快照ID2&gt;</code>: 比较两个历史快照</li>
+<li><code>git diff &lt;快照ID&gt;</code>: 比较当前工作目录和Git仓库中的快照</li>
+<li><code>git diff HEAD</code>: 比较当前工作目录的内容和最新提交的快照的差别</li>
+<li><code>git diff --cached &lt;快照ID&gt;</code>: 比较暂存区域和Git仓库快照</li>
+<li><code>git commit --amend -m &quot;修改内容&quot;</code>: “修正” 最近的一次提交 <code>shift + zz</code>保存退出。</li>
+<li><code>git rm &lt;文件名&gt;</code>: <blockquote>
+<ol>
+<li>删除的只是工作目录和暂存区域的文件，也就是取消跟踪，在下次提交时不会纳入版本管理。</li>
+<li>当工作区域和暂存区域的同一个文件在不同内容时，执行 <code>git rm -f &lt;文件名&gt;</code> 可以把两个都删除。</li>
+<li>如果只删除暂存区域的文件(保留工作目录)，则可通过 <code>fit rm --cached &lt;文件名&gt;</code>。</li>
+</ol>
+</blockquote>
+</li>
+<li><code>git mv &lt;旧文件名&gt; &lt;新文件名&gt;</code>: 重命名文件。相当于：<blockquote>
+<ol>
+<li><code>ren/mv &lt;旧文件名&gt; &lt;新文件名&gt;</code></li>
+<li><code>git rm &lt;旧文件名&gt;</code></li>
+<li><code>git add &lt;新文件名&gt;</code></li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><blockquote>
+<p><code>git branch &lt;分支名&gt;</code>: 创建分支<br><code>git checkout &lt;分支名&gt;</code>: 切换分支<br><code>git log --decorate --oneline --graph --all</code>: 以图像化方式显示所有分支的情况</p>
+</blockquote>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><blockquote>
+<ol>
+<li><code>git merge &lt;待合并的分支&gt;</code>: 合并分支到主分支master中去（若存在同名的不同文件，则合并失败）</li>
+</ol>
+</blockquote>
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><blockquote>
+<p><code>git branch -d &lt;分支名&gt;</code>: 删除分支</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-10T14:10:05.000Z" itemprop="dateUpdated">2019-12-10 22:10:05</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/&title=《Git理论基础》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/&title=《Git理论基础》 — 咸鱼的自我修养&source=Git记录的是什么
+
+Git是将每个版本独立保存
+工作区域、暂存区域和Git仓库
+工作区域 (Working Directory)：日常编程时的工作目录暂..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git理论基础》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/08/Java%E4%B8%AD%E6%96%B9%E6%B3%95/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java中参数</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/08/Block%20Truncation%20Coding/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Block Trunction Coding</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/&title=《Git理论基础》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/&title=《Git理论基础》 — 咸鱼的自我修养&source=Git记录的是什么
+
+Git是将每个版本独立保存
+工作区域、暂存区域和Git仓库
+工作区域 (Working Directory)：日常编程时的工作目录暂..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git理论基础》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/08/Git%E5%85%A5%E9%97%A8/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

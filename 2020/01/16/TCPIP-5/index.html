@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>TCPIP-5 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="TCP/IP">
+    <meta name="description" content="路由协议路由控制的定义路由控制路由器根据控制表（Routing Table）转发数据包，由收到的数据包中的目标IP地址和路由控制表确定下一个路由器。 分类：  静态路由 动态路由  静态路由有使用者手工操作，新增网络需要手动增加，发生故障需要手动设置恢复。 动态路由设置好路由协议。新增路由器则只需在该路由器进行动态路由设置即可。发生故障路由器可自动选择可行的路径。路由器将自己已知的网络连接信息发送">
+<meta name="keywords" content="TCP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCPIP-5">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;16&#x2F;TCPIP-5&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="路由协议路由控制的定义路由控制路由器根据控制表（Routing Table）转发数据包，由收到的数据包中的目标IP地址和路由控制表确定下一个路由器。 分类：  静态路由 动态路由  静态路由有使用者手工操作，新增网络需要手动增加，发生故障需要手动设置恢复。 动态路由设置好路由协议。新增路由器则只需在该路由器进行动态路由设置即可。发生故障路由器可自动选择可行的路径。路由器将自己已知的网络连接信息发送">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-20T01:11:00.750Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCPIP-5</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCPIP-5</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-16T08:35:38.000Z" itemprop="datePublished" class="page-time">
+  2020-01-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#路由协议"><span class="post-toc-number">1.</span> <span class="post-toc-text">路由协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由控制的定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">路由控制的定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由控制范围"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">路由控制范围</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由算法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">路由算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#距离向量算法"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">距离向量算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#链路状态算法"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">链路状态算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要路由协议"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">主要路由协议</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RIP"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">RIP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#广播路由控制信息"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">广播路由控制信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#根据距离向量确定路由"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">根据距离向量确定路由</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用子网掩码时的RIP处理"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">使用子网掩码时的RIP处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RIP中路由变更时处理"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">RIP中路由变更时处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RIP2"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">RIP2</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OSPF"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">OSPF</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OSPF是链路状态型路由协议"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">OSPF是链路状态型路由协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基础知识"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">基础知识</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作原理"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">工作原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将区域分层化进行细化管理"><span class="post-toc-number">1.5.4.</span> <span class="post-toc-text">将区域分层化进行细化管理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BGP"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">BGP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BGP是路径向量协议"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">BGP是路径向量协议</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MPLS"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">MPLS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络基本动作"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">网络基本动作</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCPIP-5"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCPIP-5</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-16 16:35:38" datetime="2020-01-16T08:35:38.000Z"  itemprop="datePublished">2020-01-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h1><h2 id="路由控制的定义"><a href="#路由控制的定义" class="headerlink" title="路由控制的定义"></a>路由控制的定义</h2><h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><p>路由器根据控制表（Routing Table）转发数据包，由收到的数据包中的目标IP地址和路由控制表确定下一个路由器。</p>
+<p>分类：</p>
+<ul>
+<li><strong>静态路由</strong></li>
+<li><strong>动态路由</strong></li>
+</ul>
+<p><strong>静态路由</strong><br>有使用者手工操作，新增网络需要手动增加，发生故障需要手动设置恢复。</p>
+<p><strong>动态路由</strong><br>设置好路由协议。新增路由器则只需在该路由器进行动态路由设置即可。发生故障路由器可自动选择可行的路径。<br>路由器将自己已知的网络连接信息发送给其他路由器，直到整个网络都了解。</p>
+<hr>
+<h2 id="路由控制范围"><a href="#路由控制范围" class="headerlink" title="路由控制范围"></a>路由控制范围</h2><p>自治系统(AS: Autonomous System)/路由选择域(Routing Domain)：<br>制定自己的路由策略，并以此为准的一个或多个网络群体。</p>
+<p>分类：</p>
+<ul>
+<li>外部网关协议EGP()</li>
+<li>内部网关协议IGP(Interior Gateway Protocol)</li>
+</ul>
+<p>依据EGP在区域网络之间进行路由选择。<br>根据IGP在区域内部进行主机识别。</p>
+<hr>
+<h2 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h2><p>分类：</p>
+<ul>
+<li>距离向量（Distance-Vector）算法</li>
+<li>链路状态（Link-State）算法</li>
+</ul>
+<h3 id="距离向量算法"><a href="#距离向量算法" class="headerlink" title="距离向量算法"></a>距离向量算法</h3><p>根据距离和方向决定目标网络或目标主机位置。</p>
+<p>路由器之间可以相互交换目标网络的方向及其距离。</p>
+<h3 id="链路状态算法"><a href="#链路状态算法" class="headerlink" title="链路状态算法"></a>链路状态算法</h3><p>了解网络整体连接状态的基础上生成路由控制表。<br>每个路由器保持相同的信息。</p>
+<h3 id="主要路由协议"><a href="#主要路由协议" class="headerlink" title="主要路由协议"></a>主要路由协议</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>路由协议</th>
+<th>下一层协议</th>
+<th>方式</th>
+<th>适用范围</th>
+<th>循环检测</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RIP</td>
+<td>UDP</td>
+<td>距离向量</td>
+<td>域内</td>
+<td>No</td>
+</tr>
+<tr>
+<td>OSFP</td>
+<td>IP</td>
+<td>链路状态</td>
+<td>域内</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>EGP</td>
+<td>IP</td>
+<td>距离向量</td>
+<td>对外连接</td>
+<td>No</td>
+</tr>
+<tr>
+<td>BGP</td>
+<td>TCP</td>
+<td>路径向量</td>
+<td>对外连接</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h2><p>RIP(Routing Information Protocol)</p>
+<h3 id="广播路由控制信息"><a href="#广播路由控制信息" class="headerlink" title="广播路由控制信息"></a>广播路由控制信息</h3><ul>
+<li>30秒一次，将自己已知的路由信息广播出去</li>
+<li>将已知的路由信息记过一跳之后继续广播</li>
+<li>逐步传播路由信息</li>
+<li>等待6次，若未收到路由信息，则关闭连接</li>
+</ul>
+<h3 id="根据距离向量确定路由"><a href="#根据距离向量确定路由" class="headerlink" title="根据距离向量确定路由"></a>根据距离向量确定路由</h3><p>距离（Metrics）的单位为<strong>跳数</strong>，即：所经过路由器的个数。</p>
+<p>若同一个网络如果有多条路径，则选择距离较短的一个。</p>
+<h3 id="使用子网掩码时的RIP处理"><a href="#使用子网掩码时的RIP处理" class="headerlink" title="使用子网掩码时的RIP处理"></a>使用子网掩码时的RIP处理</h3><ul>
+<li>从接口的IP地址对应的分类得到的网络地址后，与流过此路由器的IP地址对应的分类进行比较。如果相同，则以接口的网络地址长度为准。</li>
+<li>若两者不同，则以IP地址的分类确认网络地址长度为准。</li>
+</ul>
+<h3 id="RIP中路由变更时处理"><a href="#RIP中路由变更时处理" class="headerlink" title="RIP中路由变更时处理"></a>RIP中路由变更时处理</h3><p><strong>基本行为</strong></p>
+<ul>
+<li>将所知的路由信息定期进行广播</li>
+<li>一旦认为网络断开，数据将无法流过路由器，其他路由器可以得知网络已断</li>
+</ul>
+<p><strong>存在的问题</strong><br>无限计数（Counting to Infinity）：收到自己发出去的消息，对于断开的网络未及时更新而收到之前发送给其他路由器的路由信息。</p>
+<p><strong>解决</strong></p>
+<ul>
+<li>最长距离不超过16,从时间上进行控制</li>
+<li>规定路由器不再将所收到的路由器消息原路返回给发送端（水平分割（Split Horizon））。</li>
+</ul>
+<p>对于有环路的网络，可采取：</p>
+<ul>
+<li><strong>毒性逆转</strong>(Poisoned Reverse)：当网络中发生断开时，将这个无法通信的消息传播出去，即发送一个距离16的消息。</li>
+<li><strong>触发更新</strong>(Triggered Updatt)：当路由消息发生变化时，不是等待30秒，而是立即发送出去。</li>
+</ul>
+<h3 id="RIP2"><a href="#RIP2" class="headerlink" title="RIP2"></a>RIP2</h3><p><strong>特点</strong></p>
+<ul>
+<li>使用多播</li>
+<li>支持子网掩码</li>
+<li>路由选择域(同一个网络中使用多个逻辑上独立的RIP)</li>
+<li>外部路由标志(通过BGP获得的路由信息传递给AS)</li>
+<li>生份验证密钥</li>
+</ul>
+<hr>
+<h2 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h2><h3 id="OSPF是链路状态型路由协议"><a href="#OSPF是链路状态型路由协议" class="headerlink" title="OSPF是链路状态型路由协议"></a>OSPF是链路状态型路由协议</h3><ul>
+<li>路由器之间通过交换链路状态生成网络拓扑信息，由拓扑信息生成控制表。</li>
+<li>给每条链路赋予权值，选择权重最小的路径作为最终的路由。</li>
+</ul>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>包名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>问候(HELLO)</td>
+<td>确认相邻路由器，确定指定路由器</td>
+</tr>
+<tr>
+<td>数据库描述(Database Description)</td>
+<td>链路状态数据库的摘要信息</td>
+</tr>
+<tr>
+<td>链路状态请求(Link State Request)</td>
+<td>请求从数据库中获取链路状态信息</td>
+</tr>
+<tr>
+<td>链路状态更新(Link State Update)</td>
+<td>更新链路状态数据库中的链路状态信息</td>
+</tr>
+<tr>
+<td>链路状态确认应答(Link State Acknowledgement)</td>
+<td>链路状态信息更新的确认应答</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>流程：</p>
+<ul>
+<li>通过发送问候包确认是否连接</li>
+<li>每个路由器通过数据库描述包相互发送路由器摘要信息和版本信息</li>
+<li>若版本较老，则首先发送一个链路状态请求包请求路由控制信息</li>
+<li>然后通过链路状态更新包接受路由状态信息</li>
+<li>最后再通过链路状态确认包通知已接受路由控制信息</li>
+</ul>
+<p>HELLO包：<br>每10秒发送一个，允许等待3次，第4次认为连接断开，进行连接断开或恢复连接操作。发送链路状态更新包。</p>
+<p>链路状态更新包：</p>
+<ul>
+<li>网络LSA：以网络为中心生成的信息</li>
+<li>路由器LSA：以路由器为中心生成的信息</li>
+</ul>
+<p>路由器由Dijkstra算法生成相应的路由控制表。</p>
+<h3 id="将区域分层化进行细化管理"><a href="#将区域分层化进行细化管理" class="headerlink" title="将区域分层化进行细化管理"></a>将区域分层化进行细化管理</h3><p><strong>区域</strong></p>
+<ul>
+<li>将连接在一起的网络和主机划分成小组，使一个自治系统(AS)内可以拥有多个区域。</li>
+<li>多个区域需要连接一个<strong>主干区域</strong>(Backbone Area)</li>
+<li>连接区域和主干区域的路由器为<strong>边界路由器</strong></li>
+<li>区域内部的路由器为<strong>内部路由器</strong></li>
+<li>只与主干区域连接的路由器为<strong>主干路由器</strong></li>
+<li>与外部连接的路由器为<strong>AS边界路由器</strong></li>
+<li>区域内路由器持有本区域网络拓扑</li>
+<li>区域外路径只能从区域边界路由器获知</li>
+<li>区域边界路由器将自己到区域内的路由器的距离信息发送给其他区域路由器</li>
+<li>区域出口的边界路由器只有一个，为末端区域，不需要发送区域外的路由信息</li>
+</ul>
+<h2 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h2><p>BGP(Border Gateway Protocol)，边界网关协议：</p>
+<ul>
+<li>连接不同组织机构的一种协议。</li>
+<li>属于外部网关协议(EGP)。</li>
+<li>用于ISP之间相连接。</li>
+</ul>
+<p>ISP，区域网络将每个网络域分成一个个自治系统(AS:Autonomous System)，每个AS发配一个AS编号。</p>
+<h3 id="BGP是路径向量协议"><a href="#BGP是路径向量协议" class="headerlink" title="BGP是路径向量协议"></a>BGP是路径向量协议</h3><p><strong>BGP扬声器</strong>:<br>根据BGP交换路由控制信息的路由器。</p>
+<p><strong>AS路径信息访问列表</strong>(AS Path List)：<br>BGP数据包传输时，生成一个中途经过所有AS的编码列表。<br>对于多条路径，选择AS数量最少的路径。</p>
+<p><strong>路径向量型协议</strong>(Path Vector)：<br>更具所要经过的路径信息访问列表进行路由控制。</p>
+<hr>
+<h2 id="MPLS"><a href="#MPLS" class="headerlink" title="MPLS"></a>MPLS</h2><p>转发IP数据包时使用了标记交换技术，对每个IP包都设定一个标记，然后根据标记再进行转发。</p>
+<p>MPLS(Multi Protocol Label Switching)：多协议标记交换技术。</p>
+<h3 id="网络基本动作"><a href="#网络基本动作" class="headerlink" title="网络基本动作"></a>网络基本动作</h3><p><strong>标记交换路由器</strong>(LSR,Label Switching Router)：MPLS网络中实现MPLS功能的路由器。<br><strong>标记边缘路由器</strong>（LER,Label Edge Router）：与外部网络连接的LSR。</p>
+<ul>
+<li>数据包进入MPLS时，其IP首部的前面被追加32比特垫片头。</li>
+<li>MPLS网络中，根据垫片头中的标记进行下一步转发。</li>
+<li>数据离开MPLS时，垫片头被去除。</li>
+</ul>
+<p><strong>标记交换路径</strong>(LSP,Label Switch Path)：MPLS中目标地址和数据包都要通过由标记决定的同一个路径。</p>
+<p>分类：</p>
+<ul>
+<li>一对一的点对点LSP</li>
+<li>一对多绑定的合并LSP</li>
+</ul>
+<p>扩展：</p>
+<ul>
+<li>采用标记发配协议(LDP,Label Distribution Protocol)</li>
+<li>通过协议捎带信息</li>
+</ul>
+<p>优势:</p>
+<ul>
+<li>转发速度快。(<em>使用固定长度的标记信息</em>)</li>
+<li>利用标记生成虚拟的路径。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-20T01:11:00.750Z" itemprop="dateUpdated">2020-01-20 09:11:00</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/16/TCPIP-5/&title=《TCPIP-5》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/16/TCPIP-5/&title=《TCPIP-5》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/16/TCPIP-5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-5》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/16/TCPIP-5/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/16/TCPIP-5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/16/DataStructure-tree3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">多路查找树</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/15/TCPIP-4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">TCPIP-4</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/16/TCPIP-5/&title=《TCPIP-5》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/16/TCPIP-5/&title=《TCPIP-5》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/16/TCPIP-5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-5》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/16/TCPIP-5/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/16/TCPIP-5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/16/TCPIP-5/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

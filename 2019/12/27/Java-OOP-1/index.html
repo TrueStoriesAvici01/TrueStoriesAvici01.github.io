@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Java-面向对象(一) | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java,面向对象,OOP">
+    <meta name="description" content="Java 对象与类面向对象程序设计程序：由对象组成。对象：包含对用户公开的特定功能部分和对用户隐藏的实现部分。 类(class)是构造对象的模板和蓝图。 类构造对象的过程称为创建类的实例(instance)。 class -(构造)-&amp;gt; instance 封装：将数据域和行为组合，对象的使用者不知道实现的细节。 实例域(instance field)：对象中的数据。方法(method)：对象">
+<meta name="keywords" content="Java,面向对象,OOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-面向对象(一)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;27&#x2F;Java-OOP-1&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="Java 对象与类面向对象程序设计程序：由对象组成。对象：包含对用户公开的特定功能部分和对用户隐藏的实现部分。 类(class)是构造对象的模板和蓝图。 类构造对象的过程称为创建类的实例(instance)。 class -(构造)-&amp;gt; instance 封装：将数据域和行为组合，对象的使用者不知道实现的细节。 实例域(instance field)：对象中的数据。方法(method)：对象">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-30T09:31:54.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java-面向对象(一)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java-面向对象(一)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-27T08:07:12.000Z" itemprop="datePublished" class="page-time">
+  2019-12-27
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java-对象与类"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java 对象与类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">对象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变量"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#封装-Encapsulation"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">封装(Encapsulation)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#package-import和import-static"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">package,import和import static</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构造器"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">构造器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多态-Polymorphism"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">多态(Polymorphism)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组合"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">组合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初始化块"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">初始化块</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java-OOP-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java-面向对象(一)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-27 16:07:12" datetime="2019-12-27T08:07:12.000Z"  itemprop="datePublished">2019-12-27</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Java-对象与类"><a href="#Java-对象与类" class="headerlink" title="Java 对象与类"></a>Java 对象与类</h1><p>面向对象程序设计<br>程序：由<strong>对象</strong>组成。<br>对象：包含对用户公开的<strong>特定功能部分</strong>和对用户隐藏的<strong>实现部分</strong>。</p>
+<p>类(class)是构造对象的<strong>模板</strong>和<strong>蓝图</strong>。</p>
+<p>类构造对象的过程称为创建类的实例(instance)。</p>
+<p>class -(构造)-&gt; instance</p>
+<p><strong>封装</strong>：将数据域和行为组合，对象的使用者不知道实现的细节。</p>
+<p><strong>实例域</strong>(instance field)：对象中的数据。<br><strong>方法</strong>(method)：对象中对这些数据的操作。</p>
+<p>提示：<br>实现封装的一个准则就是：<br>    不要在类外直接访问该对象的实例域，而是只通过该对象的方法实现与实例域的交互。</p>
+<p><strong>继承</strong>(inheritance)：<br>通过扩展(extends)一个已有的类来构造一个新的类。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><blockquote>
+<p>类可以看作是一种<strong>自定义的数据类型</strong>.</p>
+</blockquote>
+<p><strong>类与对象</strong></p>
+<ul>
+<li><strong>类</strong>: 是一批对象的抽象.</li>
+<li><strong>对象</strong>: 是一个具体存在的实体.</li>
+</ul>
+<p><strong>定义类的格式</strong>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">    成员变量</span><br><span class="line">    构造器</span><br><span class="line">    方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>类中成员的组成</strong>:</p>
+<ul>
+<li>成员变量</li>
+<li>构造器</li>
+<li>方法</li>
+</ul>
+<p><strong>成员变量</strong>:<br>类或对应实例的数据.</p>
+<p>定义成员变量的格式:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] 类型 成员变量名 [=默认值];</span><br></pre></td></tr></table></figure></p>
+<p><strong>构造器</strong>:<br>一个类创建对象(实例)的途径.(<em>没有则系统默认发配</em>)</p>
+<p>定义构造器的格式:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] 构造器名 (形参列表)&#123;</span><br><span class="line">    构造器执行的行为</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 没有返回值</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>方法</strong>:<br>类或该类对象的行为或功能.</p>
+<p>定义方法的格式:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] 方法返回值类型 方法名(形参列表)&#123;</span><br><span class="line">    方法执行的行为</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注:</p>
+<ul>
+<li><strong>修饰符</strong>: 可以是{public, protected, private,}中选一和{static,final,abstract}中选一组合.</li>
+<li><strong>类型</strong>: 可以是基本类型和引用类型.</li>
+<li><strong>形参列表</strong>: 由<code>形参类型 形参名</code>构成,多组形参之间用<code>,</code>隔开.</li>
+<li><strong>构造器名</strong>: 必须与类名保持一致.</li>
+</ul>
+<blockquote>
+<p><code>static</code>修饰的成员变量和方法为类变量和类方法,表示其<strong>属于这个类,而非某个特定的对象</strong>.<br>没有<code>static</code>修饰的变量和方法称为实例变量和实例方法.<br><code>static</code>修饰的方法不能访问未被<code>static</code>修饰的变量或方法.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例:人类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age; <span class="comment">// 成员变量</span></span><br><span class="line">    <span class="keyword">private</span> string name; <span class="comment">// 成员变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> eyesNum = <span class="number">2</span>; <span class="comment">// 类变量</span></span><br><span class="line"></span><br><span class="line">    Person(string name, <span class="keyword">int</span> age)&#123; <span class="comment">// 构造器</span></span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123; <span class="comment">// 方法</span></span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getOld</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeName</span><span class="params">(string newName)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = newName;</span><br><span class="line">        System.out.println(<span class="string">"New name is: "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person(Bob, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>其中:<br><code>new Person(Bob,20)</code>: 创建一个Person类的对象(实例).<br><code>Person person1</code>: 定义一个Person类型的引用变量.<br>结果: 引用变量指向新创建的对象.(<em>类似于指针</em>)<br>内存: <strong>引用变量</strong>存放在<strong>栈内存</strong>中(Stack),<strong>对象(实例)</strong>存放在<strong>堆内存</strong>(heap)中.</p>
+<p><strong>对象的<code>this</code>引用</strong></p>
+<p>使用情景:</p>
+<ul>
+<li>构造器中引用该构造器正在初始化的对象.</li>
+<li>方法中引用调用该方法的对象.</li>
+</ul>
+<p>作用:<br>类中的一个方法调用该类中另一个方法或实例变量.<br><em>一般情况下,调用一个方法不需要使用<code>this</code>关键词,只有当方法内有同名的局部变量时才加<code>this</code>指明该变量是类中的成员变量</em>, 如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">int</span> age; <span class="comment">// 成员变量</span></span><br><span class="line"><span class="keyword">int</span> year; <span class="comment">// 成员变量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addAge</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> age = num; <span class="comment">// 局部变量</span></span><br><span class="line">    <span class="keyword">if</span> (age == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.age += age; <span class="comment">// 局部变量age与成员变量age重名,必须使用this来指明</span></span><br><span class="line">        year -= age; <span class="comment">// 局部变量没有与成员变量重名,不需要使用this</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>与<code>static</code>的关系:</p>
+<ul>
+<li><code>static</code>修饰的方法中不能使用<code>this</code>引用.</li>
+<li><code>static</code>修饰的方法中不能访问没有<code>static</code>修饰的成员变量或方法.</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>类中的方法类似于函数,但是其必须依赖于对应的类或对象,不能独立使用.</li>
+<li><code>static</code>修饰的方法属于类,故该类的不同的对象调用时其结果都相同.</li>
+<li>非<code>static</code>方法,调用者为对象,<code>static</code>方法,调用者为类.</li>
+</ul>
+<p><strong>参数传递</strong><br>方法的参数传递只有一种: <strong>值传递</strong>.<br>值传递: 将<strong>实际参数值的副本传入方法中,原来值不受影响</strong>.</p>
+<p>注:<br>当方法的参数是一个对象时,其传入的是对象的引用,对该引用变量进行修改时,不会影响引用所指向的对象. 因此是为引用的值传递,而非对象传递.</p>
+<p><strong>形参个数可变</strong><br>方法中的参数列表中的一个形参的个数是可变的.<br>形式:<code>参数类型... 参数名</code>,如<code>int... arg</code>.<br>注:</p>
+<ul>
+<li>方法的参数列表中的个数可变的形参只能放在列表的最后.</li>
+<li>有且只有一个个数可变的形参.</li>
+<li>其等价于对应参数的数组<code>参数类型[] 参数名</code>.</li>
+</ul>
+<p><strong>递归方法</strong></p>
+<p>一个方法在其内部调用自己.注意避免无穷递归.</p>
+<p><strong>方法重载</strong></p>
+<p>一个类中定义多个同名的方法, 其参数列表不同.</p>
+<p>对于一个重载了<strong>无参参数列表</strong>,<strong>个数可变的参数</strong>和<strong>只有一个参数</strong>的方法:</p>
+<ul>
+<li>对于无参的方法的调用最终会调用到<strong>个数可变的参数</strong>的方法.</li>
+<li>对于只有一个参数的调用,最终调用的是<strong>只有一个参数</strong>的方法.</li>
+<li>其他情况,会调用<strong>个数可变的参数</strong>的方法.</li>
+<li>若传入一个参数,而想调用<strong>个数可变的参数</strong>的方法,可以构造一个只含一个参数的数组.</li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>分类:</p>
+<p>所有变量:</p>
+<ul>
+<li><strong>成员变量</strong></li>
+<li><strong>局部变量</strong></li>
+</ul>
+<p>成员变量:</p>
+<ul>
+<li><strong>实例变量</strong>(无<code>static</code>)</li>
+<li><strong>类变量</strong>(有<code>static</code>)</li>
+</ul>
+<p>局部变量:</p>
+<ul>
+<li><strong>形参</strong>(方法形参列表中定义)</li>
+<li><strong>方法局部变量</strong>(方法内定义)</li>
+<li><strong>代码块局部变量</strong>(代码块内定义)</li>
+</ul>
+<p>各变量参数:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>初始化时期</th>
+<th>生命周期</th>
+<th>默认初始值</th>
+<th>存储位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类变量</td>
+<td>首次加载类</td>
+<td>整个类</td>
+<td>有</td>
+<td>堆内存</td>
+</tr>
+<tr>
+<td>实例变量</td>
+<td>实例创建时</td>
+<td>整个实例</td>
+<td>有</td>
+<td>堆内存</td>
+</tr>
+<tr>
+<td>形参</td>
+<td>方法被调用</td>
+<td>整个方法</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>方法局部变量</td>
+<td>定义该变量起</td>
+<td>从定义起,到方法结束为止</td>
+<td>无</td>
+<td>栈内存</td>
+</tr>
+<tr>
+<td>代码块局部变量</td>
+<td>定义该变量起</td>
+<td>从定义起,到代码块结束为止</td>
+<td>无</td>
+<td>栈内存</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>同名</strong></p>
+<ul>
+<li>相同方法的不同代码块局部变量可以重名.</li>
+<li>局部变量和类变量可以重名.(<em>局部变量覆盖类变量</em>)</li>
+<li>其他情况不可重名</li>
+</ul>
+<p>使用规则:<br>减少变量的生存周期.</p>
+<p>成员变量使用情景:</p>
+<ul>
+<li>所有实例共有的属性.</li>
+<li>用来保存类的状态.</li>
+<li>同内中多个方法共享的信息.</li>
+</ul>
+<h2 id="封装-Encapsulation"><a href="#封装-Encapsulation" class="headerlink" title="封装(Encapsulation)"></a>封装(Encapsulation)</h2><p>举例:<br>内存条: 内部实现细节和数据被隐藏在其内部,外部只需通过金手指就可以实现数据的存取.</p>
+<p>将对象的状态信息隐藏到对象内部,不允许外部程序直接访问对象的内部信息,而是通过该类所提供的方法来实现对内部信息的操作.</p>
+<p>目的:</p>
+<ul>
+<li>隐藏类的实现细节.</li>
+<li>使用者对数据的访问受限,保证数据的合法性.</li>
+<li>便于修改,提高可维护性.</li>
+</ul>
+<p>访问控制级别表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">private</th>
+<th style="text-align:center">default</th>
+<th style="text-align:center">protected</th>
+<th style="text-align:center">public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同一个类中</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td>同一个包中</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td>子类中</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td>全局范围内</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>选择原则:</p>
+<ul>
+<li>private: 大多数成员变量,以及用于辅助实现其他方法的工具方法.</li>
+<li>protected: 作为其他类的父类,需要被子类重写方法,而非直接调用.</li>
+<li>public: <code>static</code>修饰的,全局变量; 供外部使用的方法.</li>
+</ul>
+<h2 id="package-import和import-static"><a href="#package-import和import-static" class="headerlink" title="package,import和import static"></a>package,import和import static</h2><p>package: 一组功能相关的类放在一起,组成逻辑上的类库, 可避免重名.</p>
+<p>import: 导入包名,其后可省略包名而直接使用类名.</p>
+<p>import static: 导入static的类变量,方法,可省略类名.</p>
+<p>注:</p>
+<ul>
+<li>package 只能放在类中的首句.</li>
+<li>一个类只能指定一个package.</li>
+<li>一个类中可以使用多个import导入.</li>
+<li>import导入时使用 * 可导入包中所有的类,但其子包需额外导入.</li>
+<li>导入的多个包有重名类,使用时要加包名指定哪个包中的类.</li>
+</ul>
+<h2 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h2><p>作用:<br>创建对象时对对象进行<strong>初始化</strong>操作.</p>
+<p>系统 =&gt; 创建对象(分配内存,默认初始化)<br>构造器 =&gt; 变量初始化</p>
+<p><strong>构造器重载</strong></p>
+<p>使用不同的参数列表实现变量的不同的初始化.</p>
+<p><strong>通过<code>this</code>调用其他构造器</strong></p>
+<p><code>this</code>语句只能放在首句,不同的变量初始化位于其后.</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>目的:<br>子类通过继承父类,获得父类的全部成员变量和方法.</p>
+<p>特点:</p>
+<ul>
+<li>只能继承一个父类.</li>
+<li>子类只有一个直接父类,但可以有多个间接父类.</li>
+<li>所有类都继承于<code>java.lang.Object</code>.</li>
+</ul>
+<p><strong>重写父类的方法</strong></p>
+<p>情景:<br>需要继承父类的方法,但又有所不同. </p>
+<p><strong>重写</strong>(Override)/方法覆盖: 子类中定义父类同名的方法.</p>
+<p>特点:</p>
+<ul>
+<li>方法名,形参列表相同.</li>
+<li>子类返回值和异常类型比父类小.</li>
+<li>子类方法的访问权限比父大.</li>
+<li>父类<code>private</code>对子类隐藏,子类的重名方法不是重写.</li>
+</ul>
+<p><strong>重载与重写</strong></p>
+<ul>
+<li>重载(Overload): 同一个类中多个同名方法之间.</li>
+<li>重写(Override): 子类与父类之间同名方法.</li>
+</ul>
+<p><strong>调用父类的方法</strong></p>
+<p>情景:<br>子类重写父类的方法,子类的实例默认使用子类的方法.若想要调用父类的方法,则需要<code>super</code>.</p>
+<p>注:</p>
+<ul>
+<li>不能用于<code>static</code>的方法中.</li>
+<li>系统创建子类时,会首先创建对应的父类,直到其父类为<code>java.lang.Object</code>为止,然后在创建对应的子类.</li>
+<li>向父类依次查找成员变量时,若其中有一个<code>private</code>变量,则无法在继续向上查找,提示无法访问<code>private</code>变量.</li>
+</ul>
+<p>未指明调用者,则变量的查找顺序为:</p>
+<ol>
+<li>该方法内部的局部变量.</li>
+<li>当前类的成员变量.</li>
+<li>查找直接父类或间接父类的成员变量.</li>
+</ol>
+<h2 id="多态-Polymorphism"><a href="#多态-Polymorphism" class="headerlink" title="多态(Polymorphism)"></a>多态(Polymorphism)</h2><p>情景:<br>引用变量的类型和其所引用的对象的类型不同,此为<strong>多态</strong>.</p>
+<p><code>Object obj = new String();</code></p>
+<p><code>obj</code> 编译时为<code>Object</code>类型, 运行时为<code>String</code>类型.</p>
+<p>注:</p>
+<ul>
+<li>只能用父类的引用变量引用其子类的对象.</li>
+<li>引用变量在编译时为声明该引用变量的类型(父类),运行时为其引用的对象的类型(子类).</li>
+<li>编译阶段,引用变量只能使用其声明的类中的方法或其父类中的方法,其子类中的方法不可用.</li>
+<li>运行时,引用变量可以默认使用其引用对象中的方法,否则再去使用其父类的方法.</li>
+<li>调用引用变量的成员变量,使用的是声明该引用变量的成员变量(父类中的成员变量),与方法在运行时调用子类中的方法不同.</li>
+</ul>
+<p><strong>类型转换</strong></p>
+<p>格式:<br><code>(type)variable</code></p>
+<p>注:</p>
+<ul>
+<li>基本类型只能是数值类型(整数,字符,浮点)之间相互之间转换,数值与布尔不能相互转化.</li>
+<li>引用类型之间的相互转换只能发生在两个有继承关系的类型之间.</li>
+<li>将父类引用变量转换为子类引用变量,只能是其所指向的对象为要转换的子类类型,否则异常.</li>
+<li>子类转换为父类可忽略类型转换.(向上转型,upcasting)</li>
+</ul>
+<p><strong>instanceof 运算符</strong></p>
+<p>格式:<br><code>引用变量 instanceof 类</code></p>
+<p>功能:<br>判断前面的引用变量是否是后面的类的类,子类,实现类的实例.是则为true,否则false.</p>
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>继承的缺陷: 破坏封装.</p>
+<p>父类设计原则:</p>
+<ul>
+<li>隐藏父类的内部数据,避免直接访问父类的成员变量.</li>
+<li>避免子类随意修改父类的方法: public: 外部调用; final: 被调用而不能重写; protected: 能重写而不能自由访问.</li>
+<li><strong>不要在父类构造器中调用子类重写的方法</strong>.</li>
+</ul>
+<p>派生子类的原则:</p>
+<ul>
+<li>子类需要<strong>增加额外的属性</strong>.</li>
+<li>子类需要<strong>增加自己独有的方法</strong>.</li>
+</ul>
+<p><strong>组合实现复用</strong><br>把旧类<strong>对象</strong>作为新类的<strong>成员变量</strong>组合起来,实现新类的功能.<br>隐藏(private)旧类对象,开放新类的方法.</p>
+<p><strong>组合与继承的关系</strong></p>
+<ul>
+<li><strong>继承</strong>: 对已有的类的改造,获得特殊的版本,是将抽象的类改造成适应于特定需求的类.</li>
+<li><strong>组合</strong>: 两个类之间有明确的<strong>整体,部分</strong>的关系.</li>
+<li>继承: 抽象-具体;</li>
+<li>组合: 整体-部分.</li>
+</ul>
+<h2 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h2><p>情景:<br>多个构造器使用相同的初始化语句,可以合并成一个初始化块,减少冗余.</p>
+<p>格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[static] &#123;</span><br><span class="line">    初始化语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>static初始化块</strong><br><strong>类初始化</strong>阶段执行,只能对static变量进行初始化.</p>
+<p>次序:</p>
+<ol>
+<li>执行父类的static初始化块.</li>
+<li>执行子类的static初始化块.</li>
+<li>执行父类的普通初始化块.</li>
+<li>执行父类的构造器.</li>
+<li>执行子类的普通初始化块.</li>
+<li>执行子类的构造器.</li>
+</ol>
+<p>原则:</p>
+<ul>
+<li>先执行父类,再执行子类.</li>
+<li>先执行static初始化块,再执行普通初始化块,最后执行构造器.</li>
+<li>多个构造器依据调用情况选择构造器.</li>
+<li>初始化块之间按照原本的次序先后执行.</li>
+</ul>
+<hr>
+<p>对象构成:</p>
+<ul>
+<li>特定功能部分(公开)</li>
+<li>实现部分(隐藏)</li>
+</ul>
+<p>从一个类<em>构造</em>一个对象,该对象称为类的一个<strong>实例</strong>(instance).</p>
+<p><strong>封装</strong>(Encapsulation, information hiding):<br> 将数据和行为组合在一个包类,对用户隐藏实现的细节.<br>表现:</p>
+<ul>
+<li>用户无法直接与实例域交互.</li>
+<li>用户只能通过特定的方法与实例域交互.</li>
+</ul>
+<p><strong>实例域</strong>(instance fileds): 对象的数据.<br><strong>方法</strong>(methods): 对象的行为.</p>
+<p><strong>继承</strong>(inheritnce): 通过已有类来构造(extends)新的类.<br>(<em>所有类都是<code>Object</code>类的子类</em>)</p>
+<p><strong>对象的特征</strong></p>
+<ul>
+<li>行为(behaviors)</li>
+<li>状态(state)</li>
+<li>标识(identity)</li>
+</ul>
+<p><strong>OOP流程</strong></p>
+<blockquote>
+<p>分辨不同的类,并向类中添加对应的方法.<br>名词 =&gt; 类<br>动词 =&gt; 方法</p>
+</blockquote>
+<p><strong>类间关系</strong></p>
+<ul>
+<li>依赖(dependence): 其方法使用或操作另外一个类的对象.(<em>需要降低依赖/耦合(coupling)</em>)</li>
+<li>聚合(aggregation): 一个类包含另外一个类的对象.</li>
+<li>继承(inheritance): 特殊和一般的关系. 继承的子类获取父类的方法,并且具有特有的行为.</li>
+</ul>
+<p><strong>更改器方法和访问器方法</strong></p>
+<ul>
+<li><strong>更改器方法</strong>(mutator method): 调用该方法后,对象的状态发生改变.</li>
+<li><strong>访问器方法</strong>(accessor mathod): 只访问对象,而不修改对象的状态.</li>
+</ul>
+<p><strong>构造器</strong></p>
+<ul>
+<li>构造器与类同名.</li>
+<li>一个类可有多个构造器.</li>
+<li>一个构造器可有0或多个参数.</li>
+<li>构造器没有返回值.</li>
+<li>构造器只被<code>new</code>操作符调用.</li>
+</ul>
+<p><strong>构造器或方法内同名变量</strong><br>构造器或方法中定义实例域(instance field)同名的局部变量:</p>
+<ul>
+<li>在对该变量进行修改时,为局部变量改变,对应的同名实例域变量保持不变.</li>
+<li>使用<code>this.变量名</code>可以对实例域变量进行修改.</li>
+</ul>
+<p><strong>隐式参数和显式参数</strong>(Implicit &amp; Explicit)</p>
+<ul>
+<li><strong>隐式参数</strong>: 调用方法时在方法名之前,为方法所属类的对象.(<em>方法内可用<code>this</code>代替</em>)</li>
+<li><strong>显式参数</strong>: 方法的参数列表.</li>
+</ul>
+<p><strong>良好的封装</strong></p>
+<ul>
+<li><code>private</code>的数据域.</li>
+<li><code>public</code>的访问器方法.</li>
+<li><code>public</code>的修改器方法.</li>
+</ul>
+<p><strong>封装的优点</strong></p>
+<ol>
+<li>类的实现的更改不会影响其使用.</li>
+<li>可以对实例域的修改进行检查,确保其合法.</li>
+</ol>
+<blockquote>
+<p>注: <strong>不要使用可变对象作为方法的返回值</strong><br>任何对该对象的修改将会导致所有引用该对象的对象的状态随之改变.<br><strong>建议</strong>: 使用<code>clone</code>来进行拷贝.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具有访问和修改实例域数据的方法的类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">class1</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setA</span><span class="params">(<span class="keyword">int</span> newA)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a = newA;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 参考类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">class2</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> class1 <span class="title">getAFromClass1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        class1 c = <span class="keyword">new</span> class1();</span><br><span class="line">        <span class="keyword">return</span> class1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span></span>&#123;</span><br><span class="line">        class2 c2 = <span class="keyword">new</span> class2();</span><br><span class="line">        class1 c1 = c2.gerAFromClass1(); <span class="comment">// c1 作为返回值可能受到对应修改器的影响</span></span><br><span class="line">        <span class="keyword">int</span> tempA = c1.getA();</span><br><span class="line">        c1.setA(<span class="number">10</span>); <span class="comment">// 调用对象的修改器,使得对应的实例域数据改变</span></span><br><span class="line">        <span class="keyword">int</span> finalA = c1.getA();</span><br><span class="line">        System.out.println(<span class="string">"Old a is: "</span> + tempA + <span class="string">". New a is: "</span> + finalA);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改:</span></span><br><span class="line">class1 c1  = (class1) c2.getAFromClass1().clone(); <span class="comment">// 错误,待修改</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>一个对象的方法可以访问同类对象的私有域</strong>.</p>
+<p><strong>私有方法</strong></p>
+<ul>
+<li>与其他方法联系紧密,如: 是其他方法的一部分.</li>
+<li>需要特定的调用次序,如: 两个方法之间有先后次序要求.</li>
+</ul>
+<p><strong><code>final</code>实例域</strong><br>确保构造器执行完后,其值已经初始化.<br>特点: 用于一旦设定完后不再修改的数据.</p>
+<p><strong><code>static</code>域和<code>static</code>方法</strong></p>
+<ul>
+<li><strong><code>static</code>域</strong>: 为类变量,该类的所有对象共用同一个域.对象不存在<code>static</code>域也存在.</li>
+<li><strong><code>static</code>常量</strong>: 可以通过类直接访问该变量而无需创建对象.</li>
+<li><strong><code>static</code>方法</strong>: 不能向对象操作的方法,不使用对象访问,只可访问自身类中的<code>static</code>域.</li>
+</ul>
+<p><strong><code>static</code>方法的使用</strong></p>
+<ul>
+<li>不需要访问对象,其参数都是显式参数.</li>
+<li>只访问类的静态域.</li>
+</ul>
+<p><strong><code>main</code>方法</strong><br><code>main</code>方法是<code>static</code>方法, 不对任何对象进行操作.<br>常用于进行单元测试.</p>
+<p><strong>方法参数</strong></p>
+<blockquote>
+<p>Java中只有<strong>值调用</strong>（call by value）。</p>
+</blockquote>
+<p>方法参数分类：</p>
+<ul>
+<li>基本数据类型（数字，布尔值）</li>
+<li>对象引用</li>
+</ul>
+<p>使用情况：</p>
+<ol>
+<li>一个方法不能修改一个基本数据类型的参数。</li>
+<li>一个方法可以改变一个对象参数的状态。</li>
+<li>一个方法不能让对象参数引用一个新的对象。</li>
+</ol>
+<blockquote>
+<p><strong>对象构造</strong></p>
+</blockquote>
+<p><strong>重载</strong>（overloading）</p>
+<p>特征： 多个方法具有相同的名字、不同的参数。<br>注： 不同的返回值不能构成重载。</p>
+<p><strong>默认域初始化</strong></p>
+<p>实例域没有初始化，默认自动初始化为：</p>
+<ul>
+<li>数值 =&gt; 0</li>
+<li>布尔值 =&gt; false</li>
+<li>对象引用 =&gt; null</li>
+</ul>
+<p><strong>无参数的构造器</strong></p>
+<ul>
+<li>没有构造器时，系统默认提供一个无参构造器</li>
+<li>拥有有参构造器，则默认的无参构造器则无法使用。</li>
+</ul>
+<p><strong>显式域初始化</strong></p>
+<blockquote>
+<p>可以调用方法对域进行初始化。</p>
+</blockquote>
+<p><strong>参数名</strong></p>
+<blockquote>
+<p>参数变量名与实例域变量重名时，方法内使用<code>this.变量名</code>调用实例域变量。</p>
+</blockquote>
+<p><strong>调用其他构造器</strong></p>
+<ul>
+<li>当前构造器中使用<code>this(...)</code>调用其他的构造器。</li>
+<li><code>this</code>只能放在第一句。</li>
+</ul>
+<p><strong>初始化块</strong>（initialization block）</p>
+<p>处理次序：</p>
+<ol>
+<li>所有数据域被初始化为默认值。</li>
+<li>按照类中出现的次序，依次执行所有域初始化语句和初始化块。</li>
+<li>若构造器调用其他构造器，则执行其他的构造器。</li>
+<li>执行构造器中的其他内容。</li>
+</ol>
+<p><strong>导入包</strong></p>
+<p>格式：</p>
+<ul>
+<li><code>import 包名/类名</code></li>
+<li><code>import 包名.*</code>：将包内所有的类导入。</li>
+<li>不能使用 * 导入多个包。</li>
+<li>多个包中重名的类使用时需要指定完整的包名。</li>
+</ul>
+<p><strong><code>static</code>导入</strong></p>
+<p><code>import static 包名</code>: 导入静态方法或静态域。</p>
+<hr>
+<p>参考</p>
+<ol>
+<li><a href="https://book.douban.com/subject/10436048/" target="_blank" rel="noopener">疯狂Java讲义</a></li>
+<li><a href="https://book.douban.com/subject/26880667/" target="_blank" rel="noopener">Java核心技术卷一第10版</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-30T09:31:54.000Z" itemprop="dateUpdated">2019-12-30 17:31:54</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/" rel="tag">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/27/Java-OOP-1/&title=《Java-面向对象(一)》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/27/Java-OOP-1/&title=《Java-面向对象(一)》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/27/Java-OOP-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java-面向对象(一)》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/27/Java-OOP-1/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/27/Java-OOP-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/28/LearnLinux-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux入门(一):初识Linux与命令行</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">计算机网络-网络管理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/27/Java-OOP-1/&title=《Java-面向对象(一)》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/27/Java-OOP-1/&title=《Java-面向对象(一)》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/27/Java-OOP-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java-面向对象(一)》 — 咸鱼的自我修养&url=http://yoursite.com/2019/12/27/Java-OOP-1/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/27/Java-OOP-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/27/Java-OOP-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

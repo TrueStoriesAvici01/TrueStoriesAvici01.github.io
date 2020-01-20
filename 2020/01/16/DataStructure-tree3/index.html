@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>多路查找树 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构,多路查找树,B树">
+    <meta name="description" content="多路查找树m-路查找树背景 访问磁盘的时间较长，为了提高效率可减少对磁盘的访问次数。 单次访问可读取的数据量等同于多个二叉树的结点所占存储空间的之和。 二叉树不能完全利用单次访问磁盘所能传输的数据量，为了访问需要的数据，则要进行多次这样低效的访问。 若使用多路树，使得单次访问能够传输多个结点，减少访问磁盘的次数，从而提高效率。  定义m-路查找树或是空树，或者满足：  根最多有m棵子树，结点的构成">
+<meta name="keywords" content="数据结构,多路查找树,B树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多路查找树">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;16&#x2F;DataStructure-tree3&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="多路查找树m-路查找树背景 访问磁盘的时间较长，为了提高效率可减少对磁盘的访问次数。 单次访问可读取的数据量等同于多个二叉树的结点所占存储空间的之和。 二叉树不能完全利用单次访问磁盘所能传输的数据量，为了访问需要的数据，则要进行多次这样低效的访问。 若使用多路树，使得单次访问能够传输多个结点，减少访问磁盘的次数，从而提高效率。  定义m-路查找树或是空树，或者满足：  根最多有m棵子树，结点的构成">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-16T10:11:22.811Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">多路查找树</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">多路查找树</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-16T10:11:22.811Z" itemprop="datePublished" class="page-time">
+  2020-01-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多路查找树"><span class="post-toc-number">1.</span> <span class="post-toc-text">多路查找树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#m-路查找树"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">m-路查找树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性质"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">性质</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#B-Tree-B-树"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">B-Tree(B-树)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义-1"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#B-树-B-Tree"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">B+-树(B+-Tree)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义-2"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性质-1"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">性质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作-1"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">操作</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-DataStructure-tree3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">多路查找树</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-16 18:11:22" datetime="2020-01-16T10:11:22.811Z"  itemprop="datePublished">2020-01-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="多路查找树"><a href="#多路查找树" class="headerlink" title="多路查找树"></a>多路查找树</h1><h2 id="m-路查找树"><a href="#m-路查找树" class="headerlink" title="m-路查找树"></a>m-路查找树</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>访问磁盘的时间较长，为了提高效率可减少对磁盘的访问次数。</li>
+<li>单次访问可读取的数据量等同于多个二叉树的结点所占存储空间的之和。</li>
+<li>二叉树不能完全利用单次访问磁盘所能传输的数据量，为了访问需要的数据，则要进行多次这样低效的访问。</li>
+<li>若使用多路树，使得单次访问能够传输多个结点，减少访问磁盘的次数，从而提高效率。</li>
+</ul>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>m-路查找树或是空树，或者满足：</p>
+<ul>
+<li>根最多有m棵子树，结点的构成为$n,A_0,(E_1,A_1),(E_2,A_2),…,(E_n,A_n)$, 其中$A_i$是指向子树的指针;$E_i$是数据元素。</li>
+<li>$E_i &lt; E_{i+1}$</li>
+<li>所有子树$A_i$中的key都小于$E_{i+1}$，大于$E_i$。</li>
+<li>所有子树$A_i$都是m-路查找树。</li>
+</ul>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>一棵树的度是m，高度是h，树的结点个数最多为：<br>$\sum_{0 \leq i \leq h-1} m^i = (m^h -1)/(m - 1)$.</li>
+</ul>
+<hr>
+<h2 id="B-Tree-B-树"><a href="#B-Tree-B-树" class="headerlink" title="B-Tree(B-树)"></a>B-Tree(B-树)</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>对于每个结点，有：<ul>
+<li>设其存储的key个数为n个</li>
+<li>每个结点中的key按照非降序排列</li>
+</ul>
+</li>
+<li>内部结点有n+1个指针，指向其孩子结点</li>
+<li>孩子结点与父结点中key的关系满足：<ul>
+<li>$c_1.key \leq key_1 \leq c_2.key \leq key_2…$,即：第i个孩子结点中的所有key都不大于其父结点中第i个key</li>
+</ul>
+</li>
+<li>所有叶结点高度相同</li>
+<li>结点中key的个数有限制：<ul>
+<li>除根结点外，每个结点至少有$\lceil n/2 \rceil$个key</li>
+<li>除根结点外，每个内部结点至少有$\lceil n/2 \rceil + 1$个孩子</li>
+<li>非空树至少有一个key</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p><strong>查找</strong></p>
+<ul>
+<li>首先查找根结点中是否有目标值，若有，则直接返回。</li>
+<li>若没有，则检查对应对应的子结点是否存在，若存在，则在子结点进行查找。</li>
+<li>若子结点不存在，则查找失败。</li>
+</ul>
+<p><strong>插入</strong></p>
+<ul>
+<li>先查找根结点，从而确定所属的孩子结点。</li>
+<li>访问孩子结点，再次确认插入值对应的位置。重复多次，直到该结点无孩子结点。</li>
+<li>若插入结点未满，则直接插入即可。</li>
+<li>若插入结点已满，插入值后，对该结点进行分裂。</li>
+<li>若分裂结点的父结点已满，则继续向上分裂，直到根结点。</li>
+<li>若根结点已满，则创建新的根结点，原根结点分裂出的两个结点分别为新的根结点的两个孩子结点。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~~* 若key在结点x中，并且x为叶结点，则从x中删除key。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>若key在结点x中，而x是内部结点，则：~~~</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~~* 如果结点x中前于key的子结点y包含至少t个key，则找出key在y中的直接前驱，递归的用直接前驱替代。</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight plain"><figcaption><span>如果y中少于t个key，则检查结点x中后于key的子结点z，若z中的key至少为t个，则类似的利用直接后继进行递归替换。~~~</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~~* 若前后两个结点中的key都少于t个，则将key和结点z合并到y中，然后递归的从y中删除key。</span><br></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><figcaption><span>如果key不在内部结点x中，则查找包含key的子树。若子树只有t-1个key，则：~~~</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~~* 如果子树只含t-1个关键字，而相邻的兄弟至少包含t个key，则将x中一个key转移到该子树中，并将子树的兄弟结点中的一个key转移到x中，将兄弟结点被转移的key对应的孩子结点指针移到子树中。</span><br></pre></td></tr></table></figure>
+<pre><code>~~~* 若子树及其相邻的兄弟都只包含t-1个key，则将子树与其一个兄弟想合并，x的一个key移到合并的结点中，成为其中间key。~~~
+</code></pre><p><strong>删除结点</strong><br><em>以x为根的子树中删除key</em></p>
+<ul>
+<li>若key不再内部结点x中，则确定key所在的子树x.c<ul>
+<li>若子树中<strong>只含t-1个key,而相邻的兄弟至少含有t个key</strong>，则将x中的一个key降至子树x.c中，使其兄弟结点中的一个key升至x中，将兄弟结点中对应的孩子指针移动到子树x.c中</li>
+<li>若<strong>子树和子树的兄弟结点都只含t-1个key</strong>，则将子树和一个兄弟结点合并，将x的一个key移动到合并的结点中。</li>
+</ul>
+</li>
+<li>若key在结点x中，并且x是叶结点，则从x中删除key。</li>
+<li>若key在结点x中，并且x是内部结点，则：<ul>
+<li>结点x中前于key的子节点y中至少包含t个key，则使用y中key替换x中key，然后递归向下进行替换。</li>
+<li>若节点x中前于key的子节点不足t个key，而后于key的子节点z中至少含有t个key，则使用z中key替换x中key，然后递归向下进行替换。</li>
+<li>否则，将key和z合并到y中，并从y中删除key。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="B-树-B-Tree"><a href="#B-树-B-Tree" class="headerlink" title="B+-树(B+-Tree)"></a>B+-树(B+-Tree)</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>有两种结点：<strong>索引结点</strong>和<strong>数据结点</strong>。索引结点存放关键词（非数据元素）和指针，数据结点存放数据元素。</li>
+<li>数据结点用双向链表连接在一起。</li>
+</ul>
+<h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>所有数据结点在同一层，数据结点只含有数据元素。</li>
+<li>索引结点构成一个m阶B-树，每个索引结点包含关键字，但不包含数据元素。</li>
+</ul>
+<h3 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h3><p><strong>查找</strong></p>
+<ol>
+<li>精准匹配：查找每个指定的数据。</li>
+<li>范围匹配：先精准匹配范围中的一端，然后在数据结点中按序查找另外一端。</li>
+</ol>
+<p><strong>插入</strong></p>
+<ol>
+<li>查找需要插入的位置，然后将数据插入。</li>
+<li>判断结点是否已满，若已满，则进行分裂。</li>
+<li>向上判断祖先结点是否已满，若已满，则进行分裂。</li>
+</ol>
+<p><strong>删除</strong></p>
+<ol>
+<li>删除数据，判断结点数据是否少于最低限制，若不少于，则结束。</li>
+<li>若少于，则检查兄弟结点是否有不少于最低数量+1的结点，若有，则将兄弟结点中的一个数据转移到当前结点。</li>
+<li>若没有，则将一个兄弟结点与之合并，删除对应父结点的指针。若父结点少于最低限制，则检查其兄弟结点是否有足够的数据，若有，则转移一个数据给其父结点，否则，合并父结点与其兄弟结点。</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-16T10:11:22.811Z" itemprop="dateUpdated">2020-01-16 18:11:22</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/B%E6%A0%91/" rel="tag">B树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E8%B7%AF%E6%9F%A5%E6%89%BE%E6%A0%91/" rel="tag">多路查找树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/16/DataStructure-tree3/&title=《多路查找树》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/16/DataStructure-tree3/&title=《多路查找树》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/16/DataStructure-tree3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《多路查找树》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/16/DataStructure-tree3/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/16/DataStructure-tree3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/18/TCPIP-6/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCPIP-6</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/16/TCPIP-5/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">TCPIP-5</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/16/DataStructure-tree3/&title=《多路查找树》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/16/DataStructure-tree3/&title=《多路查找树》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/16/DataStructure-tree3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《多路查找树》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/16/DataStructure-tree3/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/16/DataStructure-tree3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/16/DataStructure-tree3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

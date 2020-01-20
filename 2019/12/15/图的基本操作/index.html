@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="咸鱼的自我修养">
 <meta property="og:description" content="图的基本操作以下以图的邻接表形式存储 深度优先搜索核心思想 刨根问底，不撞南墙不回头，撞了南墙少回头，没头可回就结束。 实现  一个栈用来保存图中的节点。 对栈的顶端的节点进行判断，若有未访问的邻居，则访问该邻居，并将其入栈。若没有未访问的邻居，则该节点出栈。 栈为空时则结束。  深度优先搜索伪代码： 123456789101112131415161718public void DepthFirs">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-16T13:23:46.787Z">
+<meta property="og:updated_time" content="2019-12-21T10:07:03.000Z">
 <meta name="twitter:card" content="summary">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -161,7 +161,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#图的基本操作"><span class="post-toc-number">1.</span> <span class="post-toc-text">图的基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度优先搜索"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">深度优先搜索</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#广度优先搜索"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">广度优先搜索</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连通分量"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">连通分量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成树"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">生成树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重连通分量"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">重连通分量</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#图的基本操作"><span class="post-toc-number">1.</span> <span class="post-toc-text">图的基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度优先搜索"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">深度优先搜索</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#广度优先搜索"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">广度优先搜索</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连通分量"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">连通分量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#无向图的连通分量"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">无向图的连通分量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成树"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">生成树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重连通分量"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">重连通分量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓扑序"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">拓扑序</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -215,6 +215,16 @@
 </ul>
 <p>伪代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获得图的所有连通分量</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">connected</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++) <span class="comment">// n个节点的图</span></span><br><span class="line">        <span class="keyword">if</span>(!visited(i))&#123; <span class="comment">// 若节点未访问，则对其DFS或BFS</span></span><br><span class="line">            dfs(i); <span class="comment">// 或(bfs(i))</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="无向图的连通分量"><a href="#无向图的连通分量" class="headerlink" title="无向图的连通分量"></a>无向图的连通分量</h3><blockquote>
+<p><strong>连通图的连通分量和生成树</strong></p>
+</blockquote>
+<p>对任意一个顶点进行深度优先搜索或广度优先搜索所得到的点和边的集合为其连通分量,也是其生成树.</p>
+<blockquote>
+<p><strong>非连通图的连通分量和生成森林</strong></p>
+</blockquote>
+<p>对每个连通分量遍历生成一个生成树,多个连通分量对应的生成树组成非连通图的连通森林.</p>
+<p>伪代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">DFSForest(Graph G)&#123;</span><br><span class="line">    <span class="keyword">for</span>(G中每个节点v)&#123;</span><br><span class="line">        <span class="keyword">if</span>(v未被访问)&#123;</span><br><span class="line">            v设为根节点;</span><br><span class="line">            DFSTree(G,v); <span class="comment">// 对于v的邻接节点,构造连通分量的生成树</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造生成树子方法</span></span><br><span class="line">DFSTree(G,v)&#123;</span><br><span class="line">    <span class="keyword">for</span>(v的所有邻接节点p)&#123;</span><br><span class="line">        <span class="keyword">if</span>(p是第一个邻接节点)</span><br><span class="line">            p是v的左孩子节点;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p是上一个节点的右兄弟节点;</span><br><span class="line">        DFSTree(G,p); <span class="comment">// 对节点p递归DFSTree,实现深度优先搜索</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>应用</strong><br>推荐系统：在社交网络中，一群人通常有密切的关系（例如，一个班级或者任何其他公共场所的学生）。这些群体中的许多人通常喜欢一些常见的网站或玩常见的游戏。找到这样的组，并向组中尚未喜欢这些网站或游戏的人群推荐这些内容。</p>
 <h2 id="生成树"><a href="#生成树" class="headerlink" title="生成树"></a>生成树</h2><p><strong>实现</strong><br>对于一个连通图G，从图中的任意一个节点出发，对图进行一次DFS或BFS，所经历的边和节点构成一个生成树。</p>
 <p><strong>特点</strong></p>
@@ -226,8 +236,7 @@
 <h2 id="重连通分量"><a href="#重连通分量" class="headerlink" title="重连通分量"></a>重连通分量</h2><p><strong>定义</strong></p>
 <p>不含关节点的图.<br><em>关节点:若从图中删去该节点及其邻接各边后的图G’,至少有两个连通分量.</em></p>
 <p>重连通分量: 连通无向图G的<strong>最大重连通子图</strong>,即不是G中其他连通分量的真子图.</p>
-<p><strong>拓扑序</strong></p>
-<p>在有向无环图顶点的拓扑序中,当从顶点a到顶点b有有向边时,顶点a排在顶点b的前面.</p>
+<h2 id="拓扑序"><a href="#拓扑序" class="headerlink" title="拓扑序"></a>拓扑序</h2><p>在有向无环图顶点的拓扑序中,当从顶点a到顶点b有有向边时,顶点a排在顶点b的前面.</p>
 <p>拓扑排序算法:</p>
 <ol>
 <li>寻找没有后继的顶点,将这个顶点标记为已访问并入栈.</li>
@@ -251,7 +260,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-16T13:23:46.787Z" itemprop="dateUpdated">2019-12-16 21:23:46</time>
+    Last updated: <time datetime="2019-12-21T10:07:03.000Z" itemprop="dateUpdated">2019-12-21 18:07:03</time>
 </span><br>
 
 
@@ -396,7 +405,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>咸鱼不翻身 &copy; 2018 - 2019</span>
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
