@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>操作系统概念(八):内存管理 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,内存管理">
+    <meta name="description" content="内存管理[toc] 背景内存:  由很大的一组字或字节组成. 每个字或字节都有它们自己的地址. CPU根据程序计数器(PC)的值从内存中提取指令.  指令执行周期:  从内存中读取指令. 指令被解码,可能需要从内存中读取操作数. 指令对操作数执行后,其结果被存回内存.  基本硬件要点:  CPU能够直接访问的存储器只有内存和处理器内的寄存器. 机器指令以内存地址为参数,无法使用磁盘地址. 若指令使">
+<meta name="keywords" content="操作系统,内存管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概念(八):内存管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;09&#x2F;OperatingSystem-8&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="内存管理[toc] 背景内存:  由很大的一组字或字节组成. 每个字或字节都有它们自己的地址. CPU根据程序计数器(PC)的值从内存中提取指令.  指令执行周期:  从内存中读取指令. 指令被解码,可能需要从内存中读取操作数. 指令对操作数执行后,其结果被存回内存.  基本硬件要点:  CPU能够直接访问的存储器只有内存和处理器内的寄存器. 机器指令以内存地址为参数,无法使用磁盘地址. 若指令使">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-09T14:15:16.243Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统概念(八):内存管理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统概念(八):内存管理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-09T14:15:16.243Z" itemprop="datePublished" class="page-time">
+  2020-02-09
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#内存管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本硬件"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">基本硬件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#地址绑定"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">地址绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#逻辑地址空间与物理地址空间"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">逻辑地址空间与物理地址空间</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态加载"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">动态加载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态链接与共享库"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">动态链接与共享库</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交换"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">交换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连续内存分配"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">连续内存分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存映射与保护"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">内存映射与保护</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存分配"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">内存分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#碎片"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">碎片</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分页"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">分页</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本方法"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">基本方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬件支持"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">硬件支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#保护"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">保护</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#共享页"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">共享页</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#页表结构"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">页表结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#层次页表"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">层次页表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#哈希页表"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">哈希页表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#反向页表"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">反向页表</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分段"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">分段</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本方法-1"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">基本方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬件"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">硬件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实例-Intel-Pentium"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">实例: Intel Pentium</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Pentium分段"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">Pentium分段</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Pentium分页"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">Pentium分页</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Pentium系统上的Linux"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">Pentium系统上的Linux</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OperatingSystem-8"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统概念(八):内存管理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-09 22:15:16" datetime="2020-02-09T14:15:16.243Z"  itemprop="datePublished">2020-02-09</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p>[toc]</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>内存:</p>
+<ul>
+<li>由很大的一组字或字节组成.</li>
+<li>每个字或字节都有它们自己的地址.</li>
+<li>CPU根据程序计数器(PC)的值从内存中提取指令.</li>
+</ul>
+<p>指令执行周期:</p>
+<ol>
+<li>从内存中读取指令.</li>
+<li>指令被解码,可能需要从内存中读取操作数.</li>
+<li>指令对操作数执行后,其结果被存回内存.</li>
+</ol>
+<h3 id="基本硬件"><a href="#基本硬件" class="headerlink" title="基本硬件"></a>基本硬件</h3><p>要点:</p>
+<ul>
+<li>CPU能够直接访问的存储器只有<strong>内存</strong>和<strong>处理器内的寄存器</strong>.</li>
+<li>机器指令以内存地址为参数,无法使用磁盘地址.</li>
+<li>若指令使用的数据不在内存中,则需要先把数据移到内存中.</li>
+<li>CPU访问寄存器可以在一个时钟周期,而访问内存需要多个CPU时钟周期.</li>
+<li><strong>高速缓存</strong>(cache): 位于CPU和内存之间的快速内存,协调速度差异的内存缓冲区.</li>
+<li>确保每个进程都有独立的内存空间,可通过<strong>基地址寄存器</strong>(base register)和<strong>界限地址寄存器</strong>(limit register)确定进程可访问的合法地址范围.</li>
+<li>基地址寄存器:最小的合法物理内存地址; 界限地址寄存器: 地址的范围.</li>
+<li>操作系统在内核模式下加载基地址寄存器和界限地址寄存器,对用户模式产生的地址进行比较,若非合法地址,则出现错误.</li>
+</ul>
+<h3 id="地址绑定"><a href="#地址绑定" class="headerlink" title="地址绑定"></a>地址绑定</h3><p><strong>输入队列</strong>(input queue):在磁盘上等待调入内存以便执行的进程.</p>
+<p><strong>绑定</strong>(bind):<br><em>从一个地址空间到另一个地址空间的映射.</em></p>
+<ul>
+<li>编译器:通常将符号地址(源程序地址)绑定到可重定位的地址.</li>
+<li>链接程序/加载程序:将可重定位的地址绑定成绝对地址.</li>
+</ul>
+<p>绑定发生的时间:</p>
+<ul>
+<li><strong>编译时</strong>(compile time): 能确定进程在内存的驻留地址,生成<strong>绝对代码</strong>(absolute code).</li>
+<li><strong>加载时</strong>(load time): 编译时无法确定位置,则生成<strong>可重定位代码</strong>(relocatable code),绑定在加载时完成.开始地址改变,需重新加载.</li>
+<li><strong>执行时</strong>(execution time):进程执行时可从一个位置移到另外一个位置.</li>
+</ul>
+<h3 id="逻辑地址空间与物理地址空间"><a href="#逻辑地址空间与物理地址空间" class="headerlink" title="逻辑地址空间与物理地址空间"></a>逻辑地址空间与物理地址空间</h3><p><strong>逻辑地址</strong>(logical address)/虚拟地址(virtual address):CPU生成的地址.程序生成的所有逻辑地址的集合为<strong>逻辑地址空间</strong>(logical address space).</p>
+<p><strong>物理地址</strong>(physical address)/内存地址寄存器(memory-address register):内存单元所看到的地址.所有物理地址的集合为<strong>物理地址空间</strong>(physical address space).</p>
+<ul>
+<li>编译和加载的地址绑定方法:生成相同的逻辑地址和物理地址.</li>
+<li>执行时的地址绑定方案:不同的逻辑地址和物理地址.</li>
+</ul>
+<p><strong>内存管理单元</strong>(memory-management unit, MMU):<br>运行时将虚拟地址映射到物理地址.</p>
+<p><strong>重定位寄存器</strong>(relocation register): 基地址寄存器.</p>
+<h3 id="动态加载"><a href="#动态加载" class="headerlink" title="动态加载"></a>动态加载</h3><p><strong>动态加载</strong>(dynamic loading): 子程序以可重定位形式保存在磁盘,只有在调用时才被加载.</p>
+<ul>
+<li>主程序装入内存并执行.</li>
+<li>调用子程序时:</li>
+<li>先检查是否已加载,若没有,链接程序加载所需的子程序,并更新地址表.</li>
+<li>控制交给子程序.</li>
+</ul>
+<h3 id="动态链接与共享库"><a href="#动态链接与共享库" class="headerlink" title="动态链接与共享库"></a>动态链接与共享库</h3><p><strong>动态链接</strong>(dynamically link): 将链接延迟到运行时,常用于系统库.</p>
+<p>流程:</p>
+<ul>
+<li>二进制镜像对每个库程序的引用有一个存根(stub).</li>
+<li>执行到存根时,先检查所需子程序是否在内存中,若不在,则将子程序装入内存.</li>
+<li>若在,则用子程序替换存根本身,并执行子程序.</li>
+</ul>
+<p><strong>共享库</strong>(shared library):<br>新程序装入之前所链接的其他程序可以继续使用旧库.</p>
+<hr>
+<h2 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h2><p><strong>交换</strong>(swap):<br>进程从内存中交换(滚出,roll out)到备份存储(backing store)上,当需要再次执行时再调回(滚进,roll in)到内存中.</p>
+<p><strong>就绪队列</strong>(ready queue):<br>包括在备份存储或在内存中准备运行的所有进程.</p>
+<p>CPU调度程序决定执行进程时,调度程序检查队列中下一个进程是否在内存中,若不在且没有空闲内存,则将内存中的一个进程交换出去,换入所需的进程.然后重新状态寄存器,控制权交给选择的进程.</p>
+<p>问题:</p>
+<ul>
+<li>交换时间较长,可以通过系统调用通知操作系统真正需要使用的内存,减少交换时间.</li>
+<li>保证换出进程处于空闲状态.(若当前进程等待I/O操作,交换进程后导致I/O操作使用交换后进程的内存)<ul>
+<li>禁止换出有待处理I/O的进程.</li>
+<li>I/O操作的执行只能使用操作系统缓冲区.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="连续内存分配"><a href="#连续内存分配" class="headerlink" title="连续内存分配"></a>连续内存分配</h2><p>内存区域:</p>
+<ul>
+<li>驻留操作系统</li>
+<li>用户进程</li>
+</ul>
+<p><strong>连续内存分配</strong>(contiguous memory allocation):<br>将多个进程同时放入内存中,每个进程位于一个连续的内存区域.</p>
+<h3 id="内存映射与保护"><a href="#内存映射与保护" class="headerlink" title="内存映射与保护"></a>内存映射与保护</h3><ul>
+<li>通过<em>重定位寄存器</em>和<em>界限地址寄存器</em>实现内存保护.</li>
+<li>调度程序初始化重定位寄存器和界限地址寄存器.</li>
+<li>MMU将逻辑地址加上重定位寄存器的值映射成物理地址.</li>
+<li>逻辑地址小于界限地址寄存器才为合法.</li>
+</ul>
+<p><strong>暂时操作系统代码</strong>(transient):<br>不常用的操作系统代码,其被重定向机制替换成其他代码,只有当需要时调入.</p>
+<h3 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h3><p><strong>多分区方法</strong>(multiple-partition method):<br>将内存分成多个固定大小的分区(partition),每个分区只能容纳一个进程.</p>
+<p><em>一个分区空闲时,从输入队列中选择一个进程装入分区;进程终止时,其分区可被其他进程使用.</em></p>
+<p><strong>可变分区</strong>(variable-partition):<br>操作系统有一个记录可用内存(空,hole)的表,新进程进入时,为其查找足够大的孔.从孔中分配内存,剩余的内存作为新孔可再次使用.</p>
+<p>孔的管理:</p>
+<ul>
+<li>新进程进入时,孔分配给进程;进程终止时,孔返回到操作系统.</li>
+<li>对于可用的孔,可查找输入队列,确定可满足的进程.</li>
+<li>两个相邻的孔可以合并成更大的新孔.</li>
+</ul>
+<p><strong>动态存储分配问题</strong>(dynamic storage allocation problem):<br>从一组可用孔中选择一个空闲的孔.</p>
+<p>方式:</p>
+<ul>
+<li><strong>首次适应</strong>(first-fit): 分配第一个足够大的孔.</li>
+<li><strong>最佳适应</strong>(best-fit): 分配最小的足够大的孔.</li>
+<li><strong>最差适应</strong>(worst-fit): 分配最大的孔.</li>
+</ul>
+<h3 id="碎片"><a href="#碎片" class="headerlink" title="碎片"></a>碎片</h3><p><strong>外部碎片问题</strong>(external fragmentation):<br>随着进程的装入和移出,空闲的内存被分成小片段.(<em>可能出现总的空闲内存足够,但由于不连续,无法使用</em>)</p>
+<p><strong>内部碎片</strong>(internal fragmentation):<br>内存以固定大小的块为单位分配给进程,分配的内存大于进程所需的内存,剩余的空间为内部碎片,其无法被使用.</p>
+<p>解决:</p>
+<ul>
+<li><strong>紧缩</strong>(compaction):移动内存内容,使得所有空闲空间合并成一个整块.</li>
+<li>允许物理地址空间为非连续.</li>
+</ul>
+<hr>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p><strong>分页</strong>(paging):<br>允许进程的物理地址空间是非连续的.</p>
+<h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><ul>
+<li><strong>帧</strong>(frame): 将物理内存分成固定大小的块.</li>
+<li><strong>页</strong>(page): 将逻辑内存分成同样大小的块.</li>
+</ul>
+<p><em>执行程序时,从硬盘中调入到可用的内存帧中.</em></p>
+<ul>
+<li>CPU生成的地址分为两个部分: <strong>页码</strong>(page number)和<strong>页偏移</strong>(page offset).</li>
+<li><strong>页表</strong>(page table)包含同一个页中所在的物理内存的基地址.</li>
+<li>页码确定存储在页表中的基地址的位置,与页偏移一起组合成物理地址.</li>
+</ul>
+<blockquote>
+<p>逻辑地址到物理地址的转换:<br>设: 页大小为n, 第i个页表的基地址为 PT(i),则:<br>第j个逻辑地址对应的物理地址PA(j)为:<br>a <em> n + b = j<br>PA(j) = PT(a) </em> n + b</p>
+</blockquote>
+<ul>
+<li><em>分页技术可能导致内部碎片: 进程需要的内存不是页的整数倍,最后一个帧则没有用完.</em></li>
+<li><em>虽然页大小减少可以减少内部碎片,但是导致页表开销增加,趋势是增大页的大小.</em></li>
+<li><strong>帧表</strong>(frame table): 每个条目对应者一个帧.表示该帧是否占用,占用的进程等.</li>
+</ul>
+<h3 id="硬件支持"><a href="#硬件支持" class="headerlink" title="硬件支持"></a>硬件支持</h3><p><em>每个进程分配一个页表,页表指针放在进程控制块中.</em></p>
+<p>硬件实现:</p>
+<p><strong>使用一组专用寄存器(register)实现.</strong></p>
+<ul>
+<li>对内存的每次访问都要经过分页表.</li>
+</ul>
+<p><strong>采用<em>页表基地址寄存器</em>(page-table base register, PTBR)指向页表</strong>.</p>
+<ul>
+<li>将页表放在内存中,改变页表只需改变寄存器即可.</li>
+<li>访问某个位置,先由PTBR中的值加上页码的偏移来查找页表.</li>
+<li>需要两次内存访问(页表条目和字节访问),速度慢.</li>
+</ul>
+<p><strong>采用<em>转换表缓冲区</em>(translation look-aside buffer, TLB)</strong>.</p>
+<ul>
+<li>TLB是关联的快速内存,其中条目由两部分组成:键和值.</li>
+<li>TLB中的条目不多.</li>
+<li>TLB只包含页表的一部分,CPU产生的逻辑地址在TLB中查找,若找到则用来访问内存.</li>
+<li><strong>TLB失效</strong>(TLB miss): 页码不在TLB中.则访问页表,再由得到的帧号访问内存.同时将页号和帧号增加到TLB中.</li>
+<li>若TLB已满,可随机替换,或者最近最少使用替换(LRU).</li>
+<li>TLB允许某些条目固定(wired down),如内核代码的条目.</li>
+</ul>
+<p><strong>地址空间标识符</strong>(address-space identifier, ASID):</p>
+<ul>
+<li>用来唯一标识进程. 确保当前进程的ASID和虚拟页ASID匹配,否则为TLB失效.</li>
+<li>允许TLB同时包括多个不同进程的条目.</li>
+</ul>
+<p><em>命中率</em>(hit ratio):<br>表示在TLB中找到所需的页号的概率p.</p>
+<p><strong>有效内存访问时间</strong>(effective memory-access time):<br>设命中率为p, 访问TLB的时间为t1,访问内存的时间为t2.<br>则有效时间为:<br>p<em>(t1 + t2) + (1 - p)</em>( 2 * t2)</p>
+<h3 id="保护"><a href="#保护" class="headerlink" title="保护"></a>保护</h3><ul>
+<li>内存保护位保存在页表中.</li>
+<li>一个位用来定义一个页是<em>只读</em>,<em>读写</em>还是<em>只执行保护</em>等. 通过检查保护位对页进行保护.</li>
+<li>通常有<strong>有效-无效</strong>(valid-invalid)位.有效表示相关的页在进程的逻辑地址.</li>
+<li>由于页大小问题,常导致分页的内部碎片问题.</li>
+<li>程序很少使用其所有地址空间,为每个页建立条目浪费空间,可使用硬件<strong>页表长度寄存器</strong>(page-table length register, PTLR).</li>
+</ul>
+<h3 id="共享页"><a href="#共享页" class="headerlink" title="共享页"></a>共享页</h3><p>分页可实现共享公共代码.</p>
+<p>可将进程的内存分成:</p>
+<ul>
+<li><strong>可重入代码</strong>(reentrant code)/纯代码(pure code).(<em>多个进程共享同一个代码</em>)</li>
+<li>进程私有的寄存器副本和数据存储.(<em>每个进程自己私有的数据</em>)</li>
+</ul>
+<hr>
+<h2 id="页表结构"><a href="#页表结构" class="headerlink" title="页表结构"></a>页表结构</h2><h3 id="层次页表"><a href="#层次页表" class="headerlink" title="层次页表"></a>层次页表</h3><p>使用两层分页,将页表再分页.</p>
+<ul>
+<li>一个逻辑地址被分成<strong>页码</strong>和<strong>页偏移</strong>.</li>
+<li>页码再分成两部分:p1和p2.p1用来访问外部页表的索引;p2是外部页表的页偏移.</li>
+<li>这种两层分页称为<strong>向前映射页表</strong>(forward-mapped page table).</li>
+</ul>
+<p>映射方式:</p>
+<ol>
+<li>由p1在外页表查找,获得页表.</li>
+<li>由p2在页表查找,获得页表的页.</li>
+<li>在页中由页偏移d确定物理地址.</li>
+</ol>
+<p>对于更大的表,可以将外部页表再进行一步细分,从而得到三层分页方案.</p>
+<h3 id="哈希页表"><a href="#哈希页表" class="headerlink" title="哈希页表"></a>哈希页表</h3><p><strong>哈希页表</strong>(hashed page table):</p>
+<p>哈希表由多个链表组成,链表中元素是由三部分组成:</p>
+<ol>
+<li>虚拟页码</li>
+<li>所映射的帧码</li>
+<li>指向链表中下一个元素的指针</li>
+</ol>
+<p>算法:</p>
+<ol>
+<li>逻辑地址中p经过哈希函数获得虚拟页码.</li>
+<li>在哈希表中查找虚拟页码,找到则按照逻辑地址的p查找.</li>
+<li>若找到,则第二个域中存储的值与逻辑地址的d共同构成物理地址.</li>
+</ol>
+<p><strong>群集页表</strong>(clustered page table):<br>哈希表的每一条目包含多页.一个页表条目可以存储多个物理页帧的映射.</p>
+<h3 id="反向页表"><a href="#反向页表" class="headerlink" title="反向页表"></a>反向页表</h3><p>每个逻辑地址有一个三元组:<br>(process-id, page-number, offset)</p>
+<ul>
+<li>process-id: 用来作为地址空间的标识符.</li>
+</ul>
+<p>由 pid 和 page-number 组成的虚拟地址查找反向页表来寻找匹配,若找到,则对应的页目i和offset构成物理地址.</p>
+<p>该方案减少了存储每个页表的内存空间,但增加了查找页表所需的时间.可使用哈希表将查找限制在少数页表条目.但至少两次内存读取:查找哈希表条目和查找页表.</p>
+<hr>
+<h2 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h2><h3 id="基本方法-1"><a href="#基本方法-1" class="headerlink" title="基本方法"></a>基本方法</h3><p><strong>分段</strong>(segmentation):</p>
+<ul>
+<li>逻辑地址是由一组段组成的(segment-number, offset).</li>
+<li>每个段都有名称和长度.</li>
+<li>地址指定了段名称和段内偏移.</li>
+</ul>
+<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><p><strong>段表</strong>(segment table):<br>将用户定义地址映射为一维物理地址.</p>
+<ul>
+<li>段表中每个条目都有<em>段基地址</em>和<em>段界限</em>.</li>
+<li>段基地址为该段在内存中开始物理地址,段界限为该段的长度.</li>
+</ul>
+<p>算法:</p>
+<ol>
+<li>逻辑地址由段号s和偏移d构成.</li>
+<li>对每个段进行编号,按照段标号在段表查找.</li>
+<li>由对应的条目确定基地址.</li>
+<li>若偏移d为超过界限,则由段号s和偏移d构成物理地址.</li>
+</ol>
+<hr>
+<h2 id="实例-Intel-Pentium"><a href="#实例-Intel-Pentium" class="headerlink" title="实例: Intel Pentium"></a>实例: Intel Pentium</h2><ol>
+<li>CPU产生逻辑地址.</li>
+<li>分段单元由逻辑地址生成线性地址.</li>
+<li>分页单元由线性地址生成物理地址.</li>
+<li>由物理地址访问内存.</li>
+</ol>
+<h3 id="Pentium分段"><a href="#Pentium分段" class="headerlink" title="Pentium分段"></a>Pentium分段</h3><p>逻辑地址是由一对(selector, offset)组成:</p>
+<ul>
+<li>selector: 是一个16位的数.由13位段号(s),1位标识(g,在GDT还是LDT中)和2位保护信息(p)组成.</li>
+<li>offset(偏移): 32位,表示字节在段内的位置.</li>
+</ul>
+<p>算法:</p>
+<ol>
+<li>段寄存器指向描述符表(GDT或LDT).</li>
+<li>由段号确定段描述符.</li>
+<li>界限用来检测地址的合法性.</li>
+<li>若有效,则偏移值加上基地址产生32位线性地址(linear address).</li>
+</ol>
+<h3 id="Pentium分页"><a href="#Pentium分页" class="headerlink" title="Pentium分页"></a>Pentium分页</h3><p>页的大小为4KB或4MB.</p>
+<p>对于4KB的页,采用二级分页方案,32位线性地址划分:</p>
+<ul>
+<li>p1:10位,<strong>页目录</strong>(page directory),指向p2的内部页表.</li>
+<li>p2:10位,<strong>页表</strong>,用来指向4KB大小页面.</li>
+<li>页偏移: 12位.</li>
+</ul>
+<p><em>页目录存在一个条目Page Size标志,设置后则页帧大小为4MB,则页目录指向4MB页帧.</em></p>
+<h3 id="Pentium系统上的Linux"><a href="#Pentium系统上的Linux" class="headerlink" title="Pentium系统上的Linux"></a>Pentium系统上的Linux</h3><p>Linux使用六个段:</p>
+<ul>
+<li>内核代码段</li>
+<li>内核数据段</li>
+<li>用户代码段</li>
+<li>用户数据段</li>
+<li>任务状态段(TSS)</li>
+<li>默认的LDT段</li>
+</ul>
+<p>细节:</p>
+<ul>
+<li>每个进程都有自己的任务状态段(TSS),保存在上下文中.</li>
+<li>每个段选择器有两个保护:用户模式和内核模式.</li>
+<li>线性地址分成: 全局目录, 中间目录, 页表, 偏移.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-02-09T14:15:16.243Z" itemprop="dateUpdated">2020-02-09 22:15:16</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/09/OperatingSystem-8/&title=《操作系统概念(八):内存管理》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/09/OperatingSystem-8/&title=《操作系统概念(八):内存管理》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/09/OperatingSystem-8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(八):内存管理》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/09/OperatingSystem-8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/09/OperatingSystem-8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/09/SQL-4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SQL必知必会(四):过滤数据</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/06/SQL-3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SQL必知必会(三):排序检索数据</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/09/OperatingSystem-8/&title=《操作系统概念(八):内存管理》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/09/OperatingSystem-8/&title=《操作系统概念(八):内存管理》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/09/OperatingSystem-8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(八):内存管理》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/09/OperatingSystem-8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/09/OperatingSystem-8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/09/OperatingSystem-8/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

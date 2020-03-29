@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>操作系统概念(一):导论 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统">
+    <meta name="description" content="导论操作系统做什么操作系统(operating system)：管理计算机硬件的程序，为应用程序提供基础，为计算机硬件和计算机用户之间的中介。 计算机系统组成  计算机硬件 操作系统 系统软件与应用程序 用户  或  硬件 软件 数据  硬件：中央处理器，内存，输入&#x2F;输出设备等。（为系统提供基本的计算资源)应用程序：规定了使用这些资源的方式从而解决用户的计算问题。操作系统：控制和协调用户的应用程序">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概念(一):导论">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;22&#x2F;OperatingSystem-1&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="导论操作系统做什么操作系统(operating system)：管理计算机硬件的程序，为应用程序提供基础，为计算机硬件和计算机用户之间的中介。 计算机系统组成  计算机硬件 操作系统 系统软件与应用程序 用户  或  硬件 软件 数据  硬件：中央处理器，内存，输入&#x2F;输出设备等。（为系统提供基本的计算资源)应用程序：规定了使用这些资源的方式从而解决用户的计算问题。操作系统：控制和协调用户的应用程序">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-22T04:30:03.866Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统概念(一):导论</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统概念(一):导论</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-22T04:30:03.866Z" itemprop="datePublished" class="page-time">
+  2020-01-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#导论"><span class="post-toc-number">1.</span> <span class="post-toc-text">导论</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作系统做什么"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">操作系统做什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机系统组织"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">计算机系统组织</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#计算机系统操作"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">计算机系统操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#存储结构"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">存储结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#I-O结构"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">I/O结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机系统体系结构"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">计算机系统体系结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单处理器系统"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">单处理器系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多处理器系统"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">多处理器系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集群系统"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">集群系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作系统结构"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">操作系统结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作系统操作"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">操作系统操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双重模式操作"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">双重模式操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程管理"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">进程管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存管理"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">内存管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存储管理"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">存储管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件系统管理"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">文件系统管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大容量存储器管理"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">大容量存储器管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#高速缓冲"><span class="post-toc-number">1.8.3.</span> <span class="post-toc-text">高速缓冲</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保护和安全"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">保护和安全</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式系统"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">分布式系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算环境"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">计算环境</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传统计算"><span class="post-toc-number">1.11.1.</span> <span class="post-toc-text">传统计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#客户机-服务器计算"><span class="post-toc-number">1.11.2.</span> <span class="post-toc-text">客户机-服务器计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对等计算"><span class="post-toc-number">1.11.3.</span> <span class="post-toc-text">对等计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于Web的计算"><span class="post-toc-number">1.11.4.</span> <span class="post-toc-text">基于Web的计算</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OperatingSystem-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统概念(一):导论</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-22 12:30:03" datetime="2020-01-22T04:30:03.866Z"  itemprop="datePublished">2020-01-22</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h1><h2 id="操作系统做什么"><a href="#操作系统做什么" class="headerlink" title="操作系统做什么"></a>操作系统做什么</h2><p>操作系统(operating system)：管理计算机硬件的程序，为应用程序提供基础，为计算机硬件和计算机用户之间的中介。</p>
+<p><strong>计算机系统组成</strong></p>
+<ul>
+<li>计算机硬件</li>
+<li>操作系统</li>
+<li>系统软件与应用程序</li>
+<li>用户</li>
+</ul>
+<p>或</p>
+<ul>
+<li>硬件</li>
+<li>软件</li>
+<li>数据</li>
+</ul>
+<p>硬件：中央处理器，内存，输入/输出设备等。（<em>为系统提供基本的计算资源</em>)<br>应用程序：规定了使用这些资源的方式从而解决用户的计算问题。<br>操作系统：控制和协调用户的应用程序对硬件的使用。</p>
+<p><strong>设计目的</strong></p>
+<ul>
+<li><strong>用户</strong>：使用户使用方便。对于大型机，是使资源利用率最大化;对于工作站，是使个人可用性和资源利用率的折中。</li>
+<li><strong>系统</strong>:资源发配器，管理各种资源，对于冲突的资源请求，决定为各个程序和用户发配资源。</li>
+</ul>
+<p><em>操作系统：一直运行在计算机上的程序（内核），其他程序为系统程序和应用程序</em></p>
+<hr>
+<h2 id="计算机系统组织"><a href="#计算机系统组织" class="headerlink" title="计算机系统组织"></a>计算机系统组织</h2><h3 id="计算机系统操作"><a href="#计算机系统操作" class="headerlink" title="计算机系统操作"></a>计算机系统操作</h3><p><strong>概述</strong></p>
+<ul>
+<li>CPU与若干设备控制器通过<strong>总线</strong>相连。</li>
+<li>总线提供对共享内存的访问。</li>
+<li>设备控制器负责特定的设备。</li>
+<li>CPU与设备控制器并发工作，竞争内存周期。</li>
+<li>内存控制器协调对内存的同步访问功能。</li>
+</ul>
+<p>计算机运行：</p>
+<ul>
+<li>运行引导程序(bootstrap program)(<em>初始化程序,位于<strong>固件</strong>中</em>,初始化系统的所有部分，找到操作系统内核，并装入内存)</li>
+<li>操作系统开始执行第一个程序，等待事件发生。</li>
+</ul>
+<p><strong>中断</strong>(interrupt)</p>
+<ul>
+<li>硬件：通过系统总线向CPU发送信号，触发中断。</li>
+<li>软件：通过执行<strong>系统调用</strong>(system call)，触发中断。</li>
+</ul>
+<p>中断流程：</p>
+<ol>
+<li>暂停当前任务</li>
+<li>转入中断服务程序开始位置</li>
+<li>中断服务程序执行</li>
+<li>CPU重新执行被中断的计算</li>
+</ol>
+<p>中断中的控制权转移：<br>调用通用例程检查中断信息，例程调用相应的中断处理程序。</p>
+<p>中断中状态保存：</p>
+<ul>
+<li>固定位置保存中断地址</li>
+<li>返回系统栈中的地址</li>
+</ul>
+<h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p><em>程序必须装入内存中才能运行。</em></p>
+<p>指令执行周期：</p>
+<ol>
+<li>从内存获取指令</li>
+<li>将指令保存在<strong>指令寄存器</strong>(instruction register)</li>
+<li>解码指令，从内存获取操作数，将操作数保存在内部寄存器中</li>
+<li>完成对操作数的执行后，结果存回内存</li>
+</ol>
+<ul>
+<li><strong>易失存储器</strong>(volatile storage)：断电后丢失其中的内容</li>
+<li><strong>非易失存储器</strong>(nonvoolatile storage):断电不会丢失内容</li>
+</ul>
+<p>存储设备层次：<br>寄存器 &lt;—&gt; 高速缓存 &lt;—&gt; 主存 &lt;—&gt; 电子磁盘 &lt;—&gt; 磁盘 &lt;—&gt; 光盘</p>
+<h3 id="I-O结构"><a href="#I-O结构" class="headerlink" title="I/O结构"></a>I/O结构</h3><ul>
+<li>一个CPU和多个设备控制器通过共同的总线连接。</li>
+<li>设备控制器维护本地缓冲存储器和一组专用的寄存器。</li>
+<li>设备控制器负责控制外围设备与本地缓冲存储器之间的数据传递。</li>
+<li><strong>设备驱动程序</strong>提供设备与操作系统直接的统一接口。</li>
+</ul>
+<p>流程：</p>
+<ol>
+<li>驱动程序在设备控制器中装载适当的寄存器。</li>
+<li>设备控制器检查寄存器。</li>
+<li>控制器从设备向本地缓冲区传输数据。</li>
+<li>数据传输完成后通过中断通知驱动程序已完成操作。</li>
+<li>驱动程序返回到操作系统的控制。</li>
+</ol>
+<p><strong>直接内存访问</strong>(direct memory access,DMA)<br>设备控制器在本地缓冲和内存之间传送一整块数据，每块只产生一个中断。CPU在设备控制器执行操作时可完成其他工作。</p>
+<hr>
+<h2 id="计算机系统体系结构"><a href="#计算机系统体系结构" class="headerlink" title="计算机系统体系结构"></a>计算机系统体系结构</h2><h3 id="单处理器系统"><a href="#单处理器系统" class="headerlink" title="单处理器系统"></a>单处理器系统</h3><p>有一个主CPU能够执行一个通用指令集。</p>
+<h3 id="多处理器系统"><a href="#多处理器系统" class="headerlink" title="多处理器系统"></a>多处理器系统</h3><p><strong>并行系统</strong>(parallel system)/<strong>紧耦合系统</strong>(tightly coupled system)：<br>两个或多个紧密通信的处理器，共享计算机总线，时钟，内存和外设。</p>
+<p>优势：</p>
+<ul>
+<li><strong>增加吞吐量</strong>：N个处理器不能达到单个处理器的N倍。</li>
+<li><strong>规模经济</strong>：共享外设，存储，节省成本。</li>
+<li><strong>增加可靠性</strong>：单个处理器故障系统依旧可用。</li>
+</ul>
+<p>类型：</p>
+<ul>
+<li><strong>非对称处理</strong>(asymmetric multiprocessing)：主处理器控制系统，其他处理器或向主处理器要任务或做预先定义的任务。</li>
+<li><strong>对称多处理</strong>(symmetric multiprocessing,SMP)：所有处理器对等，每个处理器都要完成操作系统中的所有任务。</li>
+</ul>
+<h3 id="集群系统"><a href="#集群系统" class="headerlink" title="集群系统"></a>集群系统</h3><p>clustered system：将两个或多个独立的系统耦合起来，计算机共享存储并通过局域网连接或内部连接。</p>
+<p>目的：<br>提供<strong>高可用性</strong>(high availability)，单个或多个系统出错，服务仍然继续。</p>
+<p>分类：</p>
+<ul>
+<li><strong>非对称集群</strong>(asymmetric clustering)：一台机器处于<strong>热备份模式</strong>(hot-standby mode)，另外一台运行，热备份主机监控活动服务器，若服务器失效，则热备份主机成为活动服务器。</li>
+<li><strong>对称模式</strong>(symmetric mode)：两个或更多主机都运行应用，相互监视。</li>
+</ul>
+<p><strong>并行集群</strong>：允许多个主机访问共享存储上的相同的数据，并对文件访问内提供控制和加锁。</p>
+<hr>
+<h2 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h2><p><strong>多道程序设计</strong><br>通过组织作业以使CPU总有一个作业可执行。</p>
+<p>实现：</p>
+<ul>
+<li>同时将多个任务保存在内存中，作业集为作业池中作业集的子集。</li>
+<li>系统从内存中选择一个作业开始执行。</li>
+<li>当前作业需要等待另外一个任务时，切换到其他作业。</li>
+<li>若等待的作业满足要求，继续执行。</li>
+</ul>
+<p><strong>分时系统</strong>（多任务系统）<br>多个用户同时共享计算机，系统在不同用户之间快速切换，为每个用户提供一小部分分时计算机。</p>
+<p>名词解释：</p>
+<ul>
+<li><strong>进程</strong>(process)：装入到内存中并执行的程序。</li>
+<li><strong>作业池</strong>(job pool)：所有驻留在磁盘中等待发配内存的作业组成。</li>
+<li><strong>作业调度</strong>(job scheduling)：多个作业调入内存中，系统在作业中做出选择。</li>
+<li><strong>CPU调度</strong>(CPU scheduling)：多个任务需要同时执行，系统从中选择。</li>
+<li><strong>虚拟内存</strong>(virtual memory)：允许一个执行的任务不必在内存中。</li>
+</ul>
+<hr>
+<h2 id="操作系统操作"><a href="#操作系统操作" class="headerlink" title="操作系统操作"></a>操作系统操作</h2><p><strong>中断驱动</strong>：<br>没有进程或I/O设备服务，操作系统将等待。事件的发生通过<strong>中断</strong>或<strong>陷阱</strong>引起。</p>
+<p><strong>陷阱</strong>(异常)：<br>一种软件中断，源于出错或用户程序的特别请求。(<em>中断服务程序用来处理中断</em>)</p>
+<h3 id="双重模式操作"><a href="#双重模式操作" class="headerlink" title="双重模式操作"></a>双重模式操作</h3><p><strong>目的</strong>：区分操作系统代码和用户定义代码，确保操作系统正常执行。</p>
+<p><strong>模式</strong>:</p>
+<ol>
+<li><strong>用户模式</strong>(user mode)</li>
+<li><strong>内核模式</strong>(kernel mode)/(管理模式(supervisor mode),系统模式(system mode),特权模式(privileged mode))</li>
+</ol>
+<p><strong>模式位</strong>(mode bit)：<br>用来区分为操作系统所执行的任务还是用户所执行的任务。</p>
+<p>操作系统运行流程：</p>
+<ol>
+<li>系统引导，硬件处于内核模式。</li>
+<li>装入操作系统，以用户模式执行用户进程。</li>
+<li>出现陷阱或中断，硬件从用户模式切换到内核模式。</li>
+<li>系统将控制权交还给用户程序时切换到用户模式。</li>
+</ol>
+<p><strong>指令执行生命周期</strong>：</p>
+<ul>
+<li>控制发生在操作系统中，指令以内核模式来执行。</li>
+<li>控制权转交给一个用户程序序后，转换为用户模式。</li>
+<li>通过中断、陷阱或系统调用将控制权返回给操作系统。</li>
+<li>系统调用后，硬件将其作为软件中断。</li>
+<li>控制权由中断向量转交给操作系统的中断处理程序，转换为内核模式。</li>
+<li>内核检查为何种内核模式，请求服务的类型，通过寄存器，堆栈等传递其他信息。</li>
+<li>内核检查参数的合法性。</li>
+<li>执行请求。</li>
+<li>将控制权返还给系统调用之后的指令。</li>
+</ul>
+<p><strong>错误处理</strong>：</p>
+<ol>
+<li>用户程序出现错误。</li>
+<li>硬件向操作系统发出陷阱。</li>
+<li>通过中断向量将控制权转交给操作系统。</li>
+<li>操作系统进行异常终止。</li>
+<li>给出恰当的出错信息，并将内存转存。</li>
+</ol>
+<p><strong>定时器</strong>(timer):<br>目的：<br>防止用户程序陷入死循环或不调用系统服务，不将控制权返回给操作系统。</p>
+<p>实现：<br><strong>可变定时器</strong>(variable timer):固定速率的时钟和计数器实现。每个时钟周期，计数器递减。减0时产生中断。</p>
+<p>流程：</p>
+<ul>
+<li>设置好定时器</li>
+<li>将控制权交给用户</li>
+<li>若发生中断，则控制权自动交给操作系统</li>
+</ul>
+<hr>
+<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p><strong>进程</strong>：处于<strong>执行中</strong>的程序。</p>
+<ul>
+<li>进程需要一定的资源，在创建进程或执行进程时进行发配。</li>
+<li>进程接收各种输入。</li>
+<li>进程可执行系统调用。</li>
+<li>进程终止时，操作系统收回可再用的资源。</li>
+</ul>
+<p><strong>程序计数器</strong>(program counter)：明确下一个执行的指令，从而进程的执行是连续的。</p>
+<p>组成：</p>
+<ul>
+<li>进程是系统工作的单元。</li>
+<li>系统由多个进程组成。</li>
+<li>由<strong>操作系统进程</strong>和<strong>用户进程</strong>构成，可并发执行。</li>
+</ul>
+<p>活动：</p>
+<ul>
+<li>创建或删除系统和用户进程</li>
+<li>挂起和重启进程</li>
+<li>进程同步</li>
+<li>进程通信</li>
+<li>死锁处理机制</li>
+</ul>
+<hr>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p><em>内存是CPU和I/O能够直接寻址和访问的唯一大容量存储器</em></p>
+<p><strong>与硬盘的关系</strong></p>
+<ul>
+<li>数据：通过CPU生成的I/O调用传送到内存中。</li>
+<li>指令：指令必须在内存中。</li>
+</ul>
+<p><strong>程序执行</strong></p>
+<ul>
+<li>先变成绝对地址转入内存</li>
+<li>进程通过绝对地址访问内存中断指令和数据</li>
+<li>程序终止，内存空间释放</li>
+</ul>
+<p><strong>内存管理活动</strong></p>
+<ul>
+<li>记录内存中正在执行的部分和执行的主体</li>
+<li>决定装入内存中的进程</li>
+<li>根据需要分配和释放内存</li>
+</ul>
+<hr>
+<h2 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h2><p><strong>文件</strong><br>对存储设备的物理属性的抽象。将文件映射到物理介质上，通过存储介质访问文件。</p>
+<h3 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h3><p>可以在多种类型的物理介质中存储信息。<br>文件是由创建者定义的一组相关信息的集合。</p>
+<h3 id="大容量存储器管理"><a href="#大容量存储器管理" class="headerlink" title="大容量存储器管理"></a>大容量存储器管理</h3><p>为了断电后保存数据，备份内存。<br>程序存储在硬盘上，执行时才调入内存，在执行时将硬盘作为来源和目的地。</p>
+<h3 id="高速缓冲"><a href="#高速缓冲" class="headerlink" title="高速缓冲"></a>高速缓冲</h3><p><strong>信息的使用</strong></p>
+<ul>
+<li>信息保存在内存中</li>
+<li>使用时临时复制到高速缓存中</li>
+<li>需要特定信息时，先检查是否在高速缓存中<ul>
+<li>若在，则直接使用</li>
+<li>若不在，使用位于内存中，则复制到高速缓存中</li>
+</ul>
+</li>
+<li>内存为外存的高速缓存，外存数据复制到内存中后使用。</li>
+</ul>
+<p><strong>高速缓存一致性</strong>(cache coherency):<br>多个CPU可并发执行，必须确保在一个高速缓存中数值的更新必须反映到所有其他副本所在的高速缓存。</p>
+<hr>
+<h2 id="保护和安全"><a href="#保护和安全" class="headerlink" title="保护和安全"></a>保护和安全</h2><p><strong>保护</strong>：控制进程或用户对计算机系统资源的访问。</p>
+<p><strong>安全</strong>(security)：确保系统不受外部或内部攻击。</p>
+<p><strong>用户标识</strong>(user ID,UID)：区分不同的用户，用户登录时鉴别步骤确认ID，将ID与用户的进程和线程关联。</p>
+<p><strong>组标识</strong>(group identifier)：定义一个祖名和属于该组的用户集。</p>
+<p><strong>升级特权</strong>(escalate privilege)：获取对一个活动的额外特权。</p>
+<hr>
+<h2 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h2><p>一组物理上分开的，各个异构的计算机系统通过网络连接在一起，为用户通过各种资源的计算机的集合。</p>
+<p><strong>网络操作系统</strong>(network operating system)：提供网络的文件共享，允许不同计算机上的进程进行信息交换的通信方法。</p>
+<hr>
+<h2 id="计算环境"><a href="#计算环境" class="headerlink" title="计算环境"></a>计算环境</h2><h3 id="传统计算"><a href="#传统计算" class="headerlink" title="传统计算"></a>传统计算</h3><p>一些联网的PC组成，服务器提供文件和打印服务。公司实现门户以从Web访问内部服务器。</p>
+<h3 id="客户机-服务器计算"><a href="#客户机-服务器计算" class="headerlink" title="客户机-服务器计算"></a>客户机-服务器计算</h3><p><strong>服务器系统</strong>(server system)满足<strong>客户机系统</strong>(client system)的请求。</p>
+<p>分类：</p>
+<ul>
+<li><strong>计算服务器系统</strong>(compute-server system)：接收用户所发送的请求，将操作结果返回给客户机。</li>
+<li><strong>文件服务器系统</strong>(file-server system)：客户机创建，更新，访问和删除文件。</li>
+</ul>
+<h3 id="对等计算"><a href="#对等计算" class="headerlink" title="对等计算"></a>对等计算</h3><p>系统中所有节点是对等的，每个节点可作客户机或服务器。</p>
+<p>流程：</p>
+<ul>
+<li>节点加入网络时，利用查询服务注册服务。需要服务的节点与集中查询服务联系，确定提供服务的节点，然后与之进行通信。</li>
+<li>客户机向所有网络中的其他节点广播服务请求。提供服务的节点响应发出该请求的对等节点。</li>
+</ul>
+<h3 id="基于Web的计算"><a href="#基于Web的计算" class="headerlink" title="基于Web的计算"></a>基于Web的计算</h3><p><strong>负载平衡器</strong>(load balancer)：在一组相似的服务器之间实现负荷发配。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-22T04:30:03.866Z" itemprop="dateUpdated">2020-01-22 12:30:03</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/22/OperatingSystem-1/&title=《操作系统概念(一):导论》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/22/OperatingSystem-1/&title=《操作系统概念(一):导论》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/22/OperatingSystem-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(一):导论》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/22/OperatingSystem-1/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/22/OperatingSystem-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/24/OperatingSystem-2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">操作系统概念(二):操作系统结构</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/21/GithubProblem/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Github相关问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/22/OperatingSystem-1/&title=《操作系统概念(一):导论》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/22/OperatingSystem-1/&title=《操作系统概念(一):导论》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/22/OperatingSystem-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(一):导论》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/22/OperatingSystem-1/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/22/OperatingSystem-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/22/OperatingSystem-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

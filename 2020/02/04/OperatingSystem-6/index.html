@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>操作系统概念(六):进程同步 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,进程同步">
+    <meta name="description" content="进程同步[toc]  协作进程:与系统内的其他进程相互影响的进程. 协作进程共享数据: 共享逻辑地址空间 通过文件或消息    背景协作顺序进程或线程(cooperating sequential process or thread):进程或线程间可以异步执行并且可能共享数据. 竞争条件(race condition):多个进程并发访问和操作同一数据并且执行结果与访问发生的特定顺序有关. 解决:确">
+<meta name="keywords" content="操作系统,进程同步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概念(六):进程同步">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;04&#x2F;OperatingSystem-6&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="进程同步[toc]  协作进程:与系统内的其他进程相互影响的进程. 协作进程共享数据: 共享逻辑地址空间 通过文件或消息    背景协作顺序进程或线程(cooperating sequential process or thread):进程或线程间可以异步执行并且可能共享数据. 竞争条件(race condition):多个进程并发访问和操作同一数据并且执行结果与访问发生的特定顺序有关. 解决:确">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-04T10:08:10.731Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统概念(六):进程同步</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统概念(六):进程同步</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-04T10:08:10.731Z" itemprop="datePublished" class="page-time">
+  2020-02-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进程同步"><span class="post-toc-number">1.</span> <span class="post-toc-text">进程同步</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#临时区问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">临时区问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Peterson-算法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Peterson 算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#硬件同步"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">硬件同步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信号量"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">信号量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用法"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">用法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#死锁与饥饿"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">死锁与饥饿</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经典同步问题"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">经典同步问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有限缓冲问题"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">有限缓冲问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读者-写者问题"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">读者-写者问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#哲学家进餐问题"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">哲学家进餐问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#管程"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">管程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java同步"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">Java同步</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有限缓冲区"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">有限缓冲区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多重通知"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">多重通知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读则-写者问题"><span class="post-toc-number">1.8.3.</span> <span class="post-toc-text">读则-写者问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#块同步"><span class="post-toc-number">1.8.4.</span> <span class="post-toc-text">块同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#同步规则"><span class="post-toc-number">1.8.5.</span> <span class="post-toc-text">同步规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java并发特性"><span class="post-toc-number">1.8.6.</span> <span class="post-toc-text">Java并发特性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#同步实例"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">同步实例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Solaris同步"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">Solaris同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Windows-XP-同步"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">Windows XP 同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Linux同步"><span class="post-toc-number">1.9.3.</span> <span class="post-toc-text">Linux同步</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子事务"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">原子事务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统模型"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">系统模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于日志的恢复"><span class="post-toc-number">1.10.2.</span> <span class="post-toc-text">基于日志的恢复</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#检查点"><span class="post-toc-number">1.10.3.</span> <span class="post-toc-text">检查点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并发原子操作"><span class="post-toc-number">1.10.4.</span> <span class="post-toc-text">并发原子操作</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OperatingSystem-6"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统概念(六):进程同步</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-04 18:08:10" datetime="2020-02-04T10:08:10.731Z"  itemprop="datePublished">2020-02-04</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h1><p>[toc]</p>
+<ul>
+<li><strong>协作进程</strong>:与系统内的其他进程相互影响的进程.</li>
+<li>协作进程共享数据:<ul>
+<li>共享逻辑地址空间</li>
+<li>通过文件或消息</li>
+</ul>
+</li>
+</ul>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><strong>协作顺序进程或线程</strong>(cooperating sequential process or thread):<br>进程或线程间可以异步执行并且可能共享数据.</p>
+<p><strong>竞争条件</strong>(race condition):<br>多个进程并发访问和操作同一数据并且执行结果与访问发生的特定顺序有关.</p>
+<p>解决:<br>确保一段时间内只有一个进程能操作变量,实现进程/线程<em>同步</em>(synchronization)和<em>协调</em>(coordination).</p>
+<hr>
+<h2 id="临时区问题"><a href="#临时区问题" class="headerlink" title="临时区问题"></a>临时区问题</h2><p><strong>临界区</strong>(critical section):<br>每个进程有一个代码段,该区中进程可能改变共同变量,更新表,写文件等.<br>特征:一个进程进入临界区,没有其他进程可被允许在临时区内执行.</p>
+<p><strong>临界区问题</strong>(critical-section problem): 设计一个便于进程协作的协议,每个进程请求允许后进入临界区.</p>
+<ul>
+<li><strong>进入区</strong>(entry section): 实现请求的代码段.</li>
+<li><strong>退出区</strong>(exit section): 离开临界区后的代码段.</li>
+<li><strong>剩余区</strong>(remainder section): 其他代码段.</li>
+</ul>
+<p><strong>要求</strong>:</p>
+<ul>
+<li><strong>互斥</strong>(mutual exclusion): 有一个进程在其临界区内执行,其他进程都不能在其临界区内执行.</li>
+<li><strong>前进</strong>(progress): 若临界区没有进程,且有进程需进入临界区,不在剩余区内执行的进程可参加选择.</li>
+<li><strong>有限等待</strong>(bounded waiting): 一个进程从请求到进入临界区过程中,进入临界区的进程有上限.</li>
+</ul>
+<p><strong>操作系统内的临界区问题</strong>:</p>
+<ul>
+<li><strong>抢占内核</strong>(preemptive kernel):允许处于内核模式的进程被抢占.(<em>需确保不会导致竞争条件</em>)</li>
+<li><strong>非抢占内核</strong>(nonpreemptive kernel):不允许处于内核模式的进程被抢占.(<em>不会导致竞争条件</em>)</li>
+</ul>
+<hr>
+<h2 id="Peterson-算法"><a href="#Peterson-算法" class="headerlink" title="Peterson 算法"></a>Peterson 算法</h2><p><strong>Peterson算法</strong>:<br>适用于两个进程Pi和Pj在临界区与剩余区交替执行.</p>
+<p>说明:</p>
+<ul>
+<li>两个进程之间共享两个数据项:<code>turn</code>和<code>flag[2]</code>. <code>turn = i</code>表示Pi可以进入临界区的进程;<code>flag[i] = true</code>表示Pi想要进入临界区.</li>
+<li>进程Pi进入临界区时,设定<code>flag[i] = true</code>和<code>turn = j</code>.</li>
+</ul>
+<p>Pi的数据结构:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">    flag[i] = <span class="keyword">true</span>;</span><br><span class="line">    turn = j;</span><br><span class="line">    <span class="keyword">while</span>(flag[j] &amp;&amp; turn == j);</span><br><span class="line">    <span class="comment">// 临界区</span></span><br><span class="line">    flag[i] = <span class="keyword">false</span>; <span class="comment">// 退出区</span></span><br><span class="line">    <span class="comment">// 剩余区</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明:</p>
+<ul>
+<li>若两个进程同时进入临界区,则<code>flag[i]=true</code>和<code>flag[j]=true</code>,此时<code>turn</code>决定进入临界区的进程.</li>
+<li>若一个进程退出临界区,则<code>flag</code>会设定为<code>false</code>,则另一个进程被允许进入临界区.</li>
+</ul>
+<hr>
+<h2 id="硬件同步"><a href="#硬件同步" class="headerlink" title="硬件同步"></a>硬件同步</h2><p>利用锁(lock)避免竞争.<br>进入临界区要得到锁,退出临界区时释放锁.</p>
+<ul>
+<li><strong>单处理器环境</strong>:临界区问题可通过<strong>修改共享变量时禁止中断</strong>实现.</li>
+<li><strong>多处理器环境</strong>:禁止中断导致消息传递延迟,降低效率.通过<strong>提供特殊硬件指令而允许<em>原子地</em>(atomically)操作,<em>不可中断指令</em></strong>实现.</li>
+</ul>
+<hr>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p><strong>信号量</strong>(semaphiore):<br>用来解决基于硬件的临界区问题.</p>
+<ul>
+<li>信号量S是一个整型变量.</li>
+<li>只能通过两个标准原子操作:<code>acquire()</code>和<code>release()</code>访问.</li>
+<li>两个操作不可分,即一个进程修改信号量,其他进程不可同时修改同一个信号量.</li>
+</ul>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>分类:</p>
+<ul>
+<li><strong>计数信号量</strong>(counting semaphore):值域不受限制.</li>
+<li><strong>二进制信号量</strong>(binary semaphore)/互斥锁(mutex lock):值只能为0或1.</li>
+</ul>
+<p><strong>二进制信号量用法</strong>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Semaphore s = <span class="keyword">new</span> Semaphore();</span><br><span class="line"></span><br><span class="line">S.acquire();</span><br><span class="line"><span class="comment">//临界区</span></span><br><span class="line"></span><br><span class="line">S.release();</span><br><span class="line"><span class="comment">//剩余区</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>计数信号量用法</strong>:</p>
+<ul>
+<li>控制访问有限资源.信号量初始为可用资源的数量,使用资源时,<code>acquire()</code>减少信号量的计数;释放资源时,<code>release()</code>增加信号量的计数.若信号量的计数为0,则后续线程被阻塞.</li>
+<li>解决同步问题.两个并发进程有先后顺序,可在在先执行的进程中加入<code>synch.release()</code>,后执行的进程中加入<code>synch.acquire()</code>.</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p><strong>忙等待</strong>(busy waiting)/自旋锁(spinlock):<br>一个进程位于临界区内,其他试图进入临界区的进程必须连续循环,浪费CPU时钟.</p>
+<p><strong>解决</strong>:</p>
+<ul>
+<li>执行<code>acquire()</code>时若信号量非正,则进程阻塞(<em>进程放入等待队列,进程状态切换为等待状态</em>).</li>
+<li>其他进程执行<code>release()</code>后,阻塞的等待进程通过<code>wakeup()</code>重新执行.进程从等待状态切换到就绪状态,进程放入就绪队列.</li>
+</ul>
+<h3 id="死锁与饥饿"><a href="#死锁与饥饿" class="headerlink" title="死锁与饥饿"></a>死锁与饥饿</h3><p><strong>被死锁</strong>(deadlocked):多个进程无限等待一个事件,该事件只能由等待进程之一产生.</p>
+<p><strong>无限期阻塞</strong>(indefinite blocking)/饥饿(starvation):进程在信号量内无限期等待.(<em>队列使用LIFO顺序</em>)</p>
+<hr>
+<h2 id="经典同步问题"><a href="#经典同步问题" class="headerlink" title="经典同步问题"></a>经典同步问题</h2><h3 id="有限缓冲问题"><a href="#有限缓冲问题" class="headerlink" title="有限缓冲问题"></a>有限缓冲问题</h3><ul>
+<li>生产者调用<code>insert()</code>函数将一个数据项放入缓冲区.</li>
+<li>消费者通过调用<code>remove()</code>移出数据项.</li>
+</ul>
+<h3 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h3><p><strong>读者</strong>(reader):<br>读数据库的线程.(<em>可同时访问共享数据</em>)</p>
+<p><strong>写者</strong>(writer):<br>更新(读和写)数据库的线程.(<em>不可与其他线程共同访问共享对象</em>)</p>
+<p><strong>读者-写者问题</strong>:<br>写者对共享数据库有排它的访问.</p>
+<ul>
+<li><em>第一读者-写者问题</em>: 除非已有写者获得使用共享数据库的权利,否则读者无需等待.</li>
+<li><em>第二读者-写者问题</em>: 若一个写者访问对象,则新的读者不能读数据.</li>
+</ul>
+<p>解决:</p>
+<ul>
+<li>第一个读者执行<code>acquire()</code>操作,阻止任一写者进入数据库.</li>
+<li>最后一个读者执行<code>release()</code>操作.</li>
+<li>一个写者使用数据库而有n个读者等待,则一个读者在数据库队列排队,其他在就绪队列排队.</li>
+<li>一个写者执行<code>release()</code>,则重新启动一个等待的读者或写者.</li>
+</ul>
+<p><strong>读写锁使用范围</strong>:</p>
+<ul>
+<li>容易区分只需读和只需写共享数据的进程.</li>
+<li>读线程数比写线程数多.</li>
+</ul>
+<h3 id="哲学家进餐问题"><a href="#哲学家进餐问题" class="headerlink" title="哲学家进餐问题"></a>哲学家进餐问题</h3><p>问题:</p>
+<ul>
+<li>5名哲学家,每个人或思考或吃饭.</li>
+<li>两人之间有一个筷子,同时有两个筷子则可吃饭.</li>
+<li>一个人可拿起临近的两个筷子.</li>
+</ul>
+<p><strong>死锁</strong>:5个哲学家同时饥饿,同时拿起左边的筷子.则都在等待右边的筷子.</p>
+<p><strong>死锁解决</strong>:</p>
+<ul>
+<li>最多允许四个哲学家存在.</li>
+<li>只有两个筷子可用才允许拿起.</li>
+<li>奇数哲学家先拿左筷子,再拿右筷子.偶数哲学家相反.</li>
+</ul>
+<hr>
+<h2 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p><strong>类型</strong>/抽象数据类型: 由<strong>私有数据类型</strong>和<strong>公有方法</strong>.</p>
+<p><strong>管程</strong>(monitor):一组<strong>变量的声明</strong>(实例的状态)和对变量操作的<strong>函数实现</strong>.</p>
+<p><strong>条件变量</strong>(condition variable):<br>处理一些特定同步方案而定义的一些额外的同步机制.</p>
+<p><strong>条件变量的操作</strong>:</p>
+<ul>
+<li><code>wait()</code>:调用操作的进程会挂起.</li>
+<li><code>signal()</code>:重新启动一个挂起的进程.若没有进程挂起,则无效.</li>
+</ul>
+<p><strong>多进程与管程</strong>:<br>进程P执行<code>x.signal()</code>,而其与挂起进程Q关联.存在两种情形:</p>
+<ol>
+<li><strong>唤醒并等待</strong>(signal and wait):P等待Q离开管程或等待其他条件.</li>
+<li><strong>唤醒并继续</strong>(signal and continue):Q等待直到P离开管程,或等待其他条件.</li>
+</ol>
+<hr>
+<h2 id="Java同步"><a href="#Java同步" class="headerlink" title="Java同步"></a>Java同步</h2><p><strong>线程安全</strong>(thread-safe):<br>数据被多个线程并发访问时保持一致.</p>
+<h3 id="有限缓冲区"><a href="#有限缓冲区" class="headerlink" title="有限缓冲区"></a>有限缓冲区</h3><p><strong>忙等</strong><br>通过<code>Thread.yield()</code>函数实现阻塞.</p>
+<p>线程处于可运行状态,允许选择其他可运行线程.</p>
+<p><em>问题</em>:<br><strong>活锁</strong>(livelock):<br>集合中的每个线程阻塞等待一个事件,线程持续试图做一个动作但总失败.(<em>生产者优先级高,其获得锁时缓冲区已满,则等待消费者消费,而消费者没有锁,无法消费</em>)</p>
+<p><strong>竞争条件</strong><br>Java中的关键词<code>synchronized</code>:</p>
+<ul>
+<li>每个对象关联一个单独的锁.</li>
+<li>一个对象的锁可能被单个线程拥有.</li>
+<li>一个方法为<code>synchronized</code>,则拥有锁才能调用.</li>
+<li>若锁为其他线程拥有,线程调用<code>synchronized</code>方法块,则线程进入对象锁的<strong>进入集合</strong>(entry set).</li>
+<li>若线程调用<code>synchronized</code>方法,锁可用,则调用线程拥有对象锁.退出方法时,释放锁.</li>
+<li>若释放锁时进入集合非空,则任意选择一个线程拥有锁.</li>
+</ul>
+<p><strong>死锁</strong><br>通过声明每个方法为<code>synchronized</code>,可以防止共享变量的条件竞争,但是<code>yield()</code>循环导致死锁.</p>
+<ul>
+<li>生产者阻塞,等待消费者释放缓冲空间.</li>
+<li>消费者阻塞,等待生产者释放锁.</li>
+</ul>
+<p><strong>等待和通知</strong></p>
+<p><strong>等待集合</strong>(wait set):<br>有一个线程集合构成.拥有锁的线程阻塞后放入其中.</p>
+<p>流程:</p>
+<ol>
+<li>线程释放对象的锁.</li>
+<li>线程的状态被设置为阻塞.</li>
+<li>线程放入对象的等待集合.</li>
+</ol>
+<p><code>notify()</code>方法:</p>
+<ol>
+<li>从等待集合中线程列表中任意选择一个线程T.</li>
+<li>将T从等待集合移动到进入集合.</li>
+<li>设置T的状态由阻塞到可运行.</li>
+</ol>
+<h3 id="多重通知"><a href="#多重通知" class="headerlink" title="多重通知"></a>多重通知</h3><p><code>notifyAll()</code>方法: 通知等待集合中的所有线程.</p>
+<ul>
+<li>将每个线程从等待集合中移除并放入集合中.</li>
+<li>唤醒所有等待线程,让线程自己决定接下来运行的线程.</li>
+</ul>
+<h3 id="读则-写者问题"><a href="#读则-写者问题" class="headerlink" title="读则-写者问题"></a>读则-写者问题</h3><ul>
+<li>写者希望写时:<ul>
+<li>先检查当前数据库是否正在被读写.若正在被读写,则进入等待集合.否则进行写操作.</li>
+<li>写完成后释放锁.</li>
+<li>调用<code>notifyAll()</code>.</li>
+</ul>
+</li>
+<li>读者希望读时:<ul>
+<li>先检查当前数据库是否正在被写,若不可用,则读者进入等待集合.否则,读操作,直到最后一个读者.</li>
+<li>释放锁时,调用<code>notify()</code>通知一个等待的写者.</li>
+</ul>
+</li>
+</ul>
+<h3 id="块同步"><a href="#块同步" class="headerlink" title="块同步"></a>块同步</h3><p>将控制共享数据的代码块同步,使得产生较小的锁范围.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(aObject)&#123;</span><br><span class="line">    <span class="comment">//方法需要aObject对象的锁</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="同步规则"><a href="#同步规则" class="headerlink" title="同步规则"></a>同步规则</h3><ul>
+<li>拥有对象锁的线程可进入同一个对象的其他<code>synchronized</code>方法.(递归(recursive)/可重入(reentrant))</li>
+<li>线程可同时拥有多个对象的锁.</li>
+<li>若方法没有<code>synchonized</code>,则无论是否有锁都可调用.</li>
+<li>若等待集合为空,则<code>notify()</code>和<code>notifyAll()</code>无效.</li>
+<li><code>wait()</code>,<code>notify()</code>和<code>notifyAll()</code>只能被<code>synchronized</code>方法调用.</li>
+</ul>
+<p><strong>类锁</strong>(class lock):<br>声明<code>static</code>的方法为<code>synchronized</code>,每个类关联一个类锁.<br>可通过哦在<code>synchronized</code>语句中放入<strong>类名.class</strong>实现类锁同步块.</p>
+<h3 id="Java并发特性"><a href="#Java并发特性" class="headerlink" title="Java并发特性"></a>Java并发特性</h3><p><strong>可重入锁</strong><br>一个<code>ReentrantLock</code>为单个线程拥有,提供<strong>共享资源互斥访问</strong>.</p>
+<p>线程通过<code>lock()</code>方法获取<code>ReentrantLock</code>锁.</p>
+<ul>
+<li>若锁可获得:<code>lock()</code>分配调用线程锁的使用权限.</li>
+<li>若锁不可用:调用线程阻塞,直到锁拥有者调用<code>unlock()</code>,最终发配锁.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Lock key = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">key.lock();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//临界区</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span> &#123;</span><br><span class="line">    key.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>信号量</strong><br>信号量构造函数:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Semaphore(<span class="keyword">int</span> val); <span class="comment">// val为信号量初始量</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>条件变量</strong><br>创建:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Lock key = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">Condition condVar = key.newCondition();</span><br></pre></td></tr></table></figure></p>
+<p>条件变量与锁对象绑定,只能与锁配合使用,控制并发程序访问竞争资源安全.</p>
+<p>是为了更精细控制等待与唤醒.</p>
+<hr>
+<h2 id="同步实例"><a href="#同步实例" class="headerlink" title="同步实例"></a>同步实例</h2><h3 id="Solaris同步"><a href="#Solaris同步" class="headerlink" title="Solaris同步"></a>Solaris同步</h3><p><strong>适应互斥</strong>(adaptive mutex):保护对临界数据项的访问.<br>若数据加锁:</p>
+<ul>
+<li>正在运行的线程拥有锁:请求锁的线程自旋并等待锁.</li>
+<li>拥有锁的线程不在运行:线程阻塞并进入睡眠,直到锁释放时将其唤醒.</li>
+</ul>
+<p><strong>读写锁</strong>:用于保护经常性读数据,多个线程可以同时读数据.</p>
+<p><strong>十字转门</strong>(turnstile):队列结构,包含阻塞在锁上的线程.</p>
+<ul>
+<li>一个线程拥有同步对象的锁,其他试图获得锁的线程被阻塞后进入该锁的十字转门.</li>
+<li>释放该锁后,从十字转门中选择一个线程作为锁的拥有者.</li>
+<li>每个内核线程拥有一个十字转门.</li>
+</ul>
+<p><em>为了防止<strong>优先级倒置</strong>(priority inversion),十字转门根据<strong>优先级继承协议</strong>(priority-inher itance protocol)组织:线程拥有高优先级线程阻塞的锁后,该线程继承较高优先级,释放锁后,线程返回原来的优先级.</em></p>
+<h3 id="Windows-XP-同步"><a href="#Windows-XP-同步" class="headerlink" title="Windows XP 同步"></a>Windows XP 同步</h3><ul>
+<li>单处理器:屏蔽访问全局资源的中断处理程序的中断.</li>
+<li>多处理器:采用自锁保护对全局资源的访问.</li>
+</ul>
+<p><strong>调度对象</strong>(dispatcher object):<br>线程根据不同的机制进行同步.</p>
+<p><strong>事件</strong>(event):<br>当所需条件出现时通知等待线程.</p>
+<p>调度对象状态:</p>
+<ul>
+<li><strong>触发状态</strong>(signaled state):对象可用且线程在获取时不会阻塞.</li>
+<li><strong>非阻塞状态</strong>(nonsignaled state):对象不可用且线程试图获取时会阻塞.</li>
+</ul>
+<p><em>互斥锁</em>:</p>
+<ul>
+<li>线程试图获取处于非触发状态的互斥调度对象时,线程会被挂起,并被放在互斥对象的等待队列上.</li>
+<li>当互斥变为触发状态,等待互斥的线程会从等待状态变为就绪状态,获取互斥锁.</li>
+</ul>
+<h3 id="Linux同步"><a href="#Linux同步" class="headerlink" title="Linux同步"></a>Linux同步</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>单处理器</th>
+<th>多处理器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>禁止内核抢占</td>
+<td>获取自旋锁</td>
+</tr>
+<tr>
+<td>使用内核抢占</td>
+<td>释放自旋锁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用<code>preempt_disable()</code>和<code>preempt_enable()</code>禁止和允许内核抢占.<br>使用<code>preempt_count</code>表示任务所占锁的数量,为0时其可被安全地中断.</p>
+<hr>
+<h2 id="原子事务"><a href="#原子事务" class="headerlink" title="原子事务"></a>原子事务</h2><p><strong>数据库系统</strong>(database system):<br>关注数据的存储和提取及数据的一致性.</p>
+<h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><p><strong>事务</strong>(transaction):<br>执行单个逻辑功能的一组指令或操作.</p>
+<p><strong>提交</strong>(committed):<br>已成功完成执行的终止事务,否则为<strong>撤销</strong>(aborted).</p>
+<p><strong>回退</strong>(rolled back):<br>被中止的事务所访问的数据状态必须恢复到事务刚开始执行之前.</p>
+<ul>
+<li><strong>易失性存储</strong>(volative storage):掉电后丢失信息.(内存,高速缓存)</li>
+<li><strong>非易失性存储</strong>(nonvolatile storage):掉电后不丢失信息.(磁盘,磁带)</li>
+<li><strong>稳定存储</strong>(stable storage):信息绝不会损失.</li>
+</ul>
+<h3 id="基于日志的恢复"><a href="#基于日志的恢复" class="headerlink" title="基于日志的恢复"></a>基于日志的恢复</h3><p>确保原子性:<br>在对访问的数据做各种修改前在稳定存储上记录有关事务(<strong>写前日志</strong>(write-ahead log)).</p>
+<p>日志组成:</p>
+<ul>
+<li>事务名称(transaction name)</li>
+<li>数据项名称(data item name)</li>
+<li>旧值(old data)</li>
+<li>新值(new data)</li>
+</ul>
+<p>恢复算法:</p>
+<ul>
+<li>undo(Ti):将事务Ti更新的所有数据的值恢复到原来值.</li>
+<li>redo(Ti):将事务Ti更新的所有数据的值设置成新值.</li>
+</ul>
+<h3 id="检查点"><a href="#检查点" class="headerlink" title="检查点"></a>检查点</h3><p><strong>检查点</strong>(checkpoint)</p>
+<ol>
+<li>将内存上的日志输出到硬盘.</li>
+<li>将内存上的所有修改数据输出到硬盘.</li>
+<li>在硬盘上输出一个日志记录<code>&lt; checkpoint &gt;</code>.</li>
+</ol>
+<p>差错纠正:</p>
+<ol>
+<li>确定最近的检查点.</li>
+<li>查找<code>&lt;Ti start&gt;</code>记录.</li>
+<li>若只有<code>&lt;Ti commits&gt;</code>,则执行redo(Ti)</li>
+<li>若只有<code>&lt;Ti commits&gt;</code>没有出现,则执行undo(Ti).</li>
+</ol>
+<h3 id="并发原子操作"><a href="#并发原子操作" class="headerlink" title="并发原子操作"></a>并发原子操作</h3><p><strong>串行化</strong>(serializability):<br>多个事务并行执行相当于这些事务按任意顺序串行执行.</p>
+<p><strong>串行化能力</strong>:<br>调度(schedule):按照一定顺序原子地执行事务.</p>
+<p>串行调度(serial schedule):每个事务原子地执行的调度,同一个事务的指令在调度中顺序出现.</p>
+<p>非串行调度(nonserial schedule):多个事务重叠执行.</p>
+<p>冲突操作(conflicting operation):<br>不同事务操作的顺序导致访问结果不同.</p>
+<p>冲突可串行化(conflict serializable):<br>调度可通过一系列非冲突操作的交换转换成串行调度.</p>
+<p><strong>加锁协议</strong>(locking protocol):<br><em>确保串行化的一个方式是为每个数据项关联一个锁.</em></p>
+<p>方式:</p>
+<ul>
+<li><strong>共享</strong>(shared):获取数据项的共享模式锁,则可读取数据项,但不能修改.</li>
+<li><strong>排它</strong>(exclusive):获取数据项的排它模式锁,可读写数据项.</li>
+</ul>
+<p><strong>两阶段加锁协议</strong>(two-phase locking protocol):</p>
+<ul>
+<li><strong>增长阶段</strong>(growing phase):事务可获取锁,但不能释放锁.</li>
+<li><strong>收缩阶段</strong>(shrinking phase):事务可释放锁,但不能获取新锁.</li>
+</ul>
+<p><strong>基于时间戳的协议</strong>(timestamp):</p>
+<ul>
+<li>采用系统时钟作为时间戳.</li>
+<li><p>采用逻辑计数器作为时间戳.(<em>计数器在赋予新时间戳后值增加.</em></p>
+</li>
+<li><p>W-timestamp(Q):成功执行<code>write(Q)</code>的任何事务的最大数据戳.</p>
+</li>
+<li>R-timestamp(Q):成功执行<code>read(Q)</code>的任何事务的最大时间戳.</li>
+</ul>
+<p>协议:</p>
+<ul>
+<li>假设事务Ti发出<code>read(Q)</code>:<ul>
+<li>若<code>TS(Ti) &lt; W-timestamp(Q)</code>,则需要读的Q值已被修改.<code>read</code>操作被拒绝.</li>
+<li>若<code>TS(Ti) &gt;= W-timestamp(Q)</code>,执行<code>read</code>操作,R-timestamp(Q)设置为两者较大值.</li>
+</ul>
+</li>
+<li>假设事务Ti发出<code>write(Q)</code>:<ul>
+<li>若<code>TS(Ti) &lt; R-timestamp(Q)</code>,则Ti正在产生以前需要的Q值.<code>write</code>操作被拒绝,Ti回滚.</li>
+<li>若<code>TS(Ti) &lt; W-timestamp(Q)</code>,表示Ti试图写Q的旧值.则<code>write</code>操作拒绝,Ti回滚.</li>
+<li>否则,执行<code>write</code>操作.</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-02-04T10:08:10.731Z" itemprop="dateUpdated">2020-02-04 18:08:10</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" rel="tag">进程同步</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/04/OperatingSystem-6/&title=《操作系统概念(六):进程同步》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/04/OperatingSystem-6/&title=《操作系统概念(六):进程同步》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/04/OperatingSystem-6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(六):进程同步》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/04/OperatingSystem-6/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/04/OperatingSystem-6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/05/SQL-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SQL必知必会(一):了解SQL</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/01/OperatingSystem-5/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">操作系统概念(五):CPU调度</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/04/OperatingSystem-6/&title=《操作系统概念(六):进程同步》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/04/OperatingSystem-6/&title=《操作系统概念(六):进程同步》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/04/OperatingSystem-6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(六):进程同步》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/04/OperatingSystem-6/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/04/OperatingSystem-6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/04/OperatingSystem-6/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

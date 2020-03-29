@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>操作系统概念(十一):文件系统实现 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,文件系统">
+    <meta name="description" content="文件系统实现[toc] 文件系统结构磁盘特点:  磁盘可以重写. 可以直接访问磁盘上的任意一块信息. 磁盘与内存之间的I&#x2F;O是以块为单位,每个块包含多个扇区.  文件系统(file system):存储,定位,提取数据. 要求:  定义文件系统对用户的接口.(文件及其属性,允许的操作,文件的目录) 创建数据结构和算法,将逻辑系统映射到物理外存设备.  文件系统的分层:  I&#x2F;O控制:底层,由设备驱">
+<meta name="keywords" content="操作系统,文件系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概念(十一):文件系统实现">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;OperatingSystem-11&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="文件系统实现[toc] 文件系统结构磁盘特点:  磁盘可以重写. 可以直接访问磁盘上的任意一块信息. 磁盘与内存之间的I&#x2F;O是以块为单位,每个块包含多个扇区.  文件系统(file system):存储,定位,提取数据. 要求:  定义文件系统对用户的接口.(文件及其属性,允许的操作,文件的目录) 创建数据结构和算法,将逻辑系统映射到物理外存设备.  文件系统的分层:  I&#x2F;O控制:底层,由设备驱">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-18T07:38:55.608Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统概念(十一):文件系统实现</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统概念(十一):文件系统实现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-18T07:38:55.608Z" itemprop="datePublished" class="page-time">
+  2020-02-18
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件系统实现"><span class="post-toc-number">1.</span> <span class="post-toc-text">文件系统实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统结构"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">文件系统结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统实现-1"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">文件系统实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分区与安装"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">分区与安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#虚拟文件系统"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">虚拟文件系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录实现"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目录实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线性列表"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">线性列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#哈希表"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">哈希表</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分配方法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">分配方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连续分配"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">连续分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#链接分配"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">链接分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#索引分配"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">索引分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性能"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">性能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空闲空间管理"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">空闲空间管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#位向量"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">位向量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#链表"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">链表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#计数"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">计数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#效率与性能"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">效率与性能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效率"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">效率</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性能-1"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">性能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#恢复"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">恢复</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一致性检查"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">一致性检查</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#备份和恢复"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">备份和恢复</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基于日志结构的文件系统"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">基于日志结构的文件系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NFS"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">NFS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概述-1"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装协议"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">安装协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NFS协议"><span class="post-toc-number">1.9.3.</span> <span class="post-toc-text">NFS协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径名转换"><span class="post-toc-number">1.9.4.</span> <span class="post-toc-text">路径名转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#远程操作"><span class="post-toc-number">1.9.5.</span> <span class="post-toc-text">远程操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实例-WAFL文件系统"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">实例:WAFL文件系统</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OperatingSystem-11"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统概念(十一):文件系统实现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-18 15:38:55" datetime="2020-02-18T07:38:55.608Z"  itemprop="datePublished">2020-02-18</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="文件系统实现"><a href="#文件系统实现" class="headerlink" title="文件系统实现"></a>文件系统实现</h1><p>[toc]</p>
+<h2 id="文件系统结构"><a href="#文件系统结构" class="headerlink" title="文件系统结构"></a>文件系统结构</h2><p>磁盘特点:</p>
+<ol>
+<li>磁盘可以重写.</li>
+<li>可以直接访问磁盘上的任意一块信息.</li>
+<li>磁盘与内存之间的I/O是以<em>块</em>为单位,每个块包含多个扇区.</li>
+</ol>
+<p><strong>文件系统</strong>(file system):<br>存储,定位,提取数据.</p>
+<p>要求:</p>
+<ol>
+<li>定义文件系统对用户的接口.(<em>文件及其属性,允许的操作,文件的目录</em>)</li>
+<li>创建数据结构和算法,将逻辑系统映射到物理外存设备.</li>
+</ol>
+<p>文件系统的分层:</p>
+<ol>
+<li><strong>I/O控制</strong>:底层,由设备驱动程序(device driver)和中断处理程序组成,实现内存与磁盘之间的信息传输.</li>
+<li><strong>基本文件系统</strong>(basic file system):向合适的设备驱动程序发送命名,就可对磁盘上的物理块进行读写.</li>
+<li><strong>文件组织模型</strong>(file-organization module):将逻辑地址转换为物理块地址.</li>
+<li><strong>逻辑文件系统</strong>(logical file system):管理元数据(包括:文件系统的所有结构数据).根据给定符号文件名来管理目录结构.</li>
+</ol>
+<ul>
+<li>UNIX: 使用UNIX文件系统(UNIX file system, UFS)</li>
+<li>Windows:支持磁盘文件系统FAT,FAT32,NTFS</li>
+<li>Linux:使用可扩展文件系统(extended file system)</li>
+</ul>
+<hr>
+<h2 id="文件系统实现-1"><a href="#文件系统实现-1" class="headerlink" title="文件系统实现"></a>文件系统实现</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>文件系统结构:</p>
+<ul>
+<li><strong>引导控制块</strong>(boot control block):从该卷引导操作系统所需的信息.UFS称为<em>引导块</em>(boot block),NTFS称为<em>分区引导扇区</em>(partition boot sector).</li>
+<li><strong>卷控制块</strong>(volume control block):关于卷的详细信息(分区大小,块大小,空闲块数量和指针等).UFS称为<em>超级块</em>(superblock),NTFS称为<em>主控文件表</em>(master file table).</li>
+<li>文件系统的目录结构.UFS包括:<em>索引节点</em>(inode),NTFS将其存储在主控文件表.</li>
+<li>文件的FCB包括文件的信息(文件权限,拥有者,大小,数据块位置).UFS称为:<em>索引结点</em>,NTFS存储在主控文件表中.</li>
+</ul>
+<p>内存内信息:</p>
+<ul>
+<li>所有安装表的信息.</li>
+<li>目录结构缓存,保存最近访问过的目录.</li>
+<li><strong>系统范围内的打开文件表</strong>(system-wide open-file table):每个打开文件的FCB副本等信息.</li>
+<li><strong>单个进程的打开文件表</strong>(per-process open-file table):指向系统范围内已打开文件表中合适条目的指针.</li>
+</ul>
+<p>文件的创建:</p>
+<ul>
+<li>分配一个新的FCB,并将相应目录信息读入内存,用新的文件名更新该目录和FCB,并将结果写回磁盘.</li>
+<li>逻辑文件系统盗用文件组织模块将目录I/O映射成磁盘块的号,再传递给文件系统和I/O控制系统.</li>
+<li>创建文件后,首先将文件名传给文件系统,系统调用搜索系统范围内的打开文件表确定是否已被其他进程打开,若是,则单个进程的打开文件表中创建一项,指向系统范围内的打开文件表.</li>
+<li>打开文件时,由文件名搜索目录结构,若找到文件,FCB复制到系统范围内的打开文件表中.然后单个进程的打开文件表会增加一个条目,并通过指针将系统范围内的打开文件表的条目与其他域相连.访问打开文件表的索引称为<strong>文件描述符</strong>(file descriptor)/文件句柄(file handle).</li>
+</ul>
+<p>文件的删除:<br>一个进程关闭文件时,删除一个对应的单个进程打开文件表的条目,系统范围内的打开文件表对应的文件条目打开数递减.打开文件的所有用户都关闭一个文件时,系统范围内的文件表的对应条目也删除.</p>
+<h3 id="分区与安装"><a href="#分区与安装" class="headerlink" title="分区与安装"></a>分区与安装</h3><ul>
+<li><strong>生磁盘</strong>(raw disk):用于没有合适文件系统的地方.</li>
+<li><strong>熟磁盘</strong>(cooked disk):含有文件的地方.</li>
+<li><strong>双引导</strong>(dual-booted):把多个操作系统装入同一个文件系统.</li>
+<li><strong>根分区</strong>(root partition):包括操作系统内核或其他系统文件,在引导时装入内存.</li>
+</ul>
+<h3 id="虚拟文件系统"><a href="#虚拟文件系统" class="headerlink" title="虚拟文件系统"></a>虚拟文件系统</h3><p>为了分开基本系统调用的功能和实现细节,文件系统实现包括三个层次:</p>
+<ul>
+<li>文件系统接口</li>
+<li>虚拟文件系统(virtual file system, VFS)</li>
+<li>实现文件系统类型或远程文件系统协议</li>
+</ul>
+<p><strong>虚拟文件系统</strong>(virtual file system, VFS):<br>定义了四种对象类型:</p>
+<ul>
+<li><strong>索引节点对象</strong>(inode object):一个单独的文件.</li>
+<li><strong>文件对象</strong>(file object):一个打开的文件.</li>
+<li><strong>超级块对象</strong>(superblock object):整个文件系统.</li>
+<li><strong>目录条目对象</strong>(dentry object):一个单独的目录条目.</li>
+</ul>
+<p><em>一个特定的文件对象实现文件对象定义的每个函数.</em></p>
+<hr>
+<h2 id="目录实现"><a href="#目录实现" class="headerlink" title="目录实现"></a>目录实现</h2><h3 id="线性列表"><a href="#线性列表" class="headerlink" title="线性列表"></a>线性列表</h3><p><strong>使用存储文件名和数据块指针的线性列表.</strong></p>
+<ul>
+<li>创建新文件:搜索目录确定是否有同名文件.在目录后增加一条新条目.</li>
+<li>删除文件:搜索目录,释放分配的空间.</li>
+<li>重用目录条目:1.将目录条目设置为不再使用;2.将条目加入空闲目录条目列表.</li>
+<li>查找条目:软件缓存存储最近访问过的目录信息.排序列表使用二分搜索.使用B树的数据结构.</li>
+</ul>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p><strong>哈希表</strong>(hash table):根据文件名得到一个值,并返回一个指向线性列表中元素的指针.(<em>需要避免冲突(collision)</em>).</p>
+<p>困难:<br>固定的大小和哈希函数对大小的依赖.<br>扩大目录哈希表需要新的哈希函数.需重新组织现有目录条目.</p>
+<hr>
+<h2 id="分配方法"><a href="#分配方法" class="headerlink" title="分配方法"></a>分配方法</h2><p>磁盘空间分配方法:</p>
+<ul>
+<li>连续</li>
+<li>链接</li>
+<li>索引</li>
+</ul>
+<h3 id="连续分配"><a href="#连续分配" class="headerlink" title="连续分配"></a>连续分配</h3><p><strong>连续分配</strong>(contiguous allocation):<br>每个文件在磁盘占有一组连续的块.</p>
+<p>特点:</p>
+<ul>
+<li>访问连续分配的文件所需的寻道数最小.</li>
+<li>文件的连续分配可以用第一块的磁盘地址和连续块的数量定义.</li>
+<li>支持顺序访问和直接访问.</li>
+</ul>
+<p>问题:</p>
+<ul>
+<li>为新文件寻找空间.可使用<em>动态存储分配</em>(dynamic storage-allocation),在一个空闲列表中寻找一个满足大小的空间.</li>
+<li><strong>外部碎片</strong>(external fragmentation)问题.随着文件的分配和删除,磁盘空闲空间被分配成多个小片.(解决:将文件系统复制到其他磁盘,然后按连续分配将文件复制回来;或卸载文件系统,再合并空间.)</li>
+<li>为一个文件分配的空间,分配太小无法扩展,分配太大造成空间浪费.(解决:终止程序,重新分配后重新运行;或找更大的孔,复制文件内容到新空间.)</li>
+</ul>
+<h3 id="链接分配"><a href="#链接分配" class="headerlink" title="链接分配"></a>链接分配</h3><p><strong>链接分配</strong>(linked allocation):<br>每个文件是磁盘块的链表,磁盘块分布在磁盘的任何地方.目录包含文件的第一块的指针和最后一块的指针.不同的磁盘块用指针链接.</p>
+<p>问题:</p>
+<ul>
+<li>不适用于顺序访问.随机访问必须从文件开始,跟着指针顺序查找.</li>
+<li>指针需要空间,浪费一定的空间.</li>
+<li>可靠性存在问题.一个指针丢失导致文件丢失.</li>
+</ul>
+<p>解决:</p>
+<ul>
+<li>将多个块组成<strong>簇</strong>(cluster),按照簇进行分配.(<em>可能增加内部碎片</em>)</li>
+<li>使用双向链表或每块中存储文件名和相对块数.</li>
+</ul>
+<p>变种:<br><strong>文件分配表</strong>(file-allocation table,FAT):</p>
+<ul>
+<li>每个卷的开始存储该FAT.</li>
+<li>每个块在FAT有一项.</li>
+<li>目录条目包含文件首块的块号码.</li>
+<li>每个块有指向下一个块的指针.</li>
+<li>一直到最后一个块,条目的值为文件结束(end-of-file)值.</li>
+</ul>
+<h3 id="索引分配"><a href="#索引分配" class="headerlink" title="索引分配"></a>索引分配</h3><p><strong>索引分配</strong>(indexed allocation):<br>将所有指针放在一起,通过<strong>索引块</strong>(index block)实现.</p>
+<p><strong>索引块</strong>:每个文件有一个,一个磁盘块地址的数组.索引块的第i个条目指向文件的第i个块.若要访问文件的第i个块,通过索引块的第i个条目的指针来查找.</p>
+<p>问题:</p>
+<ul>
+<li>索引分配浪费空间.索引分配太小,无法存储足够多的空间.</li>
+</ul>
+<p>解决:</p>
+<ul>
+<li><strong>链接方案</strong>(linked scheme):一个索引块通常为一个磁盘块,可将多个索引块链接起来,减少单独分配空间的空闲空间浪费.</li>
+<li><strong>多层索引</strong>(multilevel index):用用第一层索引块指向一组第二层的索引块,第二层索引块再指向文件块.</li>
+<li><strong>组合方案</strong>(combined scheme):将索引分成两个部分,一部分指针指向<strong>直接块</strong>(direct block),存储文件数据块的地址.另外一部分指向<strong>间接块</strong>(indirect block).第一个间接块,指向<strong>二级间接块</strong>(double indirect block),包含一个块的地址.最后一个块的指针<strong>三级间接块</strong>(triple indirect block).</li>
+</ul>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>使用连续分配以支持文件的直接访问,通过链接分配以支持文件的顺序访问.</p>
+<p>索引分配一般先读入索引块,然后读入所需的数据块.大文件需要读入所需的数据块.</p>
+<p>可将连续分配和索引分配组合:小文件采用连续分配,大文件使用索引分配.</p>
+<hr>
+<h2 id="空闲空间管理"><a href="#空闲空间管理" class="headerlink" title="空闲空间管理"></a>空闲空间管理</h2><p><strong>空闲空间链表</strong>(free-space list):<br>记录所有空闲磁盘空间.</p>
+<ul>
+<li>创建文件时,搜索空闲空间链表,从中得到所需的空间.</li>
+<li>删除文件时,将空间加入空闲空间链表中.</li>
+</ul>
+<h3 id="位向量"><a href="#位向量" class="headerlink" title="位向量"></a>位向量</h3><p>使用<strong>位图</strong>(bit map)/位向量(bit vector),每个块使用一个位表示.若为空,则为1,否则为0.</p>
+<p>优点:</p>
+<ul>
+<li>查找空闲块简单高效.</li>
+<li>简化软件功能,但大容量磁盘需要较大的内存空间存储位图.</li>
+</ul>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>将所有空闲磁盘块使用链表连接起来,并保存指向第一空闲块的指针.</p>
+<p>缺点:</p>
+<ul>
+<li>效率不高,遍历整个表需要读入每个块.</li>
+</ul>
+<h3 id="计数"><a href="#计数" class="headerlink" title="计数"></a>计数</h3><p>记录第一个空闲块的地址和后续连续的空闲块的数量.<br>空闲空间表的每个条目包括磁盘地址和数量.</p>
+<hr>
+<h2 id="效率与性能"><a href="#效率与性能" class="headerlink" title="效率与性能"></a>效率与性能</h2><h3 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h3><p><em>磁盘空间的有效使用主要取决于所使用的磁盘分配和目录管理算法.</em></p>
+<p>特点:</p>
+<ul>
+<li>预先分配索引节点发布在整个卷上,改善了文件系统的性能.</li>
+<li>簇技术有利于文件查找和文件传输,根据文件大小来调节簇的大小,降低内部碎片.</li>
+<li>保留在文件目录条目内的数据类型需要考虑.</li>
+<li>选择指针的大小是需要考虑技术的发展.</li>
+</ul>
+<h3 id="性能-1"><a href="#性能-1" class="headerlink" title="性能"></a>性能</h3><p>特点:</p>
+<ul>
+<li>磁盘有板载高速缓存,可用于存储整个磁道.</li>
+<li>有些使用<strong>缓冲缓存</strong>(buffer cache).</li>
+<li>有些使用<strong>页面缓存</strong>(page cache)缓存文件数据,将文件数据作为页来缓存,称为<strong>统一虚拟内存</strong>(unified virtual memory).</li>
+<li><strong>双重缓存</strong>(double caching):内存映射从文件系统中读入磁盘块并存放在缓冲缓存中,缓冲缓存的数据复制到页面缓存中.</li>
+<li><strong>统一缓冲缓存</strong>(unified buffer cache):内存映射和系统调用使用相同的页面缓存,允许虚拟内存管理文件.</li>
+<li>同步或异步写入会影响I/O性能.同步写(synchronous write):必须等待数据写到磁盘后再继续.异步写(asynchronous write):数据先存储在缓存将控制返回给调用者.</li>
+<li>不同的文件访问类型使用不同的替换算法.顺序访问使用马上释放和预先读取来优化.<strong>马上释放</strong>(free-behind):一旦请求下一页,马上从缓存中删除一页.<strong>预先读取</strong>(read-ahead):所请求的页和之后的一些页一起读入并缓存.</li>
+<li>数据写到磁盘时,页先放在缓存中,磁盘根据磁盘地址对输出地址排序后再写入,减少磁头寻道时间,除非要求同步写入.</li>
+</ul>
+<hr>
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><h3 id="一致性检查"><a href="#一致性检查" class="headerlink" title="一致性检查"></a>一致性检查</h3><p>问题:缓存目录信息写到磁盘不是即时的,内存的目录信息比磁盘信息新.突然的崩溃导致文件真实状态与目录结构所记录的不一致.</p>
+<p><strong>一致性检查程序</strong>(consistency checker):<br>将目录结构数据与磁盘数据相比较,纠正所发现的不一致.</p>
+<p>示例:</p>
+<ul>
+<li>使用链接分配,每个块指向下一个块,整个文件可以从数据重建,从而重建目录结构.</li>
+<li>采用索引分配,数据块之间没有联系,在执行变更操作时同步更新目录条目.</li>
+</ul>
+<h3 id="备份和恢复"><a href="#备份和恢复" class="headerlink" title="备份和恢复"></a>备份和恢复</h3><p>为了防止磁盘出错,可以定时将数据<em>备份</em>(back up)到另一个存储设备,需要时从备份中<em>恢复</em>(restoring).</p>
+<p>备份方案:</p>
+<ul>
+<li>首先,将磁盘上所有数据备份,称为<strong>完全备份</strong>(full backup).</li>
+<li>然后,定期将目前与前一次改变的数据备份,称为<strong>增量备份</strong>(incremental backup).</li>
+<li>一个周期后,将所有备份整合,开始新的备份周期.</li>
+</ul>
+<p>优点:</p>
+<ul>
+<li>可以恢复备份周期中任意一次时间点的数据.</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>每天需要备份更多的修改文件.</li>
+</ul>
+<hr>
+<h2 id="基于日志结构的文件系统"><a href="#基于日志结构的文件系统" class="headerlink" title="基于日志结构的文件系统"></a>基于日志结构的文件系统</h2><p><strong>基于日志的面向事务</strong>(log-based transaction-oriented;journaling):<br>所有元数据都按顺序写到日志上,执行一个特殊任务的一组操作称为<strong>事务</strong>(transaction).</p>
+<ul>
+<li>对数据的修改一旦写到日志上,则系统调用可返回.</li>
+<li>日志条目对真实文件进行修改.</li>
+<li>随着修改完成,更新日志条目显示哪些完成,哪些未完成.</li>
+<li>日志是一个<strong>环形缓冲</strong>(circular buffer),完成的条目被删除,为完成的条目不能被覆盖.</li>
+<li>问题:一个事务被中断:事务完成后没有提交.</li>
+<li>采用日志的方案由于时顺序I/O,速度较随机I/O较快.</li>
+</ul>
+<hr>
+<h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>NFS:<br>通过LAN(或WAN)访问远程文件的软件系统的实现或规范,将一组互连工作站作为具有独立文件系统的机器组合.</p>
+<p>目的:<br>允许透明地以客户机-服务器关系共享文件系统.</p>
+<p>实现:</p>
+<ul>
+<li>客户端先执行安装(mout)操作,将远程目录安装到本地文件系统的目录上.</li>
+<li>远程目录取代原来本地文件系统的目录.</li>
+<li>本地目录称为新安装目录的根.</li>
+</ul>
+<p>移动性:</p>
+<ul>
+<li>不具有转移性:客户机不能获得安装在以前文件系统上的其他文件系统的访问.</li>
+<li>串联安装:共享文件系统安装在网络上所有计算机的用户主目录上.</li>
+</ul>
+<p>两种服务:</p>
+<ul>
+<li>有安装机制提供的服务.</li>
+<li>远程文件访问服务.</li>
+</ul>
+<h3 id="安装协议"><a href="#安装协议" class="headerlink" title="安装协议"></a>安装协议</h3><p><strong>安装协议</strong>(mount protocol):<br>客户机和服务器之间建立初始逻辑连接.</p>
+<ul>
+<li>安装远程目录的名称和存储的服务器名称.</li>
+<li>安装请求映射到相应RPC,并传送到特定服务器上运行的安装服务程序.</li>
+<li><strong>输出列表</strong>(export list)列出了允许输出安装的本地文件系统以及允许安装的机器名称.</li>
+<li>服务器收到满足要求的安装请求时,返回一个文件句柄(file handle).</li>
+</ul>
+<h3 id="NFS协议"><a href="#NFS协议" class="headerlink" title="NFS协议"></a>NFS协议</h3><p>NFS协议提供一组RPC以供远程文件操作.</p>
+<ul>
+<li>搜索目录内的文件.</li>
+<li>读一组目录条目.</li>
+<li>操作链接和目录.</li>
+<li>访问文件属性.</li>
+<li>读和写文件.</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>NFS服务器是无状态的,不维护客户的每步的访问信息.</li>
+<li>修改数据必须在返回结果客户之前,提交到磁盘上.服务器必须同步写所有NFS数据.</li>
+<li>服务器崩溃和恢复对客户不可见.</li>
+<li>单个NFS写可为原子的,但不提供并发控制机制.多个用户对同一个远程文件的写会导致数据混杂,需要加锁协调对共享文件的访问.</li>
+</ul>
+<p>调用流程:</p>
+<ul>
+<li>客户机通过系统调用启动操作.</li>
+<li>操作系统将调用映射成相应的V节点的VFS操作.</li>
+<li>VFS由文件是远程的,调用NFS程序.</li>
+<li>通过RPC调用发送到远程的NFS服务层.</li>
+<li>该调用到达远程系统的VFS层.</li>
+<li>远程系统发现调用并调用其文件系统调用.</li>
+<li>计算结果通过反过程返回到客户机.</li>
+</ul>
+<h3 id="路径名转换"><a href="#路径名转换" class="headerlink" title="路径名转换"></a>路径名转换</h3><p><strong>路径名转换</strong>(path-name translation):<br>将路径名解析成独立的目录条目或组成部分.</p>
+<p>在一个安装点时,发送给服务器一个路径名并接收一个目标虚拟节点.</p>
+<p>客户端的路径转换缓存保存远程目录名称的虚拟节点,加快查找.</p>
+<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><p>文件系统调用和NFS协议RPC之间有一一对应关系,远程文件操作可直接转换成相应的RPC.</p>
+<p>NFS采用缓冲和缓存技术提高性能.</p>
+<p>两种缓存:</p>
+<ul>
+<li>文件属性缓存</li>
+<li>文件块缓存</li>
+</ul>
+<p>系统的性能使得NFS语义难以保持一致性.</p>
+<p>—</p>
+<h2 id="实例-WAFL文件系统"><a href="#实例-WAFL文件系统" class="headerlink" title="实例:WAFL文件系统"></a>实例:WAFL文件系统</h2><p>WAFL(write-anywhere file layout):一个分布式文件系统,通过NFS,CIFS,ftp和http协议给客户机提供文件.</p>
+<ul>
+<li>其基于块,使用索引节点描述文件.</li>
+<li>每个索引节点包含16个指向属于相应的文件的块的指针.</li>
+<li>每个文件系统有一个根索引节点.</li>
+<li>所有的索引结点放在一个文件中,空闲块映射表在另一个文件中,空闲索引节点映射表在第三个文件中.</li>
+<li>WAFL文件系统时以根索引节点为根的块组成的树.</li>
+<li>WAFL复制一份根节点,之后的任何文件或更新在新块上执行.</li>
+<li>新的根节点指向由写操作而变化的元数据,老的根节点指向没有被更新的块.</li>
+<li>其空块映射表中每块有超过1位对应,给每个使用该块的快照提供一个位集合的位图,当使用该块的所有快照都删除,该块的位图被清零.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-02-18T07:38:55.608Z" itemprop="dateUpdated">2020-02-18 15:38:55</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" rel="tag">文件系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/18/OperatingSystem-11/&title=《操作系统概念(十一):文件系统实现》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/18/OperatingSystem-11/&title=《操作系统概念(十一):文件系统实现》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/18/OperatingSystem-11/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(十一):文件系统实现》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/18/OperatingSystem-11/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/18/OperatingSystem-11/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/18/Java-Concurrency/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java并发编程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/17/SQL-11/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SQL必会必知(十一):使用子查询</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/18/OperatingSystem-11/&title=《操作系统概念(十一):文件系统实现》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/18/OperatingSystem-11/&title=《操作系统概念(十一):文件系统实现》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/18/OperatingSystem-11/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(十一):文件系统实现》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/18/OperatingSystem-11/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/18/OperatingSystem-11/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/18/OperatingSystem-11/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

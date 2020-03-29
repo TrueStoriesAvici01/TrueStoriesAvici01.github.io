@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>InterviewProblem | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="面试常见问题[toc] 技术问题 static的作用 final的作用 overload与override的区别 组合与继承 clone的作用 前置++与后置++ 内部类 二维数组的表示 接口与抽象类的对比 反射机制 重载函数 构造函数 合并两个有序链表 逻辑推理—智力题. 从100亿条记录的文本文件中取出重复数最多的前10条. 函数调用方式 判断单链表是否有环 二叉树的多种遍历算法实现 有读和写">
+<meta name="keywords" content="Java, 算法, 数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="InterviewProblem">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;03&#x2F;08&#x2F;InterviewProblem&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="面试常见问题[toc] 技术问题 static的作用 final的作用 overload与override的区别 组合与继承 clone的作用 前置++与后置++ 内部类 二维数组的表示 接口与抽象类的对比 反射机制 重载函数 构造函数 合并两个有序链表 逻辑推理—智力题. 从100亿条记录的文本文件中取出重复数最多的前10条. 函数调用方式 判断单链表是否有环 二叉树的多种遍历算法实现 有读和写">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-08T05:51:08.306Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">InterviewProblem</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">InterviewProblem</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-08T05:51:08.306Z" itemprop="datePublished" class="page-time">
+  2020-03-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#面试常见问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">面试常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#技术问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">技术问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">项目问题</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-InterviewProblem"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">InterviewProblem</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-08 13:51:08" datetime="2020-03-08T05:51:08.306Z"  itemprop="datePublished">2020-03-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h1><p>[toc]</p>
+<h2 id="技术问题"><a href="#技术问题" class="headerlink" title="技术问题"></a>技术问题</h2><ol>
+<li>static的作用</li>
+<li>final的作用</li>
+<li>overload与override的区别</li>
+<li>组合与继承</li>
+<li>clone的作用</li>
+<li>前置++与后置++</li>
+<li>内部类</li>
+<li>二维数组的表示</li>
+<li>接口与抽象类的对比</li>
+<li>反射机制</li>
+<li>重载函数</li>
+<li>构造函数</li>
+<li>合并两个有序链表</li>
+<li>逻辑推理—智力题.</li>
+<li>从100亿条记录的文本文件中取出重复数最多的前10条.</li>
+<li>函数调用方式</li>
+<li>判断单链表是否有环</li>
+<li>二叉树的多种遍历算法实现</li>
+<li>有读和写两个线程和一个队列,读线程从队列中读数据,写线程往队列中写数据</li>
+<li>stack和heap</li>
+<li>TCP的流量控制和拥塞控制机制</li>
+<li>写一个函数,返回一个字符串中只出现一次的第一个字符.</li>
+<li>求一个数组中第k大的数的位置</li>
+<li>面向对象继承,多态问题,例如:多态的实现机制</li>
+<li>值传递与引用传递</li>
+<li>什么是不变量</li>
+<li>==与equals的区别</li>
+<li>创建空类时,哪些成员函数是系统默认的</li>
+<li>有10万个IP段,这些IP段之间都不重合,随便给定一个IP,求出属于哪个IP段.</li>
+<li>网络编程(网络编程范式,非阻塞connect)</li>
+<li>TCP/IP</li>
+<li>Linux的命令,原理以及底层实现</li>
+<li>Linux编程,包括所有互斥的方法,多线程编程,进程间通信</li>
+<li>一个一维数轴上有不同的线段,求重复最长的两个线段,例如: a: 1~3, b: 2~7, c: 2~8, 最长重复是 b和c.</li>
+<li>Java入口函数的特点.</li>
+<li>内存溢出与内存泄漏有什么区别</li>
+<li>利用互斥量和条件变量设计一个消息队列,具有以下功能: 1. 创建消息队列(消息中所含的元素); 2.消息队列中插入消息; 3.取出一个消息(阻塞方式); 4. 取出第一消息(非阻塞方式). 注意:互斥量,条件变量和队列由系统给定.</li>
+<li>用非递归方法完成二叉树的遍历.</li>
+<li>如何实现类似函数指针的功能.</li>
+<li>设计模式</li>
+<li>排列组合问题</li>
+<li>若有序表的关键字序列为(b,c,d,e,f,g,q,r,s,t),则在二分查找关键字b的过程中,先后进行比较的关键字依次是什么</li>
+<li>有一个虚拟存储系统,若进程在内存中占3页(开始时内存为空),若采用先进先出(FIFO)页面淘汰算法,当执行如下访问序列后,1,2,3,4,5,1,2,5,1,2,3,4,5, 会发生多少缺页</li>
+<li>有一个顺序栈S, 元素s1,s2,s3,s4,s5,s6依次进栈,若6个元素的出栈顺序为s2,s3,s4,s6,s5,s1,则顺序栈的容量至少应该有多少?</li>
+<li>[0,2,1,4,3,9,5,8,6,7]是数组形式存储的最小堆,删除堆顶元素0后的结果是多少</li>
+<li>某页式存储管理系统中,地址寄存器长度为24位,其中号占14位,主存的分块大小是多少字节</li>
+<li>内存泄漏</li>
+<li>各种排序算法使用与比较</li>
+<li>默认初始化问题</li>
+<li>字符串的存储方式</li>
+<li>面向对象与面向过程编程的区别</li>
+<li>异常处理</li>
+<li>垃圾回收器</li>
+<li>多线程同步</li>
+<li>数据库内连接与外连接的区别</li>
+<li>设计模式</li>
+</ol>
+<h2 id="项目问题"><a href="#项目问题" class="headerlink" title="项目问题"></a>项目问题</h2><ol>
+<li>自我介绍</li>
+<li>项目相关问题</li>
+<li>了解我们企业吗?</li>
+<li>家乡是哪里的,为什么要来这个城市工作</li>
+<li>为什么会选择我们企业</li>
+<li>为什么选择这个职位</li>
+<li>竞赛获奖以及论文</li>
+<li>自己的职业规划是什么</li>
+<li>谈谈自己的优势与劣势</li>
+<li>你是怎么在团队合作中发挥作用的</li>
+<li>结合简历中的实习经历问一些细节</li>
+<li>对我们企业的理解,喜欢我们吗?</li>
+<li>讲讲个人优缺点</li>
+<li>个人对薪资问题</li>
+<li>可以实习吗</li>
+<li>你的同学为什么不选择我们企业</li>
+<li>如果你没有被录用,你觉得可能是什么问题</li>
+<li>你有什么问题</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-08T05:51:08.306Z" itemprop="dateUpdated">2020-03-08 13:51:08</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/08/InterviewProblem/&title=《InterviewProblem》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/08/InterviewProblem/&title=《InterviewProblem》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/08/InterviewProblem/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《InterviewProblem》 — 咸鱼的自我修养&url=http://yoursite.com/2020/03/08/InterviewProblem/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/08/InterviewProblem/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/17/JVM_basis/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JVM_basis</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/03/DSAA-LinkedList/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据结构与算法:链表</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/08/InterviewProblem/&title=《InterviewProblem》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/08/InterviewProblem/&title=《InterviewProblem》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/08/InterviewProblem/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《InterviewProblem》 — 咸鱼的自我修养&url=http://yoursite.com/2020/03/08/InterviewProblem/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/08/InterviewProblem/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/03/08/InterviewProblem/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

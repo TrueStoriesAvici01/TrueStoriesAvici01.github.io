@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>操作系统概念(九):虚拟内存 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,虚拟内存">
+    <meta name="description" content="虚拟内存[toc] 虚拟内存:允许进程不全在内存中执行. 优点:  程序可以比内存大. 将内存抽象成大容量的,标准的数组. 无需关心物理内存的限制. 进程间可以简单的共享文件.  背景虚拟内存:将逻辑内存和物理内存分离,允许在较小的物理内存提供大的虚拟内存. 虚拟地址空间(virtual address space):从低地址开始依次为代码,数据,堆.高地址为栈. 允许动态内存分配,堆向虚拟内存扩">
+<meta name="keywords" content="操作系统,虚拟内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概念(九):虚拟内存">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;12&#x2F;OperatingSystem-9&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="虚拟内存[toc] 虚拟内存:允许进程不全在内存中执行. 优点:  程序可以比内存大. 将内存抽象成大容量的,标准的数组. 无需关心物理内存的限制. 进程间可以简单的共享文件.  背景虚拟内存:将逻辑内存和物理内存分离,允许在较小的物理内存提供大的虚拟内存. 虚拟地址空间(virtual address space):从低地址开始依次为代码,数据,堆.高地址为栈. 允许动态内存分配,堆向虚拟内存扩">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-12T11:41:30.627Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统概念(九):虚拟内存</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统概念(九):虚拟内存</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-12T11:41:30.627Z" itemprop="datePublished" class="page-time">
+  2020-02-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#虚拟内存"><span class="post-toc-number">1.</span> <span class="post-toc-text">虚拟内存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#按需调页"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">按需调页</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#按需调页的性能"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">按需调页的性能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写时复制"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">写时复制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#页面置换"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">页面置换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本页置换"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">基本页置换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FIFO页置换"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">FIFO页置换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最优置换"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">最优置换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LRU页置换"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">LRU页置换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#近似LRU页置换"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">近似LRU页置换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于计数的页置换"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">基于计数的页置换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#页缓冲算法"><span class="post-toc-number">1.4.7.</span> <span class="post-toc-text">页缓冲算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#帧分配"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">帧分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#帧的最少数量"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">帧的最少数量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分配算法"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">分配算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局分配与局部分配"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">全局分配与局部分配</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统颠簸"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">系统颠簸</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统颠簸的原因"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">系统颠簸的原因</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作集合模型"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">工作集合模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#页错误频率"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">页错误频率</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存映射文件"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">内存映射文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本机制"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">基本机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java中的内存映射文件"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">Java中的内存映射文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存映射I-O"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">内存映射I/O</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核内存的分配"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">内核内存的分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Buddy系统"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">Buddy系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#slab分配"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">slab分配</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他考虑"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">其他考虑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预调页"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">预调页</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#页大小"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">页大小</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TLB范围"><span class="post-toc-number">1.9.3.</span> <span class="post-toc-text">TLB范围</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#反向页表"><span class="post-toc-number">1.9.4.</span> <span class="post-toc-text">反向页表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#程序结构"><span class="post-toc-number">1.9.5.</span> <span class="post-toc-text">程序结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IO互锁"><span class="post-toc-number">1.9.6.</span> <span class="post-toc-text">IO互锁</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作系统实例"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">操作系统实例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Windows-XP"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">Windows XP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Solaris"><span class="post-toc-number">1.10.2.</span> <span class="post-toc-text">Solaris</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OperatingSystem-9"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统概念(九):虚拟内存</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-12 19:41:30" datetime="2020-02-12T11:41:30.627Z"  itemprop="datePublished">2020-02-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h1><p>[toc]</p>
+<p><strong>虚拟内存</strong>:<br>允许进程不全在内存中执行.</p>
+<p>优点:</p>
+<ul>
+<li>程序可以比内存大.</li>
+<li>将内存抽象成大容量的,标准的数组.</li>
+<li>无需关心物理内存的限制.</li>
+<li>进程间可以简单的共享文件.</li>
+</ul>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><strong>虚拟内存</strong>:<br>将逻辑内存和物理内存分离,允许在较小的物理内存提供大的虚拟内存.</p>
+<p><strong>虚拟地址空间</strong>(virtual address space):<br>从低地址开始依次为<strong>代码</strong>,<strong>数据</strong>,<strong>堆</strong>.高地址为<strong>栈</strong>.</p>
+<p>允许动态内存分配,堆向虚拟内存扩张,栈也可向虚拟内存扩张.</p>
+<p><strong>稀疏地址空间</strong>:<br>空白的虚拟地址空间.随着程序的执行,栈或堆段的扩充时,可以利用稀疏地址空间.</p>
+<p>共享页:</p>
+<ul>
+<li>通过将共享对象映射到虚拟地址空间,系统库为多个进程共享.</li>
+<li>多个进程通过虚拟内存共享通信.</li>
+<li>使用系统调用<code>fork()</code>创建进程共享页.</li>
+</ul>
+<hr>
+<h2 id="按需调页"><a href="#按需调页" class="headerlink" title="按需调页"></a>按需调页</h2><p>执行程序从磁盘载入内存:</p>
+<ul>
+<li>整个程序在执行时载入内存中.</li>
+<li><strong>按需调页</strong>(demand paging):在需要时才调入相应的页.</li>
+</ul>
+<p>按需调页系统:</p>
+<ul>
+<li>进程驻留在第二级存储器上.</li>
+<li>在执行进程时,使用<strong>懒惰交换</strong>(lazy swapper):使用<strong>调页程序</strong>(pager)将需要页调入内存中.</li>
+</ul>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>通过使用<em>有效-无效位</em>(valid-invalid bit)分辨页是在内存里还是磁盘上.有效:相关页在内存中;无效:相关页无效或者在磁盘中.</p>
+<p>进程访问处理:</p>
+<ul>
+<li>当进程访问<strong>驻留在内存中</strong>(memory resident)的页,则执行正常.</li>
+<li>当进程访问未调入的页,则产生<strong>页错误陷阱</strong>(page-fault trap):<ul>
+<li>操作系统检查进程的内部页表,确定引用合法与否.</li>
+<li>如果引用非法,中止进程.否则为未调入的页面,需要调用.</li>
+<li>找到一个空闲帧.</li>
+<li>调度一个磁盘操作,以便将所需的页调入刚分配的帧.</li>
+<li>磁盘读操作完成时,修改进程的内部表和页表.</li>
+<li>重新开始中断的指令.</li>
+</ul>
+</li>
+</ul>
+<p><strong>纯粹按需调页</strong>(pure demand paging):<br>进程执行时只有在需要时才将页调入内存.</p>
+<p>按需调页的硬件支持:</p>
+<ul>
+<li><strong>页表</strong>(page table):对特定条目设置为有效-无效或保护位.</li>
+<li><strong>辅助存储器</strong>(secondary memory):保存不在内存中的页,称为<strong>交换空间</strong>(swap space).</li>
+</ul>
+<p>页错误的重新执行:</p>
+<ul>
+<li>保存中断进程的状态(寄存器,条件代码, 指令计数器)</li>
+<li>得到所需的页,将其调入,更正页表.</li>
+<li>重新开始指令.</li>
+</ul>
+<h3 id="按需调页的性能"><a href="#按需调页的性能" class="headerlink" title="按需调页的性能"></a>按需调页的性能</h3><p><strong>有效访问时间</strong>(effective access time):</p>
+<ul>
+<li>没有出现页错误,有效访问时间为内存访问时间ma(10~200ns).</li>
+<li>出现页错误,则先从磁盘读入相关页,在访问需要的字.有效访问时间 = (1-p) <em> ma + p </em> 页错误时间.(p为页错误概率(page-fault rate))</li>
+</ul>
+<p>处理页错误的动作:</p>
+<ol>
+<li>陷入到操作系统</li>
+<li>保存用户寄存器和进程状态</li>
+<li>确定中断是否为页错误</li>
+<li>检查页引用是否合法并确定页所在磁盘的位置</li>
+<li>从磁盘读入页到空闲帧中<ol>
+<li>在磁盘队列等待直到处理完读请求.</li>
+<li>等待磁盘的寻道的时间.</li>
+<li>开始将磁盘中的页传到空闲帧.</li>
+</ol>
+</li>
+<li>在等待时,将CPU分配到其他用户(可选)</li>
+<li>从I/O子系统收到中断</li>
+<li>保存其他用户的寄存器和进程状态(可选)</li>
+<li>确保中断来自磁盘</li>
+<li>修正页表从而表示所需页在内存中</li>
+<li>等待CPU再次分配给本进程</li>
+<li>恢复用户寄存器,进程状态和新页表,重新执行中断的指令</li>
+</ol>
+<p><em>主要的时间耗费在<strong>从磁盘中读入页</strong>,约10ms左右.</em></p>
+<p><em>使用交换空间可以缩减从文件系统中读入页的时间.有两种方式:1.进程开始时将整个文件复制到交换空间;2.开始时按需调页,当出现页置换时将页写入交换空间.</em></p>
+<hr>
+<h2 id="写时复制"><a href="#写时复制" class="headerlink" title="写时复制"></a>写时复制</h2><p><strong>写时复制</strong>(copy-on-write):<br>父子进程开始时共享同一个页面.当任何一个进程对页进行写操作时,就创建一个所写共享页的副本.将引用指向该副本,然后对其修改.</p>
+<p><em>操作系统为写时复制提供<strong>空闲缓冲池</strong>(pool),用于空闲页的分配,使用<strong>按需填零</strong>(zero-fill-on-demand,分配前先填零)方式清空以前的内容.</em></p>
+<hr>
+<h2 id="页面置换"><a href="#页面置换" class="headerlink" title="页面置换"></a>页面置换</h2><h3 id="基本页置换"><a href="#基本页置换" class="headerlink" title="基本页置换"></a>基本页置换</h3><p>页错误处理程序:</p>
+<ol>
+<li>查找所需页在磁盘上的位置.</li>
+<li>查找一个空闲帧:<ol>
+<li>如果有空闲帧,则直接使用.</li>
+<li>如果没有空闲帧,则使用页置换算法以选择一个<strong>牺牲帧</strong>(victim frame).</li>
+<li>将牺牲帧的内容写到交换空间,改变页表和帧表.</li>
+</ol>
+</li>
+<li>将所需页读入空闲帧,改变页表和帧表.</li>
+<li>重启用户进程.</li>
+</ol>
+<p><em>没有空闲帧时,需要两次页传输,可使用<strong>修改位</strong>(modify bit)/脏位(dirty bit)降低额外开销.</em></p>
+<p><em>若修改位已设置,则被选择为替换页时需要将该页写到磁盘上去.当修改位没有设置,则无需重写.</em></p>
+<p>按需调页由两部分组成:</p>
+<ul>
+<li><strong>帧分配算法</strong>(frame-allocation algorithm)</li>
+<li><strong>页置换算法</strong>(page-replacement algorithm)</li>
+</ul>
+<h3 id="FIFO页置换"><a href="#FIFO页置换" class="headerlink" title="FIFO页置换"></a>FIFO页置换</h3><p><strong>FIFO算法</strong>:<br>为每个页记录该页调入内存的时间.当必须置换一个页时,将选择最旧的页进行替换.</p>
+<p><strong>Belady异常</strong>(Belady’s anomaly):<br>页错误率可能会随着所分配的帧数的增加而增加.</p>
+<h3 id="最优置换"><a href="#最优置换" class="headerlink" title="最优置换"></a>最优置换</h3><p><strong>最优页置换算法</strong>(optimal page-replacement algorithm, OPT, MIN):<br>选择未来最长时间不会使用的页,从而在给定数量的帧会产生最低的页错误率.</p>
+<p>问题: 需要知道未来一段时间内页时使用情况.</p>
+<h3 id="LRU页置换"><a href="#LRU页置换" class="headerlink" title="LRU页置换"></a>LRU页置换</h3><p><strong>最近最少使用算法</strong>(least-recently-used(LRU) algorithm):<br>选择置换过去中最长时间没有使用的页作为置换页.</p>
+<p>硬件支持(<em>为页帧确定排序序列</em>):</p>
+<ul>
+<li><strong>计数器</strong>(counter):每个页表项增加一个<em>使用时间域</em>.每次内存引用时,计数器增加,并将时钟寄存器的值复制到对应页表项的使用时间域.置换时选择具有最小时间的页.</li>
+<li><strong>栈</strong>(stack):使用页码栈.每次引用页时,从栈中删除该页并放入栈顶.站顶是最近使用的页,栈底时LRU页.</li>
+</ul>
+<h3 id="近似LRU页置换"><a href="#近似LRU页置换" class="headerlink" title="近似LRU页置换"></a>近似LRU页置换</h3><p><strong>引用位</strong>(reference bit):<br>页表内的每项都关联者一个引用位,当引用一个页时,相应页表的引用位被置位.</p>
+<p><strong>附加引用位算法</strong></p>
+<ul>
+<li>每个表的页中保留一个8位的字节.</li>
+<li>每隔固定时间,将8位字节向右移动一位,将引用位复制到最高位.</li>
+<li>8位的移位寄存器表示最近8个周期的该页的使用情况,1为使用,0为未使用.</li>
+<li>寄存器值最小的页为LRU页,将被置换.</li>
+</ul>
+<p><strong>二次机会页置换算法</strong>(second-chance page-replacement algorithm)</p>
+<ul>
+<li>置换页时,先检查引用位,若为0,则直接置换该页.</li>
+<li>若非零,则将引用位清零,并检查下一页.</li>
+</ul>
+<p>实现(时钟算法,采用循环队列):</p>
+<ul>
+<li>指针表示下一次要置换的页.</li>
+<li>置换时,指针移动直到找到一个引用位为0的页.</li>
+<li>移动时,会清除对应位的引用位.</li>
+</ul>
+<p><strong>增强型二次机会算法</strong><br>使用两个位作为页的属性:</p>
+<ol>
+<li>(0, 0):最近没有使用且没有修改</li>
+<li>(0, 1):最近没有使用但修改过</li>
+<li>(1, 0):最近使用过但没有修改</li>
+<li>(1, 1):最近使用且修改过</li>
+</ol>
+<p><em>使用时钟算法,检查页的类型,修改过的页获得更高的级别.</em></p>
+<h3 id="基于计数的页置换"><a href="#基于计数的页置换" class="headerlink" title="基于计数的页置换"></a>基于计数的页置换</h3><p>为每个页保留一个用于记录其引用次数的计数器.</p>
+<ul>
+<li><strong>最不经常使用页置换算法</strong>(least frequently used(LFU) page-replacement algorithm):要求置换计数最小的页.</li>
+<li><strong>最常使用页置换算法</strong>(most frequently used(MFU) page-replacement algorithm):最小次数的页为刚调入的,还没有使用.</li>
+</ul>
+<h3 id="页缓冲算法"><a href="#页缓冲算法" class="headerlink" title="页缓冲算法"></a>页缓冲算法</h3><ul>
+<li>保留一个空闲帧缓冲池,需要的缓冲的页从缓冲池中读取.替换的帧写出到空帧池.</li>
+<li>保留一个空闲帧池,当帧写到磁盘上时而没有修改,则该帧保存在空闲帧池,以后需要就可以直接从空闲帧池读取.</li>
+</ul>
+<hr>
+<h2 id="帧分配"><a href="#帧分配" class="headerlink" title="帧分配"></a>帧分配</h2><h3 id="帧的最少数量"><a href="#帧的最少数量" class="headerlink" title="帧的最少数量"></a>帧的最少数量</h3><p>帧分配策略受到多方面限制:</p>
+<ul>
+<li>所分配的帧不能超过可用帧的数量.</li>
+<li><p>必须分配至少最少数量的帧.(<em>随着分配的帧减少,进程的页错误增加</em>)</p>
+</li>
+<li><p>若每个指令只有一个内存地址,并允许一级间接引用,则每个进程至少需要3个帧.</p>
+</li>
+<li>若指令跨在2个页,有2个操作数,操作数可以间接引用,则每个进程至少需要6个帧.</li>
+<li>最坏情况:允许多层间接引用,则可能整个虚拟内存都必须在物理内存上.(<em>必须对间接引用加以限制</em>)</li>
+</ul>
+<h3 id="分配算法"><a href="#分配算法" class="headerlink" title="分配算法"></a>分配算法</h3><p><strong>平均分配</strong>(equal allocation):<br>在n个进程之间分配m个帧,每个进程获得m/n个帧.</p>
+<p><strong>比例分配</strong>(proportional allocation):<br>根据进程大小,将可用内存分配给每个进程.<br>设:进程pi的虚拟内存大小为si,S=s1+s2+…,可用帧总数为m,则进程pi分配到ai个帧,ai=si/S*m.</p>
+<h3 id="全局分配与局部分配"><a href="#全局分配与局部分配" class="headerlink" title="全局分配与局部分配"></a>全局分配与局部分配</h3><p><strong>全局分配</strong>(global replacement):<br>允许一个进程从所有帧集合中选择一个置换帧,而不管该帧是否已分配给其他进程.(<em>一个进程可从另外一个进程拿到帧</em>)</p>
+<p><strong>局部分配</strong>(local replacement):<br>每个进程仅从自己的分配帧中进行选择.</p>
+<p>全局分配:</p>
+<ul>
+<li>允许高优先级进程从低优先级进程中选择帧以便置换.</li>
+<li>一个进程从其他进程的帧中选择一个进行置换,从而增加了所分配的帧的数量.</li>
+<li>不能控制页错误率,进程的页集合收到自身进程的调页行为,还取决于其他进程的调页行为.</li>
+</ul>
+<p>局部分配:</p>
+<ul>
+<li>不能使用其他进程中空闲的内存.</li>
+<li>系统吞吐量低.</li>
+</ul>
+<hr>
+<h2 id="系统颠簸"><a href="#系统颠簸" class="headerlink" title="系统颠簸"></a>系统颠簸</h2><p><strong>颠簸</strong>(thrashing):<br>进程没有其所需要使用的帧,很快出现页错误.<br>当一个进程在换页上用的时间多于执行时间,则该进程就处于颠簸.</p>
+<h3 id="系统颠簸的原因"><a href="#系统颠簸的原因" class="headerlink" title="系统颠簸的原因"></a>系统颠簸的原因</h3><p>原因:<br>CPU使用率低-&gt;引入新进程-&gt;增加多道程序-&gt;需要更多的帧-&gt;出现页错误-&gt;从其他进程拿到帧-&gt;其他进程出现页错误-&gt;等待换页-&gt;CPU使用率降低-&gt;引入新进程-&gt;…<br><em>随着多道程序程度的增加,CPU使用率增加,直到达到最大值.若继续增加,系统颠簸开始,CPU使用率剧降.</em></p>
+<p>解决:<br><strong>局部置换算法</strong>(local replacement algorithm)/优先置换算法(priority replacement algorithm):<br>进程开始颠簸,禁止其从其他进程拿到帧,从而避免其他进程颠簸.</p>
+<p><strong>局部模型</strong>(locality model):<br>当进程执行时,从一个局部移向另一个局部.<br>局部时一个经常使用页的集合,一个程序由多个不同局部组成.</p>
+<h3 id="工作集合模型"><a href="#工作集合模型" class="headerlink" title="工作集合模型"></a>工作集合模型</h3><p><strong>工作集合窗口</strong>(working-set window):<br>检查最近若干个页的引用,这些引用的页集合称为<strong>工作集合</strong>(working set).</p>
+<p>设系统内每个进程的工作集合为WSSi,有:<br>总的帧需求量 D=WSS1+WSS2+…</p>
+<p>使用:</p>
+<ul>
+<li>操作系统为每个进程分配大于其工作集合的帧数.</li>
+<li>若有空闲帧,可启动另外一个进程.</li>
+<li>若所有工作集合之和超过可用帧的总数,则暂停一个进程.</li>
+</ul>
+<h3 id="页错误频率"><a href="#页错误频率" class="headerlink" title="页错误频率"></a>页错误频率</h3><p><strong>页错误频率</strong>(page-fault frequency, PFF):<br>颠簸具有高的页错误率.</p>
+<ul>
+<li>页错误率高,进程需要更多的帧.</li>
+<li>页错误率低,进程有太多的帧.从进程中移走帧.</li>
+</ul>
+<hr>
+<h2 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h2><p><strong>内存映射</strong>(memory mapping):<br>使用虚拟内存技术将文件I/O作为普通内存访问.</p>
+<h3 id="基本机制"><a href="#基本机制" class="headerlink" title="基本机制"></a>基本机制</h3><p><strong>内存映射</strong>:<br>将磁盘块映射成内存的一页.</p>
+<p>注:</p>
+<ul>
+<li>通过内存操作文件而非系统调用.</li>
+<li>对映射到内存中的文件不会立即写到磁盘上.可能定期检查文件以选择是否更新到物理文件.</li>
+<li>多个进程可以允许将<em>同一个文件</em>映射到各自的虚拟内存中以允许数据共享.任一进程修改虚拟内存中的数据为其他进程可见.</li>
+</ul>
+<p>实例:</p>
+<ul>
+<li>UNIX和Linux使用<code>mmap()</code>实现内存映射,使用<code>shmget()</code>和<code>shmat()</code>进行内存共享.</li>
+<li>Windows使用内存映射文件实现共享内存.</li>
+</ul>
+<h3 id="Java中的内存映射文件"><a href="#Java中的内存映射文件" class="headerlink" title="Java中的内存映射文件"></a>Java中的内存映射文件</h3><ol>
+<li>打开文件并得到打开文件的<code>FileChannel</code>.</li>
+<li>调用<code>map()</code>方法,得到<code>MappedByteBuffer</code>,即映射到内存的字节组.</li>
+<li>获得内存映射文件所需的页数.</li>
+<li>通过<code>get()</code>方法访问每个页的首字节.</li>
+<li>内存映射一直存在,直到对象被垃圾回收.</li>
+</ol>
+<h3 id="内存映射I-O"><a href="#内存映射I-O" class="headerlink" title="内存映射I/O"></a>内存映射I/O</h3><p><strong>内存映射I/O</strong>(memory-mapped I/O):<br>一组内存地址专门映射到设备寄存器,对这些内存地址的读写如同对设备寄存器的读写.</p>
+<p><strong>程序I/O</strong>(programmed I/O, PIO):<br>通过内存映射串口发送字节,CPU写一个数据字节到数据寄存器,并设置控制寄存器的一位表示有字节可用.设备读取字节,并清除控制寄存器的位表示可以接收下一个字节.CPU采用轮询方式检查控制位.</p>
+<p><strong>中断驱动</strong>(interrupt driven):<br>接收设备就绪后可发下一个字节的中断.</p>
+<hr>
+<h2 id="内核内存的分配"><a href="#内核内存的分配" class="headerlink" title="内核内存的分配"></a>内核内存的分配</h2><h3 id="Buddy系统"><a href="#Buddy系统" class="headerlink" title="Buddy系统"></a>Buddy系统</h3><ul>
+<li>物理上连续的大小固定的段上进行分配.</li>
+<li>内存按照2的幂的大小进行分配.</li>
+<li>若请求大小不为2的幂次,需要调整下一个更大的2的幂次.</li>
+<li>可通过合并(coalescing)而快速形成更大的段.</li>
+<li>容易产生碎片,造成浪费.</li>
+</ul>
+<h3 id="slab分配"><a href="#slab分配" class="headerlink" title="slab分配"></a>slab分配</h3><p><strong>slab分配</strong>(slab allocation):</p>
+<ul>
+<li>slab时由多个物理上连续的页组成.</li>
+<li>高速缓存(cache)含有一个或多个slab.</li>
+<li>每个高速缓存含有内核数据结构的对象(object).</li>
+<li>Linux的slab有三种状态:<ul>
+<li>满的(full):slab所有的对象标记为使用.</li>
+<li>空的(empty):所有对象被标记为空闲.</li>
+<li>部分(partial):有的被标记为使用,有的被标记为空闲.</li>
+</ul>
+</li>
+<li>先从部分空闲的slab分配,若没有,则从空的slab进行分配.若没有,则从物理连续页分配新的slab.</li>
+</ul>
+<p>优点:</p>
+<ul>
+<li>没有因碎片而引起的内存浪费.</li>
+<li>内存请求可以快速满足.</li>
+</ul>
+<hr>
+<h2 id="其他考虑"><a href="#其他考虑" class="headerlink" title="其他考虑"></a>其他考虑</h2><h3 id="预调页"><a href="#预调页" class="headerlink" title="预调页"></a>预调页</h3><p>页错误:试图将最初局部调入到内存.</p>
+<p><strong>预调页</strong>(prepaging):<br>同时将所需的所有页一起调入到内存中.</p>
+<p>实现:</p>
+<ul>
+<li>为每个进程保留一个位于工作集合内的页的列表.</li>
+<li>进程暂停时,要记住该进程的工作集合.</li>
+<li>进程重启时,在重启进程之前会自动调入位于工作集合内的所有的页.</li>
+</ul>
+<p><em>预调页是否可行的关键在于:节省的成本是否大于预调页的开销.</em><br>设:有s页被预调页到内存中,a部分被使用(0 &lt;= a &lt;= 1).<br>若s*a个页错误成本大于预调页s(1-a)个不必要页面的开销,则预调页成功,否则是失败的.</p>
+<h3 id="页大小"><a href="#页大小" class="headerlink" title="页大小"></a>页大小</h3><p>收到多个元素的影响:</p>
+<ul>
+<li>降低页大小增加了页的数量,增加页表的个数.</li>
+<li>较小的页可以更好的利用内存.页必须整个进行分配,导致内部碎片.</li>
+<li>I/O操作每次所需的时间主要与寻道,延迟有关,读入更大的页可以最小化I/O时间.</li>
+<li>较小的页允许每个页更精准的匹配成据局部,更好的精度(resolution)允许只处理确实需要的内存.减少传输不需要的内容.</li>
+<li>更小的页导致更多的页,每个页会产生页错误,消耗额外的开销处理中断,保存寄存器等.为了较低处理页错误的数量,需要更大的页.</li>
+</ul>
+<h3 id="TLB范围"><a href="#TLB范围" class="headerlink" title="TLB范围"></a>TLB范围</h3><p><strong>TLB命中率</strong>(hit rato):<br>通过TLB而不是页表锁进行的虚拟地址转换的百分比.(<em>增加TLB的条数可以增加命中率</em>)</p>
+<p><strong>TLB范围</strong>(TLB reach):<br>TLB可访问的内存量,为TLB数量与页大小之积.</p>
+<p>通过增加TLB范围,减少通过页表而浪费的地址转换的时间.</p>
+<p>方法:</p>
+<ul>
+<li>TLB条数加倍.</li>
+<li>增加页的大小或提供多种页大小.</li>
+</ul>
+<h3 id="反向页表"><a href="#反向页表" class="headerlink" title="反向页表"></a>反向页表</h3><p>反向页表不包括进程逻辑地址空间的完整信息,引用页不在内存中,而请求页面调度需要这种信息来处理页面错误.</p>
+<p>每个进程要保留一个外部页表,其中包括每个虚拟页所在的位置.</p>
+<h3 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h3><p>数据结构和程序结构的选择能增加局部性,并减低错误率和工作集合内的页数.</p>
+<ul>
+<li>栈具有良好的局部性,访问局限于其顶部.</li>
+<li>哈希表为发散引用,局部性差.</li>
+</ul>
+<h3 id="IO互锁"><a href="#IO互锁" class="headerlink" title="IO互锁"></a>IO互锁</h3><p>在需要页面调度时,有些页在内存中被锁住(locked).</p>
+<p>一个问题:一个进程发出I/O请求,然后进入等待队列.其有可能由于其他进程页错误被其他进程页置换移出.</p>
+<p>解决:</p>
+<ul>
+<li>规定I/O只能在系统内存在I/O之间进行.用户与磁盘之间通过系统内存进行传输数据.(<em>额外的开销高</em>)</li>
+<li>允许页锁在内存中.每个帧有一个锁定位,若一个帧被锁定,则其不能被置换.</li>
+</ul>
+<p>锁住位用处:</p>
+<ul>
+<li>内核的页锁在内存中,避免内核引起的页错误.</li>
+<li>避免低优先级进程被调入内存中而从未执行后再次被其他高优先级进程置换除内存.(<em>策略问题:保证高优先级进程还是减少调入低优先级进程而浪费的时间</em>)</li>
+</ul>
+<hr>
+<h2 id="操作系统实例"><a href="#操作系统实例" class="headerlink" title="操作系统实例"></a>操作系统实例</h2><h3 id="Windows-XP"><a href="#Windows-XP" class="headerlink" title="Windows XP"></a>Windows XP</h3><p>采用请求页面加上<strong>簇</strong>(clustering)实现虚拟内存.</p>
+<p>一个进程创建时,分配工作集合的最大值和最小值.</p>
+<p><em>工作集合最小值</em>(working-set minimum):进程在内存中所保证有的页数量的最小值.</p>
+<p><em>工作集合最大值</em>(working-set maximum):进程能在有空闲内存中分配的最多的页数量.</p>
+<p><strong>自动工作集合修整</strong>(automatic working-set trimming):<br>当空闲内存的量低于阈值时启动.</p>
+<ul>
+<li>计算分配给进程的帧数.</li>
+<li>如果进程分配的帧数多于工作集合最小值,则虚拟内存管理器从中删除空闲的页直至工作集合最小值.</li>
+<li>若有足够的空闲内存,具有工作集合最小值页数的进程从空闲帧分配帧.</li>
+</ul>
+<h3 id="Solaris"><a href="#Solaris" class="headerlink" title="Solaris"></a>Solaris</h3><ul>
+<li>线程产生一个页错误时,内存从空闲链表为线程分配一个页.</li>
+<li>参数<code>lotsfree</code>用来表示开始调页的阈值.</li>
+<li>内核每秒检查4次看空闲内存是否小于<code>lotsfree</code>.</li>
+<li>若小于,则启动<strong>换页</strong>(pageout)进程.</li>
+<li>换页进程采用<strong>双指针轮转算法</strong>(two-handed-clock algorithm):第一个指针扫描所有页,将引用为设为0;第二个指针检查引用位,释放引用位为0的页,并将修改后的页保存到磁盘.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-02-12T11:41:30.627Z" itemprop="dateUpdated">2020-02-12 19:41:30</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" rel="tag">虚拟内存</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/12/OperatingSystem-9/&title=《操作系统概念(九):虚拟内存》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/12/OperatingSystem-9/&title=《操作系统概念(九):虚拟内存》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/12/OperatingSystem-9/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(九):虚拟内存》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/12/OperatingSystem-9/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/12/OperatingSystem-9/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/12/SQL-8/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SQL必会必知(八):使用函数处理数据</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/11/SQL-7/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SQL必知必会(七):创建计算字段</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/12/OperatingSystem-9/&title=《操作系统概念(九):虚拟内存》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/12/OperatingSystem-9/&title=《操作系统概念(九):虚拟内存》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/12/OperatingSystem-9/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(九):虚拟内存》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/12/OperatingSystem-9/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/12/OperatingSystem-9/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/12/OperatingSystem-9/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

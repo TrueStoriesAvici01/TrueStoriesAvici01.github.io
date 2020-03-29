@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>TCPIP-6 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="TCP/IP,TELNET,SSH,HTTP,SMTP">
+    <meta name="description" content="应用协议应用层协议概述应用层协议是为了实现某种应用而设计和创造的协议。 包含：会话层：管理通信连接表示层：转换数据格式应用层：对端主机交互 远程登录从自己的本地计算机登录到网络另外一端计算功能的应用。 分类：  TELNET SSH  TELNET利用TCP的一条连接，通过这一条连接向主机发送文字命令并在主机上执行。 分类：  仿真终端功能 协商选项机制  流程：  键入文字命令 进行行模式或透明">
+<meta name="keywords" content="TCP&#x2F;IP,TELNET,SSH,HTTP,SMTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCPIP-6">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;20&#x2F;TCPIP-6&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="应用协议应用层协议概述应用层协议是为了实现某种应用而设计和创造的协议。 包含：会话层：管理通信连接表示层：转换数据格式应用层：对端主机交互 远程登录从自己的本地计算机登录到网络另外一端计算功能的应用。 分类：  TELNET SSH  TELNET利用TCP的一条连接，通过这一条连接向主机发送文字命令并在主机上执行。 分类：  仿真终端功能 协商选项机制  流程：  键入文字命令 进行行模式或透明">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-20T15:39:18.205Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCPIP-6</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCPIP-6</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-20T01:20:37.000Z" itemprop="datePublished" class="page-time">
+  2020-01-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用协议"><span class="post-toc-number">1.</span> <span class="post-toc-text">应用协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用层协议概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">应用层协议概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#远程登录"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">远程登录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TELNET"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">TELNET</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SSH"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">SSH</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件传输"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">文件传输</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#电子邮件"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">电子邮件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作机制"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">工作机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#邮件地址"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">邮件地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MIME"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">MIME</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SMTP"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">SMTP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#POP"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">POP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IMAP"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">IMAP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WWW"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">WWW</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">基本概念</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络管理"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">网络管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他应用层协议"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">其他应用层协议</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCPIP-6"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCPIP-6</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-20 09:20:37" datetime="2020-01-20T01:20:37.000Z"  itemprop="datePublished">2020-01-20</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="应用协议"><a href="#应用协议" class="headerlink" title="应用协议"></a>应用协议</h1><h2 id="应用层协议概述"><a href="#应用层协议概述" class="headerlink" title="应用层协议概述"></a>应用层协议概述</h2><p>应用层协议是为了实现某种应用而设计和创造的协议。</p>
+<p>包含：<br>会话层：管理通信连接<br>表示层：转换数据格式<br>应用层：对端主机交互</p>
+<h2 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h2><p>从自己的本地计算机登录到网络另外一端计算功能的应用。</p>
+<p>分类：</p>
+<ul>
+<li>TELNET</li>
+<li>SSH</li>
+</ul>
+<h3 id="TELNET"><a href="#TELNET" class="headerlink" title="TELNET"></a>TELNET</h3><p>利用TCP的一条连接，通过这一条连接向主机发送文字命令并在主机上执行。</p>
+<p>分类：</p>
+<ul>
+<li>仿真终端功能</li>
+<li>协商选项机制</li>
+</ul>
+<p>流程：</p>
+<ol>
+<li>键入文字命令</li>
+<li>进行行模式或透明模式处理后将进一步中的命令传送给telnetd守护进程</li>
+<li>向Shell发送文字命令</li>
+<li>解释从Shell收到的命令，执行程序，获取结果</li>
+<li>获取从Shell返回的结果</li>
+<li>进行行模式或透明模式等处理后结果返回给TELNET客户端</li>
+<li>显示最终结果</li>
+</ol>
+<p><strong>选项</strong><br>提供交互和协商的功能。</p>
+<p>仿真终端（NVT)：</p>
+<ol>
+<li>行模式：以一行命令为一个单位发送给服务端</li>
+<li>透明模式：以一个字符为单位发送给服务端</li>
+</ol>
+<p><strong>telnet命令</strong><br><code>telnet主机名 TCP端口号</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>TCP端口号</th>
+<th>服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21</td>
+<td>FTP</td>
+</tr>
+<tr>
+<td>25</td>
+<td>SMTP</td>
+</tr>
+<tr>
+<td>110</td>
+<td>POP3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><p>加密的远程登录系统。</p>
+<p>功能：</p>
+<ul>
+<li>使用更强的认证机制。</li>
+<li>可以转发文件。</li>
+<li>可以使用端口转发功能。</li>
+</ul>
+<p><strong>端口转发</strong><br>将特定端口号所收到的消息转发到特定的IP地址和端口号。</p>
+<p>示例：<br>客户端连接POP3服务器。<br>SSH客户端程序，SSH服务器相当于网关。</p>
+<ul>
+<li>邮件程序使用<strong>一般TCP通信</strong>连接SSH客户端。</li>
+<li>SSH客户端通过<strong>SSH加密通信</strong>转发给SSH服务端程序。</li>
+<li>SSH服务端程序使用<strong>一般TCP通信</strong>连接POP3服务端程序。</li>
+</ul>
+<hr>
+<h2 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h2><p><strong>FTP工作机制</strong><br>使用两条TCP连接：</p>
+<ol>
+<li>用于控制</li>
+<li>用于数据传输</li>
+</ol>
+<p>控制：</p>
+<ul>
+<li>登录用户名和密码的验证，发送文件的名称，发送方式…</li>
+<li>通过ASCII吗字符串发送请求和接收应答。</li>
+<li>使用的为TCP21号端口。</li>
+<li>数据传送完毕后传输数据的TCP断开。</li>
+<li>通常数据传输的TCP和控制的连接按照相反的方向建立。</li>
+<li>控制用的连接保持连接，直到没有新的命令一段时间。</li>
+<li>使用端口20进行数据传输。</li>
+</ul>
+<hr>
+<h2 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h2><h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p><strong>SMTP</strong>(Simple Mail Transfer Protocol)：</p>
+<ul>
+<li>提供电子邮件服务的协议为。</li>
+<li>使用TCP协议。</li>
+</ul>
+<p><strong>邮件服务器</strong></p>
+<ol>
+<li>发送端将邮件发送给服务器。</li>
+<li>由DNS的MX记录，发送邮件给对方邮件服务器。</li>
+<li>根据邮件软件的设置，从邮件服务器接收邮件。</li>
+</ol>
+<h3 id="邮件地址"><a href="#邮件地址" class="headerlink" title="邮件地址"></a>邮件地址</h3><p><strong>MX记录</strong><br>电子邮件的发送地址右DNS进行管理，DNS中注册有邮件地址及其发送地址对应的邮件服务器的域名。</p>
+<h3 id="MIME"><a href="#MIME" class="headerlink" title="MIME"></a>MIME</h3><p>电子邮件所能发送的数据格式扩展成MIME(Multipurpose Internet Mail Extensions)，可以发送多种格式。</p>
+<p>组成：</p>
+<ul>
+<li>首部</li>
+<li>正文</li>
+</ul>
+<h3 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h3><ul>
+<li>发送电子邮件的协议。</li>
+<li>使用TCP的25号端口。</li>
+<li>建立TCP连接后进行控制和应答以及数据的发送。</li>
+<li>指令和应答的最后追加换行指令(CR,LF)。</li>
+<li>无法验证发送者，需要使用<strong>POP before SMTP</strong>或<strong>SMTP认证</strong>(SMTP Authentication)</li>
+</ul>
+<h3 id="POP"><a href="#POP" class="headerlink" title="POP"></a>POP</h3><ul>
+<li>用于接收电子邮件的协议。</li>
+<li>客户端从POP服务器接收对方发送的邮件。</li>
+<li>在客户端和服务器之间建立TCP连接。</li>
+<li>使用ASCII吗字符串。</li>
+<li>两种应答:<ul>
+<li>正常：<strong>+OK</strong></li>
+<li>异常：<strong>-ERR</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="IMAP"><a href="#IMAP" class="headerlink" title="IMAP"></a>IMAP</h3><p>接收电子邮件的协议。</p>
+<ul>
+<li>POP：邮件是由客户端进行管理。</li>
+<li>IMAP：邮件是由服务器进行管理。</li>
+</ul>
+<p>优势：</p>
+<ol>
+<li>不需要下载所有邮件。</li>
+<li>不同计算机可以保持同步。</li>
+<li>适用于异构终端。</li>
+</ol>
+<hr>
+<h2 id="WWW"><a href="#WWW" class="headerlink" title="WWW"></a>WWW</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>访问信息的手段与位置(URI,Uniform Resource Identifier)</li>
+<li>信息的表现形式(HTML, HyperText Markup Language)</li>
+<li>信息转发(HTTP, HyperText Transfer Protocol)</li>
+</ul>
+<p><strong>URI</strong><br>Uniform Resource Identifier<br>不局限于表示互联网资源，可标识所有资源的标识码。</p>
+<p><strong>HTML</strong><br>记述Web页的一种语言，指定浏览器中显示格式。<br>具有纯文本，能附加链接。</p>
+<p><em>XML：使用标签表示一个数据。</em></p>
+<p><strong>HTTP</strong><br>访问Web网页的URI时。<br>默认使用80端口。</p>
+<ul>
+<li>客户端向服务器80端口建立一个TCP连接。</li>
+<li>在TCP连接上进行请求和应答以及数据报文的发送。</li>
+</ul>
+<p>版本：</p>
+<ul>
+<li>HTTP1.0: 每一个命令和应答都触发一个TCP连接的建立与断开。</li>
+<li>HTTP1.1: 允许一个TCP连接上发送多个命令和应答。</li>
+</ul>
+<p><strong>JavaScript</strong><br>嵌入在HTML的编程语言。<br>在客户端中执行。<br>可用于验证客户端输入字符串，操作HTML或XML的逻辑结构，动态显示Web页的内容和页面风格。</p>
+<p><strong>CGI</strong><br>Web服务器调用外部程序时所使用的一种服务器端应用的规范。<br>客户端输入的数据会传给触发运行的另外一个程序，运行结束后将生成的HTML再返回客户端。<br>可以返回动态的信息。</p>
+<p><strong>Cookie</strong><br>Web应用为获取用户信息，保存的用户信息。</p>
+<hr>
+<h2 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h2><p><strong>SNMP</strong></p>
+<ul>
+<li>在TCP/IP的网络管理中使用SNMP收集必要的信息。</li>
+<li>基于UDP/IP的协议。</li>
+<li>管理端为管理器，被管理端为代理。</li>
+<li>SNMPv3中分为：<ul>
+<li>消息处理</li>
+<li>用户安全</li>
+<li>访问控制</li>
+</ul>
+</li>
+</ul>
+<p>工作机制：</p>
+<ul>
+<li>动作检查：查询请求，信息请求应答</li>
+<li>修改设置：设置请求，应答</li>
+<li>事件通知：事件通知。</li>
+</ul>
+<p><strong>MIB</strong><br>SNMP中交互的信息是MIB（Management Information Base）<br>MIB是在树状结构的数据库中为每个项目附加编号的一种信息结构。</p>
+<p><strong>RMON</strong><br>MIB由监控网络中某个设备接口的众多参数构成。<br>RMON：由监控网络上线路的众多参数构成。<br>以终端为单位，也可以以协议为单位进行监控。<br>用于收集网络扩展和变更时期更为有意义的数据。</p>
+<hr>
+<h2 id="其他应用层协议"><a href="#其他应用层协议" class="headerlink" title="其他应用层协议"></a>其他应用层协议</h2><p><strong>多媒体通信实现技术</strong><br>需求：可有少许丢包，希望延时较小，注重时延性。</p>
+<p>实时多媒体通信多采用UDP，加上H.323和SIP协议，以及RTP协议。</p>
+<p><strong>H.323</strong><br>用于IP网上传输音频，视频的协议。</p>
+<p>组件：</p>
+<ul>
+<li>终端</li>
+<li>网关</li>
+<li>网闸</li>
+<li>多点控制单元</li>
+</ul>
+<p><strong>SIP</strong><br>Session Initiation Protocol：</p>
+<ul>
+<li>解析对方地址</li>
+<li>呼叫对方号码</li>
+<li>传送的媒体信息进行处理</li>
+<li>中断会话和数据转发</li>
+</ul>
+<p><strong>RTP</strong><br>为每个报文附加时间戳和序列号。</p>
+<p><strong>P2P</strong><br>终端或主机不经过服务器直接一对一相互通信。<br>主机具有客户端和服务端，对等关系提供服务。</p>
+<p><strong>LDAP</strong><br>Lightweight Directory Access Protocol:<br>访问目录服务的一种协议。<br>目录服务：<br>网络中存在的一种提供相关资源的数据库的服务。</p>
+<p>格式：</p>
+<ul>
+<li>目录树的格式</li>
+<li>数据格式</li>
+<li>命名规则</li>
+<li>目录访问顺序</li>
+<li>安全认证</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-20T15:39:18.205Z" itemprop="dateUpdated">2020-01-20 23:39:18</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMTP/" rel="tag">SMTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TELNET/" rel="tag">TELNET</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/20/TCPIP-6/&title=《TCPIP-6》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/20/TCPIP-6/&title=《TCPIP-6》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/20/TCPIP-6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-6》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/20/TCPIP-6/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/20/TCPIP-6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/01/20/TCPIP-7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCPIP-7</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/16/DataStructure-tree3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">多路查找树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/01/20/TCPIP-6/&title=《TCPIP-6》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/01/20/TCPIP-6/&title=《TCPIP-6》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/01/20/TCPIP-6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCPIP-6》 — 咸鱼的自我修养&url=http://yoursite.com/2020/01/20/TCPIP-6/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/01/20/TCPIP-6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/01/20/TCPIP-6/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

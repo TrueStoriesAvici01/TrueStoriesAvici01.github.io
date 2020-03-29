@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>操作系统概念(十):文件系统接口 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,文件系统">
+    <meta name="description" content="文件系统接口[toc] 文件系统:  一组文件:用于存储相关数据. 目录结构:组织系统内的文件并提供有关文件的信息.  文件概念操作系统将存储设备抽象,定义了逻辑存储单元(文件),再将文件映射到物理设备. 文件属性常见属性:  名称 标识符:标识文件系统内文件的唯一标签. 类型:被支持不同类型的文件系统所使用. 位置:指向文件位置的指针. 大小:文件当前的大小. 保护:进行读,写,执行等访问控制信">
+<meta name="keywords" content="操作系统,文件系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统概念(十):文件系统接口">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;14&#x2F;OperatingSystem-10&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="文件系统接口[toc] 文件系统:  一组文件:用于存储相关数据. 目录结构:组织系统内的文件并提供有关文件的信息.  文件概念操作系统将存储设备抽象,定义了逻辑存储单元(文件),再将文件映射到物理设备. 文件属性常见属性:  名称 标识符:标识文件系统内文件的唯一标签. 类型:被支持不同类型的文件系统所使用. 位置:指向文件位置的指针. 大小:文件当前的大小. 保护:进行读,写,执行等访问控制信">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-14T08:05:53.934Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统概念(十):文件系统接口</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统概念(十):文件系统接口</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-14T08:05:53.934Z" itemprop="datePublished" class="page-time">
+  2020-02-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件系统接口"><span class="post-toc-number">1.</span> <span class="post-toc-text">文件系统接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">文件概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件属性"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">文件属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件操作"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">文件操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#打开与关闭文件"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">打开与关闭文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件类型"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">文件类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件结构"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">文件结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内部文件结构"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">内部文件结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件加锁"><span class="post-toc-number">1.1.7.</span> <span class="post-toc-text">文件加锁</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#访问方法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">访问方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#顺序访问"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">顺序访问</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#直接访问"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">直接访问</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他访问方式"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">其他访问方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录结构"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目录结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#存储结构"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">存储结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录概述"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">目录概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单层结构目录"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">单层结构目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双层结构目录"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">双层结构目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#树状结构目录"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">树状结构目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#无环图目录"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">无环图目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通用图目录"><span class="post-toc-number">1.3.7.</span> <span class="post-toc-text">通用图目录</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统安装"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">文件系统安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件共享"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">文件共享</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多用户"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">多用户</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#远程文件系统"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">远程文件系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一致性语义"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">一致性语义</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保护"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">保护</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问类型"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">访问类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问控制"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">访问控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他保护方式"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">其他保护方式</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OperatingSystem-10"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统概念(十):文件系统接口</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-14 16:05:53" datetime="2020-02-14T08:05:53.934Z"  itemprop="datePublished">2020-02-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="文件系统接口"><a href="#文件系统接口" class="headerlink" title="文件系统接口"></a>文件系统接口</h1><p>[toc]</p>
+<p>文件系统:</p>
+<ul>
+<li>一组文件:<em>用于存储相关数据.</em></li>
+<li>目录结构:<em>组织系统内的文件并提供有关文件的信息.</em></li>
+</ul>
+<h2 id="文件概念"><a href="#文件概念" class="headerlink" title="文件概念"></a>文件概念</h2><p><em>操作系统将存储设备抽象,定义了逻辑存储单元(文件),再将文件映射到物理设备.</em></p>
+<h3 id="文件属性"><a href="#文件属性" class="headerlink" title="文件属性"></a>文件属性</h3><p>常见属性:</p>
+<ul>
+<li><strong>名称</strong></li>
+<li><strong>标识符</strong>:标识文件系统内文件的唯一标签.</li>
+<li><strong>类型</strong>:被支持不同类型的文件系统所使用.</li>
+<li><strong>位置</strong>:指向文件位置的指针.</li>
+<li><strong>大小</strong>:文件当前的大小.</li>
+<li><strong>保护</strong>:进行读,写,执行等访问控制信息.</li>
+<li><strong>时间,日期和用户标识</strong>:文件创建,上次修改和上次访问相关信息.</li>
+</ul>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>创建操作:</p>
+<ul>
+<li><strong>创建文件</strong>:两个步骤:1.在文件系统为文件找到空间;2.在目录中为新文件创建一个条目.</li>
+<li><strong>写文件</strong>:执行一个系统调用,指明文件名和要写入文件的内容.</li>
+<li><strong>读文件</strong>:使用系统调用,指明文件名和读入文件块的内存位置.</li>
+<li><strong>在文件中重定位</strong>:搜索目录相应条目,设置当前文件位置为给定值.</li>
+<li><strong>删除文件</strong>:在目录中搜索给定名称的文件,释放文件空间并删除相应目录条目.</li>
+<li><strong>截短文件</strong>:保留文件属性而将长度设置为0并释放空间.</li>
+</ul>
+<h3 id="打开与关闭文件"><a href="#打开与关闭文件" class="headerlink" title="打开与关闭文件"></a>打开与关闭文件</h3><p><strong>打开文件表</strong>(open-file table):<br>一个包含所有打开文件的信息表.</p>
+<p><em>对一个文件的操作可通过表的一个索引指定文件.关闭文件使得操作系统从文件表中删除对应条目.</em></p>
+<p>多进程同时打开同一文件:<br>采用两级内部表:单个进程的表和整个系统的表.</p>
+<ul>
+<li><strong>单个进程表</strong>:单个进程打开的所有文件.每个条目中指向对应的整个系统打开的文件表.</li>
+<li><strong>系统打开文件表</strong>:进程打开一个文件,系统打开文件表为打开文件增加相应的条目.还有<em>打开计数器</em>(open count),记录打开该文件的进程数,为0时该条目可从系统打开文件表删除.</li>
+</ul>
+<p>打开文件的信息:</p>
+<ul>
+<li><strong>文件指针</strong>:指向文件的指针.</li>
+<li><strong>文件打开计数器</strong>:当计数器为0时表示没有进程打开文件,可以关闭文件并删除对应条目.</li>
+<li><strong>文件磁盘位置</strong>:定位磁盘上文件位置的信息.</li>
+<li><strong>访问权限</strong>:每个进程用一个访问模式打开文件.</li>
+</ul>
+<h3 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h3><p>文件类型:<br>通过识别和支持文件类型,并按照合理方式对文件进行操作.</p>
+<p><em>常在文件名内包含类型,可由<code>文件名+圆点+扩展名</code>组成.</em></p>
+<h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>文件类型可用于表示文件的内部结构.源文件和目标文件具有一定结构,以适应相应处理程序的要求.</p>
+<p>支持过多的文件结构导致操作系统变大.</p>
+<p>操作系统至少支持一种结构:可执行文件结构,以便能装入和运行程序.</p>
+<p>Macintosh操作系统要求每个文件包含两个部分:</p>
+<ul>
+<li>资源叉(source fork):包括用户感兴趣的信息.</li>
+<li>数据叉(data fork):包括程序代码或数据.</li>
+</ul>
+<h3 id="内部文件结构"><a href="#内部文件结构" class="headerlink" title="内部文件结构"></a>内部文件结构</h3><ul>
+<li>定义块的大小,其由扇区大小决定.</li>
+<li>每个块的大小是相同的.</li>
+<li>将若干个逻辑记录打包(packing),再放入物理记录中.</li>
+<li>由于按块分配的,最后一个块的部分空间一般没有用上,称为<em>内部碎片</em>(internal fragmentation).</li>
+</ul>
+<h3 id="文件加锁"><a href="#文件加锁" class="headerlink" title="文件加锁"></a>文件加锁</h3><ul>
+<li><strong>共享锁</strong>(shared lock):类似于读者锁.</li>
+<li><strong>专用锁</strong>(exclusive lock):类似于写者锁.</li>
+</ul>
+<p><strong>强制</strong>(mandatory):一个进程获得锁后,阻止其他进程访问已加锁的文件.</p>
+<p><strong>建议</strong>(advisory):需要确保合适地获得和释放锁.</p>
+<hr>
+<h2 id="访问方法"><a href="#访问方法" class="headerlink" title="访问方法"></a>访问方法</h2><h3 id="顺序访问"><a href="#顺序访问" class="headerlink" title="顺序访问"></a>顺序访问</h3><p><strong>顺序访问</strong>(sequential access):<br>文件信息按顺序一一加以处理.</p>
+<p>读操作:<br>读取下一个文件,并自动前移文件指针.</p>
+<p>写操作:<br>向文件尾部增加内容,并将指针移到新增数据之后.</p>
+<h3 id="直接访问"><a href="#直接访问" class="headerlink" title="直接访问"></a>直接访问</h3><p><strong>直接访问</strong>(direct access)/相对访问(relative access):</p>
+<ul>
+<li>文件以固定长度的<em>逻辑记录</em>(logical record)组成.</li>
+<li>文件作为块或记录的编号序列进行直接读写.</li>
+</ul>
+<p>实现:<br>用户向操作系统提供<em>相对块号</em>(relative block number,相对于文件开始的索引).<br>设逻辑记录长度为L,记录N的请求可转换为从文件位置 L * N 开始的L字节的请求.</p>
+<h3 id="其他访问方式"><a href="#其他访问方式" class="headerlink" title="其他访问方式"></a>其他访问方式</h3><p>创建文件索引(index,各块的指针).<br>为了查找文件中的记录,首先搜索索引,再根据指针直接访问文件,查找所需的记录.</p>
+<p>对于大文件使用两层的索引:<br>初级索引文件包括二级索引文件的指针,二级索引文件包括真正指向数据项的指针.</p>
+<hr>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p><strong>分区</strong>/片(slice):<br>一个磁盘中有多个文件系统,每个部分独立用于不同的地方.</p>
+<p><strong>卷</strong>(volume):<br>不同的分区组合成更大的结构.</p>
+<p><strong>设备目录</strong>(device directory)/卷表(volume table of content):<br>记录卷上所有文件的信息(名称,位置,大小等).</p>
+<h3 id="目录概述"><a href="#目录概述" class="headerlink" title="目录概述"></a>目录概述</h3><p><em>目录可看作符号表,将文件名转换成目录条目.</em></p>
+<p>目录相关操作:</p>
+<ul>
+<li><strong>搜索文件</strong>:搜索目录结构查找特定文件的条目.</li>
+<li><strong>创建文件</strong>:创建新文件并加入到目录中.</li>
+<li><strong>删除文件</strong>:将不需要的文件从目录删除.</li>
+<li><strong>遍历目录</strong>:遍历目录内的文件及其目录中每个文件条目的内容.</li>
+<li><strong>重命名文件</strong>:改变文件在目录结构中的位置.</li>
+<li><strong>跟踪文件系统</strong>:访问每个目录和每个目录的每个文件.</li>
+</ul>
+<h3 id="单层结构目录"><a href="#单层结构目录" class="headerlink" title="单层结构目录"></a>单层结构目录</h3><p>特点:</p>
+<ul>
+<li>所有文件都位于同一个目录下.</li>
+<li>每个文件必须具有唯一的名称.</li>
+</ul>
+<h3 id="双层结构目录"><a href="#双层结构目录" class="headerlink" title="双层结构目录"></a>双层结构目录</h3><p>特点:</p>
+<ul>
+<li>每个用户都有自己的<strong>用户文件目录</strong>(user file directory, UFD).</li>
+<li>当一个用户作业开始执行时,搜索系统的<strong>主文件目录</strong>(master file directory, MFD).</li>
+<li>不同用户的UFD唯一,但可拥有系统名称的文件.</li>
+<li>有效的对用户进行隔离,解决了名称冲突问题,但不利于合作和访问其他文件.</li>
+<li>双层结构目录可看作是高度为2的树,树根时MFD,直接后代时UFD,UFD的后代(<em>树叶</em>)为文件本身.</li>
+<li>定义一个特殊的用户目录,包含所有系统文件.给定名称文件装入时,操作系统搜索本地UFD,若未找到,则搜索特殊用户目录.</li>
+</ul>
+<h3 id="树状结构目录"><a href="#树状结构目录" class="headerlink" title="树状结构目录"></a>树状结构目录</h3><p>将目录结构扩展为任意高度的树.</p>
+<p>目录包含一组文件和子目录,每个目录是一个按照特定方式访问的文件.</p>
+<p>每个目录条目都用一位定义其为文件或子目录.</p>
+<p><strong>当前目录</strong>(current directory):<br>需要引用一个文件时,旧搜索当前目录.当所需文件不在时,需要提供路径名.</p>
+<ul>
+<li><strong>绝对路径名</strong>(absolute path name):从根开始并给出路径上的目录名直到所指定的文件.</li>
+<li><strong>相对路径名</strong>(relative path name):从当前目录开始定义路径.</li>
+</ul>
+<p>删除操作:</p>
+<ul>
+<li>若目录为空,则直接删除.</li>
+<li>若目录非空,则:<ul>
+<li>禁止删除,只有删除其中内容时才能删除目录.</li>
+<li>删除一个目录时,所有该目录的文件和子目录都被删除.</li>
+</ul>
+</li>
+</ul>
+<p><strong>桌面文件</strong>(Desktop File):<br>包括所看到的所有可执行程序的名称和位置.</p>
+<h3 id="无环图目录"><a href="#无环图目录" class="headerlink" title="无环图目录"></a>无环图目录</h3><p>背景:<br>共同的子目录需要共享,共享目录或文件可同时位于文件系统的多处.</p>
+<p><strong>无环图</strong>(acyclic graph):允许目录含有共享子目录和文件.同一文件或子目录可出现在不同目录中.</p>
+<p>共享文件(或子目录)只存在一个文件,任何改变都会其他用户看到.</p>
+<p>共享文件或目录的实现:</p>
+<ul>
+<li>创建一个新目录条目(<strong>链接</strong>,link,为另一个文件或目录的).链接可通过使用路径名定位真正的文件从而实现<strong>解析</strong>.</li>
+<li>在共享目录中重复所有被共享文件信息.</li>
+</ul>
+<p>问题:</p>
+<ul>
+<li>不同的文件名可能表示同一个文件,在遍历文件系统时,不希望多次重复地遍历共享目录.</li>
+<li>删除问题:1.删除文件时就删除,可能导致指针指向不存在的文件;2.对于符号链接实现共享,删除链接不影响原文件.若文件条目被删除,则文件空间被释放,链接指针无效;3.保留文件直到删除其所有引用.为每个文件保留引用列表或只保留文件引用的数量,当计数为0时,则删除文件.</li>
+</ul>
+<h3 id="通用图目录"><a href="#通用图目录" class="headerlink" title="通用图目录"></a>通用图目录</h3><p>对于已存在的树状结构目录增加链接.</p>
+<p>问题:</p>
+<ul>
+<li>多次检索共享部分.解决:限制搜索时所访问目录的次数.</li>
+<li>计数不为0时不一定存在引用(自我引用).解决:使用垃圾回收.</li>
+</ul>
+<hr>
+<h2 id="文件系统安装"><a href="#文件系统安装" class="headerlink" title="文件系统安装"></a>文件系统安装</h2><p><em>文件系统被进程使用之前必须被安装(mount).</em></p>
+<p><em>目录结构建立在多个卷上,卷必须被安装后才能在文件系统命名空间使用.</em></p>
+<p><em>安装步骤:操作系统获取设备名称和文件系统的安装点(mount pointer).</em></p>
+<p><em>系统可能不允许在包含文件的目录上安装,或安装的文件系统可见,而之前已存的文件不可见.</em></p>
+<p><em>系统可允许对同一个文件系统在不同的安装点上进行多次重复安装,或只允许对一个文件系统安装一次.</em></p>
+<hr>
+<h2 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h2><h3 id="多用户"><a href="#多用户" class="headerlink" title="多用户"></a>多用户</h3><p>为了实现共享和保护,操作系统采用了<em>文件</em>/(目录),<em>拥有者</em>和<em>组</em>.</p>
+<ul>
+<li>拥有者是目录最高控制权的用户,可改变属性和授权访问.</li>
+<li>组属性定义对文件拥有相同权限的用户子集.</li>
+<li>组成员和其他用户对文件可进行的操作取决于文件拥有者的定义.</li>
+</ul>
+<h3 id="远程文件系统"><a href="#远程文件系统" class="headerlink" title="远程文件系统"></a>远程文件系统</h3><p>实现方式:</p>
+<ol>
+<li>通过ftp,实现匿名访问(anonymous)和验证访问,从而在不同机器之间进行文件的人工传输.</li>
+<li>通过分布式文件系统(distributed file system,DFS),在本机上直接访问远程目录.</li>
+<li>通过WWW(World Wide Web),浏览器获取对远程文件的访问.</li>
+</ol>
+<p><strong>客户机-服务器模型</strong></p>
+<ul>
+<li>包含文件的机器为服务器,需要访问文件的机器为客户机.</li>
+<li>客户机通过网络名称或其他标识符来指定.</li>
+<li>文件操作请求会代表用户通过网络按照DFS发送给服务器.</li>
+<li>文件打开请求与请求的用户ID一起发送.</li>
+<li>服务器使用访问检查确定用户是否有权按所需模式访问文件.</li>
+</ul>
+<p><strong>分布式信息系统</strong></p>
+<ul>
+<li><strong>分布式信息系统</strong>(distributed information system)/分布式命名服务(distributed naming service):提供用于远程计算所需信息的统一访问.</li>
+<li><strong>域名系统</strong>(domain name system, DNS):提供主机名到网络地址的转换.</li>
+<li><strong>网络信息服务</strong>(network information service, NIS):将用户名,主机名等信息加以集中管理.</li>
+<li><strong>公共Internet文件系统</strong>(common Internet file system,CIFS):网络信息和用户验证信息用来创建网络登录.服务器用来确定允许或拒绝请求.</li>
+<li><strong>轻量级目录存取协议</strong>(lightweight directory access protocol, LDAP):目录存储企业内所有计算机的所有用户和资源.用户一次验证,可访问企业所有计算机.</li>
+</ul>
+<p><strong>故障模式</strong></p>
+<p>本地文件系统出错原因:</p>
+<ul>
+<li>磁盘出错</li>
+<li>目录结构和磁盘管理信息损坏</li>
+<li>磁盘控制器故障</li>
+<li>电缆故障</li>
+<li>用户或管理员错误</li>
+<li>目录或分区被删除</li>
+</ul>
+<p>远程文件系统故障处理:</p>
+<ul>
+<li>终止(或延迟)对故障服务器的操作.</li>
+<li>通过状态信息(state information,维护当前活动和打开的文件)从故障恢复.</li>
+<li>可通过无状态(stateless)DFS实现恢复(只有打开文件才能请求文件的读写).</li>
+</ul>
+<h3 id="一致性语义"><a href="#一致性语义" class="headerlink" title="一致性语义"></a>一致性语义</h3><p><strong>一致性语义</strong>(consistency semantics):多用户同时访问共享文件时的语义.</p>
+<p><strong>UNIX语义</strong></p>
+<ul>
+<li>一个用户对打开文件的写操作可被打开文件的其他用户看到.</li>
+<li>允许用户共享文件当前指针的位置.</li>
+</ul>
+<p><strong>会话语义</strong></p>
+<ul>
+<li>用户对打开文件的写不能被打开同文件的其他用户看到.</li>
+<li>一旦文件关闭,其修改只能被之后打开的用户看到,已打开的用户不能看到.</li>
+</ul>
+<p><strong>不可修改共享文件语义</strong>(immutable shared file)</p>
+<ul>
+<li>共享的文件不可重用,文件内容不可修改.</li>
+</ul>
+<hr>
+<h2 id="保护"><a href="#保护" class="headerlink" title="保护"></a>保护</h2><h3 id="访问类型"><a href="#访问类型" class="headerlink" title="访问类型"></a>访问类型</h3><p><strong>控制访问</strong>(contolled access):<br>限制可进行的文件访问类型.</p>
+<ul>
+<li>读(read)</li>
+<li>写(write)</li>
+<li>添加(append)</li>
+<li>删除(delete)</li>
+<li>列表清单(list)</li>
+</ul>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p><strong>访问控制列表</strong>(access-control list,ACL):<br>每个文件和目录增加ACL,给定每个用户名及其所允许的访问类型.</p>
+<p>改进:每个文件采用三种用户类型</p>
+<ul>
+<li>拥有者(owner):文件的创建者</li>
+<li>组(group):对共享文件进行访问的用户组成</li>
+<li>其他(universe):所有其他用户</li>
+</ul>
+<h3 id="其他保护方式"><a href="#其他保护方式" class="headerlink" title="其他保护方式"></a>其他保护方式</h3><p>保护:</p>
+<ul>
+<li>对每个文件加密.</li>
+<li>对多层目录结构,还需要保护子目录内文件. </li>
+<li>需要控制一个用户能确定一个目录是否有一个文件存在.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-02-14T08:05:53.934Z" itemprop="dateUpdated">2020-02-14 16:05:53</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" rel="tag">文件系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/14/OperatingSystem-10/&title=《操作系统概念(十):文件系统接口》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/14/OperatingSystem-10/&title=《操作系统概念(十):文件系统接口》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/14/OperatingSystem-10/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(十):文件系统接口》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/14/OperatingSystem-10/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/14/OperatingSystem-10/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/14/SQL-10/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SQL必会必知(十):分组数据</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/13/SQL-9/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SQL必会必知(九):汇总数据</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/14/OperatingSystem-10/&title=《操作系统概念(十):文件系统接口》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/14/OperatingSystem-10/&title=《操作系统概念(十):文件系统接口》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/14/OperatingSystem-10/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统概念(十):文件系统接口》 — 咸鱼的自我修养&url=http://yoursite.com/2020/02/14/OperatingSystem-10/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/14/OperatingSystem-10/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/14/OperatingSystem-10/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
