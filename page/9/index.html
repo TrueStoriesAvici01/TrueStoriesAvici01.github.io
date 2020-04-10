@@ -153,11 +153,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-卡特兰数总结"
+            <article id="post-信息论-有噪信道编码"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-12-07 09:07:52" datetime="2019-12-07T01:07:52.000Z"  itemprop="datePublished">2019-12-07</time>
+        <time class="post-time" title="2019-12-17 14:14:03" datetime="2019-12-17T06:14:03.000Z"  itemprop="datePublished">2019-12-17</time>
 
         
 
@@ -169,7 +169,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/">卡特兰数总结</a>
+      <a class="post-title-link" href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/">信息论(六)-有噪信道编码</a>
     </h3>
   
 
@@ -179,24 +179,27 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        关于卡特兰数(Catalan number)的一些小结定义1, 1, 2, 5, 14, 42, 132 …
-递推关系卡特兰数是满足以下规律的数列：
-设$C_n$为第$n$个卡特兰数
+        有噪信道编码定理背景
+信道总是存在噪声，在有噪信道中进行无措传输可以达到的最大信息传输率。
+信道编码对象
+信源编码器输出的数字序列（信息序列）。
+信源经过等长编码，码符号往往等概率分布，可认为信道编码的信源为等概率出现。
+错误概率和编码规则有噪信道的错误概率与：
 
-$C_n = C_0C_{n-1} + C_1C_{n-2} + … + C_{n-1}C_0$  = $\sum_{i = 0}^{n-1}C_iC_{n-i}$  其中$C_0 = 1$。
-$C_n = \binom{2n}{n} - \binom{2n}{n-1} = \binom{2n}{n}/({n+1})$ 
-$C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
+信道统计特性有关，可由信道的转移矩阵描述。
+错误概率与译码准则。
 
+译码准则：离散单符号信道的输入符号集为$A = \{a_i\...
     
 
-        <a href="/2019/12/07/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E6%80%BB%E7%BB%93/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/catalan-number/" rel="tag">catalan number</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/" rel="tag">卡特兰数</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86/" rel="tag">有噪信道编码定理</a></li></ul>
 
     </div>
     
@@ -205,11 +208,11 @@ $C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-递归与动态规划总结"
+            <article id="post-信息论-无失真信源编码-1"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-11-30 21:35:38" datetime="2019-11-30T13:35:38.000Z"  itemprop="datePublished">2019-11-30</time>
+        <time class="post-time" title="2019-12-17 10:41:33" datetime="2019-12-17T02:41:33.000Z"  itemprop="datePublished">2019-12-17</time>
 
         
 
@@ -221,7 +224,7 @@ $C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/">递归与动态规划总结</a>
+      <a class="post-title-link" href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/">信息论(五)-无失真信源编码</a>
     </h3>
   
 
@@ -231,20 +234,17 @@ $C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        一句话简要介绍动态规划(dynamic programming)
-
-对象：    求解最优化问题。表现：    通常要做出一组选择来达到最优解，每次选择会生成与原问题形式相同的子问题。    ？当多余一个选择子集都生成相同的子问题时，动态规划通常很有效。
-
+        无失真信源编码香农编码离散无记忆信源：$\begin{bmatrix}x_1 &amp; x_2 &amp; … &amp; x_n \\ p(x_1) &amp; p(x_2) &amp; … &amp; p(x_n) \end{bmatrix}, \sum_i p(x_i) = 1$$l_i = \lceil \log \frac{1}{p(s_i)} \rceil,\ i = 1,2,...
     
 
-        <a href="/2019/11/30/%E9%80%92%E5%BD%92%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/17/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81-1/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" rel="tag">哈夫曼编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" rel="tag">无失真信源编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%B9%E8%AF%BA%E7%BC%96%E7%A0%81/" rel="tag">费诺编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A6%99%E5%86%9C%E7%BC%96%E7%A0%81/" rel="tag">香农编码</a></li></ul>
 
     </div>
     
@@ -253,11 +253,11 @@ $C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Notes"
+            <article id="post-信息论-无失真信源编码"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-11-29 17:00:00" datetime="2019-11-29T09:00:00.000Z"  itemprop="datePublished">2019-11-29</time>
+        <time class="post-time" title="2019-12-16 19:42:32" datetime="2019-12-16T11:42:32.000Z"  itemprop="datePublished">2019-12-16</time>
 
         
 
@@ -269,7 +269,7 @@ $C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/29/Notes/">JBIG2</a>
+      <a class="post-title-link" href="/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">信息论(四)-无失真信源编码</a>
     </h3>
   
 
@@ -279,25 +279,23 @@ $C_n = \frac{(4n-2)}{(n+1)}C_{n-1}$
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        JBIG2
-Model-Based Coding
-若想获得最佳的压缩结果，使用的数据模型要与实际数据相匹配。
-T.4 和 T.6 将每一行看作黑白像素游程的组合。
-为了进一步利用不同行之间的关联，二维的游程模型(MR和MMR)提供更佳的文本压缩效果。
-JBIG1 使用邻近的像素(模板)来预测单个像素。
-自适应的方式提高周期性的半色调图像的压缩表现，使用的游程模型和基于上下文的预测模型具有通用性，但是通用性影响了某些图像的压缩能力。
-JBIG2 并不对文件做前提性假设, 而是提取最具代表性的比特图(bitmaps): 对不同类型的文字(不同的语言文字)和图像(周期抖动, 误差扩散)更加鲁棒。
-
+        无失真信源编码定理编码器实质
+编码:对信源的原始符号按一定规则进行变换.
+目的
+使得变换后得到的码符号接近等概率分布,从而提高信息的传输有效性.
+定义
+从信源符号到码符号的一种映射.
+将信源符号集中的符号$s_j,j=1,2,…,q$(或长为N的信源符号序列)变换成由基本符号$x_j,j=1,2,…r$组成的长度为$L_i$的一一对应的输出符号序列,即:$C = \{W_1,…,W_q\}$...
     
 
-        <a href="/2019/11/29/Notes/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/16/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E6%97%A0%E5%A4%B1%E7%9C%9F%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JBIG2/" rel="tag">JBIG2</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%98%E9%95%BF%E7%A0%81/" rel="tag">变长码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AD%89%E9%95%BF%E7%A0%81/" rel="tag">等长码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E5%99%A8/" rel="tag">编码器</a></li></ul>
 
     </div>
     
@@ -306,11 +304,11 @@ JBIG2 并不对文件做前提性假设, 而是提取最具代表性的比特图
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构-五"
+            <article id="post-LaTeX常用命令小结"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-11-16 10:56:17" datetime="2019-11-16T02:56:17.000Z"  itemprop="datePublished">2019-11-16</time>
+        <time class="post-time" title="2019-12-16 15:57:02" datetime="2019-12-16T07:57:02.000Z"  itemprop="datePublished">2019-12-16</time>
 
         
 
@@ -322,7 +320,7 @@ JBIG2 并不对文件做前提性假设, 而是提取最具代表性的比特图
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%94/">数据结构(五)</a>
+      <a class="post-title-link" href="/2019/12/16/LaTeX%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/">LaTeX常用命令小结</a>
     </h3>
   
 
@@ -332,19 +330,19 @@ JBIG2 并不对文件做前提性假设, 而是提取最具代表性的比特图
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        二叉树节点
-BinNode模板类
-1234567891011121314151617181920212223242526272829#define BinNodePosi(T) BinNode&lt;T&gt;* //节点位置#define stature(p) ((p) ? (p)-&gt;height : -1) // 节点高度typedef enum &#123;RB_RED, RB_...
+        LaTeX常用命令小结写在前面本文记录常用的LaTeX命令，常常回顾，加深印象。
+符号类$\overline{p}$:1\overline&#123;p&#125;
+
     
 
-        <a href="/2019/11/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%94/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/16/LaTeX%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91/" rel="tag">树</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LaTeX/" rel="tag">LaTeX</a></li></ul>
 
     </div>
     
@@ -353,11 +351,11 @@ BinNode模板类
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构-四"
+            <article id="post-信息论-离散信道"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-10-29 20:57:25" datetime="2019-10-29T12:57:25.000Z"  itemprop="datePublished">2019-10-29</time>
+        <time class="post-time" title="2019-12-15 17:56:24" datetime="2019-12-15T09:56:24.000Z"  itemprop="datePublished">2019-12-15</time>
 
         
 
@@ -369,7 +367,7 @@ BinNode模板类
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/">数据结构(四)</a>
+      <a class="post-title-link" href="/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/">信息论(三)-离散信道及其信道容量</a>
     </h3>
   
 
@@ -379,20 +377,48 @@ BinNode模板类
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        背景介绍    Java的运行环境就是基于栈结构的虚拟机。    网络浏览器将用户最近访问过的地址组织成一个栈，新访问的页面存放在栈顶，“后退”按钮可以沿着相反方向返回之前访问的页面。    文本编辑器可以将用户的编辑操作记录在一个栈中，“撤销”功能可以返回上一个编辑记录。
-调度银行或医院的服务窗口，管理轮耕的田地和轮伐的森林，要使用到队列。
-多进程共享CPU时间，多用户共享打印机，需要借助队列结构实现优化的分配。
+        离散信道及其信道容量信道的数学模型及分类信道: 输入集合与输出集合间的映射关系.输入和输出是统计依赖关系
+数学模型
+$\{X\ P(Y|X)\ Y\}$
+分类:
 
+输入输出随机信号的特点:
+
+
+离散信道
+连续信道
+半离散/半连续信道
+波形信道
+
+
+输入输出随机变量个数
+
+
+单符号信道
+离散无记忆扩展信道(多符号信道) 
+
+
+输入输出个数
+
+
+单用户信道
+多用户信道
+
+
+信道上有无干扰
+
+
+有...
     
 
-        <a href="/2019/10/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9B/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/15/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E9%81%93/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%9F%E5%88%97/" rel="tag">队列</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E9%81%93/" rel="tag">信道</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E9%81%93%E5%AE%B9%E9%87%8F/" rel="tag">信道容量</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B3%E5%9D%87%E4%BA%92%E4%BF%A1%E6%81%AF/" rel="tag">平均互信息</a></li></ul>
 
     </div>
     
@@ -401,11 +427,11 @@ BinNode模板类
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-剑指Offer-二"
+            <article id="post-图的基本操作"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-10-28 20:22:44" datetime="2019-10-28T12:22:44.000Z"  itemprop="datePublished">2019-10-28</time>
+        <time class="post-time" title="2019-12-15 09:53:07" datetime="2019-12-15T01:53:07.000Z"  itemprop="datePublished">2019-12-15</time>
 
         
 
@@ -417,7 +443,7 @@ BinNode模板类
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/">剑指Offer(二)：面试需要的基础知识</a>
+      <a class="post-title-link" href="/2019/12/15/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">图的基本操作</a>
     </h3>
   
 
@@ -427,25 +453,27 @@ BinNode模板类
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        面试官谈基础知识
-C++: 面向对象的特性、构造函数、析构函数、动态绑定，常用的设计模式、UML图。
-C++: 对内存的使用和管理。
-1.数据结构和算法； 2.编程能力；3.概率等数学；4.问题的分析和推理能力。
-1.编程基础功(字符串处理)；2.并发控制；3.算法、复杂度；4.语言的基本概念。
-1.编程基础；2.计算机系统基础知识；3.算法及设计能力。
-1.对OS的理解：内存管理、文件操作、程序性能、多线程、程序安全；2.对于一门编程语言的掌握程度；3.算法和数据结构。
+        图的基本操作以下以图的邻接表形式存储
+深度优先搜索核心思想
+刨根问底，不撞南墙不回头，撞了南墙少回头，没头可回就结束。
+实现
 
+一个栈用来保存图中的节点。
+对栈的顶端的节点进行判断，若有未访问的邻居，则访问该邻居，并将其入栈。若没有未访问的邻居，则该节点出栈。
+栈为空时则结束。
 
+深度优先搜索伪代码：
+123456789101112131415161718public void DepthF...
     
 
-        <a href="/2019/10/28/%E5%89%91%E6%8C%87Offer-%E4%BA%8C/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/15/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87offer/" rel="tag">剑指offer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88/" rel="tag">广度优先</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88/" rel="tag">深度优先</a></li></ul>
 
     </div>
     
@@ -454,11 +482,11 @@ C++: 对内存的使用和管理。
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构-三"
+            <article id="post-信息论-离散信源"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-10-26 10:19:28" datetime="2019-10-26T02:19:28.000Z"  itemprop="datePublished">2019-10-26</time>
+        <time class="post-time" title="2019-12-14 16:18:19" datetime="2019-12-14T08:18:19.000Z"  itemprop="datePublished">2019-12-14</time>
 
         
 
@@ -470,7 +498,7 @@ C++: 对内存的使用和管理。
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/">数据结构(三)：列表</a>
+      <a class="post-title-link" href="/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/">信息论(二)-离散信源及其信息测度</a>
     </h3>
   
 
@@ -480,21 +508,35 @@ C++: 对内存的使用和管理。
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        循秩访问（call-by-rank）:数据项的物理存放位置与逻辑次序完全对应，秩同时对应于逻辑和物理次序。
-循位置访问/循链接访问（call-by-position/call-by-link）:逻辑上互为前驱和后继的元素之间维护着某种索引关系。索引关系可表示为：被索引元素的位置（position）或通往被索引元素的链接（link），位置只对应于逻辑次序。
+        离散信源及其信息测度信源的数学模型及分类
+随机变量描述
 
-从向量到列表引入列表的目的，两者差异…
 
+一维离散信源
+
+适用场景
+
+消息数是有限或可数的
+每次只输出一个消息
+
+特点
+
+输出为单个符号或消息,符号集有限或可数.
+可用一维离散型随机变量表示.
+
+数学模型
+单符号离散型概率空间
+$\begin{bmatrix} X \\ P(X) \end{bmatrix} = \begin{bmatrix} x_1 &amp; x_2 &...
     
 
-        <a href="/2019/10/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%89/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%97%E8%A1%A8/" rel="tag">列表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E4%BF%A1%E6%BA%90/" rel="tag">离散信源</a></li></ul>
 
     </div>
     
@@ -503,11 +545,11 @@ C++: 对内存的使用和管理。
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-剑指Offer-一"
+            <article id="post-信息论-绪论"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-10-26 07:44:46" datetime="2019-10-25T23:44:46.000Z"  itemprop="datePublished">2019-10-26</time>
+        <time class="post-time" title="2019-12-14 15:17:29" datetime="2019-12-14T07:17:29.000Z"  itemprop="datePublished">2019-12-14</time>
 
         
 
@@ -519,7 +561,7 @@ C++: 对内存的使用和管理。
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/">剑指Offer(一)：面试流程</a>
+      <a class="post-title-link" href="/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%BB%AA%E8%AE%BA/">信息论-绪论</a>
     </h3>
   
 
@@ -529,23 +571,25 @@ C++: 对内存的使用和管理。
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        面试官谈面试
-初级程序员：考查算法与数据结构；高级程序员：关注专业技能和项目经验。
-准备：公司近况，项目情况有所了解；准备好合适的问题问面试官。
-面试：不要紧张；了解清楚所解决的问题；做一些整体的设计与规划；不要马上提交，测试用例检查代码；
-
-
-面试的3种形式流程电话面试 -&gt; （共享桌面远程面试） -&gt; 现场面试
+        绪论
+基本概念信息
+事物运动或存在的不确定性的描述.
+信息量
+与不确定性(随机性)消除的程度有关.
+自信息
+消息a出现的不确定性和a出现的概率成反比:$I(a) = \log(1/p(a)) = -\log (p(a))$
+互信息
+接受到b后,获得关于a的信息量:$I(a:b) = \log (1/p(a)) - \log (1/p(a|b)) = \log (p(a|b)/p(a))$
     
 
-        <a href="/2019/10/26/%E5%89%91%E6%8C%87Offer-%E4%B8%80/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/14/%E4%BF%A1%E6%81%AF%E8%AE%BA-%E7%BB%AA%E8%AE%BA/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87offer/" rel="tag">剑指offer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="tag">信息论</a></li></ul>
 
     </div>
     
@@ -554,11 +598,11 @@ C++: 对内存的使用和管理。
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Java编程思想(五)"
+            <article id="post-图论小结"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-10-25 16:15:55" datetime="2019-10-25T08:15:55.000Z"  itemprop="datePublished">2019-10-25</time>
+        <time class="post-time" title="2019-12-14 13:11:27" datetime="2019-12-14T05:11:27.000Z"  itemprop="datePublished">2019-12-14</time>
 
         
 
@@ -570,7 +614,7 @@ C++: 对内存的使用和管理。
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/25/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%94)/">Java编程思想(五)：初始化与清理</a>
+      <a class="post-title-link" href="/2019/12/14/%E5%9B%BE%E8%AE%BA%E5%B0%8F%E7%BB%93/">图论小结</a>
     </h3>
   
 
@@ -580,17 +624,19 @@ C++: 对内存的使用和管理。
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        用构造器确保初始化Java中通过构造器确保每个对象都得到初始化。初始化采用与类相同的名称。
+        图论小结定义构成由两个集合构成:V和E.
+V: 节点的有限非空集合, 称为节点集.E: 节点的二元组集合,称为边集(节点的二元组称为边)
+表示G = (V,E)
     
 
-        <a href="/2019/10/25/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%94)/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/14/%E5%9B%BE%E8%AE%BA%E5%B0%8F%E7%BB%93/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="tag">初始化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%85%E7%90%86/" rel="tag">清理</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li></ul>
 
     </div>
     
@@ -599,11 +645,11 @@ C++: 对内存的使用和管理。
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-使用Matlab在训练分类模型"
+            <article id="post-字符串匹配小结"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2019-10-20 10:12:29" datetime="2019-10-20T02:12:29.000Z"  itemprop="datePublished">2019-10-20</time>
+        <time class="post-time" title="2019-12-13 18:23:47" datetime="2019-12-13T10:23:47.000Z"  itemprop="datePublished">2019-12-13</time>
 
         
 
@@ -615,7 +661,7 @@ C++: 对内存的使用和管理。
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/20/%E4%BD%BF%E7%94%A8Matlab%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">使用Matlab在训练分类模型</a>
+      <a class="post-title-link" href="/2019/12/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E5%B0%8F%E7%BB%93/">字符串匹配小结</a>
     </h3>
   
 
@@ -625,30 +671,21 @@ C++: 对内存的使用和管理。
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        简介Matlab中的Classification Learner App中包含了多种分类模型：decision tree, discriminant analysis, support vector machines, logistic regression, nearest neighbors, ensemble classification.
-
-Automated Classifier Training
-在Apps标签下，选择Math, Statistics and Optimization，点击Classification Learner。
-点击New Session，从本地文件或workspace中导入数据。指定response变量和作为predictors变量。
-在Classification Learner标签页中，选择Classifier，点击All Quick-To-Train。然后会自动训练所有模型。
-点击Train进行训练。
-最终结果Accuracy将在训练完成后展示在History标签页中。
-
-
-点击History标签页中的一个模型，探究所得结果。
-(optional)若要尝试所有分类器，可选All，然后点击Train进行训练。
-
+        字符串匹配算法小结定义
+文本串S
+模式串P
+在文本串S中查找模式串P所在的位置，存在则返回第一次匹配到的第一个字符在文本串S中的位置，未查到则返回-1。
 
     
 
-        <a href="/2019/10/20/%E4%BD%BF%E7%94%A8Matlab%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/" class="post-more waves-effect waves-button">
+        <a href="/2019/12/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E5%B0%8F%E7%BB%93/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/classification/" rel="tag">classification</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E7%B1%BB/" rel="tag">分类</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KMP%E7%AE%97%E6%B3%95/" rel="tag">KMP算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" rel="tag">字符串匹配</a></li></ul>
 
     </div>
     
@@ -661,7 +698,7 @@ Automated Classifier Training
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
     </div>
 </nav>
 

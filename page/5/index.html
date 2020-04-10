@@ -153,11 +153,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-TCPIP-3"
+            <article id="post-OperatingSystem-6"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-14 18:55:29" datetime="2020-01-14T10:55:29.000Z"  itemprop="datePublished">2020-01-14</time>
+        <time class="post-time" title="2020-02-04 18:08:10" datetime="2020-02-04T10:08:10.731Z"  itemprop="datePublished">2020-02-04</time>
 
         
 
@@ -169,7 +169,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/14/TCPIP-3/">TCPIP-3</a>
+      <a class="post-title-link" href="/2020/02/04/OperatingSystem-6/">操作系统概念(六):进程同步</a>
     </h3>
   
 
@@ -179,21 +179,28 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        IP协议IP即网际协议IP位于网络层。作用：实现终端节点之间的通信（点到点，end-to-end）。
-网络层与数据链路层的关系数据链路层：直连两个设备之间的通信功能。互连同一种数据链路节点之间的包传递。网络层：非直连的设备之间的通信传输。不同数据链路实现端节点之间的数据包传输。
-主机：配备IP地址，不进行路由控制的设备路由器：配备IP地址，又具有路由控制能力的设备节点：主机和路由器总称
+        进程同步[toc]
 
-I...
+协作进程:与系统内的其他进程相互影响的进程.
+协作进程共享数据:
+共享逻辑地址空间
+通过文件或消息
+
+
+
+背景协作顺序进程或线程(cooperating sequential process or thread):进程或线程间可以异步执行并且可能共享数据.
+竞争条件(race condition):多个进程并发访问和操作同一数据并且执行结果与访问发生的特定顺序有关.
+解...
     
 
-        <a href="/2020/01/14/TCPIP-3/" class="post-more waves-effect waves-button">
+        <a href="/2020/02/04/OperatingSystem-6/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICP-IP/" rel="tag">ICP/IP</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" rel="tag">进程同步</a></li></ul>
 
     </div>
     
@@ -202,11 +209,11 @@ I...
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-TCPIP-2"
+            <article id="post-OperatingSystem-5"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-14 08:44:42" datetime="2020-01-14T00:44:42.000Z"  itemprop="datePublished">2020-01-14</time>
+        <time class="post-time" title="2020-02-01 20:37:46" datetime="2020-02-01T12:37:46.563Z"  itemprop="datePublished">2020-02-01</time>
 
         
 
@@ -218,7 +225,7 @@ I...
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/14/TCPIP-2/">TCPIP-2</a>
+      <a class="post-title-link" href="/2020/02/01/OperatingSystem-5/">操作系统概念(五):CPU调度</a>
     </h3>
   
 
@@ -228,52 +235,31 @@ I...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        TCP/IP基础知识
+        CPU调度[toc]
+基本概念单处理器系统:
 
+每次只允许一个进程运行.
+任何其他进程必须等待,直到CPU空闲.
 
+多道程序设计:
 
-OSI模型
-TCP/IP模型
+多个进程同时处于内存中.
+一个进程等待时,操作系统将CPU的使用权交给其他进程.
 
+CPU-I/O区间周期特点:
 
-
-
-应用层
-
-
-
-表示层
-
-
-
-会话层
-TELENT,SSH,HTTP,SMTP,POP,SSL/TLS,FTP,MIME,HTML,SNMP,MIB,SIP,RTP…
-
-
-传输层
-TCP,UDP,UDP-Lite,SCTP,DCCP
-
-
-网络层
-ARP,IPv4,IPv6,ICMP,IPsec
-
-
-数据链路层
-
-
-
-物理层
-以太...
+进程执行由CPU执行和I/O等待周期组成.
+进程从CPU区间(CPU burst)到I/O区间(I/O burst),循环重复,直到终止CPU区...
     
 
-        <a href="/2020/01/14/TCPIP-2/" class="post-more waves-effect waves-button">
+        <a href="/2020/02/01/OperatingSystem-5/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CPU%E8%B0%83%E5%BA%A6/" rel="tag">CPU调度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
 
     </div>
     
@@ -282,11 +268,11 @@ ARP,IPv4,IPv6,ICMP,IPsec
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-TCPIP-1"
+            <article id="post-OperatingSystem-4"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-13 18:05:57" datetime="2020-01-13T10:05:57.000Z"  itemprop="datePublished">2020-01-13</time>
+        <time class="post-time" title="2020-01-28 16:09:40" datetime="2020-01-28T08:09:40.309Z"  itemprop="datePublished">2020-01-28</time>
 
         
 
@@ -298,7 +284,7 @@ ARP,IPv4,IPv6,ICMP,IPsec
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/13/TCPIP-1/">TCPIP-1</a>
+      <a class="post-title-link" href="/2020/01/28/OperatingSystem-4/">操作系统概念(四):线程</a>
     </h3>
   
 
@@ -308,29 +294,29 @@ ARP,IPv4,IPv6,ICMP,IPsec
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        网络基础知识计算机网络出现的背景分类按照规模：
+        [toc]
+线程概述线程(thread)
 
-WAN(Wide Area Network)，广域网
-MAN(Metroplitan Area Network)，城域网
-LAN(Local Area Network)，局域网
+CPU使用的基本单元
+由线程ID,程序计数器,寄存器集合和栈.
+同一个进程的多个线程共享代码段,数据段和其他操作系统资源.
 
+优点:
 
-计算机与网络发展的7个阶段
-批处理(Batch Processing)
-
-将用户的数据存入卡带中，由计算机按照一定顺序读取，用户要执行的程序一并得到处理。
-
-分时...
+响应度高:部分阻塞,程序仍然继续执行,从而增加响应程度.
+资源共享:共享内存和资源,允许同一地址空间有多个不同的活动线程.
+成本低:线程共享所属进程的资源.
+多处理器体系结构利用:每个进程并行运行在不同的处理器上....
     
 
-        <a href="/2020/01/13/TCPIP-1/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/28/OperatingSystem-4/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B/" rel="tag">线程</a></li></ul>
 
     </div>
     
@@ -339,11 +325,11 @@ LAN(Local Area Network)，局域网
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-计算机网络(一)"
+            <article id="post-OperatingSystem-3"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.962Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-28 08:06:43" datetime="2020-01-28T00:06:43.223Z"  itemprop="datePublished">2020-01-28</time>
 
         
 
@@ -355,7 +341,7 @@ LAN(Local Area Network)，局域网
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/">计算机网络(一)：计算机网络于Internet</a>
+      <a class="post-title-link" href="/2020/01/28/OperatingSystem-3/">操作系统概念(三)：进程管理</a>
     </h3>
   
 
@@ -365,32 +351,38 @@ LAN(Local Area Network)，局域网
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        The InternetA nut-and-bolts descriptionhosts(end systems): Many devices that are being hooked up to the Internet, such as laptops, smartphones, tablets, etc.
-The way  end systems communicate with each other:
+        进程[toc]
+背景：允许多个程序调入内存并发执行。
+进程：正在执行的程序。
+特点：
+
+需要一定的资源：CPU时间，内存，文件和I/O设备。
+资源在进程创建或执行时发配。
+是多数系统的工作单元。
+所有进程可以并发执行。
+
+进程管理：
+
+进程的创建和删除
+进程调度
+提供进程同步机制
+进程通信机制
+进程死锁处理
 
 
-End systems are connected together by a network of communication links(coaxial cable, copper wire, optical fiber…) and packet switches.
-Transmission rate: The rate of different links can transmit data, measured in bits/second.
-Steps: 
-
-The sending end system segments the data and adds header bytes to each segment.
-The resulting packages (packets) are sent through the network to the destination end system.
-The destination end system reassmbled into the original data.
-
-
-
-
-
+进程概念进程
+执行中的程序。
+不只是程序代码，还包括当前活动，通过程序计数器(p...
     
 
-        <a href="/2020/01/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C(%E4%B8%80)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/28/OperatingSystem-3/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
 
     </div>
     
@@ -399,11 +391,11 @@ The destination end system reassmbled into the original data.
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构与抽象(四)"
+            <article id="post-OperatingSystem-2"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.950Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-24 22:06:25" datetime="2020-01-24T14:06:25.090Z"  itemprop="datePublished">2020-01-24</time>
 
         
 
@@ -415,7 +407,7 @@ The destination end system reassmbled into the original data.
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/">数据结构与抽象(四)：泛型</a>
+      <a class="post-title-link" href="/2020/01/24/OperatingSystem-2/">操作系统概念(二):操作系统结构</a>
     </h3>
   
 
@@ -425,21 +417,22 @@ The destination end system reassmbled into the original data.
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Background使用Java没有定义的类类型，可以使用泛型(generic)，定义一个类，其对象的数据类型是由使用者决定。
-泛型数据类型当定义一个实例可能保存不同数据集合的类时，不需要给出对象的具体数据类型，而是使用泛型数据类型替代实际的数据类型。
-实现
+        操作系统结构[toc]
+操作系统服务操作系统服务
 
-在类或接口的定义中写一个占位符，该占位符就是泛型数据类型(generic data type),简称：泛型(generic type...
+用户界面(user interface,UI)：1.命令行界面(command-line interface,CLI)：文本命令;2.批处理(batch interface)：通过执行文件实现;3.图形用户界面(graphical user interface,GUI)：视窗系统。
+程序执行：程序装入内存并运行，能够结束执行。
+I/O操作：...
     
 
-        <a href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E5%9B%9B)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/24/OperatingSystem-2/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/" rel="tag">泛型</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
 
     </div>
     
@@ -448,11 +441,11 @@ The destination end system reassmbled into the original data.
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构与抽象(二)"
+            <article id="post-OperatingSystem-1"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.934Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-22 12:30:03" datetime="2020-01-22T04:30:03.866Z"  itemprop="datePublished">2020-01-22</time>
 
         
 
@@ -464,7 +457,7 @@ The destination end system reassmbled into the original data.
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/">数据结构与抽象(二)：设计类</a>
+      <a class="post-title-link" href="/2020/01/22/OperatingSystem-1/">操作系统概念(一):导论</a>
     </h3>
   
 
@@ -474,33 +467,31 @@ The destination end system reassmbled into the original data.
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        设计类封装封装：将数据和方法放在一个类中，隐藏类实现的细节，不需要知道类定义的内部细节，只需要知道如何为方法提供相应的参数，让方法执行正确的动作。
-抽象(abstract)：关注是什么而不是如何的过程。
-封装将类定义分成两个部分:
+        导论操作系统做什么操作系统(operating system)：管理计算机硬件的程序，为应用程序提供基础，为计算机硬件和计算机用户之间的中介。
+计算机系统组成
 
+计算机硬件
+操作系统
+系统软件与应用程序
+用户
 
-客户接口(client interface): 
+或
 
-类的公有方法的方法头
-类中公有命名常量
+硬件
+软件
+数据
 
-
-
-实现(implementation): 所有数据域和所有方法的定义组成
-
-私有数据域
-私有常量
-所有的方法定义
+硬件：中央处理器，内存，输入/输出设备等。（为系统提供基本的计算资源)应用程序：规定了使用这些资源的方式从而解决用户的计算问题。操作系统：控制和协调用户的应...
     
 
-        <a href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%BA%8C)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/22/OperatingSystem-1/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
 
     </div>
     
@@ -509,11 +500,11 @@ The destination end system reassmbled into the original data.
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构与抽象(三)"
+            <article id="post-GithubProblem"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.906Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-21 21:04:03" datetime="2020-01-21T13:04:03.324Z"  itemprop="datePublished">2020-01-21</time>
 
         
 
@@ -525,7 +516,7 @@ The destination end system reassmbled into the original data.
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/">数据结构与抽象(三)：包</a>
+      <a class="post-title-link" href="/2020/01/21/GithubProblem/">Github相关问题</a>
     </h3>
   
 
@@ -535,23 +526,25 @@ The destination end system reassmbled into the original data.
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        包
-数据类型(data type): 一组值及使用某种特定的程序语言定义的这些值上的操作。抽象数据类型(abstract data type, ADT): 在概念层面上定义的一组值及这些值上的操作。数据结构(data structure): 使用一种程序设计语言实现的ADT。 
+        
+问题描述无法ping，100%丢包
+解决
+
+ipaddress查询3个域名对应的IP地址
+在/etc/hosts文件中追加类似下列三行：××× github.com××× github.global.ssl.fastly.net××× codeload.github.com
 
 
-包的概念包的特点
-
-没有特定次序的对象的有限集合这些对象可能有相同或相关的数据类型可以有重复项
+3.重启网络：sudo /etc/init.d/networking restart或service netwo...
     
 
-        <a href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%89)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/21/GithubProblem/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%85/" rel="tag">包</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
 
     </div>
     
@@ -560,11 +553,11 @@ The destination end system reassmbled into the original data.
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构与抽象(一)"
+            <article id="post-TCPIP-7"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.894Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-20 23:41:37" datetime="2020-01-20T15:41:37.000Z"  itemprop="datePublished">2020-01-20</time>
 
         
 
@@ -576,7 +569,7 @@ The destination end system reassmbled into the original data.
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/">数据结构与抽象(一)：组织数据</a>
+      <a class="post-title-link" href="/2020/01/20/TCPIP-7/">TCPIP-7</a>
     </h3>
   
 
@@ -586,23 +579,35 @@ The destination end system reassmbled into the original data.
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        组织数据抽象数据类型(Abstract Data Type, ADT): 描述数据集(set)及数据上操作的规范说明。
-数据结构(data type): ADT在某种编程语言中的实现。
-集合(collection): 包含一组对象的ADT。可能允许重复，可能不允许重复。
+        网络安全网路安全构成要素防火墙种类：
 
+专门过滤特定数据包的包过滤防火墙
+数据到达应用以后由应用处理并拒绝非法访问的应用网关
 
-ADT包(bag): 由一个无序集合构成，允许有重复值。
-ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也...
+IDS（入侵检测系统）检查已经入侵内部网络进行非法访问的情况，并通知网络管理员。
+分类：
+形式：
+
+防火墙或DMZ等边界上进行设置
+设置在网络内部，全网等(有监控，检测边界)
+
+功能：
+
+定期采集日志
+长期监控
+通知异常
+
+DMZ:允许从互联网直接进行通信的专用子网...
     
 
-        <a href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%BD%E8%B1%A1(%E4%B8%80)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/20/TCPIP-7/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ADT/" rel="tag">ADT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IPsec/" rel="tag">IPsec</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li></ul>
 
     </div>
     
@@ -611,11 +616,11 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-数据结构(一)"
+            <article id="post-TCPIP-6"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.814Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-20 09:20:37" datetime="2020-01-20T01:20:37.000Z"  itemprop="datePublished">2020-01-20</time>
 
         
 
@@ -627,7 +632,7 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/">数据结构(一)：绪论</a>
+      <a class="post-title-link" href="/2020/01/20/TCPIP-6/">TCPIP-6</a>
     </h3>
   
 
@@ -637,31 +642,34 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        计算
-排序(sorting): 将n个整数按大小次序排成一个非降序列的操作。
+        应用协议应用层协议概述应用层协议是为了实现某种应用而设计和创造的协议。
+包含：会话层：管理通信连接表示层：转换数据格式应用层：对端主机交互
+远程登录从自己的本地计算机登录到网络另外一端计算功能的应用。
+分类：
 
+TELNET
+SSH
 
-冒泡算法局部有序和全局有序
+TELNET利用TCP的一条连接，通过这一条连接向主机发送文字命令并在主机上执行。
+分类：
 
-有序序列中每一对相邻元素都是顺序的。所有相邻元素均顺序的序列，也必然整体有序。
+仿真终端功能
+协商选项机制
 
-算法步骤:(通过改进局部有序性实现整体的有序)
+流程：
 
-
-一趟扫描交换：从前向后依次检查每一对相邻元素，若发现逆序则交换两者的位置。（长度为n的序列，需要n-1次比较和不超过n-1次交换）
-多次扫描：进行多次扫描交换，直到序列中不再含有任何逆序的相邻元素。
-
-
+键入文字命令
+进行行模式...
     
 
-        <a href="/2020/01/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%B8%80)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/20/TCPIP-6/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMTP/" rel="tag">SMTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/" rel="tag">TCP/IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TELNET/" rel="tag">TELNET</a></li></ul>
 
     </div>
     
@@ -670,11 +678,11 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Java编程思想(二)"
+            <article id="post-DataStructure-tree3"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2020-01-08 07:53:24" datetime="2020-01-07T23:53:24.358Z"  itemprop="datePublished">2020-01-08</time>
+        <time class="post-time" title="2020-01-16 18:11:22" datetime="2020-01-16T10:11:22.811Z"  itemprop="datePublished">2020-01-16</time>
 
         
 
@@ -686,7 +694,7 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/">Java编程思想(二)：一切都是对象</a>
+      <a class="post-title-link" href="/2020/01/16/DataStructure-tree3/">多路查找树</a>
     </h3>
   
 
@@ -696,18 +704,25 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        创建对象在创建一个引用的同时，必须将其与一个新的对象进行关联。可使用关键词new实现：12String s = new String();//创建一个String类型的对象s
+        多路查找树m-路查找树背景
+访问磁盘的时间较长，为了提高效率可减少对磁盘的访问次数。
+单次访问可读取的数据量等同于多个二叉树的结点所占存储空间的之和。
+二叉树不能完全利用单次访问磁盘所能传输的数据量，为了访问需要的数据，则要进行多次这样低效的访问。
+若使用多路树，使得单次访问能够传输多个结点，减少访问磁盘的次数，从而提高效率。
 
+定义m-路查找树或是空树，或者满足：
+
+根最多有m棵子树，结点...
     
 
-        <a href="/2020/01/08/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3(%E4%BA%8C)/" class="post-more waves-effect waves-button">
+        <a href="/2020/01/16/DataStructure-tree3/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/B%E6%A0%91/" rel="tag">B树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E8%B7%AF%E6%9F%A5%E6%89%BE%E6%A0%91/" rel="tag">多路查找树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
 
     </div>
     
@@ -720,7 +735,7 @@ ADT线性表: 对项进行编号，可以将项添加到线性表的表尾，也
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
     </div>
 </nav>
 

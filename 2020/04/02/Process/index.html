@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>进程 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,进程">
+    <meta name="description" content="进程[toc] 进程的概念和特征进程的概念进程控制块(Process Control Block,PCB)：描述进程的基本情况和运行状态。 进程：由程序段，数据段和进程控制块组成。 创建进程：创建进程的PCB；撤销进程：撤销进程的PCB。 PCB是进程存在的唯一标志。 进程的定义：  进程是程序的一次执行过程。 进程是程序和数据在处理机上顺序执行时所发生的活动。 进程是程序运行过程，是系统进行资源">
+<meta name="keywords" content="操作系统,进程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;02&#x2F;Process&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="进程[toc] 进程的概念和特征进程的概念进程控制块(Process Control Block,PCB)：描述进程的基本情况和运行状态。 进程：由程序段，数据段和进程控制块组成。 创建进程：创建进程的PCB；撤销进程：撤销进程的PCB。 PCB是进程存在的唯一标志。 进程的定义：  进程是程序的一次执行过程。 进程是程序和数据在处理机上顺序执行时所发生的活动。 进程是程序运行过程，是系统进行资源">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;processstatustransaction.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;ManyToOneThread.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;OneToOneThread.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;ManyToLittleThread.jpg">
+<meta property="og:updated_time" content="2020-04-03T12:58:51.128Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;processstatustransaction.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">进程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">进程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-02T15:08:00.000Z" itemprop="datePublished" class="page-time">
+  2020-04-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进程"><span class="post-toc-number">1.</span> <span class="post-toc-text">进程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程的概念和特征"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">进程的概念和特征</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的概念"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">进程的概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的特征"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">进程的特征</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程的状态和转换"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">进程的状态和转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的状态"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">进程的状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的状态转换"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">进程的状态转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程的控制"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">进程的控制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的创建"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">进程的创建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的终止"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">进程的终止</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的阻塞和唤醒"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">进程的阻塞和唤醒</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的切换"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">进程的切换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程的组织"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">进程的组织</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程控制块-PCB"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">进程控制块(PCB)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#程序段"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">程序段</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据段"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">数据段</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程的通信"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">进程的通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#共享内存"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">共享内存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#消息传递"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">消息传递</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#管道通信"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">管道通信</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程的概念和多线程模型"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">线程的概念和多线程模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程的基本概念"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">线程的基本概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程与进程的比较"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">线程与进程的比较</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程的属性"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">线程的属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程的实现方式"><span class="post-toc-number">1.6.4.</span> <span class="post-toc-text">线程的实现方式</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Process"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">进程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-02 23:08:00" datetime="2020-04-02T15:08:00.000Z"  itemprop="datePublished">2020-04-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>[toc]</p>
+<h2 id="进程的概念和特征"><a href="#进程的概念和特征" class="headerlink" title="进程的概念和特征"></a>进程的概念和特征</h2><h3 id="进程的概念"><a href="#进程的概念" class="headerlink" title="进程的概念"></a>进程的概念</h3><p><strong>进程控制块</strong>(Process Control Block,PCB)：描述进程的基本情况和运行状态。</p>
+<p>进程：由<strong>程序段</strong>，<strong>数据段</strong>和<strong>进程控制块</strong>组成。</p>
+<p><em>创建进程：创建进程的PCB；撤销进程：撤销进程的PCB。</em></p>
+<p><strong>PCB是进程存在的唯一标志。</strong></p>
+<p><strong>进程的定义</strong>：</p>
+<ul>
+<li>进程是程序的<strong>一次执行过程</strong>。</li>
+<li>进程是程序和数据在处理机上顺序执行时所发生的<strong>活动</strong>。</li>
+<li>进程是程序运行过程，是系统进行<strong>资源分配和调度</strong>的一个独立单位。</li>
+</ul>
+<h3 id="进程的特征"><a href="#进程的特征" class="headerlink" title="进程的特征"></a>进程的特征</h3><ol>
+<li><strong>动态性</strong>：具有<strong>创建</strong>、<strong>活动</strong>、<strong>暂停</strong>、<strong>终止</strong>过程，是动态地产生，变化和消亡的。</li>
+<li><strong>并发性</strong>：多个进程同时存在与内存中，在一段时间内同时运行。</li>
+<li><strong>独立性</strong>：能独立运行，获得资源和接受调度的单位。</li>
+<li><strong>异步性</strong>：进程各自独立，一不可预测的速度执行。</li>
+<li><strong>结构性</strong>：进程是由程序段，数据段和进程控制块组成。</li>
+</ol>
+<h2 id="进程的状态和转换"><a href="#进程的状态和转换" class="headerlink" title="进程的状态和转换"></a>进程的状态和转换</h2><h3 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h3><p>主要有五种状态：</p>
+<ol>
+<li><strong>创建状态</strong>：进程被创建出来。（步骤：申请PCB，将PCB写入进程相关信息，系统为进程分配必须的资源）</li>
+<li><strong>就绪状态</strong>：进程处于准备状态，若获得CPU，则可以运行。</li>
+<li><strong>运行状态</strong>：进程正在CPU上运行。单核状态下，每个时刻最多只有一个进程处于运行。</li>
+<li><strong>阻塞状态</strong>（等待状态）：进程由于等待某个事件而暂停（等待资源可用，等待输入…）。（不可获得CPU）</li>
+<li><strong>结束状态</strong>：进程执行完成或者被中断而退出运行。（进程若要结束，先设置结束状态，再进行资源释放和回收）</li>
+</ol>
+<blockquote>
+<p>就绪状态与阻塞状态的区别：就绪可以获得时间片，只要获得获得时间片，就进入运行状态；阻塞状态：不可获得时间片，其等待其他事件，需要其他事件完成后，将其转换到就绪状态等待时间片。</p>
+</blockquote>
+<h3 id="进程的状态转换"><a href="#进程的状态转换" class="headerlink" title="进程的状态转换"></a>进程的状态转换</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//processstatustransaction.png" alt="ProcessStatusTransaction" title>
+                </div>
+                <div class="image-caption">ProcessStatusTransaction</div>
+            </figure>
+<p>解释：</p>
+<ul>
+<li>就绪—&gt;运行：就绪状态的进程被调度，获得时间片。</li>
+<li>运行—&gt;就绪：进程的时间片用完而为执行完成；或者在可剥夺资源的操作系统中，有更高优先级进程就绪，则挂起当前的进程，让高优先级进程执行。</li>
+<li>运行—&gt;阻塞：进程请求某种资源或等待某种事件，进程有运行进入阻塞。此时CPU不会再分配时间片给进程。</li>
+<li>阻塞—&gt;就绪：进程等待的资源或事件到来后，进程的状态由阻塞转换为就绪。</li>
+</ul>
+<hr>
+<h2 id="进程的控制"><a href="#进程的控制" class="headerlink" title="进程的控制"></a>进程的控制</h2><p><strong>原语</strong>:进程控制用的程序段.</p>
+<p>特点:执行期间不允许中断,是不可分割的基本单位.</p>
+<h3 id="进程的创建"><a href="#进程的创建" class="headerlink" title="进程的创建"></a>进程的创建</h3><ul>
+<li>父进程创建子进程.</li>
+<li>子进程继承父进程拥有的资源.</li>
+<li>子进程撤销时,归还从父进程获得的资源.</li>
+<li>父进程撤销时,撤销其所有子进程.</li>
+</ul>
+<p><strong>创建进程的过程</strong>:</p>
+<ol>
+<li>为进程分配唯一的进程标识号,申请PCB.</li>
+<li>为进程分配所需的资源.(<em>若资源不足,则处于”等待状态”</em>)</li>
+<li>初始化PCB.(<em>初始化标志信息,处理机状态,进程优先级等</em>)</li>
+<li>将进程插入就绪队列,等待调度.</li>
+</ol>
+<h3 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h3><p>终止的原因:</p>
+<ul>
+<li>正常结束.(任务完成)</li>
+<li>异常结束.(存储区越界,保护错,非法指令,特权指令错)</li>
+<li>外界干扰.(系统干预,父进程终止)</li>
+</ul>
+<p>过程:</p>
+<ol>
+<li>由进程的标识符,检索PCB,获得进程的状态.</li>
+<li>若进程处于运行状态,则终止进程,将资源分配给其他进程.</li>
+<li>若进程有子进程,将子进程终止.</li>
+<li>将进程拥有的资源或者归还给父进程,或者归还给操作系统.</li>
+<li>将PCB从队列中删除.</li>
+</ol>
+<h3 id="进程的阻塞和唤醒"><a href="#进程的阻塞和唤醒" class="headerlink" title="进程的阻塞和唤醒"></a>进程的阻塞和唤醒</h3><p><strong>阻塞</strong><br>正在执行的进程由于等待的事件未发生,<strong>自行调用</strong>阻塞原语(block),使得由运行状态转化为阻塞状态.<br><em>注:阻塞是进程自身的主动行为,只有运行状态的进程才能转化为阻塞状态.</em></p>
+<p>过程:</p>
+<ol>
+<li>由进程标识符找到对应的PCB.</li>
+<li>若为运行状态,保护现场,将状态转化到阻塞状态,停止运行.</li>
+<li>将PCB插入到对应事件的等待队列中.</li>
+</ol>
+<p><strong>唤醒</strong><br>阻塞的进程等待的某种事件发生,由相关的进程调用唤醒原语(wakeup),将进程唤醒.</p>
+<p>过程:</p>
+<ol>
+<li>找到对应进程的PCB.</li>
+<li>将其从等待队列中移出,状态转为就绪队列.</li>
+<li>将PCB插入就绪队列中,等待调度.</li>
+</ol>
+<blockquote>
+<p>注:block是由被阻塞的进程自我调用实现的,wakeup是由其他进程调用实现的.</p>
+</blockquote>
+<h3 id="进程的切换"><a href="#进程的切换" class="headerlink" title="进程的切换"></a>进程的切换</h3><p>从一个进程的运行转换到另一个进程的运行.</p>
+<p>过程:</p>
+<ol>
+<li>保存CPU的上下文.(<em>程序计数器和寄存器</em>)</li>
+<li>更新当前进程的PCB信息.</li>
+<li>将进程的PCB移入相应的队列中.(<em>就绪,阻塞队列</em>)</li>
+<li>选择新进程,更新其PCB.</li>
+<li>更新内存管理的数据结构.</li>
+<li>恢复CPU的上下文.</li>
+</ol>
+<hr>
+<h2 id="进程的组织"><a href="#进程的组织" class="headerlink" title="进程的组织"></a>进程的组织</h2><p><strong>进程时操作系统的资源分配和独立运行的基本单位.</strong></p>
+<p>组成:</p>
+<ul>
+<li>进程控制块</li>
+<li>程序段</li>
+<li>数据段</li>
+</ul>
+<h3 id="进程控制块-PCB"><a href="#进程控制块-PCB" class="headerlink" title="进程控制块(PCB)"></a>进程控制块(PCB)</h3><p>PCB包含的内容:<br>|进程描述信息|进程控制和管理信息|资源分配清单|处理机相关信息|<br>|—-|—-|—-|—-|<br>|进程标识符(PID)|进程当前状态|代码段指针|通用寄存器值|<br>|用户标识符(UID)|进程优先级|数据段指针|地址寄存器值|<br>||代码运行入口地址|堆栈段指针|控制寄存器值|<br>||程序的外存地址|文件描述符|标志寄存器值|<br>||进入内存时间|键盘|状态字|<br>||处理机占用时间|鼠标||<br>||信号量使用|||</p>
+<p><em>操作系统通过PCB对进程进行管理和控制.</em></p>
+<p><strong>PCB的组织方式</strong></p>
+<ul>
+<li><strong>链接方式</strong>:将相同状态的PCB链接成一个队列,不同的状态对应不同的队列.(<em>也可以按照阻塞原因的不同,排成多个阻塞队列.</em>)</li>
+<li><strong>索引方式</strong>:将同一状态的进程组织在一个索引表中,索引表项指向相应的PCB.(<em>不同状态对应不同的索引表,如就绪索引表和阻塞索引表</em>)</li>
+</ul>
+<h3 id="程序段"><a href="#程序段" class="headerlink" title="程序段"></a>程序段</h3><p>可以被多个进程共享,多个程序运行同一个程序.</p>
+<h3 id="数据段"><a href="#数据段" class="headerlink" title="数据段"></a>数据段</h3><p>进程的中间数据或结果.</p>
+<hr>
+<h2 id="进程的通信"><a href="#进程的通信" class="headerlink" title="进程的通信"></a>进程的通信</h2><p><strong>进程通信</strong>:进程之间的信息交换.</p>
+<p>分类:</p>
+<ul>
+<li><strong>共享内存</strong></li>
+<li><strong>消息传递</strong></li>
+<li><strong>管道通信</strong></li>
+</ul>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>存在一块可以直接访问的共享空间,通过对共享空间进行读/写操作实现进程之间的信息交换.<br>在对共享空间进行读写操作时,需要使用同步互斥工具(P,V操作)对共享空间进行控制.</p>
+<p>特点:</p>
+<ul>
+<li>效率高:只拷贝两次数据(一次从输入文件到共享内存区,一次从共享内存区到输出文件).</li>
+<li>进程间使用共享内存时,会一直保持共享内存区,直到通信结束.共享内存中的内容是解除映射时写回文件的.</li>
+<li>设置好共享内存区后,不再涉及到内核的系统调用.</li>
+</ul>
+<p>使用共享内存的方式:</p>
+<ol>
+<li>服务器使用信号量获取某个共享内存对象.</li>
+<li>服务器将数据从输入文件读到共享内存区对象.</li>
+<li>服务器读入完毕后使用信号量通知客户.</li>
+<li>客户将这些数据从该共享内存区对象写到输出文件中.</li>
+</ol>
+<h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3><ul>
+<li>进程间的数据交换通过格式化的消息实现的.</li>
+<li>利用操作系统提供的消息传递方法实现进程通信.</li>
+</ul>
+<p>分类:</p>
+<ul>
+<li>直接通信方式</li>
+<li>间接通信方式</li>
+</ul>
+<p><strong>直接消息传递</strong><br>发送进程直接将消息发送给接收进程,并将消息挂在接收进程的消息缓冲队列中,接收进程从消息缓冲队列中取得消息.</p>
+<p><em>若没有缓冲机制,则发送进程执行<code>send</code>,发送进程阻塞,直到接收进程执行<code>receive</code>进行接收.</em></p>
+<p><strong>间接通信方式</strong><br>发送进程将消息发送到信箱,接收进程从信箱取得消息.<br>也称为<em>信箱通信方式</em>.</p>
+<p>过程:<br>发送进程:<br>检查信箱是否已满,若已满,则发送进程阻塞;若未满,则将信息存入信箱,若有进程等待取信,则唤醒正在等待信件的进程.</p>
+<p>接收进程:<br>检查信箱是否有信件,若有,则取出信件.若有进程等待将信件放入信箱,则唤醒该进程;若没有信件,则接收进程阻塞.</p>
+<h3 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h3><p><strong>管道</strong>:用于连接读进程和写进程以实现进程间通信的一个共享文件(pipe).<br><em>写进程以字符流形式向管道送入数据,读进程从管道接收数据.</em></p>
+<p>特点:</p>
+<ol>
+<li>为<em>半双工</em>的,数据只能向一个方向流动;若需要<em>双方通信</em>,则要建立两个管道.</li>
+<li>匿名管道只能用于父子进程或者兄弟进程之间通信.</li>
+<li>单独构成文件系统:管道对于两端的进程是一个文件,其单独构成一个文件系统,存在于内存中.</li>
+</ol>
+<p>分类:</p>
+<ul>
+<li>无名管道(pipe):用于相关进程(父子进程)之间通信,通过<code>pipe()</code>创建打开,最后使用的进程关闭.</li>
+<li>命名管道(fifo):在磁盘上有对应的节点,没有数据块.通过<code>mknode()</code>系统调用建立.任何进程都可以打开和读写操作.</li>
+</ul>
+<p><em>管道是一个内核缓冲区,进程以先进先出从缓冲区取出数据.缓冲区可以看做一个循环读列,每个数据只能被读一次.</em></p>
+<h2 id="线程的概念和多线程模型"><a href="#线程的概念和多线程模型" class="headerlink" title="线程的概念和多线程模型"></a>线程的概念和多线程模型</h2><h3 id="线程的基本概念"><a href="#线程的基本概念" class="headerlink" title="线程的基本概念"></a>线程的基本概念</h3><p>引入线程,减少并发执行所付出的时空开销,提高操作系统的并发性能.</p>
+<p>特点:</p>
+<ul>
+<li>线程时程序执行的最小单位.</li>
+<li>组成:线程ID,程序计数器,寄存器集合和堆栈.</li>
+<li>线程是<strong>系统独立调度和分派的基本单位</strong>.</li>
+<li>线程与同一进程的其他线程共享进程拥有的资源.</li>
+<li>线程可以创建或销毁另一个线程.</li>
+<li>多个线程并发执行.</li>
+<li>线程有就绪,阻塞和运行三种状态.</li>
+</ul>
+<p><em>进程作为系统资源分配的单元,则线程作为CPU分配单元.</em></p>
+<h3 id="线程与进程的比较"><a href="#线程与进程的比较" class="headerlink" title="线程与进程的比较"></a>线程与进程的比较</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>进程</th>
+<th>线程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>调度</td>
+<td>拥有资源和独立调度的基本单位</td>
+<td>线程:独立调度的基本单位,进程:资源拥有的基本单位</td>
+</tr>
+<tr>
+<td>拥有资源</td>
+<td>进程拥有资源</td>
+<td>进程拥有资源,线程访问所属进程的资源</td>
+</tr>
+<tr>
+<td>并发性</td>
+<td>进程间可以并发</td>
+<td>进程间可以并发,线程间也可以并发</td>
+</tr>
+<tr>
+<td>系统开销</td>
+<td>创建或撤销进程要分配或回收资源,进程间切换需要CPU环境的保存和新进程CPU环境的设置</td>
+<td>线程切换只需保存和设置少量寄存器,同一进程的多个线程共享地址空间,线程间同步和通信容易</td>
+</tr>
+<tr>
+<td>地址空间和其他资源</td>
+<td>进程间地址空间相互独立</td>
+<td>同一进程的线程共享进程资源</td>
+</tr>
+<tr>
+<td>通信</td>
+<td>需要进程同步和互斥实现</td>
+<td>线程间可直接读/写进程数据段进行通信</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="线程的属性"><a href="#线程的属性" class="headerlink" title="线程的属性"></a>线程的属性</h3><p>属性:</p>
+<ol>
+<li>每个线程有一个唯一的标识符和线程控制块(记录线程执行的寄存器和栈等现场状态).</li>
+<li>不同的线程可以执行相同的程序.</li>
+<li>同一进程的各个线程共享该进程所拥有的资源.</li>
+<li>多个线程可以并发执行.</li>
+<li>线程的生命周期经历阻塞态,就绪态,运行态等状态变化.</li>
+</ol>
+<h3 id="线程的实现方式"><a href="#线程的实现方式" class="headerlink" title="线程的实现方式"></a>线程的实现方式</h3><p>线程的分类：<br>|名称|描述|<br>|—-|—-|<br>|用户级线程(User-Level Thread,ULT)|由应用程序支持的线程实现，对内核不可见|<br>|内核级线程(Kernel-Level Thread,KLT)|内核支持的线程|</p>
+<p>组合线程(Hybrid Multithreading):将用户线程和内核线程的组合。</p>
+<p><strong>用户级线程</strong></p>
+<ul>
+<li>线程的管理由应用程序完成，内核不知道多线程的存在。</li>
+<li>由应用程序的一个线程通过线程库生成新线程，切换速度快。</li>
+<li>线程不具有线程上下文，无法被调度到内核。</li>
+<li>任意时刻每个进程上只有一个线程运行，只有一个处理器内核分配给该进程。</li>
+<li>特点：<strong>同一进程的多个线程对应于一个内核线程，任一时刻只有其中的一个线程与内核线程对应。</strong></li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//ManyToOneThread.jpg" alt="用户级线程" title>
+                </div>
+                <div class="image-caption">用户级线程</div>
+            </figure>
+<p>优点：</p>
+<ul>
+<li>可在不支持线程的操作系统上实现。</li>
+<li>创建，切换，销毁线程的代价低。</li>
+<li>线程管理算法灵活。</li>
+<li>不需要上下文切换，线程调用快捷。</li>
+<li>不需要内核调度，控制简单。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>其中一个线程发生阻塞时，系统阻塞整个进程从而阻塞所有线程。</li>
+<li>进程内部没有时钟中断，不能用轮转调度方法。</li>
+<li>同一进程下的所有线程无法并行。</li>
+</ul>
+<p><strong>内核级线程</strong></p>
+<ul>
+<li>线程的创建和销毁在内核下完成的，由操作系统负责管理，通过系统调用完成。</li>
+<li><strong>每个进程中的所有线程都有与之对应的内核线程</strong>，内核为每个线程维护上下文信息。</li>
+<li>内核线程为每个对应的线程设置一个<strong>线程控制块</strong>(TCB)，内核根据控制块感知线程的存在，并进行控制。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//OneToOneThread.jpg" alt="内核级线程" title>
+                </div>
+                <div class="image-caption">内核级线程</div>
+            </figure>
+<p>优点：</p>
+<ul>
+<li>多处理器系统中，同一进程的多个线程可以并行执行。</li>
+<li>进程的一个线程被阻塞，不影响同一进程中的其他线程的执行。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>线程的调度都是系统调用，代价高。</li>
+<li>信号一般是发送给进程的，需要使用订阅发布模型。</li>
+</ul>
+<p><strong>用户级线程和内核级线程的区别</strong></p>
+<ul>
+<li>内核级线程是内核可以感知的，而用户级线程内核不可感知。</li>
+<li>内核级线程创建，撤销和调度线程需要内核提供支持，而用户级线程不需要内核支持。</li>
+<li>用户级线程执行系统调用会导致所属进程被中断，而内核级线程只会中断该线程。</li>
+<li>用户级线程内，CPU调度以进程为单位，同一进程的多个线程是由用户程序控制运行；内核级线程，CPU调度是以线程为单位，内核负责线程的调度。</li>
+<li>用户级线程是运行在用户态下，而内核级线程可以运行在任何状态下。</li>
+</ul>
+<p><strong>组合方式</strong> </p>
+<ul>
+<li>线程的创建是由用户程序完成的，用户程序线程的调度和同步是由用户程序完成的。</li>
+<li>同一个进程的多个用户级线程映射到少量(小于等于用户级线程个数)的内核级线程上。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//ManyToLittleThread.jpg" alt="组合方式" title>
+                </div>
+                <div class="image-caption">组合方式</div>
+            </figure>
+<p>参考:</p>
+<ul>
+<li><a href="https://www.cnblogs.com/LUO77/p/5816326.html" target="_blank" rel="noopener">进程间通信的方式——信号、管道、消息队列、共享内存</a></li>
+<li><a href="http://c.biancheng.net/cpp/html/2592.html" target="_blank" rel="noopener">进程的通信：共享存储、消息传递和管道通信</a></li>
+<li><a href="https://blog.csdn.net/u013007900/article/details/79620082" target="_blank" rel="noopener">线程的3种实现方式</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-03T12:58:51.128Z" itemprop="dateUpdated">2020-04-03 20:58:51</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/02/Process/&title=《进程》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/02/Process/&title=《进程》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/02/Process/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《进程》 — 咸鱼的自我修养&url=http://yoursite.com/2020/04/02/Process/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/02/Process/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/03/results/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">results</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/02/DeadLock/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">死锁小结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/02/Process/&title=《进程》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/02/Process/&title=《进程》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/02/Process/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《进程》 — 咸鱼的自我修养&url=http://yoursite.com/2020/04/02/Process/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/02/Process/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/04/02/Process/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

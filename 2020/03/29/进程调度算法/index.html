@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>进程调度算法 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,进程调度算法">
+    <meta name="description" content="[toc] 调度调度的概念基本概念一般进程的数量多于处理机的个数，多个进程争夺有限的处理机，需要调度算法对处理机进行分配。从就绪队列中选择进程分配给空闲的处理机，实现进程的并发执行。 调度的层次一个作业从被提交到完成，经历三级调度：  作业调度(高级调度)。从外存的后备状态的作业选择作业分配内存，输入输出设备等资源，建立进程。(内存与辅存之间的调度) 内存调度(中级调度)。将暂时不能运行的进程调至">
+<meta name="keywords" content="操作系统,进程调度算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程调度算法">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;03&#x2F;29&#x2F;%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="[toc] 调度调度的概念基本概念一般进程的数量多于处理机的个数，多个进程争夺有限的处理机，需要调度算法对处理机进行分配。从就绪队列中选择进程分配给空闲的处理机，实现进程的并发执行。 调度的层次一个作业从被提交到完成，经历三级调度：  作业调度(高级调度)。从外存的后备状态的作业选择作业分配内存，输入输出设备等资源，建立进程。(内存与辅存之间的调度) 内存调度(中级调度)。将暂时不能运行的进程调至">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;ProcessDispatch.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;cpp&#x2F;uploads&#x2F;allimg&#x2F;140629&#x2F;1-140629155KQ11.jpg">
+<meta property="og:updated_time" content="2020-04-03T12:58:51.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;ProcessDispatch.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">进程调度算法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">进程调度算法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-29T10:04:17.000Z" itemprop="datePublished" class="page-time">
+  2020-03-29
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调度"><span class="post-toc-number">1.</span> <span class="post-toc-text">调度</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调度的概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">调度的概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调度的层次"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">调度的层次</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调度的时机、切换与过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">调度的时机、切换与过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程调度方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">进程调度方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调度的基本准则"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">调度的基本准则</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进程调度算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">进程调度算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先来先服务-FCFS"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">先来先服务(FCFS)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#短作业优先-SJF"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">短作业优先(SJF)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优先级调度算法-PSA"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">优先级调度算法(PSA)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高响应比优先调度算法-HRRF"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">高响应比优先调度算法(HRRF)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间片轮转调度算法-RR-Round-Robin"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">时间片轮转调度算法(RR,Round Robin)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多级反馈队列调度算法"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">多级反馈队列调度算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调度算法评价标准"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">调度算法评价标准</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-进程调度算法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">进程调度算法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-29 18:04:17" datetime="2020-03-29T10:04:17.000Z"  itemprop="datePublished">2020-03-29</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>[toc]</p>
+<h1 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h1><h2 id="调度的概念"><a href="#调度的概念" class="headerlink" title="调度的概念"></a>调度的概念</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>一般进程的数量多于处理机的个数，多个进程争夺有限的处理机，需要调度算法对处理机进行分配。从就绪队列中选择进程分配给空闲的处理机，实现进程的并发执行。</p>
+<h3 id="调度的层次"><a href="#调度的层次" class="headerlink" title="调度的层次"></a>调度的层次</h3><p>一个作业从被提交到完成，经历三级调度：</p>
+<ol>
+<li><strong>作业调度</strong>(高级调度)。从外存的后备状态的作业选择作业分配内存，输入输出设备等资源，建立进程。(内存与辅存之间的调度)</li>
+<li><strong>内存调度</strong>(中级调度)。将暂时不能运行的进程调至外存等待，此时进程处于挂起状态。若具备运行条件，再由中级调度将就绪进程重新调入内存的就绪队列。</li>
+<li><strong>进程调度</strong>(低级调度)。从就绪队列中选择进程，将之分配给空闲的处理机。</li>
+</ol>
+<p>处理机的三级调度：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//ProcessDispatch.jpg" alt="Process dispatch" title>
+                </div>
+                <div class="image-caption">Process dispatch</div>
+            </figure></p>
+<p><strong>三级调度的联系</strong><br>作业调度从外存的后备队列中选择一批作业进入内存，建立进程。这些进程进入就绪队列，由进程调度选择进程分配处理机。为了调高内存利用率，内存调度将暂时不能运行的进程挂起，当内存充足时，再将具备运行状态的进程唤醒。</p>
+<h2 id="调度的时机、切换与过程"><a href="#调度的时机、切换与过程" class="headerlink" title="调度的时机、切换与过程"></a>调度的时机、切换与过程</h2><p>一般，当请求调度后，才能运行进程调度程序，当调度新的就绪程序后，才能进行进程间的切换。</p>
+<p><strong>不进行进程调度或切换的情况</strong></p>
+<ol>
+<li>处理中断的过程中。(<em>中断处理复杂，难以进行进程切换</em>)</li>
+<li>进程在内核程序临界区中。(<em>进入临界区，需要独占访问共享数据，需要加锁，为了防止其他进程访问，不应进行切换</em>)</li>
+<li>其他需要屏蔽原子操作的过程。(<em>加锁，解锁，中断现场保护，原子过程</em>)</li>
+</ol>
+<p><strong>可以进行进程调度和切换的情况</strong></p>
+<ol>
+<li>发生调度条件，且进程无法继续运行。</li>
+<li>中断处理结束后，返回被中断进程的用户态程序执行现场前。</li>
+</ol>
+<blockquote>
+<p>进程切换一般在调度完成之后，要求<strong>保存原进程切换点和现场信息，回复被调进程的现场信息</strong>。内核将原进程的现场信息保存到当前进程的内核堆栈中，更新堆栈指针。并且从新进程内核栈中装入新进程的现场信息，更新进程空间指针，重设PC寄存器，开始新进程。</p>
+</blockquote>
+<h2 id="进程调度方法"><a href="#进程调度方法" class="headerlink" title="进程调度方法"></a>进程调度方法</h2><p><strong>进程调度</strong>：当一个进程正在处理机上执行时，若有优先级更高的进程在就绪队列，则如何分配处理机。</p>
+<p>两种进程调度方法：</p>
+<ol>
+<li><strong>非剥夺调度方法</strong>(非抢占方式)：更高优先级的就绪队列进入就绪队列时，当前正在运行的低优先级进程继续执行，直到完成或进入阻塞状态后让出处理机。（<em>适用于批处理系统</em>）</li>
+<li><strong>剥夺调度方式</strong>(抢占方式)：更高优先级进入就绪队列后，立即暂停正在进行的进程，将处理机分配给高优先级进程（<em>适用于分时系统和实时系统</em>）</li>
+</ol>
+<h2 id="调度的基本准则"><a href="#调度的基本准则" class="headerlink" title="调度的基本准则"></a>调度的基本准则</h2><ol>
+<li><strong>CPU利用率</strong>：应使得CPU利用率高。</li>
+<li><strong>系统吞吐量</strong>：单位时间内CPU完成作业的数量。（<em>短作业有利于提高系统吞吐量</em>）</li>
+<li><strong>周转时间</strong>：作业从提交到完成所经历的时间。（<em>包括等待，就绪队列中排队，处理机运行，输入输出操作等时间</em>）</li>
+<li><strong>平均周转时间</strong>：多个作业周转时间的平均。</li>
+<li><strong>带权周转时间</strong>：作业周转时间除以作业实际运行时间。</li>
+<li><strong>平均带权周转时间</strong>：多个作业的带权周转时间的平均。</li>
+<li><strong>等待时间</strong>：进程等待处理机的时间。（<em>与作业在就绪队列等待的时间有关</em>）</li>
+<li><strong>响应时间</strong>：用户提交到系统首次产生响应所用的时间。</li>
+</ol>
+<h1 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h1><h2 id="先来先服务-FCFS"><a href="#先来先服务-FCFS" class="headerlink" title="先来先服务(FCFS)"></a>先来先服务(FCFS)</h2><p>每次从就绪队列中选择最先进入队列的进程,将CPU分配给该进程,直到完成或阻塞时释放CPU.</p>
+<p>关键: 按照进程达到的先后顺序依次处理.</p>
+<p>问题:</p>
+<ul>
+<li>长作业先到达时,后续的短作业需要等待较长时间.</li>
+<li>不适合于实时系统.</li>
+<li>有利于CPU繁忙型作业.</li>
+</ul>
+<h2 id="短作业优先-SJF"><a href="#短作业优先-SJF" class="headerlink" title="短作业优先(SJF)"></a>短作业优先(SJF)</h2><p>从后备队列中选择一个或若干个运行时间最短的作业,将CPU分配给该作业.</p>
+<p>关键: 每次都从就绪队列中选择最短运行时间的作业执行.</p>
+<p>问题:</p>
+<ul>
+<li>对长作业不利,可能导致长作业饥饿.</li>
+<li>SJF的平均等待时间,平均周转时间最短.</li>
+</ul>
+<h2 id="优先级调度算法-PSA"><a href="#优先级调度算法-PSA" class="headerlink" title="优先级调度算法(PSA)"></a>优先级调度算法(PSA)</h2><p>每次从就绪队列中选择优先级最高的进程,将其分配给CPU.</p>
+<p>分类:</p>
+<ul>
+<li>是否抢占:<ul>
+<li>非剥夺式优先级调度算法:当一个进程正在执行时,若此时到达优先级更高的进程,仍然使当前进程执行,直到其完成或退出CPU.</li>
+<li>剥夺式优先级调度算法:当一个更高优先级的进程到达时,会暂停当前的进程,将CPU分配给更高优先级的进程.</li>
+</ul>
+</li>
+<li>优先级是否改变:<ul>
+<li>静态优先级:优先级在进程创建时确定,进程运行期间保持不变.</li>
+<li>动态优先级:进程运行过程中,根据进程的动态变化调整优先级.</li>
+</ul>
+</li>
+</ul>
+<h2 id="高响应比优先调度算法-HRRF"><a href="#高响应比优先调度算法-HRRF" class="headerlink" title="高响应比优先调度算法(HRRF)"></a>高响应比优先调度算法(HRRF)</h2><p>每次进行作业调度时,先计算后备作业队列中每个作业的响应比,从中选择响应比最高的作业,将CPU分配给该作业.</p>
+<blockquote>
+<p>$响应比 = \frac{等待时间+要求服务时间}{要求服务时间}$</p>
+</blockquote>
+<p>特点:</p>
+<ul>
+<li>等待时间相同时,服务时间越短,响应比越高.(<em>利于短作业</em>)</li>
+<li>服务时间相同时,等待时间越长,相应比越高.(<em>实现先来先服务</em>)</li>
+</ul>
+<h2 id="时间片轮转调度算法-RR-Round-Robin"><a href="#时间片轮转调度算法-RR-Round-Robin" class="headerlink" title="时间片轮转调度算法(RR,Round Robin)"></a>时间片轮转调度算法(RR,Round Robin)</h2><ol>
+<li>就绪进程按照达到时间排成就绪队列.</li>
+<li>每次选择就绪队列中的第一个进程,分配一个时间片.</li>
+<li>若时间片用完而进程还在运行,则计数器发出时钟中断,将进程终止,并放入就绪队列队尾.</li>
+</ol>
+<p>问题:</p>
+<ul>
+<li>若时间片太大,则变成先来先服务调度算法.</li>
+<li>若时间片太小,使得进程的调度时间消耗增多,则进程的运行时间减少.</li>
+</ul>
+<p><strong>时间片的确定</strong></p>
+<ul>
+<li>与<em>系统的响应时间</em>,<em>就绪进程的个数</em>,<em>CPU能力</em>有关.</li>
+<li>应满足大多数进程能在一个时间片内完成(<em>即略大于一次平均交互时间</em>).</li>
+</ul>
+<h2 id="多级反馈队列调度算法"><a href="#多级反馈队列调度算法" class="headerlink" title="多级反馈队列调度算法"></a>多级反馈队列调度算法</h2><ol>
+<li>设置多个就绪队列,各个队列有不同的优先级.(<em>第一级队列优先级最高,第二级次之…</em>).</li>
+<li>不同的队列的时间片大小不同.(<em>优先级高的队列中进程的时间片小</em>).</li>
+<li>一个新进程进入时,先放入第一级队列的队尾,按照FCFS排队.若其运行时时间片完成,则将该进程放入第二级队列…直到进入最后一级队列.最后一级队列中实行时间片轮转.</li>
+<li>只有当高优先级队列为空时,才执行低优先级队列中的进程.若执行过程中,更高优先级队列中进入新进程,则新进程会抢占正在运行的进程,将正在运行的进程放在该队列队尾.</li>
+</ol>
+<p><em>多队列调度算法示意图</em></p>
+<p><div align="center"> <img src="http://c.biancheng.net/cpp/uploads/allimg/140629/1-140629155KQ11.jpg"> </div><br></p>
+<h2 id="调度算法评价标准"><a href="#调度算法评价标准" class="headerlink" title="调度算法评价标准"></a>调度算法评价标准</h2><p><strong>周转时间</strong>:作业被提交给系统起,到作业被完成的时间间隔.</p>
+<blockquote>
+<p>设作业的提交时刻为$t_1$,作业的开始时刻为$t_2$,作业的完成时刻为$t_3$.则作业的周转时间为$t_3-t_1$.</p>
+</blockquote>
+<p><strong>带权周转时间</strong>:作业的周转时间与其服务时间之比. </p>
+<blockquote>
+<p>作业的服务时间为$t_3-t_2$,则带权周转时间为$(t_3-t_1)/(t_3-t_2)$.</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-03T12:58:51.132Z" itemprop="dateUpdated">2020-04-03 20:58:51</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" rel="tag">进程调度算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/&title=《进程调度算法》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/&title=《进程调度算法》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《进程调度算法》 — 咸鱼的自我修养&url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/29/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">进程同步</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/26/MySQL-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MySQL入门(一)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/&title=《进程调度算法》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/&title=《进程调度算法》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《进程调度算法》 — 咸鱼的自我修养&url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/03/29/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>FileManagement | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,文件管理">
+    <meta name="description" content="文件管理[toc] 文件的概念和定义用户进行的输入,输出中,是以文件为基本单位的. 数据项分类:  基本数据项:描述一个对象的某种属性的一个值,时数据中最小逻辑数据单位. 组合数据项:由多个基本数据项组成.  记录一组相关的数据项的集合,用于描述一个对象在某方面的数据. 文件一组相关的集合.逻辑上可分为:  有结构文件(一组相似记录组成,记录型文件) 无结构文件(一个字符流,流式文件)   文件的">
+<meta name="keywords" content="操作系统,文件管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FileManagement">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;06&#x2F;FileManagement&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="文件管理[toc] 文件的概念和定义用户进行的输入,输出中,是以文件为基本单位的. 数据项分类:  基本数据项:描述一个对象的某种属性的一个值,时数据中最小逻辑数据单位. 组合数据项:由多个基本数据项组成.  记录一组相关的数据项的集合,用于描述一个对象在某方面的数据. 文件一组相关的集合.逻辑上可分为:  有结构文件(一组相似记录组成,记录型文件) 无结构文件(一个字符流,流式文件)   文件的">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;IndexTable.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;IndexSequenceTable.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;SingleCatalogue.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;TwoLevelCatalogue.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;FileSystemLevelStructure.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;SequenceDispatch.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;IndexDispatch.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;FileAllocationTable.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;LogicAndPhysicalDisk.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;FreeTable.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;GroupLinkedList.png">
+<meta property="og:updated_time" content="2020-04-08T13:29:31.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;IndexTable.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">FileManagement</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">FileManagement</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-06T00:40:41.000Z" itemprop="datePublished" class="page-time">
+  2020-04-06
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">文件管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件的概念和定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">文件的概念和定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件的属性-基本操作以及打开和关闭"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">文件的属性,基本操作以及打开和关闭</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件的属性"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">文件的属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件的基本操作"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">文件的基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建"><span class="post-toc-number">1.2.2.1.</span> <span class="post-toc-text">创建</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#写文件"><span class="post-toc-number">1.2.2.2.</span> <span class="post-toc-text">写文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#读文件"><span class="post-toc-number">1.2.2.3.</span> <span class="post-toc-text">读文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件重定位"><span class="post-toc-number">1.2.2.4.</span> <span class="post-toc-text">文件重定位</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#删除文件"><span class="post-toc-number">1.2.2.5.</span> <span class="post-toc-text">删除文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#截断文件"><span class="post-toc-number">1.2.2.6.</span> <span class="post-toc-text">截断文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件的打开与关闭"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">文件的打开与关闭</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件的逻辑结构"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">文件的逻辑结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#无结构文件"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">无结构文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有结构文件"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">有结构文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#顺序文件"><span class="post-toc-number">1.3.2.1.</span> <span class="post-toc-text">顺序文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#索引文件"><span class="post-toc-number">1.3.2.2.</span> <span class="post-toc-text">索引文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#索引顺序文件"><span class="post-toc-number">1.3.2.3.</span> <span class="post-toc-text">索引顺序文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#直接文件或散列文件-Hash-File"><span class="post-toc-number">1.3.2.4.</span> <span class="post-toc-text">直接文件或散列文件(Hash File)</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件目录结构"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">文件目录结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件控制块"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">文件控制块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#索引结点"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">索引结点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录结构"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">目录结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单级目录结构"><span class="post-toc-number">1.4.3.1.</span> <span class="post-toc-text">单级目录结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#两级目录结构"><span class="post-toc-number">1.4.3.2.</span> <span class="post-toc-text">两级目录结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多级目录结构-树形目录结构"><span class="post-toc-number">1.4.3.3.</span> <span class="post-toc-text">多级目录结构(树形目录结构)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#无环图目录结构"><span class="post-toc-number">1.4.3.4.</span> <span class="post-toc-text">无环图目录结构</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#共享文件"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">共享文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于索引结点的共享方式-硬链接"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">基于索引结点的共享方式(硬链接)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#利用符号链接实现文件共享-软链接"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">利用符号链接实现文件共享(软链接)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件保护"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">文件保护</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问类型"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">访问类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问控制"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">访问控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统层次结构"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">文件系统层次结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统的实现"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">文件系统的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录实现"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">目录实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#线性列表"><span class="post-toc-number">1.8.1.1.</span> <span class="post-toc-text">线性列表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#哈希表"><span class="post-toc-number">1.8.1.2.</span> <span class="post-toc-text">哈希表</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件实现"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">文件实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件分配方式"><span class="post-toc-number">1.8.2.1.</span> <span class="post-toc-text">文件分配方式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件存储空间管理"><span class="post-toc-number">1.8.2.2.</span> <span class="post-toc-text">文件存储空间管理</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#磁盘的结构"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">磁盘的结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#磁盘调度算法"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">磁盘调度算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常见磁盘调度算法"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">常见磁盘调度算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#先来先服务算法-First-Come-First-Service-FCFS"><span class="post-toc-number">1.10.1.1.</span> <span class="post-toc-text">先来先服务算法(First Come First Service,FCFS)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最短寻找时间优先算法-Short-Seek-Time-First-SSTF"><span class="post-toc-number">1.10.1.2.</span> <span class="post-toc-text">最短寻找时间优先算法(Short Seek Time First,SSTF)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#扫描算法-SCAN-电梯算法"><span class="post-toc-number">1.10.1.3.</span> <span class="post-toc-text">扫描算法(SCAN)/电梯算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#循环扫描算法-Circular-SCAN-C-SCAN"><span class="post-toc-number">1.10.1.4.</span> <span class="post-toc-text">循环扫描算法(Circular SCAN,C-SCAN)</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#磁盘的管理"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">磁盘的管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#磁盘的初始化"><span class="post-toc-number">1.11.1.</span> <span class="post-toc-text">磁盘的初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引导块"><span class="post-toc-number">1.11.2.</span> <span class="post-toc-text">引导块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#坏块"><span class="post-toc-number">1.11.3.</span> <span class="post-toc-text">坏块</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#磁盘结构"><span class="post-toc-number">1.12.1.</span> <span class="post-toc-text">磁盘结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存结构"><span class="post-toc-number">1.12.2.</span> <span class="post-toc-text">内存结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#混合索引分配的实现"><span class="post-toc-number">1.12.3.</span> <span class="post-toc-text">混合索引分配的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#直接地址"><span class="post-toc-number">1.12.3.1.</span> <span class="post-toc-text">直接地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一次间接地址"><span class="post-toc-number">1.12.3.2.</span> <span class="post-toc-text">一次间接地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多次间接地址"><span class="post-toc-number">1.12.3.3.</span> <span class="post-toc-text">多次间接地址</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-FileManagement"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">FileManagement</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-06 08:40:41" datetime="2020-04-06T00:40:41.000Z"  itemprop="datePublished">2020-04-06</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h1><p>[toc]</p>
+<h2 id="文件的概念和定义"><a href="#文件的概念和定义" class="headerlink" title="文件的概念和定义"></a>文件的概念和定义</h2><p><em>用户进行的输入,输出中,是以文件为基本单位的.</em></p>
+<p><strong>数据项</strong><br>分类:</p>
+<ul>
+<li>基本数据项:描述一个对象的某种属性的一个值,时数据中最小逻辑数据单位.</li>
+<li>组合数据项:由多个基本数据项组成.</li>
+</ul>
+<p><strong>记录</strong><br>一组相关的数据项的集合,用于描述一个对象在某方面的数据.</p>
+<p><strong>文件</strong><br>一组相关的集合.<br>逻辑上可分为:</p>
+<ul>
+<li>有结构文件(一组相似记录组成,记录型文件)</li>
+<li>无结构文件(一个字符流,流式文件)</li>
+</ul>
+<hr>
+<h2 id="文件的属性-基本操作以及打开和关闭"><a href="#文件的属性-基本操作以及打开和关闭" class="headerlink" title="文件的属性,基本操作以及打开和关闭"></a>文件的属性,基本操作以及打开和关闭</h2><h3 id="文件的属性"><a href="#文件的属性" class="headerlink" title="文件的属性"></a>文件的属性</h3><ul>
+<li><strong>名称</strong>:需唯一.</li>
+<li><strong>标识符</strong>:文件的唯一标签,使用者不可读.</li>
+<li><strong>类型</strong>:为对应的文件系统使用.</li>
+<li><strong>位置</strong>:指向文件的指针.</li>
+<li><strong>大小</strong>:文件当前的大小.</li>
+<li><strong>保护</strong>:保护文件的访问呢控制信息.</li>
+<li><strong>时间,日期和用户标识</strong>:文件创建,上次修改,上次访问的信息.</li>
+</ul>
+<h3 id="文件的基本操作"><a href="#文件的基本操作" class="headerlink" title="文件的基本操作"></a>文件的基本操作</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p>步骤:</p>
+<ol>
+<li>在文件系统中找到空间.</li>
+<li>在目录中创建对应的条目.</li>
+</ol>
+<h4 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h4><p>输入:</p>
+<ul>
+<li>待写入的文件名</li>
+<li>待写入的内容</li>
+</ul>
+<p>过程:</p>
+<ul>
+<li>搜索目录查找文件位置.</li>
+<li>根据文件的写位置指针,进行写入,并更新写指针.</li>
+</ul>
+<h4 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h4><p>输入:</p>
+<ul>
+<li>待读取的文件名</li>
+<li>读入文件块的内存位置</li>
+</ul>
+<p>过程:</p>
+<ul>
+<li>搜索目录查找对应的目录项.</li>
+<li>进行读操作,更新读指针.</li>
+</ul>
+<h4 id="文件重定位"><a href="#文件重定位" class="headerlink" title="文件重定位"></a>文件重定位</h4><p>根据条件搜索目录,将当前文件位置设为给定值.</p>
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><p>过程:</p>
+<ul>
+<li>从目录中查找待删除文件的目录项,使之成为空值.</li>
+<li>回收该文件所占的空间.</li>
+</ul>
+<h4 id="截断文件"><a href="#截断文件" class="headerlink" title="截断文件"></a>截断文件</h4><p>保持文件属性不变,删除文件内容.</p>
+<h3 id="文件的打开与关闭"><a href="#文件的打开与关闭" class="headerlink" title="文件的打开与关闭"></a>文件的打开与关闭</h3><p><em>操作系统在使用文件前要显式的打开.</em></p>
+<p>打开流程:</p>
+<ul>
+<li>首次打开:由文件属性从外存中拷贝到内存.</li>
+<li>由文件名搜索目录,将对应的目录条目复制到打开文件表(open-file table).</li>
+<li>返回该文件在打开文件表中对应的条目.</li>
+</ul>
+<p>一个进程打开文件:</p>
+<ul>
+<li>系统将进程中的进程打开表中添加相应的条目,指向系统的打开文件表.</li>
+<li>增加系统的打开文件表中对应条目的<em>文件打开计数器</em>(Open Count).</li>
+</ul>
+<p>一个进程关闭文件:</p>
+<ul>
+<li>减少打开文件表对应条目的文件打开计数器的值,若为0,则回收该文件的内存空间.</li>
+<li>将打开文件表中相应条目删除,释放文件的文件控制块(File Control Block,FCB).</li>
+</ul>
+<hr>
+<h2 id="文件的逻辑结构"><a href="#文件的逻辑结构" class="headerlink" title="文件的逻辑结构"></a>文件的逻辑结构</h2><p>分类：</p>
+<ul>
+<li>无结构文件(流式文件)</li>
+<li>有结构文件(记录式文件)</li>
+</ul>
+<h3 id="无结构文件"><a href="#无结构文件" class="headerlink" title="无结构文件"></a>无结构文件</h3><ul>
+<li>将数据按顺序组织成记录并保存。</li>
+<li>已字节(Byte)为单位。</li>
+<li>只能通过穷举搜索访问。</li>
+<li>源程序，目标代码等适用于字符流无结构方式。</li>
+</ul>
+<h3 id="有结构文件"><a href="#有结构文件" class="headerlink" title="有结构文件"></a>有结构文件</h3><h4 id="顺序文件"><a href="#顺序文件" class="headerlink" title="顺序文件"></a>顺序文件</h4><p>结构：</p>
+<ol>
+<li>串结构：记录之间的顺序与关键字无关。（按照存入时间先后顺序排列）</li>
+<li>顺序结构：文件中的所有记录按关键字顺序排列。</li>
+</ol>
+<h4 id="索引文件"><a href="#索引文件" class="headerlink" title="索引文件"></a>索引文件</h4><p><strong>定长记录文件</strong></p>
+<p>第i个记录的地址为：<br>$A_i = i*L$</p>
+<p><strong>可变长记录文件</strong></p>
+<p>顺序查找前i-1个记录，第i个记录的地址为：<br>$A_{i-1} = L_0+L_1+…+L_{i-2}$</p>
+<p>可以建立索引表加快索引速度：</p>
+<ul>
+<li>索引表是定长记录的顺序文件。</li>
+<li>每条记录对应一个索引项，包括<strong>索引号</strong>，<strong>记录的长度</strong>，<strong>指向逻辑文件中记录的指针</strong>。</li>
+<li>将关键字作为索引号内容，并按照关键字顺序排序。</li>
+</ul>
+<p>索引表：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//IndexTable.jpg" alt="Index Table" title>
+                </div>
+                <div class="image-caption">Index Table</div>
+            </figure></p>
+<h4 id="索引顺序文件"><a href="#索引顺序文件" class="headerlink" title="索引顺序文件"></a>索引顺序文件</h4><p>特点：</p>
+<ul>
+<li>将顺序文件中的所有记录分成若干组（按照关键字）</li>
+<li>为顺序文件建立一张索引表，为每个分组中的第一个记录建立一个索引项。</li>
+<li>每个索引项包含一个关键字和指向该记录的指针。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//IndexSequenceTable.jpg" alt="Index Sequence Table" title>
+                </div>
+                <div class="image-caption">Index Sequence Table</div>
+            </figure>
+<ul>
+<li>主文件是以关键字和其他数据组成.</li>
+<li>索引表为每组设置一个记录,使用关键字和指向该记录起始位置的指针.</li>
+<li>索引表是以关键字递增排序.</li>
+<li>查找记录时,先通过索引表查找对应的组,再从组中使用顺序查找确定记录.</li>
+</ul>
+<h4 id="直接文件或散列文件-Hash-File"><a href="#直接文件或散列文件-Hash-File" class="headerlink" title="直接文件或散列文件(Hash File)"></a>直接文件或散列文件(Hash File)</h4><p>通过hash函数将键值转换成哈希值,由哈希值直接决定记录的物理地址.</p>
+<hr>
+<h2 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h2><p>文件目录:</p>
+<ul>
+<li>包含属性,位置,所有权等信息.</li>
+<li>提供文件名和文件之间的映射.</li>
+<li>提供控制访问文件的信息.</li>
+</ul>
+<h3 id="文件控制块"><a href="#文件控制块" class="headerlink" title="文件控制块"></a>文件控制块</h3><p><strong>文件控制块</strong>(FCB):</p>
+<ul>
+<li>存放控制文件所需的各种信息的数据结构.</li>
+<li>FCB的有序集合称为<strong>文件目录</strong>,一个FCB为一个文件目录项.</li>
+</ul>
+<p>包含信息:</p>
+<ul>
+<li>基本信息(文件名,物理位置,逻辑结构,物理结构)</li>
+<li>存取控制信息(文件存取权限)</li>
+<li>使用信息(文件建立,修改时间)</li>
+</ul>
+<h3 id="索引结点"><a href="#索引结点" class="headerlink" title="索引结点"></a>索引结点</h3><p>将文件名和文件描述信息分开,文件描述信息形成<strong>索引结点</strong>.<br>文件目录中的每个目录项是由<strong>文件名</strong>和<strong>指向该文件的索引结点的指针</strong>构成.</p>
+<p>索引结点组成:</p>
+<ul>
+<li>文件主标识符</li>
+<li>文件类型</li>
+<li>文件存取权限</li>
+<li>文件物理地址</li>
+<li>文件长度</li>
+<li>文件链接计数</li>
+<li>文件存取时间</li>
+</ul>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>文件操作:</p>
+<ul>
+<li>搜索:搜索目录,找出对应的目录项.</li>
+<li>创建文件:在目录增加一个目录项.</li>
+<li>删除文件:从目录中删除相应目录项.</li>
+<li>显示目录:显示用户目录中的文件和属性.</li>
+<li>修改目录:改变相应的目录项.</li>
+</ul>
+<h4 id="单级目录结构"><a href="#单级目录结构" class="headerlink" title="单级目录结构"></a>单级目录结构</h4><p>特点:</p>
+<ul>
+<li>只有一张目录表.</li>
+<li>每个文件对应一个目录项.</li>
+<li>查找速度慢,不允许重名,不利于共享.</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//SingleCatalogue.jpg" alt="Single Catalogure" title>
+                </div>
+                <div class="image-caption">Single Catalogure</div>
+            </figure>
+<h4 id="两级目录结构"><a href="#两级目录结构" class="headerlink" title="两级目录结构"></a>两级目录结构</h4><ul>
+<li>将文件目录分成<strong>主文件目录</strong>和<strong>用户文件目录</strong>.</li>
+<li>主文件目录(Master File Directory):记录用户名和用户文件目录的存储地址.</li>
+<li>用户文件目录:记录用户文件的FCB.</li>
+<li>不能对文件分类.</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//TwoLevelCatalogue.jpg" alt="Two Level Catalogue" title>
+                </div>
+                <div class="image-caption">Two Level Catalogue</div>
+            </figure>
+<h4 id="多级目录结构-树形目录结构"><a href="#多级目录结构-树形目录结构" class="headerlink" title="多级目录结构(树形目录结构)"></a>多级目录结构(树形目录结构)</h4><ul>
+<li><strong>文件路径名</strong>是字符串,由根目录出发到目标文件的通路上所有目录名与数据文件名用分隔符链接起来组成的.</li>
+<li><strong>绝对路径</strong>:从根目录出发的路径.</li>
+<li><strong>相对路径</strong>:设置一个当前目录,进程对文件的访问是相对于当前目录的.</li>
+<li>使用<code>cd</code>改变”当前路径”.</li>
+<li>查找文件需要按路径名访问中间结点,增加磁盘访问次数,降低速度.</li>
+</ul>
+<h4 id="无环图目录结构"><a href="#无环图目录结构" class="headerlink" title="无环图目录结构"></a>无环图目录结构</h4><ul>
+<li>在树形目录结构上增加指向同一个结点的有向边,形成有向无环图.</li>
+<li>便于实现文件共享.</li>
+<li>每个共享结点设置共享计数器,增加该结点的共享链时,计数器加1,每个用户请求删除结点时,计数器减1.计数器为0时才删除结点.</li>
+</ul>
+<hr>
+<h2 id="共享文件"><a href="#共享文件" class="headerlink" title="共享文件"></a>共享文件</h2><h3 id="基于索引结点的共享方式-硬链接"><a href="#基于索引结点的共享方式-硬链接" class="headerlink" title="基于索引结点的共享方式(硬链接)"></a>基于索引结点的共享方式(硬链接)</h3><p>特点：</p>
+<ul>
+<li><strong>索引结点</strong>：存放文件的<strong>物理地址</strong>和<strong>文件属性</strong>。</li>
+<li>文件目录只设置<strong>文件名</strong>和<strong>指向相应索引结点的指针</strong>。</li>
+<li>索引结点有一个<strong>链接计数</strong>(count)，表示链接到索引结点的用户数。</li>
+<li>新增用户共享该文件时，其索引结点的链接计数加1，否则减1。计数为0时删除该文件。</li>
+</ul>
+<p>shell代码:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln 待链接的文件 硬链接名</span><br></pre></td></tr></table></figure></p>
+<h3 id="利用符号链接实现文件共享-软链接"><a href="#利用符号链接实现文件共享-软链接" class="headerlink" title="利用符号链接实现文件共享(软链接)"></a>利用符号链接实现文件共享(软链接)</h3><p>特点：</p>
+<ul>
+<li>系统创建LINK类型的新文件，放到新用户的目录中。</li>
+<li>软链接中只包含被链接文件的<strong>路径名</strong>。</li>
+<li>路径名页称为符号链。</li>
+<li>只有文件的拥有者才有指向索引结点的指针，其他用户只有该文件的路径名。</li>
+<li>文件拥有者删除文件，其他用户访问失败，则删除符号链接。</li>
+<li>不会出现文件被删产生悬空指针。</li>
+<li>问题：文件被替换后，旧的符号链接仍然有效，导致错误。</li>
+</ul>
+<p>shell代码：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s 待链接的文件 软链接名</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="文件保护"><a href="#文件保护" class="headerlink" title="文件保护"></a>文件保护</h2><p>文件保护实现：</p>
+<ul>
+<li>口令保护（避免窃取）</li>
+<li>加密保护</li>
+<li>访问控制（*控制访问方式）</li>
+</ul>
+<h3 id="访问类型"><a href="#访问类型" class="headerlink" title="访问类型"></a>访问类型</h3><ul>
+<li><strong>读</strong></li>
+<li><strong>写</strong></li>
+<li><strong>执行</strong>：转入内存并执行</li>
+<li><strong>添加</strong>：添加信息</li>
+<li><strong>删除</strong>：删除文件</li>
+<li><strong>列表清单</strong>：列出文件名和文件属性</li>
+</ul>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><ul>
+<li>实现一：根据用户身份进行控制。</li>
+<li><strong>访问控制列表</strong>(Access-Control List,ACL)：文件的每个用户名和所允许的访问类型。</li>
+<li>优点：可以实现复杂的访问方法。</li>
+<li>缺点：复杂的空间管理。</li>
+<li>精简的访问列表：<ul>
+<li>拥有者：创建文件的用户</li>
+<li>组：一组具有类似访问的用户</li>
+<li>其他：其他用户</li>
+</ul>
+</li>
+<li>实现二：建立文件时提供口令。用户请求访问时必须提供口令。</li>
+<li>优缺点：时间、空间开销小；口令保存在系统内部，不安全。</li>
+<li>实现三：对文件进行加密。访问文件需要使用密钥。</li>
+<li>优缺点：保密性好，节省存储空间；编码和译码需要时间。</li>
+<li>注：多级目录结构还需要保护子目录的文件。</li>
+</ul>
+<hr>
+<h2 id="文件系统层次结构"><a href="#文件系统层次结构" class="headerlink" title="文件系统层次结构"></a>文件系统层次结构</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//FileSystemLevelStructure.jpg" alt="File System Level Structure" title>
+                </div>
+                <div class="image-caption">File System Level Structure</div>
+            </figure>
+<blockquote>
+<p><strong>用户调用接口</strong></p>
+</blockquote>
+<ul>
+<li>为用户提供与文件和目录有关的调用（新建，打开，读写，关闭，删除…）。</li>
+<li>一个模块对应一个系统调用。</li>
+</ul>
+<blockquote>
+<p><strong>文件目录系统</strong></p>
+</blockquote>
+<ul>
+<li>管理文件目录。</li>
+<li>活跃文件目录表，读写状态信息表，进程打开文件表，存储设备上的文件目录结构管理。</li>
+</ul>
+<blockquote>
+<p><strong>存取控制验证</strong></p>
+</blockquote>
+<ul>
+<li>实现文件保护。</li>
+<li>将用户的访问要求与FCB指示的访问控制权限进行比较，确认合法性。</li>
+</ul>
+<blockquote>
+<p><strong>逻辑文件系统与文件信息缓冲区</strong></p>
+</blockquote>
+<ul>
+<li>将用户要读写的逻辑记录转换成文件逻辑结构内的相应块号。</li>
+</ul>
+<blockquote>
+<p><strong>物理文件系统</strong></p>
+</blockquote>
+<ul>
+<li>将逻辑记录对应的块号转换成实际物理地址。</li>
+</ul>
+<blockquote>
+<p><strong>分配模块</strong></p>
+</blockquote>
+<ul>
+<li>管理辅存空间。</li>
+</ul>
+<blockquote>
+<p><strong>设备管理程序模块</strong></p>
+</blockquote>
+<ul>
+<li>分配设备，分配设备读写用缓冲区，磁盘调度，启动它设备，处理设备中断，释放设备。</li>
+</ul>
+<hr>
+<h2 id="文件系统的实现"><a href="#文件系统的实现" class="headerlink" title="文件系统的实现"></a>文件系统的实现</h2><h3 id="目录实现"><a href="#目录实现" class="headerlink" title="目录实现"></a>目录实现</h3><p>分类:</p>
+<ul>
+<li><strong>线性列表</strong></li>
+<li><strong>哈希表</strong></li>
+</ul>
+<h4 id="线性列表"><a href="#线性列表" class="headerlink" title="线性列表"></a>线性列表</h4><ul>
+<li>是一个线性表，每一项由<strong>文件名</strong>和对应的<strong>数据块指针</strong>组成。</li>
+<li>创建文件：搜索目录确定没有同名文件。然后再目录表中国增加一项目录项。</li>
+<li>删除文件：由文件名搜索目录表，释放对应目录项所指向的地址的空间。</li>
+</ul>
+<h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><ul>
+<li>由文件名通过哈希函数或者哈希值，哈希值为指向线性列表中一项的指针。</li>
+<li>优点：查找迅速，插入和删除简单。</li>
+<li>缺点：需要避免冲突，哈希函数依赖于表长。</li>
+</ul>
+<h3 id="文件实现"><a href="#文件实现" class="headerlink" title="文件实现"></a>文件实现</h3><h4 id="文件分配方式"><a href="#文件分配方式" class="headerlink" title="文件分配方式"></a>文件分配方式</h4><p>磁盘空间分配方式：</p>
+<ul>
+<li>连续分配</li>
+<li>链接分配</li>
+<li>索引分配</li>
+</ul>
+<blockquote>
+<p><strong>连续分配</strong></p>
+</blockquote>
+<ul>
+<li>每个文件占用一组连续的块。</li>
+<li>连续分配可以用第一块的磁盘地址和连续块的数量定义。</li>
+<li>文件的目录条目包括<strong>开始块的地址</strong>和<strong>分配区域的长度</strong>。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//SequenceDispatch.png" alt="Sequence Dispatch" title>
+                </div>
+                <div class="image-caption">Sequence Dispatch</div>
+            </figure>
+<p>注：</p>
+<ul>
+<li>每个文件在文件中有一个目录项。</li>
+<li>每一项由<strong>文件名</strong>，<strong>起始磁盘地址</strong>和<strong>连续块数量</strong>组成。</li>
+<li>优点：存取快。缺点：不能动态调整长度。增删容易产生碎片。</li>
+</ul>
+<blockquote>
+<p><strong>链接分配</strong></p>
+</blockquote>
+<p>分类：</p>
+<ul>
+<li>隐式链接</li>
+<li>显式链接</li>
+</ul>
+<p><strong>隐式链接</strong>：</p>
+<ul>
+<li>每个文件对应一个磁盘块的链表。</li>
+<li>每个磁盘块都有指向下一个盘块的指针（除最后一块）</li>
+<li>目录由<strong>文件名</strong>，<strong>文件的第一块的指针</strong>和<strong>文件的最后一块的指针</strong>组成。</li>
+<li>创建文件时，在目录中新增一项，起始指针指向文件的首块。</li>
+<li>无法随机访问盘块，只能通过指针顺序访问文件。</li>
+<li>其中一个指针丢失导致文件的丢失。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//IndexDispatch.png" alt="Index Dispatch" title>
+                </div>
+                <div class="image-caption">Index Dispatch</div>
+            </figure>
+<p><strong>显式链接</strong></p>
+<ul>
+<li><strong>文件分配表</strong>(File Allocation Table,FAT)：每一项对应一个物理块，每一块存放文件中下一块的序号。</li>
+<li>文件目录中每一项对应一个文件，每一项由<strong>文件名</strong>和<strong>首块序号</strong>组成。</li>
+<li>FAT存放在内存中。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//FileAllocationTable.png" alt="File Allocation Table" title>
+                </div>
+                <div class="image-caption">File Allocation Table</div>
+            </figure>
+<blockquote>
+<p><strong>索引分配</strong></p>
+</blockquote>
+<ul>
+<li>每个文件的所有的盘块号集中放在一个索引块中。</li>
+<li>索引块的第i个条目指向文件的第i个块。</li>
+<li>目录条目包括<strong>文件名</strong>和<strong>索引块地址</strong>。</li>
+<li>要读入文件的第i个块，则由索引的第i个条目的指针确定其物理地址。</li>
+</ul>
+<p><em>多层索引</em>：第一层索引块指向第二层的索引块，第二层索引块再指向文件块。<br><em>混合索引</em>：将多种索引分配方式相结合的分配方式。</p>
+<h4 id="文件存储空间管理"><a href="#文件存储空间管理" class="headerlink" title="文件存储空间管理"></a>文件存储空间管理</h4><blockquote>
+<p><strong>文件存储器空间的划分与初始化</strong></p>
+</blockquote>
+<ul>
+<li>文件数据信息的空间（文件区）和存放文件控制信息FCB的空间（目录区）是分离的。</li>
+<li>逻辑卷需要初始化，划分好目录区和文件区，建立空闲空间管理表和存放逻辑卷信息的超级块。</li>
+</ul>
+<p>逻辑卷和物理盘的关系：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//LogicAndPhysicalDisk.jpg" alt="LogicAndPhysicalDisk" title>
+                </div>
+                <div class="image-caption">LogicAndPhysicalDisk</div>
+            </figure></p>
+<blockquote>
+<p><strong>文件存储空间管理</strong></p>
+</blockquote>
+<p>1.<strong>空闲表法</strong></p>
+<ul>
+<li>为所有空闲区建立一个<strong>空闲盘块表</strong>。</li>
+<li>每个空闲区对应一个空闲表项，包括<strong>表项序号</strong>，<strong>空闲区的第一个盘块号</strong>和<strong>该区的空闲盘块数</strong>。</li>
+<li>创建文件时，从空闲盘块表中依次查找各表项，直到找到第一个满足大小的空闲区。</li>
+<li>回收时，需要考虑将两个相邻的空闲区合并。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//FreeTable.png" alt="Free Table" title>
+                </div>
+                <div class="image-caption">Free Table</div>
+            </figure>
+<p>2.<strong>空闲链表法</strong></p>
+<ul>
+<li>所有空闲盘区组成一个空闲链。</li>
+<li>可分为：<strong>空闲盘块链</strong>和<strong>空闲盘区链</strong>。</li>
+<li><strong>空闲盘块链</strong>：以盘块为单位形成链。创建文件时，从链首开始，取下适当空闲盘块分配。删除文件时，回收盘插入空闲盘块链末尾。</li>
+<li><strong>空闲盘区链</strong>：将所有空闲盘区（若干个盘块）形成链。每个盘区有<strong>指示下一个空闲盘区的指针</strong>和<strong>本盘区的大小</strong>。</li>
+</ul>
+<p>3.<strong>位示图法</strong></p>
+<ul>
+<li>使用二进制的一位表示磁盘的一个盘块。</li>
+<li>若该位为0，则对应盘块空闲；若该位为1，则对应盘块已分配。</li>
+<li>分配：顺序扫描二进制，找到需要的k个连续的0，若为第i行，第j列，则对应的盘块号为：n(i-1)+j （n为每行的位数）。修改对应的位为1。</li>
+<li>回收：由盘块号转换为行列号：i =(b-1)/(n+1);j=(b-1)%(n+1) （b为盘块号）。修改对应位示图为0。</li>
+</ul>
+<p>4.<strong>成组链接法</strong></p>
+<ul>
+<li>将空闲块分成若干组。</li>
+<li>每组的第一个空闲块记录<strong>当前组空闲块总数</strong>和<strong>下一个空闲块的物理盘块号</strong>以及<strong>下一组的空闲块物理盘块号</strong>。</li>
+<li>有一个<strong>空闲盘块号栈</strong>（超级块）保存<strong>第一组中空闲块号</strong>和<strong>空闲盘块号</strong>。</li>
+<li>分配是从前往后分配，回收是从后往前回收。</li>
+</ul>
+<p>成组链接法：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//GroupLinkedList.png" alt="Group Linked List" title>
+                </div>
+                <div class="image-caption">Group Linked List</div>
+            </figure></p>
+<hr>
+<h2 id="磁盘的结构"><a href="#磁盘的结构" class="headerlink" title="磁盘的结构"></a>磁盘的结构</h2><ul>
+<li>磁盘的盘面上的数据存储在一组同心圆中，为<strong>磁道</strong>。</li>
+<li>一个盘面有上千个磁道，磁道可划分成几百个扇面。</li>
+<li>每个扇面固定存储大小（512B）。</li>
+<li>一个扇面称为一个盘块。</li>
+<li>扇面从外到内密度增加。</li>
+<li>所有盘片上相对位置相同的磁道组成柱面。</li>
+<li>扇面是磁盘可寻址的最小存储单位。</li>
+<li>磁盘的地址使用：柱面号+盘面号+扇区号（块号） 组成。</li>
+</ul>
+<hr>
+<h2 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h2><p><em>磁盘读写时间由<strong>寻道时间</strong>，<strong>延迟时间</strong>和<strong>传输时间</strong>决定。</em></p>
+<p><strong>寻道时间</strong>：磁头移动到指定磁道的时间。<br>$T_s = m*n+s$<br>m:磁盘速度常数（约0.2ms）；n：跨越的磁道数；s：启动时间。</p>
+<p><strong>延迟时间</strong>：定位到某一个磁道的扇区的时间。<br>$T_r = 1/(2r)$<br>r：旋转速度。5400r/m的磁盘约为5.55ms。</p>
+<p><strong>传输时间</strong>：磁盘读写数据的时间。<br>$T_t=b/(rN)$<br>b：读写的字节数；r：磁盘每秒转数；N：一个磁道的字节数。</p>
+<p>总平均存取时间：<br>$T_a=T_s+T_r+T_t$</p>
+<h3 id="常见磁盘调度算法"><a href="#常见磁盘调度算法" class="headerlink" title="常见磁盘调度算法"></a>常见磁盘调度算法</h3><h4 id="先来先服务算法-First-Come-First-Service-FCFS"><a href="#先来先服务算法-First-Come-First-Service-FCFS" class="headerlink" title="先来先服务算法(First Come First Service,FCFS)"></a>先来先服务算法(First Come First Service,FCFS)</h4><ul>
+<li>根据<strong>进程请求访问磁盘的先后顺序</strong>进行调度。</li>
+<li>当请求是访问簇聚的文件扇区时达到较好的性能。</li>
+<li>一般接近随机调度。</li>
+</ul>
+<h4 id="最短寻找时间优先算法-Short-Seek-Time-First-SSTF"><a href="#最短寻找时间优先算法-Short-Seek-Time-First-SSTF" class="headerlink" title="最短寻找时间优先算法(Short Seek Time First,SSTF)"></a>最短寻找时间优先算法(Short Seek Time First,SSTF)</h4><ul>
+<li>选择处理的磁道是<strong>与当前磁头所在磁道距离最近的磁道</strong>，使得每次的寻找时间最短。</li>
+<li>可能产生“饥饿”。</li>
+</ul>
+<h4 id="扫描算法-SCAN-电梯算法"><a href="#扫描算法-SCAN-电梯算法" class="headerlink" title="扫描算法(SCAN)/电梯算法"></a>扫描算法(SCAN)/电梯算法</h4><ul>
+<li><strong>在磁头当前移动方向上选择当前磁头所在磁道距离最近的请求</strong>作为下一次服务的对象。</li>
+<li>访问局部性不佳。</li>
+</ul>
+<h4 id="循环扫描算法-Circular-SCAN-C-SCAN"><a href="#循环扫描算法-Circular-SCAN-C-SCAN" class="headerlink" title="循环扫描算法(Circular SCAN,C-SCAN)"></a>循环扫描算法(Circular SCAN,C-SCAN)</h4><ul>
+<li>在扫描算法的基础上规定<strong>磁头单向移动提供服务</strong>，<strong>回返时直接移动到起始端而不服务任何请求</strong>。</li>
+<li>即：只在同一方向上进行扫描，反方向只移动，不扫描。</li>
+</ul>
+<p>减少延迟时间：</p>
+<ul>
+<li>对扇面进行交替编号，不同盘面错位命名。</li>
+</ul>
+<hr>
+<h2 id="磁盘的管理"><a href="#磁盘的管理" class="headerlink" title="磁盘的管理"></a>磁盘的管理</h2><h3 id="磁盘的初始化"><a href="#磁盘的初始化" class="headerlink" title="磁盘的初始化"></a>磁盘的初始化</h3><p><strong>低级格式化</strong>（物理分区）：将磁盘分成扇区。</p>
+<p>每个扇区的数据结构：头，数据区域，尾部组成。</p>
+<p>步骤：</p>
+<ol>
+<li>分成多个柱面组成的分区。</li>
+<li>对物理分区进行逻辑格式化，将文件系统数据结构存储到磁盘上。</li>
+</ol>
+<h3 id="引导块"><a href="#引导块" class="headerlink" title="引导块"></a>引导块</h3><p>自举程序：<br>初始化CPU，寄存器，设备控制器和内存；然后启动操作系统。</p>
+<ul>
+<li>找到磁盘上的操作系统内核。</li>
+<li>装入内存。</li>
+<li>转到起始地址。</li>
+<li>开始操作系统的运行。</li>
+</ul>
+<h3 id="坏块"><a href="#坏块" class="headerlink" title="坏块"></a>坏块</h3><ul>
+<li>电子集成驱动器（IDE）：执行逻辑格式化时扫描磁盘检查坏扇区，在FAT表上注明。</li>
+<li>小型计算机系统接口（SCSI）：控制器维护一个磁盘坏块链表。</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><p><strong>引导控制块</strong>(Boot Control Block)：<br>系统从该分区引导操作系统所需的信息。</p>
+<ul>
+<li>UFS称为<em>引导块</em>(Boot Block)，NTFS称为分区引导扇区(Partition Boot Sector)。</li>
+</ul>
+<p><strong>分区控制块</strong>(Partition Control Block)：包括分区详细信息。</p>
+<ul>
+<li>分区的块数</li>
+<li>块的大小</li>
+<li>空闲块的数量和指针</li>
+<li>空闲FCB的数量和指针。</li>
+<li>UPS称为<em>超级块</em>(Superblock)，NTFS称为<em>主控文件表</em>(Master File Table)。</li>
+</ul>
+<h3 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h3><ul>
+<li>内存分区表：所有安装分区的信息。</li>
+<li>内存目录结构：最近访问的目录信息。包括指向分区表的指针。</li>
+<li>系统打开文件表：每个打开文件的FCB。</li>
+<li>进程打开文件表：指向系统打开文件表的条目。</li>
+</ul>
+<h3 id="混合索引分配的实现"><a href="#混合索引分配的实现" class="headerlink" title="混合索引分配的实现"></a>混合索引分配的实现</h3><p>索引结点设置13个地址项，地址项分为<strong>直接地址</strong>和<strong>间接地址</strong>。</p>
+<h4 id="直接地址"><a href="#直接地址" class="headerlink" title="直接地址"></a>直接地址</h4><ul>
+<li>设置10个直接地址项，适当大小的文件可以由直接地址读出所有盘块号。</li>
+</ul>
+<h4 id="一次间接地址"><a href="#一次间接地址" class="headerlink" title="一次间接地址"></a>一次间接地址</h4><ul>
+<li>一级索引分配方案。</li>
+</ul>
+<h4 id="多次间接地址"><a href="#多次间接地址" class="headerlink" title="多次间接地址"></a>多次间接地址</h4><ul>
+<li>地址项提供二次间接地址。</li>
+<li>实质为两级索引分配方式。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-08T13:29:31.448Z" itemprop="dateUpdated">2020-04-08 21:29:31</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="tag">文件管理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/06/FileManagement/&title=《FileManagement》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/06/FileManagement/&title=《FileManagement》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/06/FileManagement/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《FileManagement》 — 咸鱼的自我修养&url=http://yoursite.com/2020/04/06/FileManagement/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/06/FileManagement/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/08/OperatingSystem/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">操作系统概述</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/04/Memory-Management/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Memory Management</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/06/FileManagement/&title=《FileManagement》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/06/FileManagement/&title=《FileManagement》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/06/FileManagement/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《FileManagement》 — 咸鱼的自我修养&url=http://yoursite.com/2020/04/06/FileManagement/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/06/FileManagement/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/04/06/FileManagement/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

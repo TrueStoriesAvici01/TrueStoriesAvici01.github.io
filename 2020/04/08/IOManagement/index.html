@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>输入输出(I/O)管理 | 咸鱼的自我修养 | 咸鱼修炼日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统,输入输出管理">
+    <meta name="description" content="[toc] 操作系统输入&#x2F;输出(I&#x2F;O)管理I&#x2F;O设备及其分类按特性分类：  人机交互类：用以与用户交互。（速度慢，以字节为单位进行数据交换，打印机，显示器，键盘，鼠标） 存储设备：存储数据的设备。（速度快，以多字节的块进行数据交换，磁盘，光盘） 网络通信设备：用以远程设备通信。（速度适中，网络接口，解调器）  按速度分类：  低速设备：每秒几个到数百字节（键盘，鼠标） 中速设备：每秒数千到数万字">
+<meta name="keywords" content="操作系统,输入输出管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="输入输出(I&#x2F;O)管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;08&#x2F;IOManagement&#x2F;index.html">
+<meta property="og:site_name" content="咸鱼的自我修养">
+<meta property="og:description" content="[toc] 操作系统输入&#x2F;输出(I&#x2F;O)管理I&#x2F;O设备及其分类按特性分类：  人机交互类：用以与用户交互。（速度慢，以字节为单位进行数据交换，打印机，显示器，键盘，鼠标） 存储设备：存储数据的设备。（速度快，以多字节的块进行数据交换，磁盘，光盘） 网络通信设备：用以远程设备通信。（速度适中，网络接口，解调器）  按速度分类：  低速设备：每秒几个到数百字节（键盘，鼠标） 中速设备：每秒数千到数万字">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;DMAControler.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;IOControlMethod.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;DeviceControler.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;SingleCache.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;DoubleCache.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;TwoDirectCommunication.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;CachePool.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;DCT.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;COCT_CHCT_SDT.jpg">
+<meta property="og:updated_time" content="2020-04-08T13:29:31.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;DMAControler.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avicii.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">咸鱼不翻身</h5>
+          <a href="mailto:414337066@qq.com" target="_blank" rel="noopener" title="414337066@qq.com" class="mail">414337066@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/TrueStoriesAvici01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">输入输出(I/O)管理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">输入输出(I/O)管理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-08T13:29:31.448Z" itemprop="datePublished" class="page-time">
+  2020-04-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#操作系统输入-输出-I-O-管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">操作系统输入/输出(I/O)管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#I-O设备及其分类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">I/O设备及其分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#I-O控制方式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">I/O控制方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#程序直接控制方式"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">程序直接控制方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中断驱动方式"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">中断驱动方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DMA方式"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">DMA方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通道控制方式"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">通道控制方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#I-O子系统的层次结构"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">I/O子系统的层次结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户层I-O软件"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">用户层I/O软件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设备独立性软件"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">设备独立性软件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设备驱动程序"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">设备驱动程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中断处理程序"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">中断处理程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬件设备"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">硬件设备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#I-O子系统"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">I/O子系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#I-O调度"><span class="post-toc-number">1.3.7.</span> <span class="post-toc-text">I/O调度</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高速缓存与缓冲区"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">高速缓存与缓冲区</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#磁盘高速缓存-Disk-Cache"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">磁盘高速缓存(Disk Cache)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓冲区-Buffer"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">缓冲区(Buffer)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单缓冲"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">单缓冲</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双缓冲"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">双缓冲</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环缓冲"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">循环缓冲</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓冲池"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">缓冲池</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入-输出-I-O-设备分配与回收"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">输入/输出(I/O)设备分配与回收</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设备分配的数据结构"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">设备分配的数据结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设备分配策略"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">设备分配策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设备分配方式"><span class="post-toc-number">1.5.2.1.</span> <span class="post-toc-text">设备分配方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设备分配的安全性"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">设备分配的安全性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#逻辑设备名到物理设备名的映射"><span class="post-toc-number">1.5.4.</span> <span class="post-toc-text">逻辑设备名到物理设备名的映射</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SPOOLing技术-假脱机技术"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">SPOOLing技术(假脱机技术)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入井和输出井"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">输入井和输出井</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入缓冲区和输出缓冲区"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">输入缓冲区和输出缓冲区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入进程和输出进程"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">输入进程和输出进程</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-IOManagement"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">输入输出(I/O)管理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-08 21:29:31" datetime="2020-04-08T13:29:31.448Z"  itemprop="datePublished">2020-04-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>[toc]</p>
+<h1 id="操作系统输入-输出-I-O-管理"><a href="#操作系统输入-输出-I-O-管理" class="headerlink" title="操作系统输入/输出(I/O)管理"></a>操作系统输入/输出(I/O)管理</h1><h2 id="I-O设备及其分类"><a href="#I-O设备及其分类" class="headerlink" title="I/O设备及其分类"></a>I/O设备及其分类</h2><p>按特性分类：</p>
+<ol>
+<li>人机交互类：用以与用户交互。（速度慢，以字节为单位进行数据交换，打印机，显示器，键盘，鼠标）</li>
+<li>存储设备：存储数据的设备。（速度快，以多字节的块进行数据交换，磁盘，光盘）</li>
+<li>网络通信设备：用以远程设备通信。（速度适中，网络接口，解调器）</li>
+</ol>
+<p>按速度分类：</p>
+<ul>
+<li>低速设备：每秒几个到数百字节（键盘，鼠标）</li>
+<li>中速设备：每秒数千到数万字节（打印机）</li>
+<li>告诉设备：每秒数百个千字节到千兆字节（磁盘，光盘）</li>
+</ul>
+<p>按信息交换的单位分类：</p>
+<ul>
+<li>块设备：以数据块为单位存取。</li>
+<li>字符设备：基本单位是字符，速率低，不可寻址，采用中断驱动。</li>
+</ul>
+<hr>
+<h2 id="I-O控制方式"><a href="#I-O控制方式" class="headerlink" title="I/O控制方式"></a>I/O控制方式</h2><p>控制设备和内存或处理机之间的数据传送。</p>
+<h3 id="程序直接控制方式"><a href="#程序直接控制方式" class="headerlink" title="程序直接控制方式"></a>程序直接控制方式</h3><ul>
+<li>每次读一个字。</li>
+<li>CPU对读入的每个字，循环检查，确定该字已经在I/O控制器的数据寄存器中。</li>
+<li>CPU大部分时间在循环测试中。</li>
+<li>CPU和I/O设备串行工作，效率低。</li>
+</ul>
+<h3 id="中断驱动方式"><a href="#中断驱动方式" class="headerlink" title="中断驱动方式"></a>中断驱动方式</h3><ul>
+<li>CPU向I/O控制器发送读命令后继续其他工作。</li>
+<li>允许I/O设备主动打断CPU的运行并请求服务。</li>
+</ul>
+<p>从I/O控制器看：</p>
+<ul>
+<li>I/O控制器从CPU接收读命令</li>
+<li>控制器从外围设备读数据到控制器的数据寄存器</li>
+<li>控制器通过控制线向CPU发送中断信号。</li>
+<li>I/O控制器收到CPU的取数据请求，将数据放到数据总线上。</li>
+</ul>
+<p>从CPU看：</p>
+<ul>
+<li>CPU发送读命令。</li>
+<li>CPU保存当前程序的上下文（现场，程序计数器，处理机寄存器）</li>
+<li>执行其他程序。</li>
+<li>每个指令周期的末尾，检查中断。</li>
+<li>若有I/O中断，则保存正在运行的程序的上下文。</li>
+<li>转到中断处理程序处理中断。</li>
+<li>结束处理中断，恢复程序的上下文。</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>数据的每个字在存储器和I/O控制器之间传输都需要经过CPU，时间消耗多。</li>
+</ul>
+<h3 id="DMA方式"><a href="#DMA方式" class="headerlink" title="DMA方式"></a>DMA方式</h3><p><em>在I/O设备和内存之间开辟直接的数据交换通路</em></p>
+<p>特点：</p>
+<ul>
+<li>基本单位是数据块。</li>
+<li>传送的数据是直接在设备和内存之间交换。</li>
+<li>仅在传动数据块的开始和结束需要CPU的干预，整个数据的传送是DMA控制器的控制下完成的。</li>
+</ul>
+<p>DMA控制器：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//DMAControler.jpg" alt="DMA Controler" title>
+                </div>
+                <div class="image-caption">DMA Controler</div>
+            </figure></p>
+<p>DMA控制器中的寄存器：</p>
+<ol>
+<li>命令/状态寄存器(CR)：接受CPU发送的I/O命令和控制信息。</li>
+<li>内存地址寄存器(MAR)：输入：存放数据传到内存的目标地址；输出：存放到设备的内存源地址。</li>
+<li>数据寄存器(DR)：暂存传输的数据。</li>
+<li>数据计数器(DC)：存放CPU读写的字数。</li>
+</ol>
+<p>工作过程：</p>
+<ul>
+<li>CPU向I/O控制器发送命令，启动DMA控制器，后继续其他工作。</li>
+<li>DMA控制器直接与存储器交互，传送整个数据块。</li>
+<li>每次传送一个字，不需要CPU参与。</li>
+<li>传送完毕，DMA控制器发送中断信号给CPU。</li>
+</ul>
+<p>DMA和中断驱动的区别：</p>
+<ul>
+<li>中断驱动：每个数据传输都要中断CPU。数据传输由CPU控制完成。</li>
+<li>DMA控制方式：在一批数据全部传送完后才中断CPU。数据传输在DMA控制器下完成的。</li>
+</ul>
+<p>I/O控制方法：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//IOControlMethod.jpg" alt="IO Control Method" title>
+                </div>
+                <div class="image-caption">IO Control Method</div>
+            </figure></p>
+<h3 id="通道控制方式"><a href="#通道控制方式" class="headerlink" title="通道控制方式"></a>通道控制方式</h3><ul>
+<li>I/O通道：专门负责输入/输出的处理机。</li>
+<li>CPU仅对一组数据块为单位的读写进行干预。</li>
+<li>实现CPU，通道和I/O设备的并行操作。</li>
+<li>通道程序放在主机内存中。</li>
+<li>通道决定传输的数据块的大小，传输内存位置等。</li>
+<li>通道控制多台设备的数据交换。</li>
+</ul>
+<p>过程：</p>
+<ul>
+<li>CPU向I/O通道发送I/O指令。</li>
+<li>通道通过通道程序完成指定的I/O任务。</li>
+<li>传送结束后向CPU发送中断请求。</li>
+</ul>
+<hr>
+<h2 id="I-O子系统的层次结构"><a href="#I-O子系统的层次结构" class="headerlink" title="I/O子系统的层次结构"></a>I/O子系统的层次结构</h2><p>I/O层次结构：</p>
+<ul>
+<li>用户层I/O软件</li>
+<li>设备独立性软件</li>
+<li>设备驱动程序</li>
+<li>中断处理程序</li>
+<li>硬件</li>
+</ul>
+<h3 id="用户层I-O软件"><a href="#用户层I-O软件" class="headerlink" title="用户层I/O软件"></a>用户层I/O软件</h3><p>实现与用户交互的接口。<br>用户可以直接调用的库函数。</p>
+<h3 id="设备独立性软件"><a href="#设备独立性软件" class="headerlink" title="设备独立性软件"></a>设备独立性软件</h3><p>实现用户程序与设备驱动器的同一接口，设备命令和设备分配与释放。</p>
+<p><em>设备独立性</em>/设备无关性：使应用程序独立于具体使用的物理设备。<br>应用程序：使用逻辑设备名请求设备。<br>系统执行：将逻辑设备名映射成物理设备名。</p>
+<p>功能：</p>
+<ul>
+<li>执行所有设备的公有操作：设备的分配和回收，逻辑设备名映射为物理设备名…</li>
+<li>向用户层提供同一接口：对各种设备进行读写操作。</li>
+</ul>
+<h3 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h3><p>与硬件有关，负责系统对设备发出操作指令的具体实现，驱动I/O设备工作的驱动程序。</p>
+<p>功能：</p>
+<ul>
+<li>为I/O内核子系统隐藏设备控制器之间的差异。</li>
+<li>接受上层软件发来的抽象读写要求，转换成具体要求，发送给I/O设备控制器。</li>
+<li>将设备控制器发送的信号传送给上层。</li>
+</ul>
+<h3 id="中断处理程序"><a href="#中断处理程序" class="headerlink" title="中断处理程序"></a>中断处理程序</h3><ul>
+<li>保存被中断进程的CPU环境。</li>
+<li>转入相应中断处理程序进行处理。</li>
+<li>处理完恢复中断进程的现场，恢复被中断的进程。</li>
+</ul>
+<p>任务：</p>
+<ul>
+<li>进程上下文切换。</li>
+<li>对处理中断信号源测试。</li>
+<li>读取设备状态和修改进程状态。</li>
+</ul>
+<h3 id="硬件设备"><a href="#硬件设备" class="headerlink" title="硬件设备"></a>硬件设备</h3><p>一般由机械部件和电子部件组成。</p>
+<ul>
+<li>电子部件：设备控制器。（接口）</li>
+<li>机械部件：设备本身。</li>
+</ul>
+<p>设备控制器通过寄存器与CPU通信：</p>
+<ul>
+<li>寄存器占用内存地址：内存映像I/O。</li>
+<li>采用I/O专用地址：寄存器独立变编址。</li>
+</ul>
+<p>功能：</p>
+<ul>
+<li>接受和识别CPU或通道发送的命令。</li>
+<li>实现数据交换。</li>
+<li>发现和识别设备和自身状态。</li>
+<li>设备地址识别。</li>
+</ul>
+<p>设备控制器组成：</p>
+<ul>
+<li>设备控制器与CPU的接口。<ul>
+<li>有三个信号线：<em>数据线</em>，<em>地址线</em>和<em>控制线</em>。</li>
+<li>数据线与两类寄存器相连：数据寄存器和控制/状态寄存器。</li>
+<li>数据寄存器：存放CPU与设备间交换的数据。</li>
+<li>控制/状态寄存器：存放CPU的控制信息或设备的状态信息。</li>
+</ul>
+</li>
+<li>设备控制器与设备的接口：每个接口有数据，控制和状态三种类型的信号。</li>
+<li>I/O控制逻辑：实现对设备的控制。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//DeviceControler.jpg" alt="Device Controler" title>
+                </div>
+                <div class="image-caption">Device Controler</div>
+            </figure>
+<h3 id="I-O子系统"><a href="#I-O子系统" class="headerlink" title="I/O子系统"></a>I/O子系统</h3><p>提供的服务：</p>
+<ul>
+<li>I/O调度</li>
+<li>缓冲与高速缓存</li>
+<li>设备分配与回收</li>
+<li>假脱机</li>
+<li>设备保护</li>
+<li>差错处理</li>
+</ul>
+<h3 id="I-O调度"><a href="#I-O调度" class="headerlink" title="I/O调度"></a>I/O调度</h3><p>使得进程间公平地共享设备访问。<br>减少I/O完成所需的平均等待时间。</p>
+<p>为每个设备维护一个请求队列，程序执行阻塞I/O系统调用时，请求加入到相应设备的队列上。</p>
+<hr>
+<h2 id="高速缓存与缓冲区"><a href="#高速缓存与缓冲区" class="headerlink" title="高速缓存与缓冲区"></a>高速缓存与缓冲区</h2><h3 id="磁盘高速缓存-Disk-Cache"><a href="#磁盘高速缓存-Disk-Cache" class="headerlink" title="磁盘高速缓存(Disk Cache)"></a>磁盘高速缓存(Disk Cache)</h3><p>意义：利用内存中的存储空间来暂存从磁盘中读出的一系列盘块中的信息。</p>
+<ul>
+<li>逻辑上属于磁盘。</li>
+<li>物理上驻留在内存中的盘块。</li>
+</ul>
+<h3 id="缓冲区-Buffer"><a href="#缓冲区-Buffer" class="headerlink" title="缓冲区(Buffer)"></a>缓冲区(Buffer)</h3><p>目的：</p>
+<ul>
+<li>缓和CPU和I/O设备间速度的不匹配。</li>
+<li>减少对CPU的中断频率。</li>
+<li>解决基本数据单位大小不匹配问题。</li>
+<li>提高CPU和I/O设备间的并行性。</li>
+</ul>
+<p>实现方法：</p>
+<ul>
+<li>硬件缓冲器。</li>
+<li>缓冲区（位于内存区域）。</li>
+</ul>
+<p>分类：</p>
+<h3 id="单缓冲"><a href="#单缓冲" class="headerlink" title="单缓冲"></a>单缓冲</h3><ul>
+<li>设备与处理机间设置一个缓冲区。</li>
+<li>交换数据时，先把数据写入缓冲区，然后需要数据的处理机或设备从缓冲区取走数据。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//SingleCache.jpg" alt="Single Cache" title>
+                </div>
+                <div class="image-caption">Single Cache</div>
+            </figure>
+<h3 id="双缓冲"><a href="#双缓冲" class="headerlink" title="双缓冲"></a>双缓冲</h3><ul>
+<li>设置两个缓冲区。</li>
+<li>I/O设备先装填缓冲区1，填满后再装填缓冲区2。</li>
+<li>处理机先从缓冲区1取出数据，当缓冲区1为空时，再从缓冲区2取出数据。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//DoubleCache.jpg" alt="Double Cache" title>
+                </div>
+                <div class="image-caption">Double Cache</div>
+            </figure>
+<p>注：<br>若实现双向数据传输，则两个机器都设置两个缓冲区：一个为发送缓冲区，一个为接受缓冲区。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//TwoDirectCommunication.jpg" alt="Two Direct Communication" title>
+                </div>
+                <div class="image-caption">Two Direct Communication</div>
+            </figure>
+<h3 id="循环缓冲"><a href="#循环缓冲" class="headerlink" title="循环缓冲"></a>循环缓冲</h3><ul>
+<li>多个大小相同的缓冲区组成。</li>
+<li>每个缓冲区有一个指向下一个缓冲区的链接指针。</li>
+<li>最后一个缓冲区指针指向第一个缓冲区。</li>
+<li>有两个指针<code>in</code>和<code>out</code>。输入时，数据读入<code>in</code>指针指向的第一个空缓冲区；输出时，从<code>out</code>指向的第一个满缓冲区取出数据。</li>
+</ul>
+<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><ul>
+<li>多个公用缓冲区组成。</li>
+<li>有三种队列：空缓冲队列，装满输入数据的缓冲队列（输入队列）和装满输出数据的缓冲队列（输出队列）。</li>
+<li>有四种缓冲区：收容输入数据的工作缓冲区，提取输入数据的工作缓冲区，收容输出数据的工作缓冲区和提取输出数据的工作缓冲区。</li>
+</ul>
+<p>过程：</p>
+<ul>
+<li>输入数据处理过程：<ul>
+<li>输入进程需要输入数据：从空缓冲队列队首取下空缓冲区，作为收容输入工作缓冲区，将输入数据输入其中，装满后挂到输入队列队尾。</li>
+<li>进程需要输入数据：从输入队列取得一个缓冲区作为提取输入工作缓冲区，计算进程提取数据，用完后挂到空缓冲队列尾。</li>
+</ul>
+</li>
+<li>输出数据处理过程：<ul>
+<li>进程需要输出数据：从空缓冲队列队首取空缓冲区，作为收容输出工作缓冲区，装满输出数据后，挂到输出队列队尾。</li>
+<li>要输出时：输出进程从输出队列中取出一个装满输出数据的缓冲区，作为提取输出工作缓冲区，取完后，挂到空缓冲队列的队尾。</li>
+</ul>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//CachePool.jpg" alt="Cache Pool" title>
+                </div>
+                <div class="image-caption">Cache Pool</div>
+            </figure>
+<hr>
+<h2 id="输入-输出-I-O-设备分配与回收"><a href="#输入-输出-I-O-设备分配与回收" class="headerlink" title="输入/输出(I/O)设备分配与回收"></a>输入/输出(I/O)设备分配与回收</h2><p>设备的分类：</p>
+<ul>
+<li><strong>独占设备</strong>：设备使用时将其独占，不允许其他进程申请使用。（打印机）（设备使用率低）</li>
+<li><strong>共享设备</strong>：通过分时共享使用，提高利用率。（磁盘）</li>
+<li><strong>虚拟设备</strong>：以SPOOLing方式使用外部设备。假脱机I/O技术，对I/O操作的批处理。</li>
+</ul>
+<h3 id="设备分配的数据结构"><a href="#设备分配的数据结构" class="headerlink" title="设备分配的数据结构"></a>设备分配的数据结构</h3><p>分配的数据结构：</p>
+<ul>
+<li>设备控制表(DCT)</li>
+<li>控制器控制表(COCT)</li>
+<li>通道控制表(CHCT)</li>
+<li>系统设备表(SDT)</li>
+</ul>
+<p><strong>设备控制表</strong></p>
+<ul>
+<li>每个设备设置一张DCT。</li>
+<li>每张DCT包括：<ul>
+<li>设备类型</li>
+<li>设备标识符</li>
+<li>设备状态：忙或者空闲</li>
+<li>指向控制器表的指针</li>
+<li>重复执行次数或时间</li>
+<li>设备队列的队首指针：等待使用设备的进程组成的队列</li>
+</ul>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//DCT.jpg" alt="DCT" title>
+                </div>
+                <div class="image-caption">DCT</div>
+            </figure>
+<p><strong>控制器控制表</strong></p>
+<ul>
+<li>每个控制器都有一张COCT。</li>
+<li>反映设备控制器的使用状态和通道的连接情况。</li>
+</ul>
+<p><strong>通道控制表</strong></p>
+<ul>
+<li>每个通道有一个CHCT。</li>
+</ul>
+<p><strong>系统设备表</strong></p>
+<ul>
+<li>整个系统只有一个SDT。</li>
+<li>记录系统所有物理设备情况。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/.com//COCT_CHCT_SDT.jpg" alt="COCT CHCT SDT" title>
+                </div>
+                <div class="image-caption">COCT CHCT SDT</div>
+            </figure>
+<h3 id="设备分配策略"><a href="#设备分配策略" class="headerlink" title="设备分配策略"></a>设备分配策略</h3><p><strong>分配原则</strong><br>提高设备的使用效率，同时避免进程死锁，将用户进程与设备隔离。</p>
+<h4 id="设备分配方式"><a href="#设备分配方式" class="headerlink" title="设备分配方式"></a>设备分配方式</h4><p>分类：</p>
+<ul>
+<li>静态分配</li>
+<li>动态分配</li>
+</ul>
+<p><strong>静态分配</strong></p>
+<ul>
+<li>主要用于独占设备</li>
+<li>作业开始时一次性分配所需的所有设备，控制器，通道。</li>
+<li>分配后被独占，找到作业完成。</li>
+<li>特点：不会产生死锁，使用效率低。</li>
+</ul>
+<p><strong>动态分配</strong></p>
+<ul>
+<li>根据执行需要提出请求，系统根据策略进行分配。</li>
+<li>一旦用完立即释放。</li>
+<li>特点：提高设备的使用率；可能造成死锁。</li>
+</ul>
+<p>设备分配算法：</p>
+<ul>
+<li>先请求先分配</li>
+<li><p>优先级高者优先</p>
+</li>
+<li><p>独占设备：静态分配。</p>
+</li>
+<li>共享设备：动态分配。</li>
+</ul>
+<h3 id="设备分配的安全性"><a href="#设备分配的安全性" class="headerlink" title="设备分配的安全性"></a>设备分配的安全性</h3><p>防止进程发生死锁。</p>
+<ol>
+<li>安全分配方式：进程发出I/O请求后进入阻塞状态，直到I/O操作完成后唤醒。</li>
+<li>不安全分配方式：发出I/O请求后继续，可以发出多个I/O请求。一个进程可以同时操作多个设备，进程推进迅速。可能产生死锁。</li>
+</ol>
+<h3 id="逻辑设备名到物理设备名的映射"><a href="#逻辑设备名到物理设备名的映射" class="headerlink" title="逻辑设备名到物理设备名的映射"></a>逻辑设备名到物理设备名的映射</h3><p>设备独立性：应用程序独立于具体物理设备。—&gt; 使用逻辑设备表。</p>
+<p><strong>逻辑设备表</strong>(Logical Unit Table,LUT)</p>
+<ul>
+<li>将逻辑设备名映射成物理设备名。</li>
+<li>LUT表项包括<strong>逻辑设备名</strong>，<strong>物理设备名</strong>和<strong>设备驱动程序入口地址</strong>。</li>
+<li>进程请求设备时，在LUT建立一个表项。其后可使用逻辑设备名请求操作。</li>
+</ul>
+<p>建立逻辑设备表：</p>
+<ul>
+<li>系统只设置一张LUT。不允许相同逻辑设备名。</li>
+<li>每个用户一张LUT。系统为用户建立进程和LUT，LUT放入进程发PCB中。</li>
+</ul>
+<hr>
+<h2 id="SPOOLing技术-假脱机技术"><a href="#SPOOLing技术-假脱机技术" class="headerlink" title="SPOOLing技术(假脱机技术)"></a>SPOOLing技术(假脱机技术)</h2><p>利用外围控制机，将低速I/O设备上的数据传送到高速磁盘上。<br>SPOOLing：假脱机输入/输出操作，将独占设备改造成共享设备的技术。</p>
+<h3 id="输入井和输出井"><a href="#输入井和输出井" class="headerlink" title="输入井和输出井"></a>输入井和输出井</h3><p>输入井：收容I/O设备输入的数据。<br>输出井：收容用户程序的输出数据。</p>
+<h3 id="输入缓冲区和输出缓冲区"><a href="#输入缓冲区和输出缓冲区" class="headerlink" title="输入缓冲区和输出缓冲区"></a>输入缓冲区和输出缓冲区</h3><p>输入缓冲区：暂存输入设备送来的数据，再传送到输入井。<br>输出缓冲区：暂存从输出井送来的数据，再传送到输出设备。</p>
+<h3 id="输入进程和输出进程"><a href="#输入进程和输出进程" class="headerlink" title="输入进程和输出进程"></a>输入进程和输出进程</h3><ul>
+<li>输入进程：模拟脱机输入时的外围控制器。<ul>
+<li>将用户要求的数据从输入机通过输入缓冲区送到输入井。</li>
+<li>当CPU需要输入数据，直接将数据从输入井读入内存。</li>
+</ul>
+</li>
+<li>输出进程：模拟脱机输出时的外围控制器。<ul>
+<li>将用户输出的数据从内存送到输出井。</li>
+<li>输出设备空闲时，将输出井中的数据经过输出缓冲区送到输出设备。</li>
+</ul>
+</li>
+</ul>
+<p>示例：共享打印机<br>用户请求打印机时：</p>
+<ul>
+<li>输出进程在输出井为之申请空闲磁盘块区，将打印的数据输入其中。</li>
+<li>输出进程为进程申请用户请求打印表，将打印要求填入其中，并将该表挂在请求打印队列上。</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>提高I/O速度</li>
+<li>将独占设备改造为共享设备</li>
+<li>实现虚拟设备</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-08T13:29:31.448Z" itemprop="dateUpdated">2020-04-08 21:29:31</time>
+</span><br>
+
+
+        
+        假如生活欺骗了你，不要悲伤，不要心急！忧郁的日子里须要镇静：相信吧，快乐的日子将会来临！心儿永远向往着未来；现在却常是忧郁。一切都是瞬息，一切都将会过去；而那过去了的，就会成为亲切的怀恋。
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avicii.jpg" alt="咸鱼不翻身">
+            咸鱼不翻身
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AE%A1%E7%90%86/" rel="tag">输入输出管理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/08/IOManagement/&title=《输入输出(I/O)管理》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/08/IOManagement/&title=《输入输出(I/O)管理》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/08/IOManagement/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《输入输出(I/O)管理》 — 咸鱼的自我修养&url=http://yoursite.com/2020/04/08/IOManagement/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/08/IOManagement/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/09/TheLinuxCommandLine-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux命令行大全(一):shell是什么</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/08/OperatingSystem/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">操作系统概述</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>咸鱼不翻身 &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/08/IOManagement/&title=《输入输出(I/O)管理》 — 咸鱼的自我修养&pic=http://yoursite.com/img/avicii.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/08/IOManagement/&title=《输入输出(I/O)管理》 — 咸鱼的自我修养&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/08/IOManagement/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《输入输出(I/O)管理》 — 咸鱼的自我修养&url=http://yoursite.com/2020/04/08/IOManagement/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/08/IOManagement/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/04/08/IOManagement/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
