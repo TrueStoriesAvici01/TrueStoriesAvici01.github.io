@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="网络技术[toc]  简介 在Activity中展示网页可以通过WebView组件展示网页。 WebView在后台处理好发送HTTP请求，接收服务器响应，解析返回数据以及最终展示页面。  WebView使用方法： 123wv.getSettings().setJavaScriptEnabled(true);wv.setWebViewClient(new WebViewClient());wv.lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络技术">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/11Network/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="网络技术[toc]  简介 在Activity中展示网页可以通过WebView组件展示网页。 WebView在后台处理好发送HTTP请求，接收服务器响应，解析返回数据以及最终展示页面。  WebView使用方法： 123wv.getSettings().setJavaScriptEnabled(true);wv.setWebViewClient(new WebViewClient());wv.lo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-22T01:44:16.865Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>网络技术 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="网络技术">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      91 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">网络技术</h1>
+            
+            <div class="markdown-body">
+              <h1 id="网络技术"><a href="#网络技术" class="headerlink" title="网络技术"></a>网络技术</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>在<code>Activity</code>中展示网页可以通过<code>WebView</code>组件展示网页。</li>
+<li><code>WebView</code>在后台处理好发送HTTP请求，接收服务器响应，解析返回数据以及最终展示页面。</li>
+</ul>
+<p><code>WebView</code>使用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">wv.getSettings().setJavaScriptEnabled(<span class="hljs-keyword">true</span>);<br>wv.setWebViewClient(<span class="hljs-keyword">new</span> WebViewClient());<br>wv.loadUrl(<span class="hljs-string">&quot;https://www.baidu.com&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>应用访问网络需要声明权限：<code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</code></li>
+</ul>
+<hr>
+<h2 id="使用HTTP访问网络"><a href="#使用HTTP访问网络" class="headerlink" title="使用HTTP访问网络"></a>使用HTTP访问网络</h2><p>基本流程：</p>
+<ol>
+<li>创建URL对象，传入目标网络地址。</li>
+<li>调用<code>openConnection()</code>方法，获得<code>HttpURLConnection</code>实例。</li>
+<li>设置在<code>HttpURLConnection</code>对象中设置HTTP配置信息。</li>
+<li>调用<code>getInputStream()</code>方法获取返回的输入流。</li>
+<li>最后通过<code>disconnect()</code>关闭HTTP连接。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendRequestWithHttpURLConnection</span><span class="hljs-params">()</span> </span>&#123;<br><span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>    HttpURLConnection connection = <span class="hljs-keyword">null</span>;<br>    StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();<br>    <span class="hljs-keyword">try</span> &#123;<br>	URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;https://www.baidu.com&quot;</span>);<br>	connection = (HttpURLConnection) url.openConnection();<br>	connection.setConnectTimeout(<span class="hljs-number">8000</span>);<br>	connection.setReadTimeout(<span class="hljs-number">8000</span>);<br>	DataOutputStream outputStream = <span class="hljs-keyword">new</span> DataOutputStream(connection.getOutputStream());<br>	outputStream.writeBytes(<span class="hljs-string">&quot;username=admin&amp;password=123456&quot;</span>);<br>	InputStream inputStream = connection.getInputStream();<br>	BufferedReader reader = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(inputStream));<br>	String tmp = <span class="hljs-keyword">null</span>;<br>	<span class="hljs-keyword">while</span> ((tmp = reader.readLine()) != <span class="hljs-keyword">null</span>) &#123;<br>	    sb.append(tmp);<br>	&#125;<br>	showResult(sb.toString());<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>	e.printStackTrace();<br>    &#125;<br>&#125;).start();<br>&#125;<br><br><span class="hljs-comment">// Android不允许在子线程中进行UI更新操作，调用runOnUiThread在UI线程进行UI更新</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showResult</span><span class="hljs-params">(String s)</span> </span>&#123;<br>runOnUiThread(() -&gt; &#123;tv_show_result.setText(s);&#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>若需要提交数据，可将请求改为POST：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">connection.setRequestMethod(<span class="hljs-string">&quot;POST&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="使用OkHttp"><a href="#使用OkHttp" class="headerlink" title="使用OkHttp"></a>使用OkHttp</h2><ul>
+<li>OkHttp是一款出色的网络通信库，可以替换<code>HttpURLConnection</code>。</li>
+</ul>
+<p>使用：</p>
+<ol>
+<li>引入依赖：在<code>build.gradle</code>中的<code>dependencies</code>节点加入：<code>implementation &#39;com.squareup.okhttp3:okhttp:4.9.1&#39;</code></li>
+<li>创建<code>OkHttpClient</code>实例。</li>
+<li>如要发起HTTP请求，则创建一个<code>Requet</code>对象，设置url等信息。</li>
+<li>通过<code>newCall()</code>创建<code>Call</code>对象，通过<code>execute()</code>方法发送请求并获取服务器返回的数据。</li>
+<li>返回的结果为<code>Response</code>对象，通过<code>body()</code>获取具体的返回内容。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendOkHttpRequest</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>	    OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();<br>	    Request request = <span class="hljs-keyword">new</span> Request.Builder().<br>		    url(<span class="hljs-string">&quot;https://www.baidu.com&quot;</span>)<br>		    .build();<br>	    <span class="hljs-keyword">try</span> &#123;<br>		Response response = client.newCall(request).execute();<br>		String responseRes = response.body() == <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">null</span> : response.body().string();<br>		<span class="hljs-keyword">if</span> (responseRes != <span class="hljs-keyword">null</span>) setText(responseRes);<br>	    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>		e.printStackTrace();<br>	    &#125;<br>	&#125;).start();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setText</span><span class="hljs-params">(String s)</span> </span>&#123;<br>	runOnUiThread(() -&gt; &#123;tv_okhttp_show_result.setText(s);&#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>网络服务等耗时操作不能直接由UI线程执行，否则会抛出<code>W/System.err: android.os.NetworkOnMainThreadException</code>错误。可以通过创建子线程执行任务。</li>
+</ul>
+<hr>
+<h2 id="解析XML数据"><a href="#解析XML数据" class="headerlink" title="解析XML数据"></a>解析XML数据</h2><ul>
+<li>常见有两种解析方式：<ul>
+<li>Pull解析</li>
+<li>SAX解析</li>
+</ul>
+</li>
+</ul>
+<p>在解析数据前，为发起HTTP的操作创建工具类，从而可以使用不同的解析方法而不用重复编写相同的HTTP请求代码。</p>
+<p>HTTP请求工具类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HttpUtil</span> </span>&#123;<br>	<span class="hljs-comment">// 发送HTTP请求，返回结果调用HttpCallbackListener回调函数进行处理</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendHttpRequest</span><span class="hljs-params">(String address, HttpCallbackListener listener)</span> </span>&#123;<br>		ExecutorService service = Executors.newSingleThreadExecutor();<br>		service.execute(() -&gt; &#123;<br>		    HttpURLConnection connection = <span class="hljs-keyword">null</span>;<br>		    <span class="hljs-keyword">try</span> &#123;<br>			StringBuilder response = <span class="hljs-keyword">new</span> StringBuilder();<br>			URL url = <span class="hljs-keyword">new</span> URL(address);<br>			connection = (HttpURLConnection) url.openConnection();<br>			connection.setConnectTimeout(<span class="hljs-number">8000</span>);<br>			connection.setReadTimeout(<span class="hljs-number">8000</span>);<br>			InputStream input = connection.getInputStream();<br>			BufferedReader reader = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(input));<br>			String tmp = <span class="hljs-keyword">null</span>;<br>			<span class="hljs-keyword">while</span> ((tmp = reader.readLine()) != <span class="hljs-keyword">null</span>) &#123;<br>			    response.append(tmp);<br>			&#125;<br>			listener.onFinish(response.toString());<br>		    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			e.printStackTrace();<br>			listener.onError(e);<br>		    &#125; <span class="hljs-keyword">finally</span> &#123;<br>			connection.disconnect();<br>		    &#125;<br>		&#125;);<br>	&#125;<br><br>	<span class="hljs-comment">// OkHttp封装调用和处理回调操作，需要重写Callback接口实现对返回数据的处理</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendOkHttpRequest</span><span class="hljs-params">(String address, okhttp3.Callback callback)</span> </span>&#123;<br>		OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();<br>		Request request = <span class="hljs-keyword">new</span> Request.Builder()<br>			.url(address)<br>			.build();<br>		client.newCall(request).enqueue(callback);<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 回调接口</span><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">HttpCallbackListener</span> </span>&#123;<br>	<span class="hljs-comment">// 处理正常的回调结果</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onFinish</span><span class="hljs-params">(String response)</span></span>;<br>	<span class="hljs-comment">// 处理异常情况</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(Exception e)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="Pull解析"><a href="#Pull解析" class="headerlink" title="Pull解析"></a>Pull解析</h3><p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parseXML</span><span class="hljs-params">(String data)</span> </span>&#123;<br><span class="hljs-keyword">try</span> &#123;<br>    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();<br>    XmlPullParser xmlPullParser = factory.newPullParser();<br>    xmlPullParser.setInput(<span class="hljs-keyword">new</span> StringReader(data));<br>    <span class="hljs-keyword">int</span> eventType = xmlPullParser.getEventType();<br>    String id = <span class="hljs-string">&quot;&quot;</span>, name = <span class="hljs-string">&quot;&quot;</span>, version = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">while</span> (eventType != XmlPullParser.END_DOCUMENT) &#123;<br>	String nodeName = xmlPullParser.getName();<br>	<span class="hljs-keyword">switch</span> (eventType) &#123;<br>	    <span class="hljs-keyword">case</span> XmlPullParser.START_TAG:<br>		<span class="hljs-keyword">switch</span> (nodeName) &#123;<br>		    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;id&quot;</span>:<br>			id = xmlPullParser.nextText();<br>			<span class="hljs-keyword">break</span>;<br>		    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;name&quot;</span>:<br>			name = xmlPullParser.nextText();<br>			<span class="hljs-keyword">break</span>;<br>		    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;version&quot;</span>:<br>			version = xmlPullParser.nextText();<br>			<span class="hljs-keyword">break</span>;<br>		&#125;<br>		<span class="hljs-keyword">break</span>;<br>	    <span class="hljs-keyword">case</span> XmlPullParser.END_TAG:<br>		<span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;app&quot;</span>.equals(nodeName)) &#123;<br>		    Log.d(<span class="hljs-keyword">this</span>.getClass().getSimpleName(), <span class="hljs-string">&quot;id is: &quot;</span> + id + <span class="hljs-string">&quot;, name is: &quot;</span> + name + <span class="hljs-string">&quot;, version is: &quot;</span> + version);<br>		&#125;<br>	&#125;<br>	eventType = xmlPullParser.next();<br>    &#125;<br>&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;e.printStackTrace();&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>HttpUtil</code>中的<code>sendHttpRequest</code>发起HTTP请求，并在回调函数<code>HttpCallbackListener</code>中使用上述Pull解析方式对xml文件进行解析。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">HttpUtil.sendHttpRequest(<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>, <span class="hljs-keyword">new</span> HttpCallbackListener() &#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onFinish</span><span class="hljs-params">(String response)</span> </span>&#123;<br>		parseXML(response); <span class="hljs-comment">// 调用Pull解析方式</span><br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onException</span><span class="hljs-params">(Exception e)</span> </span>&#123;<br>		e.printStackTrace();<br>	&#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="SAX解析"><a href="#SAX解析" class="headerlink" title="SAX解析"></a>SAX解析</h3><p>这里只展示SAX解析代码：</p>
+<ul>
+<li><p>由于SAX用到<code>ContentHandler</code>接口进行内容的解析，所以需要先实现自定义的<code>ContentHandler</code>类。</p>
+</li>
+<li><p>重写五个方法：</p>
+<ul>
+<li><code>startDocument</code>：开始解析文档</li>
+<li><code>endDocument</code>：结束解析文档</li>
+<li><code>startElement</code>：开始解析单个节点</li>
+<li><code>endElement</code>：结束解析单个节点</li>
+<li><code>characters</code>：对每个节点的数据进行获取、保存<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyContentHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">DefaultHandler</span></span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = MyContentHandler.class.getSimpleName();<br><br>    <span class="hljs-keyword">private</span> String nodeName = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">private</span> StringBuilder id, name, version;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startDocument</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SAXException </span>&#123;<br>        id = <span class="hljs-keyword">new</span> StringBuilder();<br>        name = <span class="hljs-keyword">new</span> StringBuilder();<br>        version = <span class="hljs-keyword">new</span> StringBuilder();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">endDocument</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SAXException </span>&#123;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startElement</span><span class="hljs-params">(String uri, String localName, String qName, Attributes attributes)</span> <span class="hljs-keyword">throws</span> SAXException </span>&#123;<br>        nodeName = localName;<br>        Log.d(TAG, <span class="hljs-string">&quot;start element: uri : &quot;</span> + uri + <span class="hljs-string">&quot;, local name: &quot;</span> + localName + <span class="hljs-string">&quot;, qName: &quot;</span> + qName + <span class="hljs-string">&quot;, attributes: &quot;</span> + attributes.toString());<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">endElement</span><span class="hljs-params">(String uri, String localName, String qName)</span> <span class="hljs-keyword">throws</span> SAXException </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;app&quot;</span>.equals(localName)) &#123;<br>            Log.d(TAG, <span class="hljs-string">&quot;id : &quot;</span> + id.toString().trim() + <span class="hljs-string">&quot;, name : &quot;</span> + name.toString().trim() + <span class="hljs-string">&quot;, version : &quot;</span> + version.toString().trim());<br>            id.setLength(<span class="hljs-number">0</span>);<br>            name.setLength(<span class="hljs-number">0</span>);<br>            version.setLength(<span class="hljs-number">0</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">characters</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] ch, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> length)</span> <span class="hljs-keyword">throws</span> SAXException </span>&#123;<br>        <span class="hljs-keyword">switch</span> (nodeName) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;id&quot;</span>:<br>                id.append(ch, start, length);<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;name&quot;</span>:<br>                name.append(ch, start, length);<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;version&quot;</span>:<br>                version.append(ch, start, length);<br>                <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>使用SAX进行解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parseXMLSAX</span><span class="hljs-params">(String data)</span> </span>&#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>	    SAXParserFactory factory = SAXParserFactory.newInstance();<br>	    XMLReader reader = factory.newSAXParser().getXMLReader();<br>	    MyContentHandler myContentHandler = <span class="hljs-keyword">new</span> MyContentHandler();<br>	    reader.setContentHandler(myContentHandler);<br>	    reader.parse(<span class="hljs-keyword">new</span> InputSource(<span class="hljs-keyword">new</span> StringReader(data)));<br>	&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;e.printStackTrace();&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="解析Json数据"><a href="#解析Json数据" class="headerlink" title="解析Json数据"></a>解析Json数据</h2><ul>
+<li>可以使用官方提供的<code>JSONObject</code>，或者众多第三方开源库<code>Jackson</code>,<code>GSON</code>等。</li>
+<li>JSON格式的文件体积更小，适合于网络传输，但不够直观。</li>
+</ul>
+<h3 id="使用JSONObject解析JSON数据"><a href="#使用JSONObject解析JSON数据" class="headerlink" title="使用JSONObject解析JSON数据"></a>使用<code>JSONObject</code>解析JSON数据</h3><p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parseJSONJSONObject</span><span class="hljs-params">(String data)</span> </span>&#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		JSONArray jsonArray = <span class="hljs-keyword">new</span> JSONArray(data);<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; jsonArray.length(); ++i) &#123;<br>			JSONObject jsonObject = jsonArray.getJSONObject(i);<br>			String id = jsonObject.getString(<span class="hljs-string">&quot;id&quot;</span>);<br>			String name = jsonObject.getString(<span class="hljs-string">&quot;name&quot;</span>);<br>			String version = jsonObject.getString(<span class="hljs-string">&quot;version&quot;</span>);<br>			Log.d(TAG, <span class="hljs-string">&quot;id : &quot;</span> + id + <span class="hljs-string">&quot;, name : &quot;</span> + name + <span class="hljs-string">&quot;, version : &quot;</span> + version);<br>		&#125;<br>	&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;e.printStackTrace();&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用GSON解析JSON数据"><a href="#使用GSON解析JSON数据" class="headerlink" title="使用GSON解析JSON数据"></a>使用<code>GSON</code>解析JSON数据</h3><ul>
+<li><code>GSON</code>可以直接将一段JSON字符串直接映射成一个对象。</li>
+</ul>
+<ol>
+<li>添加依赖：<code>implementation &#39;com.google.code.gson:gson:2.8.8&#39;</code>。</li>
+<li>创建数据类，添加对应的字段，使得每个节点中的数据可以映射到数据类的字段。</li>
+</ol>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 数据类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;<br>    String id, name, version;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">App</span><span class="hljs-params">(String id, String name, String version)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.id = id;<br>        <span class="hljs-keyword">this</span>.name = name;<br>        <span class="hljs-keyword">this</span>.version = version;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 使用GSON进行解析</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parseJSONGSON</span><span class="hljs-params">(String data)</span> </span>&#123;<br>	Gson gson = <span class="hljs-keyword">new</span> Gson();<br>	Type type = <span class="hljs-keyword">new</span> TypeToken&lt;List&lt;App&gt;&gt;()&#123;&#125;.getType();<br>	List&lt;App&gt; apps = gson.fromJson(data, type);<br>	<span class="hljs-keyword">for</span> (App a : apps) &#123;<br>		Log.d(TAG, <span class="hljs-string">&quot;id : &quot;</span> + a.id + <span class="hljs-string">&quot;, name : &quot;</span> + a.name + <span class="hljs-string">&quot;, version : &quot;</span> + a.version);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="网络库-Retrofit"><a href="#网络库-Retrofit" class="headerlink" title="网络库:Retrofit"></a>网络库:<code>Retrofit</code></h2><ul>
+<li>添加依赖（第一个是Retrofit库，第二个是转换库，借助GSON解析JSON数据）:<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml">implementation &#x27;com.squareup.retrofit2:retrofit:2.9.0&#x27;<br>implementation &#x27;com.squareup.retrofit2:converter-gson:2.9.0&#x27;<br></code></pre></td></tr></table></figure></li>
+<li>定义接口，用于获取JSON数据：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">AppService</span> </span>&#123;<br><br>    <span class="hljs-meta">@GET(&quot;get_data.json&quot;)</span><br>    Call&lt;List&lt;App&gt;&gt; getAppData();<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>使用<code>Retrofit</code>解析数据<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java">Retrofit retrofit = <span class="hljs-keyword">new</span> Retrofit.Builder()<br>		.baseUrl(MY_URL)<br>		.addConverterFactory(GsonConverterFactory.create())<br>		.build();<br><br>AppService appService = retrofit.create(AppService.class);<br>appService.getAppData().enqueue(<span class="hljs-keyword">new</span> Callback&lt;List&lt;App&gt;&gt;() &#123;<br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResponse</span><span class="hljs-params">(Call&lt;List&lt;App&gt;&gt; call, retrofit2.Response&lt;List&lt;App&gt;&gt; response)</span> </span>&#123;<br>		List&lt;App&gt; body = response.body();<br>		<span class="hljs-keyword">if</span> (body != <span class="hljs-keyword">null</span>) &#123;<br>			<span class="hljs-keyword">for</span> (App a : body) &#123;<br>				Log.d(TAG, <span class="hljs-string">&quot;id : &quot;</span> + a.id + <span class="hljs-string">&quot;, name : &quot;</span> + a.name + <span class="hljs-string">&quot;, version : &quot;</span> + a.version);<br>			&#125;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onFailure</span><span class="hljs-params">(Call&lt;List&lt;App&gt;&gt; call, Throwable t)</span> </span>&#123;<br>		t.printStackTrace();<br>	&#125;<br>&#125;);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>注：</p>
+<ul>
+<li>注解<code>@GET(&quot;url_address&quot;)</code>表示调用该方法为发出GET请求，请求地址为注解内的参数。</li>
+<li>方法的返回值必须为<code>Call</code>类型，通过范型指定返回的数据转换成为的对象。</li>
+</ul>
+<h3 id="处理复杂的接口地址类型"><a href="#处理复杂的接口地址类型" class="headerlink" title="处理复杂的接口地址类型"></a>处理复杂的接口地址类型</h3><p><strong>动态的接口地址</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 对应的url为host/1/get_data.json</span><br><span class="hljs-meta">@GET(&quot;&#123;page&#125;/get_data.json&quot;)</span><br>Call&lt;List&lt;App&gt;&gt; getData(<span class="hljs-meta">@Path(&quot;page&quot;)</span> <span class="hljs-keyword">int</span> page);<br></code></pre></td></tr></table></figure>
+
+<p><strong>带参数的GET请求格式</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 对应的url为host/get_data.json?u=admin&amp;t=123456</span><br><span class="hljs-meta">@GET(&quot;get_data.json&quot;)</span><br>Call&lt;List&lt;App&gt;&gt; getData1(<span class="hljs-meta">@Query(&quot;u&quot;)</span> String user, <span class="hljs-meta">@Query(&quot;t&quot;)</span> String token);<br></code></pre></td></tr></table></figure>
+
+<p><strong>DELETE操作</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@DELELE(&quot;data/&#123;id&#125;&quot;)</span><br><span class="hljs-function">Call&lt;ResponseBody&gt; <span class="hljs-title">deleteData</span><span class="hljs-params">(<span class="hljs-meta">@Path(&quot;id&quot;)</span> String id)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>注意：返回值类型<code>ResponseBody</code>表示对于服务器响应的数据不关心，用于POST，PUT，PATCH，DELETE等操作中。表示接收任何类型的响应数据。不对数据进行解析。</p>
+<p><strong>POST操作</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@POST(&quot;data/create&quot;)</span><br><span class="hljs-function">Call&lt;ResponseBody&gt; <span class="hljs-title">createData</span><span class="hljs-params">(<span class="hljs-meta">@Body</span> Data data)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>注意：将四川的数据包装成一个<code>Data</code>对象，由<code>Retrofit</code>将该对象中的数据自动的转换为JSON格式的文本，放入HTTP请求的body部分。</p>
+<p><strong>HTTP请求的header中指定参数</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GET(&quot;get_data.json&quot;)</span><br><span class="hljs-function">Call&lt;Data&gt; <span class="hljs-title">getData</span><span class="hljs-params">(<span class="hljs-meta">@Header(&quot;User-Agent&quot;)</span> String userAgent, <span class="hljs-meta">@Header(&quot;Cache-Control&quot;)</span> String cacheControl)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>优化</strong>:<br>将<code>Retrofit</code>提供的服务改写成一个工具类，方便重复调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceCreator</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> String BASE_URL = <span class="hljs-string">&quot;&quot;</span>;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Retrofit retrofit = <span class="hljs-keyword">new</span> Retrofit.Builder()<br>            .baseUrl(BASE_URL)<br>            .addConverterFactory(GsonConverterFactory.create())<br>            .build();<br><br>    <span class="hljs-function">T <span class="hljs-title">create</span><span class="hljs-params">(Class&lt;T&gt; serviceClass)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> retrofit.create(serviceClass);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/34996842/">《第一行代码》-第十一章</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/10Services/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Services</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/13Jetpack/">
+                        <span class="hidden-mobile">Jetpack高级开发组件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

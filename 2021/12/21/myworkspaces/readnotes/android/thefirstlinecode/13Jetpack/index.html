@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Jetpack高级开发组件[toc]  ViewModel 将所有的逻辑处理放在Activity中导致项目难以维护，ViewModel可以分担Activity一部分工作。 可以将界面的数据存放在ViewModel中，Activity重新创建不会丢失数据。  基本用法 添加依赖：implementation &#39;androidx.lifecycle:lifecycle-extensions:2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jetpack高级开发组件">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/13Jetpack/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="Jetpack高级开发组件[toc]  ViewModel 将所有的逻辑处理放在Activity中导致项目难以维护，ViewModel可以分担Activity一部分工作。 可以将界面的数据存放在ViewModel中，Activity重新创建不会丢失数据。  基本用法 添加依赖：implementation &#39;androidx.lifecycle:lifecycle-extensions:2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-22T01:44:20.397Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Jetpack高级开发组件 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Jetpack高级开发组件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      67 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Jetpack高级开发组件</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Jetpack高级开发组件"><a href="#Jetpack高级开发组件" class="headerlink" title="Jetpack高级开发组件"></a>Jetpack高级开发组件</h1><p>[toc]</p>
+<hr>
+<h2 id="ViewModel"><a href="#ViewModel" class="headerlink" title="ViewModel"></a><code>ViewModel</code></h2><ul>
+<li>将所有的逻辑处理放在<code>Activity</code>中导致项目难以维护，<code>ViewModel</code>可以分担<code>Activity</code>一部分工作。</li>
+<li>可以将界面的数据存放在<code>ViewModel</code>中，<code>Activity</code>重新创建不会丢失数据。</li>
+</ul>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><ol>
+<li>添加依赖：<code>implementation &#39;androidx.lifecycle:lifecycle-extensions:2.2.0&#39;</code>。</li>
+<li>新建类继承自<code>ViewModel</code>。</li>
+<li>在<code>Activity</code>中使用<code>ViewModel</code>保存相关数据。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 自定义的ViewModel</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainViewModel1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ViewModel</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainViewModel1</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(<span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainViewModel1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> countReserved)</span> </span>&#123;<br>        count = countReserved;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">plusOne</span><span class="hljs-params">()</span> </span>&#123;<br>        count++;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span> </span>&#123;<br>        count = <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 获取自定义的ViewModel，通过provider方式可以使得Activity被回收也能继续存活</span><br>mainViewModel1 = <span class="hljs-keyword">new</span> ViewModelProvider(<span class="hljs-keyword">this</span>).get(MainViewModel1.class);<br><br><span class="hljs-comment">// 通过ViewModel保存或获取数据</span><br>mainViewModel1.plusOne();<br><span class="hljs-keyword">int</span> count = mainViewModel1.getCount();<br></code></pre></td></tr></table></figure>
+
+<p>若需要在应用退出时仍然保存数据，则可以在退出时将数据保存到数据库，在重新进入时加载数据。</p>
+<ol>
+<li>创建一个可以接受参数的<code>ViewModel</code>，同上。</li>
+<li>自定义<code>ViewModelFactory</code>类，继承自<code>ViewModelProvider.Factory</code>，用于返回带参数的<code>ViewModel</code>。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainViewModelFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ViewModelProvider</span>.<span class="hljs-title">Factory</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> countReserved;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainViewModelFactory</span><span class="hljs-params">(<span class="hljs-keyword">int</span> count)</span> </span>&#123;<span class="hljs-keyword">this</span>.countReserved = count;&#125;<br><br>    <span class="hljs-meta">@NonNull</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> &lt;T extends ViewModel&gt; <span class="hljs-function">T <span class="hljs-title">create</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> Class&lt;T&gt; modelClass)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> (T) <span class="hljs-keyword">new</span> MainViewModel1(countReserved);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>在<code>Activity</code>中使用持久性方式保存或获取数据。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">sharedPreferences = getSharedPreferences(<span class="hljs-string">&quot;counter&quot;</span>, Context.MODE_PRIVATE);<br><span class="hljs-keyword">int</span> countReserved = sharedPreferences.getInt(<span class="hljs-string">&quot;count_reserved&quot;</span>, <span class="hljs-number">0</span>);<br><span class="hljs-comment">// 通过ViewModelFactory创建ViewModel</span><br>mainViewModel1 = <span class="hljs-keyword">new</span> ViewModelProvider(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> MainViewModelFactory(countReserved)).get(MainViewModel1.class);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="Lifecycles"><a href="#Lifecycles" class="headerlink" title="Lifecycles"></a><code>Lifecycles</code></h2><ul>
+<li>可以在一个非<code>Activity</code>类中感知<code>Activity</code>的生命周期。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建自定义类，实现LifecycleObserver，通过注解设置特定生命周期收到通知</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyObserver</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">LifecycleObserver</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = MyObserver.class.getSimpleName();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyObserver</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br>   <br>    <span class="hljs-comment">// Activity处于START状态时收到通知</span><br>    <span class="hljs-meta">@OnLifecycleEvent(Lifecycle.Event.ON_START)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">activityStart</span><span class="hljs-params">()</span> </span>&#123;<br>        Log.d(TAG, <span class="hljs-string">&quot; : activity start&quot;</span>);<br>        getCurrentState();<br>    &#125;<br><br>    <span class="hljs-comment">// Activity处于STOP收到通知</span><br>    <span class="hljs-meta">@OnLifecycleEvent(Lifecycle.Event.ON_STOP)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">activityStop</span><span class="hljs-params">()</span> </span>&#123;<br>        Log.d(TAG, <span class="hljs-string">&quot;: activity stop&quot;</span>);<br>        getCurrentState();<br>    &#125;<br><br>&#125;<br><br><span class="hljs-comment">// 在Activity中设置观察器</span><br>getLifecycle().addObserver(<span class="hljs-keyword">new</span> MyObserver(getLifecycle()));<br></code></pre></td></tr></table></figure>
+
+<p>若要主动获取当前<code>Activity</code>的生命周期，可以创建带参的Observer，将<code>Lifecycle</code>传入其中，即可通过<code>Lifecycle</code>主动获取生命周期信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Lifecycle lifecycle;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyObserver</span><span class="hljs-params">(Lifecycle lifecycle)</span> </span>&#123;<br>	<span class="hljs-keyword">this</span>.lifecycle = lifecycle;<br>&#125;<br><br><span class="hljs-comment">// 主动获取生命周期信息</span><br>lifecycle.getCurrentState();<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="LiveData"><a href="#LiveData" class="headerlink" title="LiveData"></a><code>LiveData</code></h2><ul>
+<li>可以包含任何类型的数据。</li>
+<li>其他类可以对该数据设置监听器，当数据发生改动时可以收到通知。</li>
+<li>一般用于界面和数据的解耦，使得界面通过<code>ViewModel</code>内置的<code>LiveData</code>获取数据。</li>
+<li><code>MutableLiveData</code>为可以修改的<code>LiveData</code>，可以通过<code>postValue()</code>在非主线程修改数据，通过<code>getValue()</code>获取数据。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 界面的数据包装成User类，并以MutableLiveData类保存，Activity可以监听该LiveData</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainViewModel1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ViewModel</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> MutableLiveData&lt;User&gt; mUserLiveData;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainViewModel1</span><span class="hljs-params">()</span> </span>&#123;<br>        mUserLiveData = <span class="hljs-keyword">new</span> MutableLiveData&lt;&gt;(<span class="hljs-keyword">new</span> User(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;aa&quot;</span>));<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> LiveData&lt;User&gt; <span class="hljs-title">getUserLiveData</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> mUserLiveData;<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">changeUserInfo</span><span class="hljs-params">()</span> </span>&#123;<br>        mUserLiveData.postValue(<span class="hljs-keyword">new</span> User(<span class="hljs-keyword">new</span> Random().nextInt(<span class="hljs-number">100</span>), <span class="hljs-keyword">new</span> Random().nextInt(<span class="hljs-number">100</span>), <span class="hljs-string">&quot;zhangsan&quot;</span>));<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 在Activity中设置监听器</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">observeUserLiveData</span><span class="hljs-params">()</span> </span>&#123;<br>	mainViewModel1.getUserLiveData().observe(<span class="hljs-keyword">this</span>, v -&gt; &#123;<br>	    <span class="hljs-comment">// 设置数据改动时动作</span><br>	    <span class="hljs-keyword">if</span> (v != <span class="hljs-keyword">null</span>) &#123;<br>		tv_number.setText(v.toString());<br>	    &#125;<br>	&#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：避免暴露<code>LiveData</code>，方式参见网络相关资料。</p>
+<h3 id="map和switchMap"><a href="#map和switchMap" class="headerlink" title="map和switchMap"></a><code>map</code>和<code>switchMap</code></h3><ul>
+<li>若不想将整个数据全部暴露出，可以使用<code>map()</code>方法将一个<code>LiveData</code>转换为另一个类型的<code>LiveData</code>。如只关注用户名，则可以将<code>User</code>转换为<code>String</code>。</li>
+<li>若<code>LiveData</code>是通过方法获取的，则每次获取新的<code>LiveData</code>实例导致在原对象上设置的监听器失效，可以通过<code>switchMap()</code>方法将一个可能会重新创建的<code>LiveData</code>转换为可观察的<code>LiveData</code>对象。</li>
+</ul>
+<p><code>switchMap()</code>方法基本原理：<br>当转换之前的对象发生改动时，<code>swithcMap()</code>方法会将通过自定义的转换函数生成可观察的<code>LiveData</code>对象。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 使用map将一种类型的LiveData转换为另一种类型的LiveData</span><br><span class="hljs-keyword">private</span> MutableLiveData&lt;User&gt; mUserLiveData;<br><span class="hljs-keyword">private</span> LiveData&lt;String&gt; mUserNameLiveData;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainViewModel1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> countReserved)</span> </span>&#123;<br>	mUserLiveData = <span class="hljs-keyword">new</span> MutableLiveData&lt;&gt;(<span class="hljs-keyword">new</span> User(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;aa&quot;</span>));<br>	mUserNameLiveData = Transformations.map(mUserLiveData, x -&gt; x.toString() );<br>&#125;<br><br><span class="hljs-comment">// 使用switchMap将LiveData转换为可观察的对象</span><br><br>```java<br><span class="hljs-keyword">private</span> LiveData&lt;User&gt; mUserIdLiveData;<br>mUserIdLiveData = Transformations.switchMap(mUserLiveData, v -&gt; <span class="hljs-keyword">new</span> MutableLiveData&lt;&gt;(v));<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h2><ul>
+<li>Room是一个ORM框架（Object Relational Mapping，对象关系映射），可以实现在面向对象语言和面向关系的数据库之间建立映射关系。</li>
+<li>通过ORM框架，可以不需要编写SQL语句实现数据库的操作。</li>
+</ul>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>Room由三个部分组成：<ul>
+<li><strong>Entity</strong>：用于封装实际数据的实体类。</li>
+<li><strong>Dao</strong>：数据访问对象，逻辑层通过<strong>Dao</strong>来实现操作数据库。</li>
+<li><strong>Database</strong>：定义数据库的基本信息，提供Dao层的访问实例。</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
+<li>添加依赖：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">implementation &#x27;androidx.room:room-runtime:2.3.0&#x27;<br>annotationProcessor &#x27;androidx.room:room-compiler:2.3.0&#x27;<br></code></pre></td></tr></table></figure></li>
+<li>创建实体类：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 通过注解表示该类为Entity</span><br><span class="hljs-meta">@Entity</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br>    <span class="hljs-comment">// 注解PrimaryKey设置主键</span><br>    <span class="hljs-meta">@PrimaryKey(autoGenerate = true)</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> id;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;<br>    <span class="hljs-keyword">private</span> String name;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(<span class="hljs-keyword">long</span> id, <span class="hljs-keyword">int</span> age, String name)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.id = id;<br>        <span class="hljs-keyword">this</span>.age = age;<br>        <span class="hljs-keyword">this</span>.name = name;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>创建Dao接口<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 不同的注解表示对应的数据库操作</span><br><span class="hljs-meta">@Dao</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserDao</span> </span>&#123;<br>    <span class="hljs-meta">@Insert</span><br>    <span class="hljs-function">Long <span class="hljs-title">insertUser</span><span class="hljs-params">(User user)</span></span>;<br><br>    <span class="hljs-meta">@Update</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">updateUser</span><span class="hljs-params">(User newUser)</span></span>;<br><br>    <span class="hljs-meta">@Query(&quot;SELECT * FROM user&quot;)</span><br>    <span class="hljs-function">List&lt;User&gt; <span class="hljs-title">loadAllUsers</span><span class="hljs-params">()</span></span>;<br><br>    <span class="hljs-meta">@Query(&quot;SELECT * FROM user WHERE age &gt; :age&quot;)</span><br>    <span class="hljs-function">List&lt;User&gt; <span class="hljs-title">loadUserOlderThan</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span></span>;<br><br>    <span class="hljs-meta">@Delete</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deleteUser</span><span class="hljs-params">(User user)</span></span>;<br><br>    <span class="hljs-meta">@Query(&quot;DELETE FROM user WHERE name = :name&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">deleteUserByName</span><span class="hljs-params">(String name)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>定义数据库<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// version表示当前数据库的版本，entities表示实体类</span><br><span class="hljs-meta">@Database(version = 1, entities = &#123;User.class&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppDatabase</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RoomDatabase</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> AppDatabase instance = <span class="hljs-keyword">null</span>;<br><br>    <span class="hljs-comment">// 抽象方法用于获取Dao的实例</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> UserDao <span class="hljs-title">userDao</span><span class="hljs-params">()</span></span>;<br><br>    <span class="hljs-function">AppDatabase <span class="hljs-title">getDatabase</span><span class="hljs-params">(Context context)</span> </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>            <span class="hljs-keyword">if</span> (instance != <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> instance;<br>            <span class="hljs-keyword">return</span> instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, <span class="hljs-string">&quot;app_database&quot;</span>).build();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>使用Room进行数据库操作<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">UserDao userDao = <span class="hljs-keyword">new</span> AppDatabase_Impl().getDatabase(<span class="hljs-keyword">this</span>).userDao();<br>userDao.insertUser(user1);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="数据库升级"><a href="#数据库升级" class="headerlink" title="数据库升级"></a>数据库升级</h3><p>通过<code>Migration</code>类实现：</p>
+<ul>
+<li>在数据库类中定义<code>Migration</code>类，在其中定义数据库升级操作，两个数值分别表示升级前后的数据库版本。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Migration MIGRATION_1_2 = <span class="hljs-keyword">new</span> Migration(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) &#123;<br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">migrate</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> SupportSQLiteDatabase database)</span> </span>&#123;<br>	    database.execSQL(<span class="hljs-string">&quot;CREATE TABLE book (id INTEGER PRIMARY KEY AUTOINCREMENT, page INTEGER, name TEXT)&quot;</span>);<br>	&#125;<br>&#125;;<br><br><span class="hljs-comment">// 通过addMigrations添加数据库升级操作</span><br><span class="hljs-function">AppDatabase <span class="hljs-title">getDatabase</span><span class="hljs-params">(Context context)</span> </span>&#123;<br>	<span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>	    <span class="hljs-keyword">if</span> (instance != <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> instance;<br>	    <span class="hljs-keyword">return</span> instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, <span class="hljs-string">&quot;app_database&quot;</span>).addMigrations(MIGRATION_1_2).build();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="WorkManager"><a href="#WorkManager" class="headerlink" title="WorkManager"></a><code>WorkManager</code></h2><ul>
+<li>主要用于处理一些要求定时执行的任务。</li>
+<li><code>Service</code>在没有被销毁时保持在后台运行，而<code>WorkManager</code>是一个处理定时任务的工具，应用退出后任务仍然可以得到执行。</li>
+<li><code>WorkManager</code>注册的周期性任务<strong>不能保证一定准时执行</strong>。</li>
+</ul>
+<h3 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h3><ul>
+<li>添加依赖：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">implementation &#x27;androidx.work:work-runtime:2.2.0&#x27;<br></code></pre></td></tr></table></figure></li>
+<li>定义一个后台任务，实现具体的任务逻辑<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 自定义的任务类需要继承自Worker</span><br><span class="hljs-comment">// 任务逻辑在doWork()方法中实现</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleWorker</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Worker</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SimpleWorker</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> Context context, <span class="hljs-meta">@NonNull</span> WorkerParameters workerParams)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(context, workerParams);<br>    &#125;<br><br>    <span class="hljs-meta">@NonNull</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">doWork</span><span class="hljs-params">()</span> </span>&#123;<br>        Log.d(<span class="hljs-keyword">this</span>.getClass().getSimpleName(), <span class="hljs-string">&quot;this is from worker manager&quot;</span>);<br>        <span class="hljs-keyword">return</span> Result.success();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>配置后台任务的运行条件和约束信息，构建后台任务请求。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// setInitiaDelay：设置延迟执行</span><br><span class="hljs-comment">// addTag：添加标签</span><br>OneTimeWorkRequest oneTimeWorkRequest = <span class="hljs-keyword">new</span> OneTimeWorkRequest.Builder(SimpleWorker.class)<br>    .setInitialDelay(<span class="hljs-number">1</span>, TimeUnit.SECONDS)<br>    .addTag(<span class="hljs-string">&quot;simple&quot;</span>)<br>    .build();<br></code></pre></td></tr></table></figure></li>
+<li>将后台任务请求传入WorkManager的enqueue方法，待系统调度执行<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">WorkManager.getInstance(<span class="hljs-keyword">this</span>).enqueue(oneTimeWorkRequest);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="创建一个周期执行的任务："><a href="#创建一个周期执行的任务：" class="headerlink" title="创建一个周期执行的任务："></a>创建一个周期执行的任务：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">PeriodicWorkRequest request = <span class="hljs-keyword">new</span> PeriodicWorkRequest.Builder(SimpleWorker.class, <span class="hljs-number">1</span>, TimeUnit.SECONDS).setInitialDelay(<span class="hljs-number">2</span>, TimeUnit.SECONDS)<br>    .addTag(<span class="hljs-string">&quot;simple&quot;</span>)<br>    .build();<br></code></pre></td></tr></table></figure>
+
+<h4 id="取消任务"><a href="#取消任务" class="headerlink" title="取消任务"></a>取消任务</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 取消指定标签的任务</span><br>WorkManager.getInstance(<span class="hljs-keyword">this</span>).cancelAllWorkByTag(<span class="hljs-string">&quot;simple&quot;</span>);<br><br><span class="hljs-comment">// 取消所有任务</span><br>WorkManager.getInstance(<span class="hljs-keyword">this</span>).cancelAllWork();<br></code></pre></td></tr></table></figure>
+
+<h4 id="社设置失败后重新执行"><a href="#社设置失败后重新执行" class="headerlink" title="社设置失败后重新执行"></a>社设置失败后重新执行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">OneTimeWorkRequest oneTimeWorkRequest = <span class="hljs-keyword">new</span> OneTimeWorkRequest.Builder(SimpleWorker.class)<br>    .setInitialDelay(<span class="hljs-number">1</span>, TimeUnit.SECONDS)<br>    .setBackoffCriteria(BackoffPolicy.LINEAR, <span class="hljs-number">10</span>, TimeUnit.SECONDS)<br>    .addTag(<span class="hljs-string">&quot;simple&quot;</span>)<br>    .build();<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="链式任务"><a href="#链式任务" class="headerlink" title="链式任务"></a>链式任务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">WorkManager.getInstance(<span class="hljs-keyword">this</span>)<br>    .beginWith(oneTask)<br>    .then(anotherTask)<br>    .enqueue();<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2744">第一行代码——Android（第3版）-第十三章</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/11Network/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络技术</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/3activity/">
+                        <span class="hidden-mobile">Activity</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

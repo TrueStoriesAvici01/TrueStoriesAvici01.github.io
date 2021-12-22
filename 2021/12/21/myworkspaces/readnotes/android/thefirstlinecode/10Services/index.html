@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="10. Services[toc]  简介 Service用于实现程序后台运行。 适用于不需要交互并长期运行的任务。 即使程序切换到后台，仍然保持正常运行。 Service依赖于创建时的应用进程。若该进程被中止，则对应的Service也停止运行。 Service不会开启线程，所有代码默认在主线程执行。  线程的基本使用两种创建线程的方式： 123456789101112131415&#x2F;&#x2F; 1. 继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Services">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/10Services/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="10. Services[toc]  简介 Service用于实现程序后台运行。 适用于不需要交互并长期运行的任务。 即使程序切换到后台，仍然保持正常运行。 Service依赖于创建时的应用进程。若该进程被中止，则对应的Service也停止运行。 Service不会开启线程，所有代码默认在主线程执行。  线程的基本使用两种创建线程的方式： 123456789101112131415&#x2F;&#x2F; 1. 继承">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/handlemessage.jpg">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-22T01:44:13.646Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/handlemessage.jpg">
+  
+  
+  <title>Services - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Services">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Services</h1>
+            
+            <div class="markdown-body">
+              <h1 id="10-Services"><a href="#10-Services" class="headerlink" title="10. Services"></a>10. Services</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><code>Service</code>用于实现程序后台运行。</li>
+<li>适用于不需要交互并长期运行的任务。</li>
+<li>即使程序切换到后台，仍然保持正常运行。</li>
+<li><code>Service</code>依赖于创建时的应用进程。若该进程被中止，则对应的<code>Service</code>也停止运行。</li>
+<li><code>Service</code>不会开启线程，所有代码默认在主线程执行。</li>
+</ul>
+<h3 id="线程的基本使用"><a href="#线程的基本使用" class="headerlink" title="线程的基本使用"></a>线程的基本使用</h3><p>两种创建线程的方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1. 继承Thread类，重写run()方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// do something</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 2. 实现Runnable接口，重写run()方法 </span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyRunnable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// do something</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> MyRunnable()) <span class="hljs-comment">// 再传入新线程中执行</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：无法创建子线程执行UI更新的操作，否则会报<code>CalledFromWrongThreadException</code>错误。</p>
+</blockquote>
+<hr>
+<h2 id="异步消息处理机制"><a href="#异步消息处理机制" class="headerlink" title="异步消息处理机制"></a>异步消息处理机制</h2><p>异步消息处理机制涉及四个部分：</p>
+<ul>
+<li><code>Message</code>：线程之间传递的消息，内部携带少量数据，用于不同线程间传递信息。</li>
+<li><code>Handler</code>：用于发送消息和处理消息。发送的消息最终由<code>handleMessage()</code>方法进行处理。</li>
+<li><code>MessageQueue</code>：消息队列，用于存放所有由<code>Handler</code>发送的消息。（每个线程有唯一的<code>MessageQueue</code>）</li>
+<li><code>Looper</code>：用来处理<code>MessageQueue</code>中存放的任务，通过<code>loop()</code>方法不断的从<code>MessageQueue</code>中取出任务，分配给对应的<code>Handler</code>，调用<code>handleMessage()</code>方法进行处理。</li>
+</ul>
+<p><img src="../../../imgs/handlemessage.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> TextView textView;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>    setContentView(R.layout.activity_main);<br>    textView = (TextView)(findViewById(R.id.textveiw_readytoupdate));<br>    ((Button)findViewById(R.id.button_updatetext)).setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;<br>            <span class="hljs-comment">// 构建Message</span><br>            Message message = <span class="hljs-keyword">new</span> Message();<br>            <span class="hljs-comment">// 发送消息</span><br>            handler.sendMessage(message);<br>        &#125;<br>    &#125;);<br>&#125;<br><br><span class="hljs-comment">// 创建Handler处理任务</span><br><span class="hljs-keyword">private</span> Handler handler = <span class="hljs-keyword">new</span> Handler(Looper.getMainLooper()) &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleMessage</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> Message msg)</span> </span>&#123;<br>        textView.setText(<span class="hljs-string">&quot;new Line&quot;</span>);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Service的用法"><a href="#Service的用法" class="headerlink" title="Service的用法"></a><code>Service</code>的用法</h2><p>自定义<code>Service</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Service</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> IBinder <span class="hljs-title">onBind</span><span class="hljs-params">(Intent intent)</span> </span>&#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Return the communication channel to the service.</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException(<span class="hljs-string">&quot;Not yet implemented&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>通过重写<code>Service</code>中的方法，可以决定<code>Service</code>在其生命周期中的行为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 这里通过log检查各方法的执行时机</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Service</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>&#123;<br>        Log.d(<span class="hljs-string">&quot;MyService&quot;</span>, <span class="hljs-string">&quot;onCreate&quot;</span>);<br>        <span class="hljs-keyword">super</span>.onCreate();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">onStartCommand</span><span class="hljs-params">(Intent intent, <span class="hljs-keyword">int</span> flags, <span class="hljs-keyword">int</span> startId)</span> </span>&#123;<br>        Log.d(<span class="hljs-string">&quot;MyService&quot;</span>, <span class="hljs-string">&quot;onStartCommand&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onStartCommand(intent, flags, startId);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>&#123;<br>        Log.d(<span class="hljs-string">&quot;MyService&quot;</span>, <span class="hljs-string">&quot;onDestroy&quot;</span>);<br>        <span class="hljs-keyword">super</span>.onDestroy();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>启动或停止<code>Service</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 启动或停止Service</span><br>Intent intent = <span class="hljs-keyword">new</span> Intent(getApplicationContext(), MyService.class);<br>startService(intent);<br><br><span class="hljs-comment">// 停止Service</span><br>stopService(intent);<br></code></pre></td></tr></table></figure>
+
+<p><code>Service</code>启动方法调用：<code>onCreate()</code>（只在启动时调用，启动后不再调用） –&gt; <code>onStartCommand()</code>。<br>停止：<code>onDestory()</code>。</p>
+<hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/34996842/">《第一行代码》-第十章》</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/java/time/getsystemtime/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java中获取系统时间</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/11Network/">
+                        <span class="hidden-mobile">网络技术</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

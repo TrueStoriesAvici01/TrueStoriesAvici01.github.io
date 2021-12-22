@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="3. Activity[toc]  Activity简介Activity是一个包含用户界面的组件，用于与用户进行交互。 手动创建Activity 创建一个新的项目 Add No Activity 确定应用属性信息。 创建项目成功后改动到Project模式。 添加一个空的Activity：在app&#x2F;java&#x2F;com.XXX文件下新建一个Activity。(注：不要勾选Generate Layout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/3activity/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="3. Activity[toc]  Activity简介Activity是一个包含用户界面的组件，用于与用户进行交互。 手动创建Activity 创建一个新的项目 Add No Activity 确定应用属性信息。 创建项目成功后改动到Project模式。 添加一个空的Activity：在app&#x2F;java&#x2F;com.XXX文件下新建一个Activity。(注：不要勾选Generate Layout">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/projectview.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/addemptyactivity.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/addlayout.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/layout_textview.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/cyclelife.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/wholecyclelife.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/standardmode.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/singletopmode.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/singletaskmode.jpg">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/singleinstancemode.jpg">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-22T01:43:42.650Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/projectview.jpg">
+  
+  
+  <title>Activity - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Activity">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      70 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Activity</h1>
+            
+            <div class="markdown-body">
+              <h1 id="3-Activity"><a href="#3-Activity" class="headerlink" title="3. Activity"></a>3. Activity</h1><p>[toc]</p>
+<hr>
+<h2 id="Activity简介"><a href="#Activity简介" class="headerlink" title="Activity简介"></a>Activity简介</h2><p>Activity是一个包含用户界面的组件，用于与用户进行交互。</p>
+<h2 id="手动创建Activity"><a href="#手动创建Activity" class="headerlink" title="手动创建Activity"></a>手动创建Activity</h2><ol>
+<li>创建一个新的项目</li>
+<li><code>Add No Activity</code></li>
+<li>确定应用属性信息。</li>
+<li>创建项目成功后改动到Project模式。<br><img src="../../../imgs/projectview.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></li>
+<li>添加一个空的Activity：在<code>app/java/com.XXX</code>文件下新建一个Activity。(注：不要勾选<code>Generate Layout File</code>和<code>Launcher Activity</code>，后续自行添加)<br><img src="../../../imgs/addemptyactivity.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></li>
+<li>创建布局：在<code>app/res/</code>目录下创建<code>layout</code>目录，并在该目录下创建一个layout布局文件：<br><img src="../../../imgs/addlayout.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></li>
+<li>编辑布局文件：点击布局文件，将视图切换到<code>Text</code>模式：<br><img src="../../../imgs/layout_textview.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload><br>添加如下：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/button1&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;Button 1&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>在启动的Activity中添加该布局，使之显示出来。在<code>onCreate()</code>方法中添加<code>setContentView(R.layout.firstlayout)</code>，其中<code>firstlayout</code>是布局文件名。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>        setContentView(R.layout.firstlayout);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>在<code>AndroidManifest.xml</code>中注册Activity为主Activity。在对应的<code>&lt;activity&gt;</code>标签中加入：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.action.MAIN&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.DEFAULT&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>此时应用构建完成，可以进行测试。</li>
+</ol>
+<hr>
+<h2 id="在Activity中使用Toast"><a href="#在Activity中使用Toast" class="headerlink" title="在Activity中使用Toast"></a>在Activity中使用Toast</h2><blockquote>
+<p><code>Toast</code>：小窗口提示信息。</p>
+</blockquote>
+<ol>
+<li>在创建的Activity中添加如下代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Button button = findViewById(R.id.button1);<br>button.setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123; <span class="hljs-comment">// 给按钮设置监听器，点击时触发</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;<br>        <span class="hljs-comment">// 弹出提示通知</span><br>        Toast.makeText(getApplicationContext(), <span class="hljs-string">&quot;You clicked this button&quot;</span>, Toast.LENGTH_SHORT).show();<br>    &#125;<br>&#125;);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="在Activity中使用Menu"><a href="#在Activity中使用Menu" class="headerlink" title="在Activity中使用Menu"></a>在Activity中使用Menu</h2><ol>
+<li>在<code>/app/res/</code>目录下创建<code>menu</code>目录。</li>
+<li>在<code>menu</code>目录下新建<code>Menu</code>文件，增加两个按钮：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">item</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/add_item&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:title</span>=<span class="hljs-string">&quot;Add&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">item</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/remove_item&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:title</span>=<span class="hljs-string">&quot;Remove&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>在主Activity中重写<code>onCreateOptionsMenu</code>方法和<code>onOptionsItemSelected</code>方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 给Activity中创建选项Menu</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onCreateOptionsMenu</span><span class="hljs-params">(Menu menu)</span> </span>&#123;<br>    MenuInflater menuInflater = getMenuInflater();<br>    menuInflater.inflate(R.menu.main, menu);<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br><br><span class="hljs-comment">// 设置当Menu中的选择被选定时的操作</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onOptionsItemSelected</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> MenuItem item)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> itemId = item.getItemId();<br>    <span class="hljs-keyword">switch</span> (itemId) &#123;<br>        <span class="hljs-keyword">case</span> R.id.add_item : Toast.makeText(getApplicationContext(), <span class="hljs-string">&quot;Add item&quot;</span>, Toast.LENGTH_LONG).show();<span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> R.id.remove_item : Toast.makeText(getApplicationContext(), <span class="hljs-string">&quot;Remove Item&quot;</span>, Toast.LENGTH_LONG).show();<span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="摧毁一个Activity"><a href="#摧毁一个Activity" class="headerlink" title="摧毁一个Activity"></a>摧毁一个Activity</h2><p>系统提供<code>finsh()</code>方法实现将一个Activity摧毁。</p>
+<hr>
+<h2 id="使用Intent在Activity间通信"><a href="#使用Intent在Activity间通信" class="headerlink" title="使用Intent在Activity间通信"></a>使用<code>Intent</code>在Activity间通信</h2><blockquote>
+<p><code>Intent</code>：各组件之间进行交互的一种方式，可以指明当前组件的目的和在不同组件之间传递数据。</p>
+</blockquote>
+<ol>
+<li>创建新的Activity。</li>
+<li>在<code>AndroidManifest.xml</code>中对应的<code>&lt;activity&gt;</code>标签中设置过滤器<code>&lt;intent-filter&gt;</code>：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;com.xiaomi.editmyactivity.ACTION_START&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.APP_CALENDAR&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>在主Activity中设置调用新Activity的逻辑：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 隐式的Intent</span><br>button.setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;<br>    <span class="hljs-comment">// 点击按钮触发第二个Activity</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;<br>        Intent intent = <span class="hljs-keyword">new</span> Intent(<span class="hljs-string">&quot;com.xiaomi.editmyactivity.ACTION_START&quot;</span>);<br>        startActivity(intent);<br>    &#125;<br>&#125;);<br><br><span class="hljs-comment">// 显式的Intent</span><br>button.setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;<br>        <span class="hljs-comment">// 指定Activity</span><br>        Intent intent = <span class="hljs-keyword">new</span> Intent(getApplicationContext(), Main2Activity.class);<br>        startActivity(intent);<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>注意：<code>&lt;action&gt;</code>：可自定义对应组件的标签。</p>
+</blockquote>
+<h3 id="隐式Intent用法"><a href="#隐式Intent用法" class="headerlink" title="隐式Intent用法"></a>隐式<code>Intent</code>用法</h3><ul>
+<li>启动系统提供的Activity：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 调用系统浏览器</span><br>Intent intent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_VIEW);<br>intent.setData(<span class="hljs-string">&quot;https://www.baidu.com&quot;</span>);<br>startActivity(intent);<br><br><span class="hljs-comment">// 调用系统拨号</span><br>Intent intent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_DIAL);<br>intent.setData(<span class="hljs-string">&quot;tel:110&quot;</span>);<br>startActivity(intent);<br></code></pre></td></tr></table></figure></li>
+<li>定制Activity特性，使其响应特定的<code>action</code>。在对应的<code>&lt;activity&gt;</code>中设置<code>&lt;intent-filter&gt;</code>：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--指定当前Activity可以响应https请求--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.action.VIEW&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.DEFAULT&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">android:scheme</span>=<span class="hljs-string">&quot;http&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong><code>&lt;data&gt;</code>可以配置的内容</strong>：<br>|标签|说明|<br>|—|—|<br>|<code>scheme</code>|指定数据的协议|<br>|<code>host</code>|指定数据的主机部分|<br>|<code>port</code>|指定数据的端口|<br>|<code>path</code>|指定主机和端口之后的部分|<br>|<code>mimeType</code>|指定可以处理的数据类型|</p>
+<hr>
+<h2 id="向其他的Activity传递数据"><a href="#向其他的Activity传递数据" class="headerlink" title="向其他的Activity传递数据"></a>向其他的Activity传递数据</h2><ol>
+<li>第一个Activity的<code>onCreate()</code>方法中设置监听器，通过<code>Intent</code>将数据传送到其他的Activity中：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 第一个Activity的onCreate方法：</span><br>findViewById(R.id.button1).setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;<br>        <span class="hljs-comment">// 指定跳转的下一个Activity</span><br>        Intent intent = <span class="hljs-keyword">new</span> Intent(getApplicationContext(), MainActivity2.class);<br>        String data = <span class="hljs-string">&quot;From MainActivity&quot;</span>;<br>        <span class="hljs-comment">// 将数据保存到Intent中</span><br>        intent.putExtra(<span class="hljs-string">&quot;extra_data&quot;</span>, data);<br>        <span class="hljs-comment">// 触发下一个Activity</span><br>        startActivity(intent);<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure></li>
+<li>第二个Activity中从Intent中获取数据：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 从Intent中取出数据</span><br>String extra_data = getIntent().getStringExtra(<span class="hljs-string">&quot;extra_data&quot;</span>);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h2><h3 id="返回栈"><a href="#返回栈" class="headerlink" title="返回栈"></a>返回栈</h3><blockquote>
+<ul>
+<li>Android将Activity存放在返回栈（back stack）中。</li>
+<li>每次启动一个Activity时，会在返回栈入栈，处于栈顶位置。</li>
+<li>当调用<code>finsh()</code>方法或返回键摧毁一个Activity时，处于栈顶的Activity会出栈，前一个Activity处于栈顶，系统将显示给用户。</li>
+</ul>
+</blockquote>
+<p><img src="../../../imgs/cyclelife.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<h3 id="Activity状态"><a href="#Activity状态" class="headerlink" title="Activity状态"></a>Activity状态</h3><blockquote>
+<p>每个Activity在生命周期中有四种状态。</p>
+</blockquote>
+<ul>
+<li><strong>运行状态</strong>：此时Activity处于返回栈栈顶。</li>
+<li><strong>暂停状态</strong>：当一个Activity不再处于栈顶但仍然可见。此时Activity是存活状态。除非内存极低，否则系统不会回收。</li>
+<li><strong>停止状态</strong>：当一个Activity不在栈顶并且完全不可见。系统会保存状态和成员变量。</li>
+<li><strong>摧毁状态</strong>：当一个Activity从返回栈移除后就变成销毁状态。系统倾向于回收其内存。</li>
+</ul>
+<h3 id="Activity的生存期"><a href="#Activity的生存期" class="headerlink" title="Activity的生存期"></a>Activity的生存期</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>调用时机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>onCreate</code></td>
+<td>一个Activity第一次被创建</td>
+</tr>
+<tr>
+<td><code>onStart</code></td>
+<td>当一个Activity由不可见变为可见状态</td>
+</tr>
+<tr>
+<td><code>onResume</code></td>
+<td>在Activity准备好与用户进行交互时，此时Activity位于栈顶并处于运行状态</td>
+</tr>
+<tr>
+<td><code>onPause</code></td>
+<td>当系统准备启动或恢复另一个Activity时调用，将系统资源释放，保存关键数据。</td>
+</tr>
+<tr>
+<td><code>onStop</code></td>
+<td>当Activity完全不可见时调用。</td>
+</tr>
+<tr>
+<td><code>onDestory</code></td>
+<td>在一个Activity被摧毁前调用。</td>
+</tr>
+<tr>
+<td><code>onRestart</code></td>
+<td>当Activity由停止状态变为运行状态之前调用。</td>
+</tr>
+</tbody></table>
+<p><img src="../../../imgs/wholecyclelife.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<p>其中：</p>
+<ul>
+<li><code>onCreat()</code>–&gt;<code>onDestroy()</code>：是一个Activity的完整生存周期。</li>
+<li><code>onStart()</code>–&gt;<code>onStop()</code>：是一个Activity的可见生存周期。此时Activity对于用户是可见的，但不一定可以进行交互。可以进行资源管理避免占用过多内存。</li>
+<li><code>onResume()</code>–&gt;<code>onPause()</code>：是一个Activity的前台生存期。此时Activity处于运行状态，并且可以进行交互。</li>
+</ul>
+<h3 id="体验不同的生命周期"><a href="#体验不同的生命周期" class="headerlink" title="体验不同的生命周期"></a>体验不同的生命周期</h3><ol>
+<li>创建两个Activity，分别为一般的Activity和对话框式的Activity，在<code>AndoridManifest.xml</code>设置对应的属性：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--一般的Activity--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">activity</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.MainActivity2&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--对话框式Activity--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">activity</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.MainActivity3&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:theme</span>=<span class="hljs-string">&quot;@style/Theme.AppCompat.Dialog&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>在主Activity中设置两个按钮，分别用于跳转到对应的Activity：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>    setContentView(R.layout.activity_main);<br>    Log.d(<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;onCreate&quot;</span>);<br><br>    <span class="hljs-comment">// 跳转一般Activity的按钮</span><br>    findViewById(R.id.normal_button).setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;<br>            Intent intent = <span class="hljs-keyword">new</span> Intent(getApplicationContext(), MainActivity2.class);<br>            startActivity(intent);<br>        &#125;<br>    &#125;);<br><br>    <span class="hljs-comment">// 跳转对话框式Activity的按钮</span><br>    findViewById(R.id.dialog_button).setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;<br>            Intent intent = <span class="hljs-keyword">new</span> Intent(getApplicationContext(), MainActivity3.class);<br>            startActivity(intent);<br>        &#125;<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>在主Activity中重写<code>onStart</code>、<code>onResume</code>、<code>onPause</code>、<code>onStop</code>、<code>onRestart</code>和<code>onDestroy</code>方法，在其中打印日志明确该方法被调用。</li>
+<li>测试日志：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs log">// 启动第一个Activity<br>2021-07-23 14:13:45.790 10152-10152/com.example.myapplication2 XXX: onCreate<br>2021-07-23 14:13:45.794 10152-10152/com.example.myapplication2 XXX: onStart<br>2021-07-23 14:13:45.796 10152-10152/com.example.myapplication2 XXX: onResume<br><br>// 唤起第二个Activity<br>2021-07-23 14:15:45.779 10152-10152/com.example.myapplication2 XXX: onPause<br>2021-07-23 14:15:46.322 10152-10152/com.example.myapplication2 XXX: onStop<br><br>// 返回第一个Activity<br>2021-07-23 14:16:15.592 10152-10152/com.example.myapplication2 XXX: onRestart<br>2021-07-23 14:16:15.593 10152-10152/com.example.myapplication2 XXX: onStart<br>2021-07-23 14:16:15.594 10152-10152/com.example.myapplication2 XXX: onResume<br><br>// 唤醒对话框式Activity<br>2021-07-23 14:17:01.660 10152-10152/com.example.myapplication2 XXX: onPause<br><br>// 从对话框式Activity中返回<br>2021-07-23 14:17:56.237 10152-10152/com.example.myapplication2 XXX: onResume<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Activity被回收"><a href="#Activity被回收" class="headerlink" title="Activity被回收"></a>Activity被回收</h3><p>但一个Activity被回收后，重新进入需要重新经历创建Activity过程。<br>而Activity中的状态和成员变量由于没有保存而消失，可以通过<code>onSaveInstanceState</code>回调方法确保Activity被销毁时保存状态信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSaveInstanceState</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> <span class="hljs-meta">@NotNull</span> Bundle outState)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.onSaveInstanceState(outState);<br>    outState.putString(<span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>); <span class="hljs-comment">// 以(key, value)形式将数据保存到Bundle</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在<code>onCreate</code>方法中由变量<code>savedInstanceState</code>获取：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (savedInstanceState != <span class="hljs-keyword">null</span>) &#123;<br>    String value = savedInstanceState.getString(<span class="hljs-string">&quot;key&quot;</span>); <span class="hljs-comment">// 根据key获取对应的value</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：可以将数据保存到<code>Bundle</code>中，然后将<code>Bundle</code>保存到<code>Intent</code>中。</p>
+</blockquote>
+<hr>
+<h2 id="Activity的启动模式"><a href="#Activity的启动模式" class="headerlink" title="Activity的启动模式"></a>Activity的启动模式</h2><blockquote>
+<p>Activity共有四种启动模式：</p>
+<ul>
+<li><strong>standard</strong></li>
+<li><strong>singleTop</strong></li>
+<li><strong>singleTask</strong></li>
+<li><strong>singleInstance</strong></li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>特点</th>
+<th>图示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>standard</td>
+<td>每次启动一个Activity，都会在返回栈中入栈。无论返回栈是否有相同的Activity，都会在栈顶创建新实例</td>
+<td><img src="../../../imgs/standardmode.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></td>
+</tr>
+<tr>
+<td>singleTop</td>
+<td>启动Activity时，若发现为相同的Activity时，则直接使用；否则创建新的Activity入栈。</td>
+<td><img src="../../../imgs/singletopmode.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></td>
+</tr>
+<tr>
+<td>singleTask</td>
+<td>singleTop模式可能在一个返回栈创建多个相同的Activity。若要Activity在整个应用的上下文中只有一个实例，使用singleTask。</td>
+<td><img src="../../../imgs/singletaskmode.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></td>
+</tr>
+<tr>
+<td>singleInstance</td>
+<td>不同的应用的Activity共用同一个返回栈，系统只有一个Activity实例</td>
+<td><img src="../../../imgs/singleinstancemode.jpg" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li><strong>singleTask</strong>模式：启动Activity时，会先检查返回栈是否存在该Activity的实例。<blockquote>
+<ul>
+<li>若不存在，则创建新的Activity并入栈在栈顶。</li>
+<li>若存在，则将<strong>该Activity上面的所有Activity都出栈</strong>，并且直接使用该Activity。</li>
+</ul>
+</blockquote>
+</li>
+<li><strong>singleInstance</strong>模式：返回模式是按照返回栈中的Activity排列顺序。一般是将当前Activity所在的返回栈中的所有Activity出栈然后到其他的返回栈。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/34996842/">《第一行代码》-第三章</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/13Jetpack/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Jetpack高级开发组件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/thefirstlinecode/4UILayout/">
+                        <span class="hidden-mobile">UILayout</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>
