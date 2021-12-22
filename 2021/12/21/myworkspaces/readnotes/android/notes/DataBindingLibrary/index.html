@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Android中的数据绑定库(Data binding library)[toc]  简介环境要求：  Android 4.0 (API 14)及以上。 Gradle 1.5.0及以上。  配置环境：在应用模块的builde.gradle设置打开数据绑定选项： 12345android &amp;#123;	buildFeatures &amp;#123;		dataBinding true	&amp;#125;&amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中的数据绑定库(Data binding library)">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/DataBindingLibrary/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="Android中的数据绑定库(Data binding library)[toc]  简介环境要求：  Android 4.0 (API 14)及以上。 Gradle 1.5.0及以上。  配置环境：在应用模块的builde.gradle设置打开数据绑定选项： 12345android &amp;#123;	buildFeatures &amp;#123;		dataBinding true	&amp;#125;&amp;#12">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:18:07.967Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Android中的数据绑定库(Data binding library) - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android中的数据绑定库(Data binding library)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      70 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android中的数据绑定库(Data binding library)</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Android中的数据绑定库-Data-binding-library"><a href="#Android中的数据绑定库-Data-binding-library" class="headerlink" title="Android中的数据绑定库(Data binding library)"></a>Android中的数据绑定库(Data binding library)</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>环境要求：</p>
+<ul>
+<li>Android 4.0 (API 14)及以上。</li>
+<li>Gradle 1.5.0及以上。</li>
+</ul>
+<p>配置环境：<br>在应用模块的<code>builde.gradle</code>设置打开数据绑定选项：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">android &#123;<br>	buildFeatures &#123;<br>		dataBinding true<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="简单的数据绑定示例"><a href="#简单的数据绑定示例" class="headerlink" title="简单的数据绑定示例"></a>简单的数据绑定示例</h2><p>通常情况下，为了实现组件和对应数据的绑定，需要通过方法<code>findViewById()</code>方法实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">findViewById&lt;TextView&gt;(R.id.my_text).apply &#123;<br>	text = <span class="hljs-string">&quot;test message&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>而通过使用数据绑定，可以直接在布局文件中为组件设置对应的数据。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;@&#123;viewmodel.userName&#125;&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>通过在布局文件中绑定数据，可以使得你移除在<code>Activity</code>中存在的大量调用UI组件的代码。</p>
+<p>注意：视图绑定(view binding)也可以提供类似的功能，若想取代<code>findViewById()</code>方法，则可以考虑优先使用视图绑定。</p>
+<hr>
+<h2 id="布局与绑定表达式"><a href="#布局与绑定表达式" class="headerlink" title="布局与绑定表达式"></a>布局与绑定表达式</h2><p>基本结构：数据绑定布局文件的根目录标签为<code>&lt;layout&gt;</code>，并且在其中放置<code>&lt;data&gt;</code>标签用来存放数据：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">layout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemes.android.com/apk/res/android&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.User&quot;</span>/&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br>	<span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span></span><br><span class="hljs-tag">		<span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">		<span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span>&gt;</span><br>		<br>		<span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">			<span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">			<span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;@&#123;user.firstName&#125;&quot;</span> /&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">			<span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">			<span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;@&#123;user.lastName&#125;&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">layout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="绑定数据"><a href="#绑定数据" class="headerlink" title="绑定数据"></a>绑定数据</h3><p>对于每个布局文件，会生成对应的绑定类。该类的类名是基于布局文件名，如布局文件为<code>activity_main.xml</code>，则生成的绑定类为<code>ActivityMainBinding</code>。这个类中保存着布局文件中的所有绑定数据。</p>
+<p>可以通过如下方式创建绑定类：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 获取绑定类对象</span><br><span class="hljs-keyword">val</span> binding: ActivityMainBinding = DataBindingUtil.setContentView(<span class="hljs-keyword">this</span>, R.layout.activity_main)<br><br><span class="hljs-comment">// 设置数据绑定</span><br>binding.user = User(<span class="hljs-string">&quot;Test&quot;</span>, <span class="hljs-string">&quot;User&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>也可以通过<code>LayoutInflater</code>获取对应的绑定类对象：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> binding: ActivityMainBinding = ActivityMainBinding.inflate(getLayoutInflater())<br></code></pre></td></tr></table></figure>
+
+<h3 id="表达式语法"><a href="#表达式语法" class="headerlink" title="表达式语法"></a>表达式语法</h3><p>可以使用的操作符：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>操作符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数学</td>
+<td>+ - * / %</td>
+</tr>
+<tr>
+<td>字符串拼接</td>
+<td>+</td>
+</tr>
+<tr>
+<td>逻辑运算符</td>
+<td>&amp;&amp; ||</td>
+</tr>
+<tr>
+<td>二值操作符</td>
+<td>&amp; | ^</td>
+</tr>
+<tr>
+<td>一元操作符</td>
+<td>+ - ! ~</td>
+</tr>
+<tr>
+<td>移位操作</td>
+<td>&gt;&gt; &gt;&gt;&gt; &lt;&lt;</td>
+</tr>
+<tr>
+<td>比较运算符</td>
+<td>== &gt; &lt; &gt;= &lt;=</td>
+</tr>
+<tr>
+<td>类型比较</td>
+<td><code>instanceof</code></td>
+</tr>
+<tr>
+<td>分组</td>
+<td>()</td>
+</tr>
+<tr>
+<td>字面值</td>
+<td>字符，字符串，数值，null</td>
+</tr>
+<tr>
+<td>类型转换</td>
+<td></td>
+</tr>
+<tr>
+<td>方法调用</td>
+<td></td>
+</tr>
+<tr>
+<td>域成员</td>
+<td></td>
+</tr>
+<tr>
+<td>数组访问</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>三元操作符</td>
+<td>?:</td>
+</tr>
+</tbody></table>
+<p>注意：表达式中不支持：<code>this</code>，<code>super</code>，<code>new</code>等。</p>
+<h4 id="null值处理"><a href="#null值处理" class="headerlink" title="null值处理"></a>null值处理</h4><p>null值处理运算符可以根据左值是否为null进行选择：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--若user.text为null，则为user.name，否则为user.text--&gt;</span><br>@&#123;user.text ?? user.name&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="空指针异常"><a href="#空指针异常" class="headerlink" title="空指针异常"></a>空指针异常</h4><p>数据绑定类会自动检查null值从而避免空指针异常。若为null，则根据不同的数据类型分配对应的默认值。</p>
+<h4 id="组件引用"><a href="#组件引用" class="headerlink" title="组件引用"></a>组件引用</h4><p>在表达式中可以通过ID引用其他组件值：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">&lt;TextView<br>    android:id=<span class="hljs-string">&quot;@+id/tv_user1&quot;</span><br>    android:layout_width=<span class="hljs-string">&quot;match_parent&quot;</span><br>    android:layout_height=<span class="hljs-string">&quot;wrap_content&quot;</span><br>    android:text=<span class="hljs-string">&#x27;@&#123;&quot;first name is&quot; + user.firstName&#125;&#x27;</span>/&gt;<br><br>&lt;TextView<br>    android:layout_width=<span class="hljs-string">&quot;match_parent&quot;</span><br>    android:layout_height=<span class="hljs-string">&quot;wrap_content&quot;</span><br>    android:text=<span class="hljs-string">&#x27;@&#123;tvUser1.text&#125;&#x27;</span>/&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>通用的集合，如：Array, List, Map等可以通过[]进行访问：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;java.util.List&quot;</span>/&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;java.util.Map&quot;</span>/&gt;</span><br><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;list&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;List<span class="hljs-symbol">&amp;lt;</span>String&gt;&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;map&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Map<span class="hljs-symbol">&amp;lt;</span>String, String&gt;&quot;</span>/&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;index&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;key&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;String&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br>android.text=&quot;@&#123;list[index]&#125;&quot;<br><br>android.text=&quot;@&#123;map[key]&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<p>注意：在xml中无法使用”&lt;”，可以使用”&lt;”进行表示。</p>
+<h4 id="字符串字面值"><a href="#字符串字面值" class="headerlink" title="字符串字面值"></a>字符串字面值</h4><p>为了在表达式中表示字符串，需要使用单引号引用表达式，在内部使用双引号引用字符串。<br>或者双引号引用表达式，引号`表示字符串：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml">android.text=&#x27;@&#123;&quot;this is a test&quot;&#125;&#x27;<br><br><span class="hljs-comment">&lt;!--或者--&gt;</span><br>android.text=&quot;@&#123;`this is a test`&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<h4 id="资源引用"><a href="#资源引用" class="headerlink" title="资源引用"></a>资源引用</h4><p>可以在表达式中引用资源：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--引用字符串--&gt;</span><br>android:text=&quot;@&#123;@string/user1&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><p>数据绑定可以通过编写的表达式对于View的事件进行处理。而事件属性名是由监听器的方法名决定的。如<code>View.onClickListener</code>中有方法<code>onClick()</code>，则对应的时间属性为<code>android:onClick</code>。</p>
+<p>除了通用的<code>android:onClick</code>外，还有一些特定的事件：<br>|类|监听器|属性|<br>|—|—|—|<br>|<code>SearchView</code>|<code>setOnSearchClickListener</code>|<code>android:onSearchLick</code>|<br>|<code>ZoomControls</code>|<code>setOnZoomInClickListener</code>|<code>android:onZoomIn</code>|<br>|<code>ZoomControls</code>|<code>setOnZoomOutClickListener</code>|<code>android:onZoomOut</code>|</p>
+<p>提供两种方式处理一个事件：</p>
+<ul>
+<li>方法引用(Method references)：需要被引用的方法的参数列表与监听器方法的参数列表保持一致。数据绑定将会该方法引用包装进一个监听器并设置在对应的View上。</li>
+<li>监听器绑定(Listener binding)：当对应事件发生时，执行对应的lambda表达式。</li>
+</ul>
+<blockquote>
+<p>两个方法的主要区别是：<strong>方法引用是在数据绑定时创建对应的监听器实例，而监听器绑定是在对应的事件发生时执行对应的表达式</strong>。</p>
+</blockquote>
+<h4 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h4><p>方法引用与一般的<code>onClick</code>方法的区别是表达式是在编译期被处理的，若方法不存在或参数有错则无法编译。</p>
+<p>代码示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 自定义的处理方法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHandler</span> </span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onButtonClicked</span><span class="hljs-params">(view: <span class="hljs-type">View</span>)</span></span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;myHandler&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.MyHandler&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_user1&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">&quot;@&#123;handler::onButtonClicked&#125;&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="监听器绑定"><a href="#监听器绑定" class="headerlink" title="监听器绑定"></a>监听器绑定</h3><p>监听器绑定当事件发生时运行对应的表达式。其类似于方法引用，但是不需要参数列表与监听器方法的参数列表保持一致，只需要返回值符合监听器对应的返回值类型即可。</p>
+<p>代码示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 自定义处理方法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Presenter</span> </span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onSaveClick</span><span class="hljs-params">(task: <span class="hljs-type">Task</span>)</span></span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;task&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.Task&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;presenter&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.Presenter&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span><br><span class="hljs-tag">	<span class="hljs-attr">...</span></span><br><span class="hljs-tag">	<span class="hljs-attr">android:onClick</span>=<span class="hljs-string">&quot;@&#123;() -&gt; presenter.onSaveClick(task)&#125;&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>监听器绑定对于参数列表有两种处理方式：1.声明所有的参数，2.忽略所有的参数。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// onClick方法的参数列表为: View -&gt; void，输入为View，返回值为void</span><br>android:onClick=<span class="hljs-string">&quot;@&#123;(view) -&gt; ... &#125;&quot;</span><br><br>android:onClick=<span class="hljs-string">&quot;@&#123;() -&gt; ... &#125;&quot;</span><br><br><span class="hljs-comment">// 可以不使用参数view</span><br>android:onClick=<span class="hljs-string">&quot;@&#123;(view) -&gt; ...&#125;&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="导入，变量和引入"><a href="#导入，变量和引入" class="headerlink" title="导入，变量和引入"></a>导入，变量和引入</h2><h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p>可以导入需要的类从而在数据绑定时使用该类。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;java.util.List&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>类型别名：若导入多个类时出现重名，可以使用别名进行标记。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.List&quot;</span> <span class="hljs-attr">alias</span>=<span class="hljs-string">&quot;MyList&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>导入的类可以用于变量或表达式中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;java.util.List&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;myList&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;List<span class="hljs-symbol">&amp;lt;</span>String&gt;&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：默认导入了<code>java.lang.*</code>。</p>
+<p>可以使用导入的类作为类型转换：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">android:text=&quot;@&#123;((User)user).name&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<p>导入的类可以调用其内的静态方法：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;MyUtils&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br>android:text=&quot;@&#123;MyUtils.getCurrentTime()&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>通过标签<code>&lt;variable&gt;</code>可以在<code>&lt;data&gt;</code>定义一个变量，数据绑定将在生成的类中生成对应的变量以及set和get方法。这些变量根据其类型被赋以默认值。</p>
+<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>一个布局文件中的变量可以传递给另一个布局文件。<br>通过<code>&lt;include&gt;</code>可以在布局文件中引入另一个布局文件，通过<code>bind</code>来将当前布局文件的变量绑定到另一个布局文件中。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.User&quot;</span>/&gt;</span><br><br>	<span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;@layout_parent&quot;</span></span><br><span class="hljs-tag">		<span class="hljs-attr">bind:user</span>=<span class="hljs-string">&quot;@&#123;user&#125;&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：不能在一个<code>&lt;merge&gt;</code>元素的直接子标签中进行数据绑定。</p>
+<hr>
+<h2 id="可观察数据对象"><a href="#可观察数据对象" class="headerlink" title="可观察数据对象"></a>可观察数据对象</h2><p>在数据绑定中，被绑定的数据的更改不会导致对应UI的更新。为了使得UI能够感知数据的更改，可以使用可观察的数据对象。</p>
+<p>常见的可观察类有三种：</p>
+<ul>
+<li>对象</li>
+<li>域</li>
+<li>集合</li>
+</ul>
+<h3 id="可观察的域"><a href="#可观察的域" class="headerlink" title="可观察的域"></a>可观察的域</h3><p>对于基本数据类型，已经预先定义了对应的可观察对象类型：</p>
+<ul>
+<li><code>ObservableBoolean</code></li>
+<li><code>ObservableByte</code></li>
+<li><code>ObservableChar</code></li>
+<li><code>ObservableShort</code></li>
+<li><code>ObservableInt</code></li>
+<li><code>ObservableLong</code></li>
+<li><code>ObservableFloat</code></li>
+<li><code>ObservableDouble</code></li>
+<li><code>ObservableParcelable</code></li>
+</ul>
+<p>基本使用方法：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 创建一个类，包含可观察域</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br>	<span class="hljs-keyword">val</span> firstName = ObservableField&lt;String&gt;()<br>	<span class="hljs-keyword">val</span> age = ObservableInt()<br>&#125;<br><br><span class="hljs-comment">// 将该类与布局文件进行绑定</span><br><span class="hljs-keyword">val</span> binding = DataBindingUtil.setContentView&lt;ActivityMainBinding&gt;(<span class="hljs-keyword">this</span>, R.layout.activity_main)<br><span class="hljs-keyword">val</span> user = User()<br>binding.user = user<br><br><span class="hljs-comment">// 修改数据，自动更新UI</span><br>user.firstName = <span class="hljs-string">&quot;zhang&quot;</span><br><span class="hljs-keyword">val</span> age = user.age<br></code></pre></td></tr></table></figure>
+
+<h3 id="可观察的集合"><a href="#可观察的集合" class="headerlink" title="可观察的集合"></a>可观察的集合</h3><p>可观察的集合需要动态保存数据，<code>ObservableArrayMap</code>使用key作为索引来获取数据：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">ObservableArrayMap&lt;String, Any&gt;().apply &#123;<br>	put(<span class="hljs-string">&quot;firstName&quot;</span>, <span class="hljs-string">&quot;zhang&quot;</span>)<br>	put(<span class="hljs-string">&quot;lastName&quot;</span>, <span class="hljs-string">&quot;li&quot;</span>)<br>	put(<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">20</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>获取数据：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;ObservableMap<span class="hljs-symbol">&amp;lt;</span>String, Object<span class="hljs-symbol">&amp;gt;</span>&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br>android:text=&quot;@&#123;user.lastName&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<p><code>ObservableArrayList</code>提供可观察的List：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">ObservableArrayList&lt;Any&gt;().apply &#123;<br>	add(<span class="hljs-string">&quot;one&quot;</span>)<br>	add(<span class="hljs-string">&quot;two&quot;</span>)<br>	add(<span class="hljs-number">1</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>获取数据：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;ObservableList<span class="hljs-symbol">&amp;lt;</span>Object<span class="hljs-symbol">&amp;gt;</span>&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br>android:text=&quot;@&#123;user[0]&#125;&quot;<br></code></pre></td></tr></table></figure>
+
+<h3 id="自定义可观察对象"><a href="#自定义可观察对象" class="headerlink" title="自定义可观察对象"></a>自定义可观察对象</h3><p>通过实现<code>Observable</code>接口，一个类可以注册监听器并在属性更改时发出通知。<code>Observable</code>提供添加和移除监听器的机制，由开发者自行决定何时发送通知。</p>
+<p>为了简化开发，自定义的可观察对象可以继承自<code>BaseObservable</code>类，只需要自行决定在属性更改时发送通知即可。<br>一个简单的实现是对于<code>get()</code>方法设置注解<code>@Bindable</code>而在<code>set()</code>方法中调用<code>notifyPropertyChanged()</code>发送通知。</p>
+<p>注意：</p>
+<ul>
+<li>数据绑定会生成一个名为<code>BR</code>的类，其中包含着数据绑定中所使用的资源ID。</li>
+<li><code>@Bindable</code>注解会在编译期在<code>BR</code>类中为可观察对象生成一个入口，可以用来识别域值是否更改。</li>
+</ul>
+<p>代码示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span>: <span class="hljs-type">BaseObservable</span></span>() &#123;<br><br>	<span class="hljs-meta">@get:Bindable</span><br>	<span class="hljs-keyword">var</span> firstName: String = <span class="hljs-string">&quot;&quot;</span><br>		<span class="hljs-keyword">set</span>(value) &#123;<br>			field = value<br>			notifyPropertyChanged(BR.firstName)<br>		&#125;<br><br>	<span class="hljs-meta">@get:Bindable</span><br>	<span class="hljs-keyword">var</span> lastName: String= <span class="hljs-string">&quot;&quot;</span><br>		<span class="hljs-keyword">set</span>(value) &#123;<br>			field = value<br>			<span class="hljs-comment">// without notification, so modify this field will not trigger update UI</span><br>		&#125;	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="生命周期感知对象"><a href="#生命周期感知对象" class="headerlink" title="生命周期感知对象"></a>生命周期感知对象</h3><p>使得布局更新能够感知UI的生命周期，只有在UI可见的情况下才进行更新操作。</p>
+<p>示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> binding: UserBinding = DataBindingUtil.setContentView(<span class="hljs-keyword">this</span>, R.layout.user)<br><br><span class="hljs-comment">// specify the current activity as the lifecycle owner</span><br>binding.lifecycleOwner = <span class="hljs-keyword">this</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/topic/libraries/data-binding">Data Binding Library</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/AsyncTaskDeprecated/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android中的AsyncTask被废弃，原因和对策</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/LifeCycleOfActivity/">
+                        <span class="hidden-mobile">Activity的生命周期</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

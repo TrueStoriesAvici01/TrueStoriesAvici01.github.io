@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="请求应用权限[toc]  简介 每个Android应用运行在一个权限受限的沙盒中，若一个应用需要额外的权限，则需要声明所需的权限。 当应用运行在API 23及以上时，对于一些关键权限需要在运行时请求对应的权限。对于API 22及以下，会自动授予对应的权限。   请求权限的流程 在应用的AndroidManifest.xml文件中声明所需的权限。 等待用户使用需要特定权限的功能，此时请求所需的运行时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="请求应用权限">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/RequestAppPermissions/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="请求应用权限[toc]  简介 每个Android应用运行在一个权限受限的沙盒中，若一个应用需要额外的权限，则需要声明所需的权限。 当应用运行在API 23及以上时，对于一些关键权限需要在运行时请求对应的权限。对于API 22及以下，会自动授予对应的权限。   请求权限的流程 在应用的AndroidManifest.xml文件中声明所需的权限。 等待用户使用需要特定权限的功能，此时请求所需的运行时">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/request_permission_workflow.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/RegisterResultCallback.png">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:18:57.499Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/request_permission_workflow.png">
+  
+  
+  <title>请求应用权限 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="请求应用权限">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      52 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">请求应用权限</h1>
+            
+            <div class="markdown-body">
+              <h1 id="请求应用权限"><a href="#请求应用权限" class="headerlink" title="请求应用权限"></a>请求应用权限</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>每个Android应用运行在一个权限受限的沙盒中，若一个应用需要额外的权限，则需要声明所需的权限。</li>
+<li>当应用运行在API 23及以上时，对于一些关键权限需要在运行时请求对应的权限。对于API 22及以下，会自动授予对应的权限。</li>
+</ul>
+<hr>
+<h2 id="请求权限的流程"><a href="#请求权限的流程" class="headerlink" title="请求权限的流程"></a>请求权限的流程</h2><ol>
+<li>在应用的<code>AndroidManifest.xml</code>文件中声明所需的权限。</li>
+<li>等待用户使用需要特定权限的功能，此时请求所需的运行时权限。</li>
+<li>对于需要特定权限的功能，每次使用前都需要检查是否被授权。</li>
+<li>请求运行时权限。</li>
+<li>检查用户是否授予权限。</li>
+<li>若用户授予权限，则可以请求访问数据；否则可以关闭部分功能。</li>
+</ol>
+<p>整个请求权限的流程如图：<br><img src="../../../imgs/request_permission_workflow.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<p><strong>各步骤细节如下</strong>(以访问位置权限为例):</p>
+<h3 id="确定应用是否已经授权特定权限"><a href="#确定应用是否已经授权特定权限" class="headerlink" title="确定应用是否已经授权特定权限"></a>确定应用是否已经授权特定权限</h3><p>代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">var</span> isGranted = ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION)<br><br><span class="hljs-comment">// 如果 isGranted == PackageManager.PERMISSION_GRANTED，则已经被授权</span><br><span class="hljs-comment">// 如果 isGranted == PackageManager.PERMISSION_DENIED，则没有被授权</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="解释需要特定权限的原因"><a href="#解释需要特定权限的原因" class="headerlink" title="解释需要特定权限的原因"></a>解释需要特定权限的原因</h3><p>如果权限检查结果为<code>PackageManager.PERMISSION_DENIED</code>，则意味着申请权限被拒，应该首次被拒应该给出需要权限的原因并再次申请权限。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// shouldShowRequestPermissionRationale()的结果为true表示首次拒绝请求权限，可以再次请求权限</span><br><span class="hljs-keyword">if</span> (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) &#123;<br>	<span class="hljs-comment">// show why application needs special permission and requests permission again</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="请求权限"><a href="#请求权限" class="headerlink" title="请求权限"></a>请求权限</h3><p>在请求权限时，有两种方式管理请求码(request code):</p>
+<ul>
+<li>在请求权限回调逻辑中自行处理。</li>
+<li>使用系统提供的<code>RequestPermission</code>由系统管理权限请求码。</li>
+</ul>
+<h4 id="由系统管理请求码"><a href="#由系统管理请求码" class="headerlink" title="由系统管理请求码"></a>由系统管理请求码</h4><ol>
+<li>自定义<code>ActvitiyResultCallback</code>的实现，用于对请求权限后对结果进行处理。</li>
+<li>为特定结果进行注册，使用方法<code>registerResultCallback()</code>获得<code>ActivityResultLauncher</code>对象。该方法需要传入两个参数：<code>ActivityResultContract</code>对象和<code>ActivityResultCallback</code>对象，其中<code>ActivityResultCallback</code>为上面自定义的结果处理回调函数，而<code>ActivityResultContract</code>为一个Activity转换器，可以将一个类型转换为另外一个类型。一般使用工具类中已经定义好的转换器<code>ActivityResultContracts</code>。</li>
+<li>使用<code>ActivityResultLauncher</code>对象的<code>launch()</code>方法，参数为需要申请的权限，来发起权限申请。</li>
+<li>获得权限申请结果后，系统或异步调用传入的结果回调函数<code>ActivityResultCallback</code>。</li>
+</ol>
+<p>流程图示：<br><img src="../../../imgs/RegisterResultCallback.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<h3 id="自行管理权限请求码"><a href="#自行管理权限请求码" class="headerlink" title="自行管理权限请求码"></a>自行管理权限请求码</h3><p>通过<code>requestPermissions()</code>方法可以自行管理权限请求码，具体实现如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 自定义权限请求码</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> SELF_DEFINED_REQUEST_CODE = <span class="hljs-number">100</span><br><span class="hljs-comment">// 请求权限</span><br>ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), SELF_DEFINED_REQUEST_CODE))<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>当系统获得请求结果后，会调用<code>activity</code>中的<code>onRequestPermissionResult()</code>来处理获得的结果。在该方法中可以自定义获得权限结果后的处理逻辑。示例代码如下：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onRequestPermissionsResult</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">	requestCode: <span class="hljs-type">Int</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">	permissions: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">out</span> <span class="hljs-type">String</span>&gt;,</span></span><br><span class="hljs-params"><span class="hljs-function">	grantResults: <span class="hljs-type">IntArray</span></span></span><br><span class="hljs-params"><span class="hljs-function">)</span></span> &#123;<br>	<span class="hljs-keyword">when</span> (requestCode) &#123;<br>	    SELF_DEFINED_REQUEST_CODE -&gt; &#123;<br>		<span class="hljs-keyword">if</span> (grantResults.isNotEmpty() &amp;&amp;<br>			grantedResult[<span class="hljs-number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;<br>		<span class="hljs-comment">// permission is granted</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-comment">// permission is denied </span><br>		&#125;<br>	    &#125;<br>	    <span class="hljs-keyword">else</span> -&gt; &#123;<br>		<span class="hljs-comment">// request other permissions</span><br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="应对申请权限被拒"><a href="#应对申请权限被拒" class="headerlink" title="应对申请权限被拒"></a>应对申请权限被拒</h2><p>最佳实践：</p>
+<ul>
+<li>告知缺失权限将导致哪些功能无法继续使用。</li>
+<li>避免阻止用户继续使用应用中的其他功能。</li>
+</ul>
+<blockquote>
+<p>在API 30及以后，当用户多次拒绝特定权限的申请时，后续的权限申请将不在显示。</p>
+</blockquote>
+<hr>
+<h2 id="一次权限"><a href="#一次权限" class="headerlink" title="一次权限"></a>一次权限</h2><p>在API 30及以后，当应用申请<strong>位置</strong>，<strong>麦克风</strong>，<strong>相机</strong>等权限时，弹出的权限对话框中包含“仅限本次”选项。当用户选择该选项时，则应用会被授权临时的一次权限。</p>
+<p>一次权限在以下情况下有效：</p>
+<ul>
+<li>当应用的Activity可见。</li>
+<li>当应用进入后台时，应用将可以在短期内具有权限。</li>
+<li>当应用启动一个前台服务，然后用户将应用放置后台，则应用可以访问前台服务知道其结束。</li>
+<li>如果用户取消一次权限（通过系统设置），应用将无法访问权限，直到下次获取权限。</li>
+</ul>
+<hr>
+<h2 id="不常用应用的权限撤销"><a href="#不常用应用的权限撤销" class="headerlink" title="不常用应用的权限撤销"></a>不常用应用的权限撤销</h2><ul>
+<li>在API 30及以后，当应用长时间没被使用，系统将撤销该应用被赋予的一些敏感权限。</li>
+<li>系统只会撤销运行时权限。</li>
+<li>通过方法<code>isAutoRevokeWhitelisted()</code>方法可以检查特定权限是否会被自动撤销。若返回值为<code>true</code>，则该权限不会被撤销。</li>
+</ul>
+<hr>
+<h2 id="请求权限示例"><a href="#请求权限示例" class="headerlink" title="请求权限示例"></a>请求权限示例</h2><h3 id="传统的申请权限的方法"><a href="#传统的申请权限的方法" class="headerlink" title="传统的申请权限的方法"></a>传统的申请权限的方法</h3><p>代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> : <span class="hljs-type">AppCompatActivity</span></span>(), ActivityCompat.OnRequestPermissionsResultCallback &#123;<br><br>    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> &#123;<br>        <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> REQUEST_LOCATION_ACCESS_CODE = <span class="hljs-number">100</span><br>        <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> REQUEST_SETTINGS_CODE = <span class="hljs-number">101</span><br>    &#125;<br><br>    <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> btnLocationAccess : Button<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)<br>        setContentView(R.layout.activity_main)<br>        btnLocationAccess = findViewById(R.id.btn_location_access)<br>        btnLocationAccess.setOnClickListener &#123;requestForegroundLocationAccessPermission(baseContext)&#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">requestForegroundLocationAccessPermission</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>)</span></span>: <span class="hljs-built_in">Boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (!checkGrantedLocationPermission(context)) &#123;<br>            ActivityCompat.requestPermissions(<span class="hljs-keyword">this</span>, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_ACCESS_CODE)<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            successGetLocationAccessPermission(baseContext)<br>        &#125;<br>        <span class="hljs-keyword">return</span> checkGrantedLocationPermission(context)<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">checkGrantedLocationPermission</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>)</span></span>: <span class="hljs-built_in">Boolean</span> =<br>        ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">successGetLocationAccessPermission</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>)</span></span> &#123;Toast.makeText(context, <span class="hljs-string">&quot;success get location access permission&quot;</span>, Toast.LENGTH_SHORT).show()&#125;<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onRequestPermissionsResult</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">        requestCode: <span class="hljs-type">Int</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">        permissions: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">out</span> <span class="hljs-type">String</span>&gt;,</span></span><br><span class="hljs-params"><span class="hljs-function">        grantResults: <span class="hljs-type">IntArray</span></span></span><br><span class="hljs-params"><span class="hljs-function">    )</span></span> &#123;<br>        <span class="hljs-keyword">when</span> (requestCode) &#123;<br>            REQUEST_LOCATION_ACCESS_CODE -&gt; &#123;<br>                <span class="hljs-keyword">if</span> (grantResults.size == <span class="hljs-number">1</span> &amp;&amp; grantResults[<span class="hljs-number">0</span>] == PackageManager.PERMISSION_GRANTED) successGetLocationAccessPermission(<span class="hljs-keyword">this</span>.baseContext)<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">if</span> (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) &#123;<br>                        showPermissionRationale(btnLocationAccess, <span class="hljs-string">&quot;需要位置权限&quot;</span>)<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        Snackbar.make(btnLocationAccess, <span class="hljs-string">&quot;需要打开位置权限，可以通过设置 --&gt; 应用设置权限&quot;</span>, Snackbar.LENGTH_INDEFINITE)<br>                            .setAction(<span class="hljs-string">&quot;确定&quot;</span>) &#123;<br>                                <span class="hljs-keyword">val</span> intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)<br>                                intent.<span class="hljs-keyword">data</span> = Uri.parse(<span class="hljs-string">&quot;package:<span class="hljs-variable">$packageName</span>&quot;</span>)<br>                                startActivityForResult(intent, REQUEST_SETTINGS_CODE)<br>                            &#125;<br>                            .show()<br>                    &#125;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> -&gt; <span class="hljs-keyword">super</span>.onRequestPermissionsResult(requestCode, permissions, grantResults)<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">showPermissionRationale</span><span class="hljs-params">(view: <span class="hljs-type">View</span>, s: <span class="hljs-type">String</span>)</span></span> &#123;<br>        Snackbar.make(view, s, Snackbar.LENGTH_INDEFINITE)<br>            .setAction(<span class="hljs-string">&quot;确定&quot;</span>) &#123;requestForegroundLocationAccessPermission(baseContext)&#125;<br>            .setDuration(<span class="hljs-number">3000</span>)<br>            .show()<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用registerForActivityResult-API申请单个权限"><a href="#使用registerForActivityResult-API申请单个权限" class="headerlink" title="使用registerForActivityResult API申请单个权限"></a>使用<code>registerForActivityResult</code> API申请单个权限</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 定义ActivityResultLauncher</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> activityResultLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) &#123;<br>    isGranted -&gt;<br>	<span class="hljs-keyword">when</span> &#123;<br>	    isGranted -&gt; &#123;<br>		<span class="hljs-comment">// got permission</span><br>	&#125;<br>	    <span class="hljs-keyword">else</span> -&gt; &#123;<br>		<span class="hljs-comment">// permission denied</span><br>	    &#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 使用launch方法申请权限</span><br>activityResultLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)<br></code></pre></td></tr></table></figure>
+
+<h3 id="申请多个权限"><a href="#申请多个权限" class="headerlink" title="申请多个权限"></a>申请多个权限</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 定义ActivityResultLauncher</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> multiPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) &#123;<br>	permissions -&gt;<br>	permissions.entries.forEach &#123;<br>		<span class="hljs-keyword">val</span> permissionName = it.key<br>		<span class="hljs-keyword">val</span> isGranted = it.value<br>		<span class="hljs-keyword">when</span> &#123;<br>			isGranted -&gt; &#123;<br>				<span class="hljs-comment">// you get permission</span><br>			&#125; <br>			<span class="hljs-keyword">else</span> -&gt; &#123;<br>				<span class="hljs-comment">// you do not get permission</span><br>			&#125; <br>		&#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 使用launch方法申请多个多个权限</span><br><span class="hljs-keyword">var</span> permissionArray = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_EXTERNAL_STORAGE)<br>multiPermissionLauncher.launch(permissionArray)<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/permissions/requesting">Request app permissions</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903717670486030">在Android上优雅的申请权限</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/codex/android-runtime-permissions-using-registerforactivityresult-68c4eb3c0b61">Android Runtime Permissions using registerForActivityResult</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/MVVMinAndroid/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MVVM架构在Android应用中的实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/SEAndroid/">
+                        <span class="hidden-mobile">SEAndroid（Android中的安全增强型Linux）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

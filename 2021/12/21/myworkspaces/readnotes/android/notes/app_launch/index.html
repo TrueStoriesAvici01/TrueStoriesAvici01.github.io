@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Android中应用启动过程[toc]  系统启动过程 加载BootLoader –&gt; 初始化内核 –&gt; 启动init进程 –&gt; 由init进程fork出Zygote进程 –&gt; Zygote进程fork出SystemServer进程   解释：  系统的所有进程是由Zygote进程fork出来的。 SystemServer进程是系统进程，很多系统服务是该进程创建后启动的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中应用启动过程">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/app_launch/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="Android中应用启动过程[toc]  系统启动过程 加载BootLoader –&gt; 初始化内核 –&gt; 启动init进程 –&gt; 由init进程fork出Zygote进程 –&gt; Zygote进程fork出SystemServer进程   解释：  系统的所有进程是由Zygote进程fork出来的。 SystemServer进程是系统进程，很多系统服务是该进程创建后启动的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidsystemstart.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidapplaunch.png">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:17:53.935Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidsystemstart.png">
+  
+  
+  <title>Android中应用启动过程 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android中应用启动过程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android中应用启动过程</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Android中应用启动过程"><a href="#Android中应用启动过程" class="headerlink" title="Android中应用启动过程"></a>Android中应用启动过程</h1><p>[toc]</p>
+<hr>
+<h2 id="系统启动过程"><a href="#系统启动过程" class="headerlink" title="系统启动过程"></a>系统启动过程</h2><blockquote>
+<p>加载<strong>BootLoader</strong> –&gt; 初始化内核 –&gt; 启动<strong>init</strong>进程 –&gt; 由<strong>init</strong>进程<code>fork</code>出<strong>Zygote</strong>进程 –&gt; <strong>Zygote</strong>进程<code>fork</code>出<strong>SystemServer</strong>进程</p>
+</blockquote>
+<p><img src="../../../imgs/androidsystemstart.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<p>解释：</p>
+<ul>
+<li>系统的所有进程是由<strong>Zygote</strong>进程<code>fork</code>出来的。</li>
+<li><code>SystemServer</code>进程是系统进程，很多系统服务是该进程创建后启动的。</li>
+<li><code>ActivityManagerServices</code>：是一个服务端对象，负责所有<code>Activity</code>的生命周期，AMS通过<code>Binder</code>与<code>Actvity</code>通信，通过Socket与<strong>Zygote</strong>通信。</li>
+<li><code>ActivityThread</code>：主线程/UI线程，其<code>main()</code>方法是APP的真正入门。</li>
+<li><code>ApplicatioinThread</code>：<code>ActivityThread</code>的内部类，用于<code>ActivityThread</code>与AMS的所在进程间通信。</li>
+</ul>
+<hr>
+<h2 id="应用启动过程"><a href="#应用启动过程" class="headerlink" title="应用启动过程"></a>应用启动过程</h2><blockquote>
+<p>接下来解释从用户点击应用图标到应用展示在屏幕的全过程。</p>
+</blockquote>
+<p>注意：</p>
+<ul>
+<li>多个入口：每个Android应用是由多个不同的组件组合而成的，这些组件可以被其他应用调用，所有应用可以从任意一种组件开始应用。</li>
+<li>独立进程：每个应用运行在各自独立的进程中，他们有自己的虚拟机实例以及唯一的UID。</li>
+</ul>
+<h3 id="Android进程何时启动"><a href="#Android进程何时启动" class="headerlink" title="Android进程何时启动"></a>Android进程何时启动</h3><ul>
+<li>用户或其他的系统组件想要启动目标应用中的某个组件时，而此时该应用没有对应的进程正在运行，则Android系统将为该应用创建一个进程。</li>
+<li>默认情况下，Android系统为每个运行的应用创建一个进程。且该进程中默认只有一个线程。</li>
+</ul>
+<h3 id="Zygote-创建所有Android进程的进程"><a href="#Zygote-创建所有Android进程的进程" class="headerlink" title="Zygote-创建所有Android进程的进程"></a><code>Zygote</code>-创建所有Android进程的进程</h3><ul>
+<li>Android是基于Linux内核，Linux内核的启动过程如下：<ul>
+<li>先通过BootLoader加载Linux内核并启动init进程。</li>
+<li>init进程创建一些守护线程：adb守护线程，usb守护线程。</li>
+</ul>
+</li>
+<li>init进程启动一个重要的进程：<strong>Zygote</strong>，该进程初始化一些重要的资源：预加载类，众多应用。</li>
+<li><strong>Zygote</strong>进程创建一个<em>system server</em>进程，用于开始所有核心的平台服务。</li>
+<li>当收到启动新应用的请求时，<strong>Zygote</strong>进程将会通过<code>fork</code>创建新的进程。</li>
+</ul>
+<h3 id="当用户点击应用图标时"><a href="#当用户点击应用图标时" class="headerlink" title="当用户点击应用图标时"></a>当用户点击应用图标时</h3><p>流程简介：</p>
+<ul>
+<li>创建进程。</li>
+<li>绑定应用。</li>
+<li>启动<code>Activity</code>/<code>Service</code>。</li>
+</ul>
+<h4 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h4><p>基本流程：</p>
+<ul>
+<li>用户的点击事件由<code>LauncherActivity</code>捕获到并通过<code>startActivity</code>方法启动。</li>
+<li>由<code>Instrumentation</code>类的<code>execStartActivity</code>方法。</li>
+<li>通过<code>ActivityManagerProxy</code>的<code>startActivity</code>方法。</li>
+<li>通过<code>ActivityManagerNativeProxy</code>的<code>transact()</code>的方法。</li>
+<li>通过<code>ActivityManagerNative</code>的<code>onTransact()</code>的方法。</li>
+<li>调用<code>ActivityManagerService</code>调用<code>startActivity()</code>方法。</li>
+<li>调用<code>ActivityManagerService</code>的<code>startActivityLocked</code>,<code>resumeTopActivityLocked</code>,<code>startSpecificActivityLocked</code>。</li>
+<li>若对应的进程存在，则调用<code>realStartActivityLocked</code>；否则创建新的进程。</li>
+<li>通过<code>Process</code>的<code>start</code>方法创建新的进程，获取pid。</li>
+<li>由<strong>Zygote</strong>类返回到<code>ActivityThread</code>类的<code>main</code>方法。</li>
+</ul>
+<ol>
+<li><code>ActivityManagerService</code>通过调用<code>startProcessLocked()</code>由<strong>Zygote</strong>进程创建新的进程。</li>
+<li><strong>Zygote</strong>通过fork方法并调用<code>ZygoteInit.main()</code>方法实例化<code>ActivityThread</code>对象，返回新进程的pid。</li>
+<li>每个进程中有一个<code>Looper</code>实例，<code>Looper</code>对象通过<code>loop()</code>方法循环将<code>MessageQueue</code>中的<code>Message</code>取出并分发给对应的<code>Handler</code>进行处理。而<code>ActivityThread</code>初始化时通过<code>Looper.prepareLoop()</code>和<code>Looper.loop()</code>方法开始循环。</li>
+</ol>
+<h4 id="绑定应用"><a href="#绑定应用" class="headerlink" title="绑定应用"></a>绑定应用</h4><p>基本流程：</p>
+<ol>
+<li>通过调用Thead对象中的<code>bindApplication()</code>方法将新创建的进程绑定到对应的进程。</li>
+<li>该方法通过发送<strong>BIND_APPLICATION</strong>的<code>handleMessage()</code>方法执行特定的action：<code>handleBindApplication()</code>。</li>
+<li>该方法调用<code>makeApplication()</code>方法将特定的类加载到内存中。</li>
+</ol>
+<h4 id="启动Activity"><a href="#启动Activity" class="headerlink" title="启动Activity"></a>启动Activity</h4><ul>
+<li>经过之前的流程，系统中有对应应用的进程并该应用类已加载到内存中。</li>
+<li>实际的启动流程是由<code>realStartActivity</code>开始的，其调用应用进程中的<code>sheduleLaunchActivity()</code>方法。</li>
+<li>该方法发送<strong>LAUNCH_ACTIVITY</strong>的消息到<code>MessageQueue</code>中。</li>
+<li>对应的<code>Handler</code>通过<code>handleLaunchActivity</code>方法启动Activity。</li>
+</ul>
+<p><img src="../../../imgs/androidapplaunch.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hzwailll/article/details/85339714">ActivityThread的理解和APP的启动过程</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/android-news/android-application-launch-explained-from-zygote-to-your-activity-oncreate-8a8f036864b">Android Application Launch explained: from Zygote to your Activity.onCreate()</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/androidipc/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android中的IPC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/context_in_android_application/">
+                        <span class="hidden-mobile">Android应用中的Context</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

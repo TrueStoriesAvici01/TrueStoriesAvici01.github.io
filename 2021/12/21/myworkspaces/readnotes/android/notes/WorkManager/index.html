@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="WorkManager学习小结[toc]  简介WorkManagerAPI提供一种简单的方式在应用退出或设备重启仍然可靠地执行异步任务。 特点：  只在指定的情况下才启动任务。 鲁棒性：WorkManager允许你执行一次或重复性任务。任务可以进行标记从而同时监视或取消一组任务。周期性任务存储在内部管理的SQLite数据库中，由WorkManager管理以确保这些任务在设备重启仍然有效。 灵活的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WorkManager学习小结">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/WorkManager/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="WorkManager学习小结[toc]  简介WorkManagerAPI提供一种简单的方式在应用退出或设备重启仍然可靠地执行异步任务。 特点：  只在指定的情况下才启动任务。 鲁棒性：WorkManager允许你执行一次或重复性任务。任务可以进行标记从而同时监视或取消一组任务。周期性任务存储在内部管理的SQLite数据库中，由WorkManager管理以确保这些任务在设备重启仍然有效。 灵活的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/flex_period.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/one_time_work_state.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/peridoc_task_state.png">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:19:14.215Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/flex_period.png">
+  
+  
+  <title>WorkManager学习小结 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WorkManager学习小结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      68 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WorkManager学习小结</h1>
+            
+            <div class="markdown-body">
+              <h1 id="WorkManager学习小结"><a href="#WorkManager学习小结" class="headerlink" title="WorkManager学习小结"></a>WorkManager学习小结</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>WorkManager</code>API提供一种简单的方式在应用退出或设备重启仍然可靠地执行异步任务。</p>
+<p>特点：</p>
+<ul>
+<li>只在指定的情况下才启动任务。</li>
+<li>鲁棒性：<code>WorkManager</code>允许你执行一次或重复性任务。任务可以进行标记从而同时监视或取消一组任务。周期性任务存储在内部管理的SQLite数据库中，由<code>WorkManager</code>管理以确保这些任务在设备重启仍然有效。</li>
+<li>灵活的重试机制：<code>WorkManager</code>提供灵活的重试机制。</li>
+<li>任务链：<code>WorkManager</code>提供接口可以将多个独立的任务链接起来，可以控制任务是顺序执行或并行执行，可以定义每个任务的输入输出数据类型，从而可以将一个任务的输出结果自动的传入到下一个任务的输入。</li>
+<li>线程互操作性：集成<code>RxJava</code>和协程，可以灵活地插入到异步API中。</li>
+</ul>
+<hr>
+<h2 id="一个简单的WorkManager示例"><a href="#一个简单的WorkManager示例" class="headerlink" title="一个简单的WorkManager示例"></a>一个简单的<code>WorkManager</code>示例</h2><ol>
+<li>添加依赖：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml">dependencies &#123;<br>    def work_version = &#x27;2.6.0&#x27;<br>    implementation &#x27;androidx.core:core-ktx:1.6.0&#x27;<br>    implementation &#x27;androidx.appcompat:appcompat:1.3.1&#x27;<br>    implementation &#x27;com.google.android.material:material:1.4.0&#x27;<br>    implementation &#x27;androidx.constraintlayout:constraintlayout:2.1.0&#x27;<br>    implementation &quot;androidx.work:work-runtime-ktx:$work_version&quot;<br>    implementation &quot;androidx.work:work-multiprocess:$work_version&quot;<br>    testImplementation &#x27;junit:junit:4.+&#x27;<br>    androidTestImplementation &#x27;androidx.test.ext:junit:1.1.3&#x27;<br>    androidTestImplementation &#x27;androidx.test.espresso:espresso-core:3.4.0&#x27;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>定义一个自定义的任务，继承自<code>Worker</code>：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyWorker</span></span>(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) &#123;<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doWork</span><span class="hljs-params">()</span></span>: Result &#123;<br>        myTask(applicationContext)<br>        <span class="hljs-keyword">return</span> Result.success()<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">myTask</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>?)</span></span> &#123;<br>	<span class="hljs-comment">// do something here</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>创建一个工作请求（设置任务类型：一次任务/重复任务）<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 一次任务</span><br><span class="hljs-keyword">val</span> notificationRequest : WorkRequest = OneTimeWorkRequestBuilder&lt;MyNotificationWork&gt;()<br>            .build()<br></code></pre></td></tr></table></figure></li>
+<li>将任务提交给系统进行处理<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">WorkManager.getInstance(applicationContext)<br>            .enqueue(notificationRequest)<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="定制个性化的任务"><a href="#定制个性化的任务" class="headerlink" title="定制个性化的任务"></a>定制个性化的任务</h2><ul>
+<li>自定义的任务包装成<code>WorkRequest</code>类交由<code>WorkManager</code>进行处理。</li>
+<li><code>WorkRequest</code>中可以设定任务执行的限制条件、执行任务的信息如延迟或重复间隔、重试机制以及需要的输入数据。</li>
+<li><code>WorkRequest</code>是一个抽象类，提供两个实现类<code>OneTimeWorkRequest</code>用于一次性的非重复任务，而<code>PeriodicWorkRequest</code>用于周期性任务。</li>
+</ul>
+<h3 id="一次性任务"><a href="#一次性任务" class="headerlink" title="一次性任务"></a>一次性任务</h3><p>一个简单的没有额外配置的一次性任务可以通过如下方式实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> oneTimeWork = OneTimeWorkRequest.from(MyWork::<span class="hljs-keyword">class</span>.java)<br></code></pre></td></tr></table></figure>
+
+<p>若需要额外的配置信息，可以通过构造器构建：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> oneTimeWork: WorkRequest = OneTimeWorkRequestBuilder&lt;MyWork&gt;()<br>				<span class="hljs-comment">// additional configuration</span><br>				.build()<br></code></pre></td></tr></table></figure>
+
+<h3 id="周期性任务"><a href="#周期性任务" class="headerlink" title="周期性任务"></a>周期性任务</h3><p>代码示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> periodicWork = PeriodicWorkRequestBuilder&lt;MyWork&gt;(<span class="hljs-number">1</span>, TimeUnit.HOURS)<br>		<span class="hljs-comment">// additional configuration</span><br>		.build()<br></code></pre></td></tr></table></figure>
+
+<p>注意：最小的重复任务的时间间隔是15分钟。</p>
+<h4 id="弹性运行时间"><a href="#弹性运行时间" class="headerlink" title="弹性运行时间"></a>弹性运行时间</h4><p>可以在每个时间间隔中设置弹性周期间隔，对应的任务可以在指定的弹性周期中运行。弹性周期开始于(repeatInterval - flexInterval)，结束于时间间隔结束。<br><img src="../../../imgs/flex_period.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<p>代码示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> myWork = PeriodicWorkRequestBuilder&lt;MyWork&gt;(<span class="hljs-number">1</span>, TimeUnit.HOURS, <span class="hljs-number">15</span>, TimeUnit.MINUTES)<br>		.build()<br></code></pre></td></tr></table></figure>
+
+<h4 id="条件约束"><a href="#条件约束" class="headerlink" title="条件约束"></a>条件约束</h4><p>可以对一个任务添加约束条件，这样即使指定的时间点到达时，任务也不会执行，除非指定的任务都满足。这可能导致任务延迟执行，或者被直接跳过。</p>
+<hr>
+<h3 id="任务约束"><a href="#任务约束" class="headerlink" title="任务约束"></a>任务约束</h3><p>主要有以下几种约束条件：<br>|类型|约束条件|<br>|NetworkType|WiFi等网络相关的约束|<br>|BatteryNotLow|低电量不执行|<br>|RequiresCharging|只有充电才运行|<br>|DeviceIdle|设备处于空闲状态才执行，适用于批处理|<br>|StorageNotLow|存储不足不执行|</p>
+<p>可以通过<code>Constraints.Builder()</code>构建一个<code>Constraints</code>实例用于表示任务约束，并将其分配给<code>WorkRequest</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> constraints = Constraints.Builder()<br>		.setRequiredNetworkType(NetworkType.UNMETERED)<br>		.setRequiresCharging(<span class="hljs-literal">true</span>)<br>		.build()<br><br><span class="hljs-keyword">val</span> myWork: WorkRequest = OneTimeWorkRequestBuilder&lt;MyWork&gt;()<br>			.setConstraints(constraints)<br>			.build()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="延迟任务"><a href="#延迟任务" class="headerlink" title="延迟任务"></a>延迟任务</h3><p>若需要对任务设置一个执行延迟时间，可以指定任务初次执行时的时延。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> myWork = OneTimeWorkRequestBuilder&lt;MyWork&gt;()<br>	.setInitialDelay(<span class="hljs-number">10</span>, TimeUnit.MINUTES)<br>	.build()<br></code></pre></td></tr></table></figure>
+
+<p>注意：对于周期任务，只有初次执行任务会被延迟，后续任务将按指定时间执行。</p>
+<hr>
+<h3 id="重试和放弃策略"><a href="#重试和放弃策略" class="headerlink" title="重试和放弃策略"></a>重试和放弃策略</h3><p>可以通过在<code>doWork()</code>中返回<code>Result.retry()</code>使得任务重新执行。对应的任务将根据对应的策略进行重新执行:</p>
+<ul>
+<li><em>Backoff delay</em>：设定重新执行任务的最小时延。</li>
+<li><em>Backoff policy</em>：设定连续的重试任务之间时延的增长规律，目前有两种：<code>LINEAR</code>和<code>EXPONENTIAL</code>。</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> myWork = OneTimeWorkRequestBuilder&lt;MyWork&gt;()<br>	.setBackOffCriteria(<br>	BackOffPolicy.LINEAR,<br>	OneTimeWorkRequest.MIN_BACKOFF_MILLS,<br>	TimeUnit.MILLISECONDS)<br>	.build()<br></code></pre></td></tr></table></figure>
+
+<p>注意：<code>LINEAR</code>是按照10, 20, 30, …的规律增加重试任务时延，而<code>EXPONENTIAL</code>是按照20, 40, 80, …的规律增加时延。</p>
+<hr>
+<h3 id="标记任务"><a href="#标记任务" class="headerlink" title="标记任务"></a>标记任务</h3><p>通过对任务添加标记，可以对于相同标记的进行操作：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 给任务添加标签</span><br><span class="hljs-keyword">val</span> myWork = OneTimeWorkRequestBuilder&lt;MyWor&gt;()<br>	.addTag(<span class="hljs-string">&quot;work1&quot;</span>)<br>	.build()<br><br><span class="hljs-comment">// 获取指定任务的所有标记</span><br><span class="hljs-keyword">val</span> tags = myWork.tags<br><br><span class="hljs-comment">// 取消指定标签的任务</span><br>WorkManager.getInstance(applicationContext).cancelAllWorkByTag(<span class="hljs-string">&quot;work1&quot;</span>)<br><br><span class="hljs-comment">// 获取指定标记的任务信息</span><br><span class="hljs-keyword">val</span> workInfo = WorkManager.getInstance(applicationContext).getWorkInfoByTag(<span class="hljs-string">&quot;work1&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="分配输入数据"><a href="#分配输入数据" class="headerlink" title="分配输入数据"></a>分配输入数据</h3><p>对于一些任务执行需要输入数据，可以将数据以键值对的形式保存到<code>Data</code>对象中，在<code>WorkManager</code>中传入输入数据，而通过<code>Worker.getInputData()</code>方法获取输入数据。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 添加输入数据</span><br><span class="hljs-keyword">val</span> myWork = OneTimeRequestBuilder&lt;MyWork&gt;()<br>	.setInputData(workDataOf(<br>	<span class="hljs-string">&quot;key1&quot;</span> to <span class="hljs-string">&quot;value1&quot;</span>,<br>	<span class="hljs-string">&quot;key2&quot;</span> to <span class="hljs-string">&quot;value2&quot;</span>))<br>	.build()<br><br><span class="hljs-comment">// 获取数据</span><br><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doWork</span><span class="hljs-params">()</span></span>: Result &#123;<br>	<span class="hljs-keyword">val</span> res = inputData.getString(<span class="hljs-string">&quot;key1&quot;</span>) ?: <span class="hljs-keyword">return</span> Result.failure()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="任务状态"><a href="#任务状态" class="headerlink" title="任务状态"></a>任务状态</h2><h3 id="一次任务状态"><a href="#一次任务状态" class="headerlink" title="一次任务状态"></a>一次任务状态</h3><p>一次任务主要有五种状态：<br><img src="../../../imgs/one_time_work_state.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<ul>
+<li>任务刚开始进入任务队列，处于<code>ENQUEUED</code>状态。</li>
+<li>当约束条件满足并且到达指定时间时，任务被调度执行，处于<code>RUNNING</code>状态。</li>
+<li>根据任务执行的结果，可以为不同的状态：执行成功的<code>SUCCEEDED</code>，执行失败的<code>FAILED</code>。</li>
+<li>重试的任务重新进入<code>ENQUEUED</code>状态。</li>
+<li>处于<code>ENQUEUED</code>或<code>RUNNING</code>状态的任务可以被取消<code>cancel()</code>，处于<code>CANCELLED</code>状态。</li>
+</ul>
+<p>结束状态：<code>SUCCEEDED</code>,<code>FAILED</code>和<code>CANCELLED</code>。通过<code>WorkInfo.State.isFinished()</code>检查任务是否处于结束状态，返回值为true即为结束状态。</p>
+<hr>
+<h3 id="周期性任务-1"><a href="#周期性任务-1" class="headerlink" title="周期性任务"></a>周期性任务</h3><p>周期性任务只有一种终止状态：<code>CANCELLED</code>。整体的执行流程如下：<br><img src="../../../imgs/peridoc_task_state.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="任务管理"><a href="#任务管理" class="headerlink" title="任务管理"></a>任务管理</h2><p>一旦确定了<code>Worker</code>和<code>WorkRequest</code>，最后一步是将任务进入到任务队列中。<br>最简单的方法是调用<code>WorkManager</code>的<code>enqueue()</code>方法：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> myWork: WorkRequest = <span class="hljs-comment">//</span><br>WorkManager.getInstance(context).enqueue(myWork)<br></code></pre></td></tr></table></figure>
+
+<p>为了避免相同任务重复执行，可以将任务设为唯一任务。</p>
+<h3 id="唯一任务"><a href="#唯一任务" class="headerlink" title="唯一任务"></a>唯一任务</h3><p>唯一任务用于保证对于特定名称一次只有一个任务实例。<br>唯一的命名只能分配给一个任务实例，而相同的标签可以分配给多个任务实例。</p>
+<p>针对不同类型的任务，使用不同的方法创建唯一任务序列：</p>
+<ul>
+<li>一次任务：<code>WorkManager.enqueueUniqueWork()</code></li>
+<li>重复任务：<code>WorkManager.enqueueUniquePeriodicWork()</code></li>
+</ul>
+<p>需要三个参数进行配置：</p>
+<ul>
+<li>`uniqueWorkName: 唯一任务的命名，唯一标识不同的任务。</li>
+<li><code>existingWorkPolicy</code>: 对于出现重复任务时的处理策略。</li>
+<li><code>work</code>: 待执行的任务<code>WorkRequest</code>。</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> myWorkRequest = PeriodicWorkRequestBuilder&lt;MyWork&gt;(<span class="hljs-number">10</span>, TimeUnit.MINUTES).build()<br><br>WorkManager.getInstance(context).enqueueUniquePeriodicWork(<br>	<span class="hljs-string">&quot;work1&quot;</span>,<br>	ExistingPeriodicWorkPolicy.KEEP,<br>	myWorkRequest)<br></code></pre></td></tr></table></figure>
+
+<h4 id="冲突解决政策"><a href="#冲突解决政策" class="headerlink" title="冲突解决政策"></a>冲突解决政策</h4><p>对于一个唯一任务，若发生多个重复任务时，会使用<code>ExistingWorkPolicy</code>来决定如何处理：</p>
+<ul>
+<li><code>REPLACE</code>：使用新的任务取代已有的任务。</li>
+<li><code>KEEP</code>：保留已有的任务而放弃新的任务。</li>
+<li><code>APPEND</code>：将新的任务链接到已有任务之后，这将导致已有任务完成之后执行新的任务。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li><code>APPEND</code>取决于前一个任务的状态，若为<code>CANCELLED</code>或<code>FAILED</code>，则新任务将被取消或失败。若想分离两个任务之间的关联，可以使用<code>APPEND_OR_REPLCAE</code>。</li>
+<li>对于重复任务，支持两种政策：<code>REPLACE</code>和<code>KEEP</code>。</li>
+</ul>
+<h3 id="监测任务状态"><a href="#监测任务状态" class="headerlink" title="监测任务状态"></a>监测任务状态</h3><p>可以通过<code>name</code>，<code>id</code>或<code>tag</code>检查队列中的任务状态：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> workManager = WorkManager.getInstance(applicationContext)<br><br><span class="hljs-comment">// by id</span><br>workManager.getWorkInfoById(myWork.id)<br><br><span class="hljs-comment">// by name</span><br>workManager.getWorkInfosForUniqueWork(<span class="hljs-string">&quot;work1&quot;</span>)<br><br><span class="hljs-comment">// by tag</span><br>workManager.getWorkInfosByTag(<span class="hljs-string">&quot;tag1&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：返回的结果为<code>ListenableFuture&lt;List&lt;WorkInfo&gt;&gt;</code>对象，其中取出<code>List&lt;WorkInfo&gt;</code>，而每个<code>WorkInfo</code>中包含着该任务的<code>id</code>，<code>tag</code>等信息：</p>
+</blockquote>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> listenableFuture = workManager.getWorkInfosByTag(<span class="hljs-string">&quot;tag1&quot;</span>)<br><span class="hljs-keyword">val</span> workInfoList = listenableFuture.<span class="hljs-keyword">get</span>()<br><span class="hljs-keyword">for</span> (work <span class="hljs-keyword">in</span> workInfoList) &#123;<br>	<span class="hljs-keyword">val</span> id = work.id<br>	<span class="hljs-keyword">val</span> tag = work.tag<br>	<span class="hljs-keyword">val</span> outputData = work.outputData<br>	<span class="hljs-keyword">val</span> currentState = work.state <span class="hljs-comment">// 当前任务的状态</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>若想要对<code>WorkInfo</code>进行监听，可以利用<code>LiveData</code>对<code>WorkInfo</code>的改变进行监听：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">workManager.getWorkInfoByIdLiveData(myWork.id)<br>	.observe(<span class="hljs-keyword">this</span>) &#123; workInfo -&gt;<br>		<span class="hljs-keyword">if</span> (workInfo?.state == WorkInfo.State.SUCCEEDED) &#123;<br>			<span class="hljs-comment">// do work succeeded</span><br>		&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于更加复杂的任务查询需求，可以通过<code>WorkQuery.Builder</code>构建<code>WorkQuery</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> queries = WorkQuery.Builder<br>		.fromTags(listOf(<span class="hljs-string">&quot;tag1&quot;</span>)<br>		.addIds(listOf(myWork.id))<br>		.build()<br><span class="hljs-keyword">val</span> workInfos = workManager.getWorkInfos(queries)<br></code></pre></td></tr></table></figure>
+
+<h3 id="取消或暂停任务"><a href="#取消或暂停任务" class="headerlink" title="取消或暂停任务"></a>取消或暂停任务</h3><p>可以通过<code>name</code>，<code>id</code>或<code>tag</code>取消一个任务：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// by id</span><br>workManager.cancelWorkById(myWork.id)<br><br><span class="hljs-comment">// by name</span><br>workManager.cancelUniqueWork(<span class="hljs-string">&quot;work_name&quot;</span>)<br><br><span class="hljs-comment">// by tag</span><br>workManager.cancelAllWorkByTag(<span class="hljs-string">&quot;tag1&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>对于当前正在运行的任务(RUNNING)，其会受到一个<code>ListenableWorker.onStopped()</code>方法调用。可以通过重载该方法来进行清理工作。</p>
+<p><strong>停止一个正在执行的任务的原因</strong>：</p>
+<ul>
+<li>通过调用<code>WorkManager.cancelWorkById()</code>方法显式的中止任务。</li>
+<li>在唯一任务中，向一个<code>ExistingWorkPolicy</code>设置为<code>REPLACE</code>的任务。则旧的任务则会被取消。</li>
+<li>任务的约束条件无法满足。</li>
+</ul>
+<p>对于被取消的任务，应该考虑释放持有的资源。主要通过重载两个方法来实现对任务的取消：</p>
+<ul>
+<li><code>onStopped()</code>：<code>WorkManager</code>会调用<code>ListenableWorker.onStopped()</code>方法来取消任务，通过重载该方法来释放持有的资源。</li>
+<li><code>isStopped()</code>：该方法用来检查一个任务是否已经取消。</li>
+</ul>
+<hr>
+<h2 id="观察运行中的任务"><a href="#观察运行中的任务" class="headerlink" title="观察运行中的任务"></a>观察运行中的任务</h2><p><code>ListenableWorker</code>支持<code>setProgressAsync()</code>方法，其提供保留中间进度的能力，进度由<code>Data</code>进行表示。</p>
+<p>代码示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 创建一个可观察的任务</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProgressWorker</span></span>(context: Context, parameters: WorkParameters) : CoroutineWorker(context, parameters) &#123;<br>	<span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> &#123;<br>		<span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> Progress = <span class="hljs-string">&quot;Progress&quot;</span><br>		<span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> delay = <span class="hljs-number">1000L</span><br>	&#125;<br><br>	<span class="hljs-keyword">override</span> <span class="hljs-keyword">suspend</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doWork</span><span class="hljs-params">()</span></span>: Result &#123;<br>		<span class="hljs-keyword">val</span> firstUpdate = workDataOf(Progress to <span class="hljs-number">0</span>)<br>		<span class="hljs-keyword">val</span> lastUpdate = workDataOf(Progress to <span class="hljs-number">100</span>)<br>		setProgress(firstUpdate)<br>		delay(delay)<br>		setProgress(lastUpdate)<br>		delay(delay)<br>		<span class="hljs-keyword">return</span> Result.success()<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 观察中间进展</span><br><span class="hljs-keyword">val</span> myWork = OneTimeWorkRequestBuilder&lt;ProgressWorker&gt;().build()<br><span class="hljs-keyword">val</span> workManager = WorkManager.getInstance(applicationContext)<br>workManager.enqueue(myWork)<br><br>workManager.getWorkInfoByIdLiveData(myWork.id)<br>	.observe(<span class="hljs-keyword">this</span>) &#123; workInfo: WorkInfo? -&gt;<br>		<span class="hljs-keyword">if</span> (workInfo != <span class="hljs-literal">null</span>) &#123;<br>			Log.d(TAG, <span class="hljs-string">&quot;current state is : <span class="hljs-subst">$&#123;workInfo.state&#125;</span>, current progress is <span class="hljs-subst">$&#123;workInfo.progress&#125;</span>&quot;</span>)<br>		&#125;<br>	&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><ul>
+<li>若任务正在执行(RUNNING)，此时取消任务<code>cancel()</code>，任务如何处理？</li>
+<li>唯一任务和非唯一任务之间是否产生冲突，同一个任务是否可以同时进入唯一任务队列和非唯一任务队列？</li>
+<li>若存在五个任务：task1 … task5，其中task4依赖于task1和task2，task5依赖于task2和task3。如何设计链式任务，避免task2重复执行？</li>
+</ul>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/topic/libraries/architecture/workmanager">Schedule tasks with WorkManager</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/ScheduleRepeatingAlarms/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">定时重复任务</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/androidipc/">
+                        <span class="hidden-mobile">Android中的IPC</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

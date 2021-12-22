@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="HTML基础知识[toc]  简介 HTML是超文本标记语言。 HTML使用标记标签描述网页。   常见标签html：通过&lt;html&gt;标记整个HTML文档。 123&lt;html&gt;    Here is the whole html document&lt;&#x2F;html&gt;  主体：通过&lt;body&gt;标记HTML文档主体。 123&lt;body&gt;    He">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML基础知识">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/22/myworkspaces/readnotes/html/html/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="HTML基础知识[toc]  简介 HTML是超文本标记语言。 HTML使用标记标签描述网页。   常见标签html：通过&lt;html&gt;标记整个HTML文档。 123&lt;html&gt;    Here is the whole html document&lt;&#x2F;html&gt;  主体：通过&lt;body&gt;标记HTML文档主体。 123&lt;body&gt;    He">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-22T01:35:00.000Z">
+<meta property="article:modified_time" content="2021-12-22T01:36:10.790Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>HTML基础知识 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HTML基础知识">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-22 09:35" pubdate>
+        2021年12月22日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HTML基础知识</h1>
+            
+            <div class="markdown-body">
+              <h1 id="HTML基础知识"><a href="#HTML基础知识" class="headerlink" title="HTML基础知识"></a>HTML基础知识</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>HTML是超文本标记语言。</li>
+<li>HTML使用标记标签描述网页。</li>
+</ul>
+<hr>
+<h2 id="常见标签"><a href="#常见标签" class="headerlink" title="常见标签"></a>常见标签</h2><p>html：通过<code>&lt;html&gt;</code>标记整个HTML文档。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>    Here is the whole html document<br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>主体：通过<code>&lt;body&gt;</code>标记HTML文档主体。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    Here is html body<br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>标题：通过<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>标签进行标记的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>H1 title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>H2 title<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>段落：通过<code>&lt;p&gt;</code>进行标记。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph 1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph 2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>链接：通过<code>&lt;a&gt;</code>标记。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://cn.bing.com&quot;</span>&gt;</span>Bing!<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>图像：通过<code>&lt;img&gt;</code>标记。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;wallpapers.jpg&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1024&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;1024&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中参见：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/index.asp">HTML 标签参考手册</a></p>
+<hr>
+<h2 id="HTML元素"><a href="#HTML元素" class="headerlink" title="HTML元素"></a>HTML元素</h2><ul>
+<li>HTML元素指的是开始标签和结束标签之间的内容。</li>
+<li>某些HTML元素具有空内容，空内容在开始标签结束。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Here is html element<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span> <span class="hljs-comment">&lt;!--here is no html element--&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="HTML属性"><a href="#HTML属性" class="headerlink" title="HTML属性"></a>HTML属性</h2><ul>
+<li>属性给HTML元素提供附加信息。</li>
+<li>属性总是在HTML元素开始标签中规定的。</li>
+<li>属性以键值对形式出现：<code>key=&quot;value&quot;</code>。</li>
+<li>属性中的值是包含在“双引号”中的，若其中存在双引号，则可以使用单引号。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span>&gt;</span>h1 title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">bgcolor</span>=<span class="hljs-string">&quot;red&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><ul>
+<li>使用<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>用来标记标题。其中<code>&lt;h1&gt;</code>最大，<code>&lt;h6&gt;</code>最小。</li>
+<li>浏览器会自动在标题前后添加空行。</li>
+</ul>
+<p>空行：通过<code>&lt;hr/&gt;</code>在页面中创建水平线。用来分割内容。</p>
+<p>注释：通过<code>&lt;!----&gt;</code>表示注释，会被浏览器忽略不被展示在页面中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--here is a comment--&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><ul>
+<li>使用<code>&lt;p&gt;</code>进行标记一个新的段落。</li>
+<li>浏览器会自动在段落前后添加空行。</li>
+<li>不要用<code>&lt;p&gt;</code>生成空行，而使用专门的<code>&lt;br/&gt;</code>标签。</li>
+</ul>
+<hr>
+<h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p>style属性用于改变HTML元素的样式。</p>
+<p>可以在独立的样式表(CSS)中进行定义。</p>
+<p>一些标签和属性是废弃的，推荐使用样式进行配置。</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 背景颜色 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color:red&quot;</span>&gt;</span>This is h1 title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 字体、大小 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-family:arial;font-size:20px&quot;</span>&gt;</span>this is h1 title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 对齐方式 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align:center&quot;</span>&gt;</span>this is h1 title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="文本格式化"><a href="#文本格式化" class="headerlink" title="文本格式化"></a>文本格式化</h2><p>使用不同的标签对文本进行格式化：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>This text is bold<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>This text is strong<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">big</span>&gt;</span>This text is big<span class="hljs-tag">&lt;/<span class="hljs-name">big</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>This text is emphasized<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>This text is italic<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">small</span>&gt;</span>This text is small<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br>This text contains<br><span class="hljs-tag">&lt;<span class="hljs-name">sub</span>&gt;</span>subscript<span class="hljs-tag">&lt;/<span class="hljs-name">sub</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br>This text contains<br><span class="hljs-tag">&lt;<span class="hljs-name">sup</span>&gt;</span>superscript<span class="hljs-tag">&lt;/<span class="hljs-name">sup</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="预格式文本"><a href="#预格式文本" class="headerlink" title="预格式文本"></a>预格式文本</h3><p>使用<code>&lt;pre&gt;</code>格式进行对空格和换行控制。</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span><br>    new line is     maintain.<br>    this is a new line.<br><span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><br><br>this is a line.<br>without new line.<br></code></pre></td></tr></table></figure>
+
+<h3 id="计算机输出标签"><a href="#计算机输出标签" class="headerlink" title="计算机输出标签"></a>计算机输出标签</h3><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">code</span>&gt;</span>Computer code<span class="hljs-tag">&lt;/<span class="hljs-name">code</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">kbd</span>&gt;</span>Keyboard input<span class="hljs-tag">&lt;/<span class="hljs-name">kbd</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">tt</span>&gt;</span>Teletype text<span class="hljs-tag">&lt;/<span class="hljs-name">tt</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">samp</span>&gt;</span>Sample text<span class="hljs-tag">&lt;/<span class="hljs-name">samp</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">var</span>&gt;</span>Computer variable<span class="hljs-tag">&lt;/<span class="hljs-name">var</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>展示地址：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">address</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;mailto:example@mail.com&quot;</span>&gt;</span>contract me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">address</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="缩写和首字母缩写"><a href="#缩写和首字母缩写" class="headerlink" title="缩写和首字母缩写"></a>缩写和首字母缩写</h3><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">abbr</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;etcetera&quot;</span>&gt;</span>etc.<span class="hljs-tag">&lt;/<span class="hljs-name">abbr</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">acronym</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;World Wide Web&quot;</span>&gt;</span>WWW<span class="hljs-tag">&lt;/<span class="hljs-name">acronym</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- dfn用于定义项目或缩写的定义 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dfn</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;world wide web&quot;</span>&gt;</span>www<span class="hljs-tag">&lt;/<span class="hljs-name">dfn</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="文字方向"><a href="#文字方向" class="headerlink" title="文字方向"></a>文字方向</h3><p>通过<code>&lt;bdo&gt;</code>控制文字的方向：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 从右向左输出 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">bdo</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;rtl&quot;</span>&gt;</span><br>Here is some Hebrew text<br><span class="hljs-tag">&lt;/<span class="hljs-name">bdo</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h3><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">blockquote</span>&gt;</span><br>    This is block quote.<br><span class="hljs-tag">&lt;/<span class="hljs-name">blockquote</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">q</span>&gt;</span><br>    This is short quote.<br><span class="hljs-tag">&lt;/<span class="hljs-name">q</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="插入-删除特效"><a href="#插入-删除特效" class="headerlink" title="插入/删除特效"></a>插入/删除特效</h3><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 删除 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">del</span>&gt;</span>delete me<span class="hljs-tag">&lt;/<span class="hljs-name">del</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 插入 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ins</span>&gt;</span>insert me<span class="hljs-tag">&lt;/<span class="hljs-name">ins</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">cite</span>&gt;</span>here is a cite message<span class="hljs-tag">&lt;/<span class="hljs-name">cit</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/index.html">W3school</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/golang/mydocker/linux_namespace/">
+                        <span class="hidden-mobile">Linux的Namespace介绍</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Git内部原理[toc]  简介 Git是一个内容寻址（content-addressable）的文件系统，并在其上提供版本控制的用户界面。 Git的本质是一个键值对数据库。向Git中插入任何数据，返回一个唯一的键。通过这个键可以取出对应的数据。  git init会在当前目录下生成一个**.git**目录，用于保存所有与Git相关的文件，其中包含：    文件 解释    description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git内部原理">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/linux/git_internals/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="Git内部原理[toc]  简介 Git是一个内容寻址（content-addressable）的文件系统，并在其上提供版本控制的用户界面。 Git的本质是一个键值对数据库。向Git中插入任何数据，返回一个唯一的键。通过这个键可以取出对应的数据。  git init会在当前目录下生成一个**.git**目录，用于保存所有与Git相关的文件，其中包含：    文件 解释    description">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:26:04.930Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Git内部原理 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git内部原理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      55 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Git内部原理</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Git内部原理"><a href="#Git内部原理" class="headerlink" title="Git内部原理"></a>Git内部原理</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Git是一个<strong>内容寻址</strong>（content-addressable）的文件系统，并在其上提供版本控制的用户界面。</li>
+<li>Git的本质是一个键值对数据库。向Git中插入任何数据，返回一个唯一的键。通过这个键可以取出对应的数据。</li>
+</ul>
+<p><code>git init</code>会在当前目录下生成一个**.git**目录，用于保存所有与Git相关的文件，其中包含：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>description</td>
+<td>供GitWeb使用</td>
+</tr>
+<tr>
+<td>config</td>
+<td>项目特有的配置项</td>
+</tr>
+<tr>
+<td>info</td>
+<td>包含一个全局排除文件，存放不希望放在**.gitignore**文件中的忽略模式</td>
+</tr>
+<tr>
+<td>hooks</td>
+<td>服务端或客户端的钩子文本</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>目前被检出的分支</td>
+</tr>
+<tr>
+<td>index</td>
+<td>保存暂存区信息</td>
+</tr>
+<tr>
+<td>refs</td>
+<td>存储指向（分支、远程仓库和标签）的提交对象的指针</td>
+</tr>
+<tr>
+<td>objects</td>
+<td>存储所有数据的内容</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Git对象"><a href="#Git对象" class="headerlink" title="Git对象"></a>Git对象</h2><p>Git中的有三种重要的对象，为Git中的重要数据结构，分别为：</p>
+<ul>
+<li>数据对象(blob object)</li>
+<li>树对象(tree object)</li>
+<li>提交对象(commit object)</li>
+</ul>
+<h3 id="数据对象"><a href="#数据对象" class="headerlink" title="数据对象"></a>数据对象</h3><p><em>Git可以被认为是一个键值对数据库</em>，可以向其添加一个数据作为值(value)，Git返回对应的键(key)。</p>
+<p>输入一个字符串作为数据添加到Git的数据库中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo &#x27;test content&#x27; | git hash-object -w --stdin<br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li><code>git hash-object</code>返回输入的数据对应的唯一值。</li>
+<li>选项<code>-w</code>表示将数据插入到Git的数据库中。</li>
+<li><code>--stdin</code>表示数据来自标准输入。若为文件可以不写该选项而在末尾添加文件名：<code>git hash-object -w test.txt</code>。</li>
+<li>该命令返回值为40个字符的SHA1哈希值。该哈希值是由“头部信息 + 数据内容”一起做SHA1校验运算获得的校验和。</li>
+</ul>
+<p>上面的命令导致在<code>.git/objects/</code>目录下生成一个对应的文件，文件的命名规则是：</p>
+<ul>
+<li>取SHA1哈希值的前两个字符作为子目录。</li>
+<li>后面的38个字符为该子目录中的文件名。</li>
+</ul>
+<p>可以通过以下命令查看所有的数据内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">find .git/objects -type f<br></code></pre></td></tr></table></figure>
+
+<p>通过指定特定的SHA1哈希值获得对应的数据内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">git cat-file -p &lt;SHA1_value&gt;<br><br>// 例如<br>git cat-file -p d670460b4b4aece5915caf5c68d12f560a9fe3e4<br></code></pre></td></tr></table></figure>
+<p>也可以用于还原数据：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git cat-file -p d670460b4b4aece5915caf5c68d12f560a9fe3e4 &gt; test.txt<br></code></pre></td></tr></table></figure>
+
+<p>若查看内部存储的对象类型，可以用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git cat-file -t d670460b4b4aece5915caf5c68d12f560a9fe3e4<br></code></pre></td></tr></table></figure>
+<p>返回结果：<br>|结果|类型|<br>|—|—|<br>|blob|数据对象|<br>|tree|树对象|</p>
+<h3 id="树对象"><a href="#树对象" class="headerlink" title="树对象"></a>树对象</h3><p>数据对象只能保存数据，无法保存文件名。而树对象可以解决这一问题，并且可以存储一系列文件。</p>
+<p>一个树对象：</p>
+<ul>
+<li>由若干个数据对象和树对象组成。</li>
+<li>是由暂存区中的状态创建并生成对应的树对象。</li>
+</ul>
+<p>通过下面命令检查master分支的树对象：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git cat-file -p master^&#123;tree&#125;<br></code></pre></td></tr></table></figure>
+
+<p>为特定文件生成一个暂存区：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">git update-index --add --cacheinfo 10064 &lt;file_sha1_value&gt; &lt;file_name&gt;<br><br>// 例如：<br>git update-index --add --cacheinfo 10064 d670460b4b4aece5915caf5c68d12f560a9fe3e4 test.txt<br></code></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li><code>--add</code>：将文件加入到暂存区中。</li>
+<li><code>--cacheinfo</code>:将文件添加到Git的数据库中，而非当前目录。</li>
+<li>10064:表示当前为一个普通文件；100755：可执行文件；120000：符号链接。</li>
+</ul>
+<p>将暂存区的内容写到一个树对象中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git write-tree<br></code></pre></td></tr></table></figure>
+
+<p>子树对象是同将已有的树对象读到暂存区并创建新的树对象：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">// 将已有树对象读入咱存取<br>git read-tree --prefix=&lt;path_name&gt; &lt;sub-tree SHA1 value&gt;<br>// 例如<br>git read-tree --prefix=bak d8329fc1cc938780ffdd9f94e0d364e0ea74f579<br><br><br>git write-tree<br></code></pre></td></tr></table></figure>
+
+<h3 id="提交对象"><a href="#提交对象" class="headerlink" title="提交对象"></a>提交对象</h3><p>提交对象(commit object)：用于保存这些快照的信息：所有者、时间、提交信息等。</p>
+<p>为一个树对象创建一个提交对象：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo &lt;commit message&gt; | git commit-tree &lt;tree object SHA1 value&gt;<br>// 例如<br>echo &quot;first commit&quot; | git commit-tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579<br></code></pre></td></tr></table></figure>
+
+<p>提交对象的数据结构：</p>
+<ul>
+<li>一个顶层树对象，表示当前的快照。</li>
+<li>父提交对象（若存在）</li>
+<li>作者/提交者信息。</li>
+<li>提交注释。</li>
+</ul>
+<p>可以检查特定提交对象保存的信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git log --stat fdf4fc3344e67ab068f836878b6c4951e3b15f3d<br></code></pre></td></tr></table></figure>
+<p>会显示：</p>
+<ul>
+<li>每个提交的SHA1哈希值。</li>
+<li>作者/邮箱信息。</li>
+<li>提交日期、时间。</li>
+<li>提交注解。</li>
+<li>简略的改动信息。</li>
+</ul>
+<blockquote>
+<p>在我们使用<code>git add</code>和<code>git commit</code>时，Git所要做的实质工作是将被改写的文件保存为数据对象，更新暂存区，记录树对象，最后创建一个指明顶层树对象和父提交的提交对象。这些对象均保存在<code>.git/objects</code>目录下。</p>
+</blockquote>
+<blockquote>
+<p>一个数据对象如何床创建的？</p>
+<ol>
+<li>Git会以识别出的对象类型作为开头构造一个<strong>头部信息</strong>，一个数据对象的头部信息格式如下：<br><code>&quot;blob &lt;character length&gt;\0000&lt;message&gt;&quot;</code>，如要保存信息”test”，则对应的头部信息为<code>&quot;blob 4\0000test&quot;</code>。</li>
+<li>使用SHA1将头部信息压缩成长度为40个字节的16进制字符串。</li>
+<li>在<code>.git/objects</code>目录下创建一个以SHA1哈希值前两个字符作为子目录，后面38个字符作为文件名创建对应的文件。</li>
+<li>文件的内容是将<strong>头部信息</strong>使用zlib进行压缩的结果。<br>其他的对象（树对象、提交对象）有各自的头部信息数据格式，但创建流程基本相同。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="Git引用"><a href="#Git引用" class="headerlink" title="Git引用"></a>Git引用</h2><blockquote>
+<p>Git中的引用本质上是<strong>对提交对象的SHA1哈希值创造一个别名</strong>，为了简化引用特定的提交对象。<br>Git的分支的本质是<strong>一个指向某个提交的指针或引用</strong>。</p>
+</blockquote>
+<p>Git引用保存在<code>.git/refs</code>目录下，其中</p>
+<ul>
+<li>heads为本地引用目录。</li>
+<li>tags为标签目录。</li>
+</ul>
+<p>创建Git引用的方式：</p>
+<ol>
+<li>直接将指定的提交对象的SHA1哈希值写入到<code>.git/refs/heads/&lt;refs name&gt;</code>文件。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo fdf4fc3344e67ab068f836878b6c4951e3b15f3d &gt; .git/refs/heads/master<br></code></pre></td></tr></table></figure></li>
+<li>使用Git提供的命令。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">// master引用指向最新提交<br>git update-ref refs/heads/master<br><br>// 指定特定引用指向特定的提交对象<br>git update-ref refs/heads/test fdf4fc3344e67ab068f836878b6c4951e3b15f3d<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>可以通过以下命令检查特定引用的提交记录：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git log --pretty=oneline master // 检查master分支的提交记录<br></code></pre></td></tr></table></figure></li>
+<li><code>git branch &lt;branch&gt;</code>实质上就是使用<code>git update-ref</code>命令更新当前引用所指向的提交，可可以用于创建一个新的分支。</li>
+</ul>
+<h3 id="HEAD引用"><a href="#HEAD引用" class="headerlink" title="HEAD引用"></a>HEAD引用</h3><blockquote>
+<p>HEAD文件在<code>.git</code>目录下，是一个符号引用(symbolic referencec，指向其他引用的指针)，指向目前所在的分支。<br>Git通过HEAD引用获取当前的最新提交的SHA1哈希值。</p>
+</blockquote>
+<p>正常情况下，HEAD文件的内容类似于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ref: refs/heads/master<br></code></pre></td></tr></table></figure>
+<p>表示目前的最新的引用指向master引用，所有随着master引用的更新而HEAD引用也随之更新。</p>
+<p>可以使用如下命令将HEAD引用指向不同的分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">git checkout test<br><br>// HEAD文件内容更新为 ref: refs/heads/test<br></code></pre></td></tr></table></figure>
+
+<p>在使用<code>git commit</code>命令时，会创建一个提交对象，并用HEAD文件所指向的SHA1哈希值作为父提交字段。</p>
+<p>推荐使用以下命令对应用进行操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">// 查看HEAD引用的指向<br>git symbolic-ref HEAD<br><br>// 将HEAD指向特定的引用<br>git symbolic-ref HEAD refs/heads/test<br></code></pre></td></tr></table></figure>
+
+<h3 id="标签引用"><a href="#标签引用" class="headerlink" title="标签引用"></a>标签引用</h3><p>标签对象(tag object)：包含标签创建者信息、日期、注释信息以及一个指针。通常指向一个提交对象，像一个不会移动的分支引用。</p>
+<p>创建标签：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">// 创建一个轻量标签<br>git update-ref refs/tags/&lt;tag_name&gt; &lt;SHA1 value&gt;<br><br>// 创建一个附注标签<br>git tag -a &lt;tag_name&gt; &lt;SHA1 value&gt; -m &lt;&quot;tag info&quot;&gt;<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>标签文件中保存着标签对象的SHA1哈希值。</li>
+<li>检查对应SHA1哈希值文件可以了解标签对象的数据格式。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">// 获得标签对应的SHA1哈希值<br>cat .git/refs/tags/v1.1<br><br>// 获得对应的标签信息<br>git cat-file -p &lt;SHA1 value&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="远程引用"><a href="#远程引用" class="headerlink" title="远程引用"></a>远程引用</h3><p>远程引用(remote reference)：用于记录远程仓库对应的引用。</p>
+<p>保存在<code>.git/refs/remotes/&lt;remote repo&gt;/&lt;remote refs&gt;</code>，如对于远程仓库<strong>origin</strong>的<strong>master</strong>分支，远程引用保存在<code>.git/refs/remotes/origin/master</code>。其中保存着本地的<strong>master</strong>分支所对应的SHA1哈希值。</p>
+<p>远程引用与本地分支的区别：<strong>远程引用是只读的</strong>。远程分支被作为记录远程服务器上各分支最后已知位置状态的书签使用。</p>
+<hr>
+<h2 id="包文件"><a href="#包文件" class="headerlink" title="包文件"></a>包文件</h2><p>默认情况下，Git是对完整的原文件生成对应的快照。所以对于大文件的改动进行多次提交会生成多个类似的快照。</p>
+<p>这种松散的数据保存格式可能导致占用额外的存储空间，可以通过保存一个原始文件再加上与之前版本的差异部分来减少新旧版本的重复部分。</p>
+<p>Git通过<strong>包文件</strong>(packfile)的二进制文件将多个对象打包成一个文件，节省空间和提高效率。</p>
+<p>可以通过以下命令手动创建包文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git gc<br></code></pre></td></tr></table></figure>
+<p>结果是<code>objects</code>目录下出现一对新文件：索引文件<code>*.idx</code>和包文件<code>*.pack</code>。<br>包文件：包含了被移除的所有对象的内容。<br>索引文件：包含了包文件的偏移信息。可以由此快速定位任意一个指定对象。</p>
+<blockquote>
+<p><strong>实现原理</strong>：查找命名及大小相近的文件，只保存文件不同版本之间的差异内容。<br>通过以下命令查看打包的内容：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git verify-pack -v .git/objects/pack/pack-XXXX.idx<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>一般是保存最新版的完整信息，而之前的版本是通过差异内容保存。因为大部分情况下需要快速访问文件的最新版本。</li>
+</ul>
+<hr>
+<h2 id="引用规范"><a href="#引用规范" class="headerlink" title="引用规范"></a>引用规范</h2><p>在<code>.git/config</code>文件中保存着<code>fetch</code>和<code>push</code>操作的**引用规范(refspec)**：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">[remote &quot;origin&quot;]<br>        url = git@github.com:XXXX/XXXX.git<br>        fetch = +refs/heads/*:refs/remotes/origin/*<br></code></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>fetch</code>后的格式为”+ <src>:<dst>“，+表示在不能快进的情况下也要强制更新引用。<code>&lt;src&gt;</code>为远程仓库的引用，<code>&lt;dst&gt;</code>为本地仓库的远程引用的位置。</li>
+<li>可以同时拉取多个分支：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">// 将远程仓库origin的master分支拉到本地分支master，topic分支拉到本地的topic分支<br>git fetch origin master:refs/remotes/origin/master topic:refs/remotes/origin/topic<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>可以通过命名空间实现在一个项目中将不同团队隔离开来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">[remote &quot;origin&quot;]<br>	url=git@github.com:XXXX/XXXX.git<br>	fetch= +refs/heads/master:refs/remotes/origin/master<br>	fetch= +refs/heads/qa/*:refs/remotes/origin/qa/*<br>	push= refs/heads/qa/master:refs/heads/qa/master<br></code></pre></td></tr></table></figure>
+
+<p>若要删除一个远程引用，可以：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">git push origin :topic<br><br>// 或者<br>git push origin --delete topic<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h2><hr>
+<h2 id="维护与数据恢复"><a href="#维护与数据恢复" class="headerlink" title="维护与数据恢复"></a>维护与数据恢复</h2><h3 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h3><p>当存在太多的松散对象或包文件时，Git会通过<code>git gc</code>命令进行垃圾回收。其主要的动作是：收集所有松散对象并将其放置在包文件中，将多个包文件合并为一个大的包文件，移除与任何提交都无关的陈旧对象。</p>
+<p>手动执行自动垃圾回收：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git gc --auto<br></code></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>只有当约7000个松散对象或50个包文件时才能触发真正的gc命令。</li>
+<li><code>git gc</code>命令会导致<code>refs</code>目录下的引用文件被移除，保存在<code>packed-refs</code>目录下。</li>
+</ul>
+<h3 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h3><p>若丢失一次提交，如何恢复丢失的提交呢？<br>可以通过以下命令查看引用日志：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git reflog<br></code></pre></td></tr></table></figure>
+<p>每次更改HEAD时，引用日志会记录每次提交或更改分支。</p>
+<p>通过以下命令以标准日志格式输出引用日志：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git log -g<br></code></pre></td></tr></table></figure>
+
+<p>找到丢失的提交，可以通过创建一个新的分支指向该提交来恢复：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git branch &lt;new_branch&gt; &lt;SHA1_value&gt;<br></code></pre></td></tr></table></figure>
+
+<p>若引用日志丢失，可以使用<code>git fsck</code>工具检查数据库的完整性：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git fsck --full<br></code></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li><code>dangling commit</code>为丢失的提交。</li>
+</ul>
+<h3 id="移除对象"><a href="#移除对象" class="headerlink" title="移除对象"></a>移除对象</h3><p>若将大文件提交到Git中，即使该文件从项目中移除，也会导致每次克隆时都强制下载该大文件。</p>
+<p>解决方案：从大文件引用最早的树对象开始重写每一次提交。</p>
+<p>注意：</p>
+<ul>
+<li>通过<code>git rm &lt;file_name&gt;</code>只会移除文件，无法删除历史记录。</li>
+</ul>
+<p>基本流程：</p>
+<ul>
+<li>找到可能的大文件。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">git gc<br><br>// 按照大小排序查找最大的三个对象<br>git verify-pack -v .git/objects/pack/pack-XXXX.XXXX.git | sort -k 3 -n | tail -3<br><br>// 由对应的SHA1哈希值找到对应的对象<br>git rev-list --objects --all | grep &lt;SHA1_value&gt;<br></code></pre></td></tr></table></figure></li>
+<li>查找所有与该文件改动有关的提交。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git log --oneline --branches -- &lt;file_name&gt;<br></code></pre></td></tr></table></figure></li>
+<li>重写指定提交后的所有提交<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git filter-branch --index-filter &#x27;git rm --ignore-unmatch --cached &lt;file_name&gt;&#x27; -- &lt;SHA1_value^&gt;<br></code></pre></td></tr></table></figure></li>
+<li>此时历史中不存在对大文件的引用，但引用日志可能存在该文件的引用，可以重新打包数据库：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -Rf .gitl/refs/original<br>rm -Rf .git/logs/<br>git gc<br></code></pre></td></tr></table></figure></li>
+<li>若要删除松散对象中的大文件，可以：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git prune --expire now<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>注意：</p>
+<ul>
+<li><code>--index-filter</code>：只修改在暂存区或索引中的文件。</li>
+<li><code>git rm --cached</code>：在索引中移除文件。</li>
+<li><code>--ignore-unmatch</code>：若删除的模式不存在，不提示错误。</li>
+<li><code>filter-branch</code>：重写指定提交以来的历史。</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/linux/SELinux/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SELinux小结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/linux/rangerdocs/">
+                        <span class="hidden-mobile">Ranger常用命令手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Android中的内存泄漏[toc]  简介内存泄漏(Memory Leak):垃圾回收器无法对内存中不再使用的对象进行回收。 内存泄漏主要分为两类：  占用内存直到应用结束。 占用内存直到方法结束：一个需要长时间运行的任务持有无用对象的引用时，该对象无法被回收，直到方法执行完成。  Java内存划分：  堆(Heap)：动态内存分配，主要用于保存创建的对象，JVM负责回收堆内存中没有引用的对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中的内存泄漏">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/memory_leaks/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="Android中的内存泄漏[toc]  简介内存泄漏(Memory Leak):垃圾回收器无法对内存中不再使用的对象进行回收。 内存泄漏主要分为两类：  占用内存直到应用结束。 占用内存直到方法结束：一个需要长时间运行的任务持有无用对象的引用时，该对象无法被回收，直到方法执行完成。  Java内存划分：  堆(Heap)：动态内存分配，主要用于保存创建的对象，JVM负责回收堆内存中没有引用的对象。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidmemoryleak_1.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidmemoryleak_2.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidmemoryleak_3.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/javagcreachable.png">
+<meta property="og:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidmemoryleak_4.png">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:18:42.807Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/imgs/androidmemoryleak_1.png">
+  
+  
+  <title>Android中的内存泄漏 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android中的内存泄漏">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android中的内存泄漏</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Android中的内存泄漏"><a href="#Android中的内存泄漏" class="headerlink" title="Android中的内存泄漏"></a>Android中的内存泄漏</h1><p>[toc]</p>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>内存泄漏(Memory Leak):垃圾回收器无法对内存中不再使用的对象进行回收。</p>
+<p>内存泄漏主要分为两类：</p>
+<ul>
+<li>占用内存直到应用结束。</li>
+<li>占用内存直到方法结束：一个需要长时间运行的任务持有无用对象的引用时，该对象无法被回收，直到方法执行完成。</li>
+</ul>
+<p>Java内存划分：</p>
+<ul>
+<li>堆(Heap)：动态内存分配，主要用于保存创建的对象，JVM负责回收堆内存中没有引用的对象。</li>
+<li>栈(Stack):静态内存分配，用于为方法执行生成对应的栈内存块(stack memory block)。</li>
+</ul>
+<p>注：</p>
+<ul>
+<li>Android为每个应用所使用的堆内存设置限制，若超过限制则会产生<code>OutOfMemoryError</code>错误。</li>
+<li>可以通过<code>ActivityManager</code>的<code>getMemoryClass()</code>方法或的堆内存限制。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">ActivityManager am = getSystemService(ACTIVIYT_SERVICE);<br>am.getMemoryClass(); <br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="实例说明Java内存分配流程"><a href="#实例说明Java内存分配流程" class="headerlink" title="实例说明Java内存分配流程"></a>实例说明Java内存分配流程</h2><p>实例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Memory</span> </span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123; <span class="hljs-comment">// 1</span><br>		<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; <span class="hljs-comment">// 2</span><br>		Object obj = <span class="hljs-keyword">new</span> Object(); <span class="hljs-comment">// 3</span><br>		Memory memo = <span class="hljs-keyword">new</span> Memory(); <span class="hljs-comment">// 4</span><br>		memo.foo(obj); <span class="hljs-comment">// 5</span><br>	&#125; <span class="hljs-comment">// 9</span><br><br>	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(Object param)</span> </span>&#123; <span class="hljs-comment">// 6</span><br>		String str = param.toString(); <span class="hljs-comment">// 7</span><br>		System.out.println(str);<br>	&#125; <span class="hljs-comment">// 8</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="方法执行"><a href="#方法执行" class="headerlink" title="方法执行"></a>方法执行</h3><p>当执行到第7行时，此时内存中的对象如图：<br><img src="../../../imgs/androidmemoryleak_1.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<blockquote>
+<p>说明：</p>
+<ul>
+<li>左侧是栈内存，右侧为堆内存。当执行一个方法时，会为该方法生成栈帧并入栈。当创建一个对象时，会在堆内存中分配内存，并且栈帧中的引用指向该对象。</li>
+<li>方法中基本数据类型的变量直接保存到对应的栈帧中。</li>
+<li>堆内存中存在一个常量池，用于保存类似<code>String</code>类型的常量。</li>
+<li>Java中只有<strong>值传递</strong>。所以传递的参数为变量时，参数总是指向堆内存中的真实对象。</li>
+</ul>
+</blockquote>
+<h3 id="方法结束"><a href="#方法结束" class="headerlink" title="方法结束"></a>方法结束</h3><p>当执行到第8行时，方法<code>foo()</code>结束。<br>当执行到第9行时，方法<code>main()</code>结束。</p>
+<blockquote>
+<p>方法<code>foo()</code>结束：</p>
+<ul>
+<li>指定String常量池的引用消失，对应的栈帧从栈内存弹出。<br><img src="../../../imgs/androidmemoryleak_2.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>方法<code>main()</code>结束：</p>
+<ul>
+<li>指定对象<code>Object</code>和<code>Memory</code>的引用消失，对应栈帧从栈内存弹出。</li>
+<li>JVM的垃圾回收器将会回收这些对象占用的内存。<br><img src="../../../imgs/androidmemoryleak_3.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></li>
+</ul>
+</blockquote>
+<h3 id="垃圾回收原理简介"><a href="#垃圾回收原理简介" class="headerlink" title="垃圾回收原理简介"></a>垃圾回收原理简介</h3><p>JVM的垃圾回收器按照可达性原理来确定一个对象是否需要被回收，当一个对象无法从所谓的GC Roots对象遍历到，则认为该对象不可达，被标记为可以回收，从而进行回收。</p>
+<p><img src="../../../imgs/javagcreachable.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="内存泄漏的几种情况"><a href="#内存泄漏的几种情况" class="headerlink" title="内存泄漏的几种情况"></a>内存泄漏的几种情况</h2><blockquote>
+<p>当栈内仍然引用着堆内存中无用的对象，会发生内存泄漏。<br>在Android中，常在使用<code>AsyncTasks</code>，<code>Handlers</code>，<strong>Singletons</strong>模式，<code>Threads</code>等出现内存泄漏。</p>
+</blockquote>
+<h3 id="示例1：内部类持有外部类的引用"><a href="#示例1：内部类持有外部类的引用" class="headerlink" title="示例1：内部类持有外部类的引用"></a>示例1：内部类持有外部类的引用</h3><p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> ImageView iv_show_image1;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        iv_show_image1 = (ImageView) findViewById(R.id.iv_show_image1);<br>        iv_show_image1.setImageResource(R.drawable.nature);<br>        <span class="hljs-keyword">new</span> MyThread(<span class="hljs-keyword">this</span>).start();<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>        <span class="hljs-keyword">private</span> MainActivity mainActivity;<br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyThread</span><span class="hljs-params">(MainActivity mainActivity)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.mainActivity = mainActivity;<br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    Thread.currentThread().wait(<span class="hljs-number">1000</span> * <span class="hljs-number">10</span>);<br>                    Log.d(<span class="hljs-string">&quot;MyThread&quot;</span>, <span class="hljs-string">&quot;task is done!&quot;</span>);<br>                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>分析</strong>：</p>
+<ul>
+<li>上述代码中在<code>MainActivity</code>中创建新的线程并运行，随后我们退出该<code>Activity</code>。而新线程要等到10秒才能结束。</li>
+<li>由于新线程<code>MyThread</code>中持有<code>MainActivity</code>的引用，导致虽然<code>MainActivity</code>已经退出，但垃圾回收器无法回收内存。</li>
+</ul>
+<p><img src="../../../imgs/androidmemoryleak_4.png" srcset="/TrueStoriesavici01.github.io/img/loading.gif" lazyload></p>
+<h3 id="示例2：单例模式导致内存泄漏"><a href="#示例2：单例模式导致内存泄漏" class="headerlink" title="示例2：单例模式导致内存泄漏"></a>示例2：单例模式导致内存泄漏</h3><p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// singleton class</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonManager</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> SingletonManager singleton;<br>    <span class="hljs-keyword">private</span> Context context;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">SingletonManager</span><span class="hljs-params">(Context context)</span> </span>&#123;<span class="hljs-keyword">this</span>.context = context;&#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">static</span> SingletonManager <span class="hljs-title">getInstance</span><span class="hljs-params">(Context context)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (singleton == <span class="hljs-keyword">null</span>) singleton = <span class="hljs-keyword">new</span> SingletonManager(context);<br>        <span class="hljs-keyword">return</span> singleton;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// pass activity context to singleton class in an activity</span><br>SingletonManager.getInstance(<span class="hljs-keyword">this</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>分析</strong>：</p>
+<ul>
+<li>单例类中使用<code>Context</code>类，而在<code>Activity</code>中传入Activity Context，使得单例类间接持有<code>Activity</code>的引用。</li>
+<li>当<code>Activity</code>退出时，由于有引用指向而无法被回收。</li>
+<li>为了避免内存泄漏，传递Context时使用Application Context而非Activity Context。无论传入的Context是何种Context，均使用Application Context。<code>context.getApplicationContext()</code></li>
+</ul>
+<h3 id="示例3：监听器导致内存泄漏"><a href="#示例3：监听器导致内存泄漏" class="headerlink" title="示例3：监听器导致内存泄漏"></a>示例3：监听器导致内存泄漏</h3><p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">LocationListener</span> </span>&#123;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLocationUpdated</span><span class="hljs-params">(Location location)</span></span>&#123;<br>  <span class="hljs-comment">// do something</span><br>  &#125;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span></span>&#123;<br>    LocationManager.getInstance().register(<span class="hljs-keyword">this</span>);<br>  &#125;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span></span>&#123;<br>    LocationManager.getInstance().unregister(<span class="hljs-keyword">this</span>);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="其他常见的内存泄漏的情况"><a href="#其他常见的内存泄漏的情况" class="headerlink" title="其他常见的内存泄漏的情况"></a>其他常见的内存泄漏的情况</h3><h3 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h3><p>若一个匿名类的生命周期比容器类的生命周期长，并且在匿名类中调用容器类的任何方法、读写容器类的属性等，这将导致容器类无法被销毁，从而引起内存泄漏。</p>
+<h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><p>内部类是另一个常见的内存泄漏的原因。由于内部类可能持有外部类的引用，所以在内部类的生命周期比外部类的生命周期长并且内部类会使用外部类的变量时，会导致外部类无法被回收。</p>
+<p>可能的解决方式：内部类中使用弱引用<code>WeakReference</code>来指向外部类对象，这样不会影响垃圾收集器对外部类的回收。</p>
+<h3 id="静态变量-static-variables"><a href="#静态变量-static-variables" class="headerlink" title="静态变量(static variables)"></a>静态变量(static variables)</h3><blockquote>
+<p>Kotlin中<code>companion object</code>块中都是静态变量。</p>
+</blockquote>
+<p>静态变量不与具体的实例对象的生命周期有关，只要类加载器首次加载该类，则静态变量则一直存活。所以避免使用静态变量引用指向Activity，只会导致Activity无法被回收。</p>
+<h3 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h3><p>如果一个单例对象持有Activity并且其生命周期比Activity长，将会导致内存泄漏。<br>为了避免这一问题，可以在但里方法中提供方法用于清除对于Activity的引用，并且在该Activity的<code>onDestroy()</code>方法调用单例中的该方法。</p>
+<blockquote>
+<p>注意：<br>在使用<strong>匿名类</strong>或<strong>内部类</strong>时要警惕使用外部类的引用。<br>同时在使用<strong>延迟任务</strong>或<strong>其他与线程相关的类</strong>(如：<code>Handlers</code>,<code>TimerTasks</code>,<code>Threads</code>,<code>AsyncTasks</code>或<code>RxJava</code>)时务必警惕。</p>
+</blockquote>
+<p><strong>分析</strong>:</p>
+<ul>
+<li>上面的代码中在Start阶段注册监听器，在Stop阶段取消监听器。</li>
+<li>若在<code>onStop()</code>方法中忘记取消监听器，则导致监听器持有Activity的引用，Activity退出时无法被回收。</li>
+<li>在<code>onDestory()</code>或<code>onStop()</code>方法中执行注销操作。</li>
+</ul>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://proandroiddev.com/everything-you-need-to-know-about-memory-leaks-in-android-d7a59faaf46a">Everything you need to know about Memory Leaks in Android.</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/location/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android中的用户位置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/processes_threads/">
+                        <span class="hidden-mobile">进程与线程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>

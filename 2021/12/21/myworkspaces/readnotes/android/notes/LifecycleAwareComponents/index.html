@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <link rel="icon" href="/TrueStoriesavici01.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zwzzzzz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="生命周期感知组件[toc]  组件的生命周期通常情况下，对于生命周期有关的操作需要在对应的方法中进行实现，如onCreate()，onStop()等，这会导致这些方法代码冗长，难以维护。 通过androidx.lifecycle提供的类和接口，可以使用更加灵活的方式实现与组件生命周期有关的逻辑代码。 LifecycleLifecycle是一个类，其用来表示对应组件的生命周期状态信息。生命周期状态由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生命周期感知组件">
+<meta property="og:url" content="https://truestoriesavici01.github.io/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/LifecycleAwareComponents/index.html">
+<meta property="og:site_name" content="战五渣的自留地">
+<meta property="og:description" content="生命周期感知组件[toc]  组件的生命周期通常情况下，对于生命周期有关的操作需要在对应的方法中进行实现，如onCreate()，onStop()等，这会导致这些方法代码冗长，难以维护。 通过androidx.lifecycle提供的类和接口，可以使用更加灵活的方式实现与组件生命周期有关的逻辑代码。 LifecycleLifecycle是一个类，其用来表示对应组件的生命周期状态信息。生命周期状态由">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-21T03:22:20.000Z">
+<meta property="article:modified_time" content="2021-12-21T06:18:31.467Z">
+<meta property="article:author" content="zwzzzzz">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>生命周期感知组件 - 战五渣的自留地</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/TrueStoriesavici01.github.io/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"truestoriesavici01.github.io","root":"/TrueStoriesavici01.github.io/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/TrueStoriesavici01.github.io/local-search.xml"};
+  </script>
+  <script  src="/TrueStoriesavici01.github.io/js/utils.js" ></script>
+  <script  src="/TrueStoriesavici01.github.io/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/TrueStoriesavici01.github.io/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/TrueStoriesavici01.github.io/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/TrueStoriesavici01.github.io/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="生命周期感知组件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 11:22" pubdate>
+        2021年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      51 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">生命周期感知组件</h1>
+            
+            <div class="markdown-body">
+              <h1 id="生命周期感知组件"><a href="#生命周期感知组件" class="headerlink" title="生命周期感知组件"></a>生命周期感知组件</h1><p>[toc]</p>
+<hr>
+<h2 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h2><p>通常情况下，对于生命周期有关的操作需要在对应的方法中进行实现，如<code>onCreate()</code>，<code>onStop()</code>等，这会导致这些方法代码冗长，难以维护。</p>
+<p>通过<code>androidx.lifecycle</code>提供的类和接口，可以使用更加灵活的方式实现与组件生命周期有关的逻辑代码。</p>
+<h3 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a><code>Lifecycle</code></h3><p><code>Lifecycle</code>是一个类，其用来表示对应组件的生命周期状态信息。生命周期状态由两个部分组成：</p>
+<ul>
+<li>事件：生命周期中发生的事件。</li>
+<li>状态：事件导致组件当前处于的状态。</li>
+</ul>
+<h3 id="LifecycleObserver和LifecycleOwner"><a href="#LifecycleObserver和LifecycleOwner" class="headerlink" title="LifecycleObserver和LifecycleOwner"></a><code>LifecycleObserver</code>和<code>LifecycleOwner</code></h3><p>与<code>Lifecycle</code>紧密相关的是两个类/接口：</p>
+<ul>
+<li><code>LifecycleOwner</code>：持有<code>Lifecycle</code>的接口，可以通过<code>getLifecycle()</code>方法获取<code>Lifecycle</code>实例。</li>
+<li><code>LifecycleObserver</code>：对于特定组件生命周期<code>Lifecycle</code>进行监测的观察者。当生命周期发生改变时观察者可以感知到并作出相应的处理。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>目前的<code>Fragment</code>和<code>AppCompatActivity</code>已经实现了<code>LifecycleOwner</code>接口。可以对这些类绑定监听器从而监听其生命周期。</li>
+</ul>
+<p>自定义生命周期监听器对特定Activity的生命周期进行监听：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 监听器</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyListener</span></span>(<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> context: Context,<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> lifecycle: Lifecycle,<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> callback: () -&gt; <span class="hljs-built_in">Unit</span>) : LifecycleObserver &#123;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> enabled = <span class="hljs-literal">false</span><br>	<br>	<span class="hljs-comment">// 当Activity触发事件onStart时该方法调用</span><br>	<span class="hljs-meta">@OnLifecycleEvent(Lifecycle.Event.ON_START)</span><br>	<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-comment">// do something when the activity is on start</span><br>	&#125;<br><br>	<span class="hljs-comment">// 当Activity触发事件onStop时该方法调用</span><br>	<span class="hljs-meta">@OnLifecycleEvent(Lifecycle.Event.ON_STOP)</span><br>	<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-comment">// do something when the activity is on stop</span><br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 被监测的Activity</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> : <span class="hljs-type">AppCompatActivity</span></span>() &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> myListener: MyListener<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)<br>        <span class="hljs-keyword">val</span> binding: ActivityMainBinding = DataBindingUtil.setContentView(<span class="hljs-keyword">this</span>, R.layout.activity_main)<br>	<br>	myListener = MyListener(<span class="hljs-keyword">this</span>, lifecycle) &#123;<br>		<span class="hljs-comment">// here is callback</span><br>	&#125;<br>	<br>	<span class="hljs-comment">// 给当前的Lifecycle添加监听器</span><br>	lifecycle.addObserver(myListener)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="实现自定义LifecycleOwner"><a href="#实现自定义LifecycleOwner" class="headerlink" title="实现自定义LifecycleOwner"></a>实现自定义<code>LifecycleOwner</code></h2><p>通过实现<code>LifecycleOwner</code>接口并且通过<code>LifecycleRegistry</code>类将事件转发到该类：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyActivity</span>: <span class="hljs-type">Activity</span></span>(), LifecycleOwner &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> lifecycleRegistry: LifecycleRegistry<br><br>	<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;<br>		<span class="hljs-keyword">super</span>.onCreate(savedInstanceState)<br>		<br>		lifecycleRegistry = LifecycleRegistry(<span class="hljs-keyword">this</span>)<br>		lifecycleRegistry.currentState = Lifecycle.State.CREATED<br>	&#125;<br><br>	<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">super</span>.onDestroy()<br>		<br>		lifecycleRegistry.currentState = Lifecycle.State.DESTROYED<br>	&#125;<br><br>	<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getLifecycle</span><span class="hljs-params">()</span></span>: Lifecycle  = lifecycleRegistry<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="生命周期感知组件的最佳实践"><a href="#生命周期感知组件的最佳实践" class="headerlink" title="生命周期感知组件的最佳实践"></a>生命周期感知组件的最佳实践</h2><ul>
+<li>UI控制器(Activity和Fragment)代码尽可能简洁。使用<code>ViewModel</code>获取UI的数据，并通过观察<code>LiveData</code>来获取最新的数据。</li>
+<li>UI控制器负责当数据改变时更新UI或将用户的操作反映到<code>ViewModel</code>中。</li>
+<li><code>ViewModel</code>作为UI控制器和其他组件的连接器，数据的处理逻辑由<code>ViewModel</code>完成，而数据的获取由其他组件完成。</li>
+<li>使用数据绑定使得View和UI控制器之间保持清晰的接口。减少在Activity和Fragment中编写UI更新的代码。</li>
+<li><strong>避免在<code>ViewModel</code>中引用View或Activity的Context，因为<code>ViewModel</code>的生命周期比Activity更长，可能导致内存泄漏。</strong></li>
+<li>使用kotlin的协程处理长时间任务或可以异步执行的任务。</li>
+</ul>
+<hr>
+<h2 id="LiveData"><a href="#LiveData" class="headerlink" title="LiveData"></a><code>LiveData</code></h2><p>Android KTX是Kotlin扩展集，用于提供对于Android Jetpack和其他Android库的支持。只要包括：</p>
+<ul>
+<li>扩展函数</li>
+<li>扩展属性</li>
+<li>lambda表达式</li>
+<li>命名参数</li>
+<li>参数默认值</li>
+<li>协程</li>
+</ul>
+<p>添加依赖：</p>
+<ul>
+<li>在项目的<code>build.gradle</code>文件中添加<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml">repositories &#123;<br>	google()<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>Android KTX被组织成若干个模块，根据需要的组件引入对应的依赖。<br>其中有一个核心模块用来提供通用的framework的API。<br>更多请参考：<a target="_blank" rel="noopener" href="https://developer.android.com/kotlin/ktx">Android KTX</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml">dependencies &#123;<br>	// core KTX<br>	implementation &quot;androidx.core:core-ktx:1.6.0&quot;<br><br>	// 集合KTX<br>	implementation &quot;androidx.collection:collection-ktx:&quot;<br><br>	// LiveData KTX<br>	implementation &quot;androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-rc01&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>LiveData</code>是一个可观察的数据类，其具有生命周期感知的能力，即只有对应的组件处于活跃状态(START或RESUME)时才更新数据。</p>
+<h3 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h3><ol>
+<li>在自定义的<code>ViewModel</code>类中创建<code>LiveData</code>实例持有特定的数据。</li>
+<li>在UI控制器中(Activity或Fragment)创建<code>Observer</code>，重写<code>onChanged()</code>用以表示数据更改的响应逻辑。</li>
+<li>调用<code>LiveData.observe()</code>方法将<code>Observer</code>与<code>LiveData</code>进行绑定。<code>observe()</code>方法接收两个参数，分别为<code>LifecycleOwner</code>和<code>Observer</code>。其中<code>LifecycleOwner</code>表示为<code>Lifecycle</code>的持有者，一般Activity和Fragment实现了该接口。</li>
+</ol>
+<p>一个简单的结合Databinding，<code>LiveData</code>和<code>ViewModel</code>的示例：</p>
+<ul>
+<li>在xml文件进行数据绑定，避免将大量UI更新操作放置在Activity中。</li>
+<li>在<code>ViewModel</code>中的设置<code>LiveData</code>，对可观察的数据进行更新。</li>
+</ul>
+<ol>
+<li>添加依赖：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml">// build.gradle<br>android &#123;<br>    buildFeatures &#123;<br>        dataBinding true<br>    &#125;<br>&#125;<br><br>dependencies &#123;<br>    implementation &#x27;androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-rc01&#x27;<br>    implementation &#x27;androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-rc01&#x27;<br>    implementation &quot;androidx.fragment:fragment-ktx:1.3.6&quot;<br>    implementation &#x27;androidx.core:core-ktx:1.6.0&#x27;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>设置自定义的<code>ViewModel</code>，保存<code>LiveData</code><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// MyViewModel.kt</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyViewModel</span>: <span class="hljs-type">ViewModel</span></span>() &#123;<br><br>    <span class="hljs-keyword">val</span> nameLiveData: MutableLiveData&lt;String&gt; <span class="hljs-keyword">by</span> lazy &#123;<br>        MutableLiveData&lt;String&gt;()<br>    &#125;<br><br>    <span class="hljs-keyword">val</span> countLiveData: MutableLiveData&lt;<span class="hljs-built_in">Int</span>&gt; <span class="hljs-keyword">by</span> lazy &#123;<br>        MutableLiveData&lt;<span class="hljs-built_in">Int</span>&gt;()<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onButtonClick</span><span class="hljs-params">()</span></span> &#123;<br>        nameLiveData.postValue(<span class="hljs-string">&quot;current time is <span class="hljs-subst">$&#123;SimpleDateFormat(<span class="hljs-string">&quot;yyyy-MM-dd:hh-mm-ss&quot;</span>).format(Date())&#125;</span>&quot;</span>)<br>        countLiveData.postValue(Random().nextInt(<span class="hljs-number">100</span>))<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>在布局文件中进行数据绑定<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--activity_4.xml--&gt;</span><br><br><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">layout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">variable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;myviewmodel&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.xiaomi.lifecycleawarecomponenttest.viewmodels.MyViewModel&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span></span><br><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;vertical&quot;</span>&gt;</span><br><br>        <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;@&#123; (myviewmodel.countLiveData <span class="hljs-symbol">&amp;amp;</span> 1) == 0 ? myviewmodel.nameLiveData : `error`&#125;&quot;</span>/&gt;</span> <span class="hljs-comment">&lt;!--数据绑定--&gt;</span><br><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;change randomly&quot;</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">&quot;@&#123;() -&gt; myviewmodel.onButtonClick()&#125;&quot;</span>/&gt;</span> <span class="hljs-comment">&lt;!--响应事件--&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">layout</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>在对应的Activity中进行数据绑定<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// MyActivity.kt</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyActivity</span>: <span class="hljs-type">AppCompatActivity</span></span>() &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> myViewModel: MyViewModel <span class="hljs-keyword">by</span> viewModels()<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> activity4Binding: Activity4Binding<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)<br><br>        activity4Binding = DataBindingUtil.setContentView(<span class="hljs-keyword">this</span>, R.layout.activity_4)<br>        activity4Binding.myviewmodel = myViewModel<br><br>        activity4Binding.lifecycleOwner = <span class="hljs-keyword">this</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>若<code>LiveData</code>的数据更新操作是在主线程中进行的，则必须调用<code>setValue(T)</code>更新<code>LiveData</code>。在工作线程中可以使用<code>postValue(T)</code>更新<code>LiveData</code>。</li>
+<li><code>LiveData</code>可以用来实现不同生命周期组件之间的通信，如Activity和ViewModel。ViewModel主要用于管理UI相关的数据，<code>LiveData</code>非常适合放置在ViewModel中。</li>
+<li>Activity和Fragment最好<strong>不要</strong>持有<code>LiveData</code>实例，因为这些UI控制器主要用于控制如何展示数据，而不是保存数据。</li>
+<li>最好不要将<code>LiveData</code>放置在数据层，因为所有的<code>LiveData</code>对象是在主线程上进行观测的，任何耗时的操作可能阻塞主线程。可以使用Kotlin Flows并在ViewModel中使用<code>asLiveData()</code>方法将其转换为<code>LiveData</code>。</li>
+</ul>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/topic/libraries/architecture/lifecycle">Lifecycle-Aware Components</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/LifeCycleOfActivity/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Activity的生命周期</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/TrueStoriesavici01.github.io/2021/12/21/myworkspaces/readnotes/android/notes/MVVMinAndroid/">
+                        <span class="hidden-mobile">MVVM架构在Android应用中的实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/events.js" ></script>
+<script  src="/TrueStoriesavici01.github.io/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/TrueStoriesavici01.github.io/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/TrueStoriesavici01.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/TrueStoriesavici01.github.io/js/boot.js" ></script>
+
+
+</body>
+</html>
